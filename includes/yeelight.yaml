@@ -1,0 +1,18 @@
+  devices:
+  
+      192.168.0.108:
+        name: yeelight_650
+        transition: 1000
+        nightlight_switch_type: light
+        model: ceiling4 
+        
+      192.168.0.112:
+        name: yeelight_450
+        transition: 1000
+        nightlight_switch_type: light
+        model: ceiling3
+        
+      192.168.0.110:
+        name: yeelight_rgb_bulb
+        transition: 1000
+        model: color2

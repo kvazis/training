@@ -1,0 +1,166 @@
+title: Home Assistant - сервер
+views:
+
+  - title: Главная
+    icon: mdi:home-assistant
+    
+    cards:
+
+      - type: vertical-stack
+        cards:
+        
+        - type: markdown
+          content: >
+             **Текущее состояние**
+             
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - entity: sensor.time
+              name: Текущее время
+              icon: mdi:clock-outline
+            - entity: sensor.date
+              name: Дата
+              icon: mdi:calendar-check-outline
+              
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - entity: sensor.maria_db_size
+              name: Объем БД
+              icon: mdi:database
+
+      - type: vertical-stack
+        cards:
+        - type: markdown
+          content: >
+             **Графики** 
+
+        - type: horizontal-stack
+          cards:
+
+           - type: gauge
+             name: Загрузка CPU
+             unit: '%'
+             entity: sensor.processor_use
+             severity:
+                green: 0
+                yellow: 60
+                red: 85
+             
+           - type: gauge
+             name: Загрузка ОЗУ
+             unit: '%'
+             entity: sensor.memory_use_percent
+             severity:
+                green: 0
+                yellow: 60
+                red: 85
+                
+        - type: horizontal-stack
+          cards:
+
+           - type: gauge
+             name: Диск заполнен
+             unit: '%'
+             entity: sensor.disk_use_percent
+             severity:
+                green: 0
+                yellow: 60
+                red: 85    
+                
+           - type: gauge
+             name: Свободное место
+             unit: 'Гб'
+             entity: sensor.disk_free
+             severity:
+                red: 2
+                yellow: 6
+                green: 8
+                
+        - type: history-graph
+          entities:
+           - entity: sensor.maria_db_size
+             name: Maria DB
+                
+              
+  - title: Погода
+    icon: mdi:weather-partly-snowy-rainy
+    
+    cards:
+
+        - type: weather-forecast
+          entity: weather.home_assistant 
+          
+          
+  - title: Освещение
+    icon: mdi:lightbulb-group
+    
+          
+    cards:
+    
+      - type: vertical-stack
+        cards:
+        - type: markdown
+          content: >
+             **Панель переключателей** 
+             
+        - type: entities
+          show_header_toggle: false
+          entities:          
+            - entity: light.yeelight_650
+              name: Люстра 650 основной свет
+            - entity: light.yeelight_650_nightlight
+              name: Люстра 650 ночник
+            - entity: light.yeelight_650_ambilight
+              name: Люстра 650 амбилайт           
+            - entity: light.yeelight_450           
+              name: Люстра 450 основной свет
+            - entity: light.yeelight_450_nightlight 
+              name: Люстра 450 ночник            
+            - entity: light.yeelight_rgb_bulb            
+              name: Лампочка  
+
+      - type: vertical-stack
+        cards:
+        - type: markdown
+          content: >
+             **Светильники**    
+              
+        - type: horizontal-stack
+          cards:
+            - type: light
+              entity: light.yeelight_650
+              name: Люстра 650
+            - type: light
+              entity: light.yeelight_650_nightlight
+              name: Ночник 650
+            - type: light
+              entity: light.yeelight_650_ambilight
+              name: Ambilight 650
+              
+        - type: horizontal-stack
+          cards:
+            - type: light
+              entity: light.yeelight_450
+              name: Люстра 450
+            - type: light
+              entity: light.yeelight_450_nightlight
+              name: Ночник 450
+            - type: light
+              entity: light.yeelight_rgb_bulb
+              name: RGB Лампочка              
+
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          

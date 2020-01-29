@@ -1,0 +1,2 @@
+  db_url: mysql://hass:hass@core-mariadb/homeassistant?charset=utf8
+  purge_keep_days: 3 
