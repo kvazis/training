@@ -5,6 +5,7 @@ homeassistant:
   elevation: 179
   unit_system: metric
   time_zone: Europe/Kiev
+  customize: !include customize.yaml
 
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
@@ -30,3 +31,10 @@ yeelight: !include includes/yeelight.yaml
 
 #Вынос во внешние папки
 sensor: !include_dir_merge_list includes/sensor
+
+xiaomi_aqara:
+  discovery_retry: 10
+  gateways:
+    - mac: 34:CE:00:88:B0:39
+      key: y4hz1r7wrxk7xowv
+      host: 192.168.0.82

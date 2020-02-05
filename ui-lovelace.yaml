@@ -151,7 +151,61 @@ views:
               entity: light.yeelight_rgb_bulb
               name: RGB Лампочка              
 
-          
+  - title: Zigbee
+    icon: mdi:zigbee
+    
+    cards:
+    
+      - type: vertical-stack
+        cards:
+        - type: markdown
+          content: >
+             **Уровень заряда** 
+             
+        - type: entities
+          show_header_toggle: false
+          entities:          
+            - entity: sensor.158d0001531698_battery
+            - entity: sensor.158d0001186d82_battery
+            - entity: sensor.158d00013fc3bc_battery
+            
+        - type: markdown
+          content: >
+             **Розетки** 
+             
+        - type: entities
+          show_header_toggle: false
+          entities:          
+            - entity: switch.plug_158d000153dd8e
+            - entity: sensor.158d000153dd8e_load
+            
+        - type: markdown
+          content: >
+             **Шлюз** 
+             
+        - type: entities
+          show_header_toggle: false
+          entities:          
+            - entity: light.gateway_light_34ce0088b039
+            - entity: sensor.illumination_34ce0088b039
+
+      - type: vertical-stack
+        cards:
+        - type: markdown
+          content: >
+             **Климат, окна двери** 
+             
+        - type: entities
+          show_header_toggle: false
+          entities:   
+            - entity: sensor.humidity_158d00015aebb6
+            - entity: sensor.temperature_158d00015aebb6
+            - entity: binary_sensor.door_window_sensor_158d00013ed373
+            - entity: binary_sensor.door_window_sensor_158d000445206b
+        
+            
+
+    
           
           
           

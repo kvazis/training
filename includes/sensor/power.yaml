@@ -1,0 +1,9 @@
+  - platform: template
+    sensors:
+     158d000153dd8e_load:
+       value_template: "{{ state_attr('switch.plug_158d000153dd8e', 'load_power') }}"
+       unit_of_measurement: 'Вт'
+       entity_id: switch.plug_158d000153dd8e
+       device_class: power
+       friendly_name: 'Розетка Zigbee мощность'
+        

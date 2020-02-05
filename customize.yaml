@@ -1,0 +1,42 @@
+#Бинарные сенсоры
+binary_sensor.cube_158d0001186d82:
+  friendly_name: Кубик Aqara
+  icon: mdi:cube-outline
+binary_sensor.wall_switch_left_158d00013fc3bc:
+  friendly_name: Выключатель Aqara левая клавиша
+binary_sensor.wall_switch_right_158d00013fc3bc:
+  friendly_name: Выключатель Aqara правая клавиша
+binary_sensor.wall_switch_both_158d00013fc3bc:
+  friendly_name: Выключатель Aqara обе клавиши
+binary_sensor.switch_158d0001531698:
+  friendly_name: Кнопка Mijia
+  icon: mdi:radiobox-blank
+binary_sensor.door_window_sensor_158d00013ed373:
+  friendly_name: Окно
+  device_class: window 
+binary_sensor.door_window_sensor_158d000445206b:
+  friendly_name: Дверь
+  device_class: door
+  
+#Светильники
+light.gateway_light_34ce0088b039:
+  friendly_name: Шлюз ночник
+  icon: mdi:star-circle-outline
+
+#Розетки, выключатели 
+switch.plug_158d000153dd8e:
+  friendly_name: Розетка Zigbee
+  device_class: plug  
+  icon: mdi:power
+
+#Сенсоры
+sensor.illumination_34ce0088b039:
+  friendly_name: Шлюз освещенность
+  device_class: illuminance
+sensor.humidity_158d00015aebb6:
+  friendly_name: Датчик влажности
+  device_class: humidity
+sensor.temperature_158d00015aebb6:
+  friendly_name: Датчик температуры
+  device_class: temperature
+ 

@@ -1,0 +1,123 @@
+Сканер портов
+sudo apt-get install nmap
+Проверка открытых портов
+sudo nmap -sU 192.168.xxx.xxx -p 9898,4321,54321
+
+Прописываем шлюз (если несколько прописваем один за другим)
+xiaomi_aqara:
+  discovery_retry: 10
+  gateways:
+    - mac: МАС адрес
+      key: ключ разработчика
+      host: ИП адрес
+      
+Кастомизация      
+   customize: !include customize.yaml
+
+Классы устройств
+https://www.home-assistant.io/integrations/sensor/#device-class
+https://www.home-assistant.io/integrations/binary_sensor/#device-class
+   
+customize.yaml
+Пример заполнения - 
+#Бинарные сенсоры
+binary_sensor.cube_158d0001186d82:
+  friendly_name: Кубик Aqara
+  icon: mdi:cube-outline
+binary_sensor.wall_switch_left_158d00013fc3bc:
+  friendly_name: Выключатель Aqara левая клавиша
+binary_sensor.switch_158d0001531698:
+  friendly_name: Кнопка Mijia
+  icon: mdi:radiobox-blank
+  
+#Светильники
+light.gateway_light_34ce0088b039:
+  friendly_name: Шлюз ночник
+  icon: mdi:star-circle-outline
+
+#Розетки, выключатели 
+switch.plug_158d000153dd8e:
+  friendly_name: Розетка Zigbee
+  device_class: plug  
+  icon: mdi:power
+
+#Сенсоры
+sensor.illumination_34ce0088b039:
+  friendly_name: Шлюз освещенность
+  device_class: illuminance
+sensor.humidity_158d00015aebb6:
+  friendly_name: Датчик влажности
+  device_class: humidity
+  
+Сенсоры батареек - 
+  - platform: template
+    sensors:
+     158d0001531698_battery:
+       value_template: "{{ state_attr('binary_sensor.switch_158d0001531698', 'battery_level') }}"
+       unit_of_measurement: '%'
+       entity_id: binary_sensor.switch_158d0001531698
+       device_class: battery
+       friendly_name: 'Кнопка Mijia батарейка'
+
+Сенсоры мощности - 
+  - platform: template
+    sensors:
+     158d000153dd8e_load:
+       value_template: "{{ state_attr('switch.plug_158d000153dd8e', 'load_power') }}"
+       unit_of_measurement: 'Вт'
+       entity_id: switch.plug_158d000153dd8e
+       device_class: power
+       friendly_name: 'Розетка Zigbee мощность'
+       
+Lovelace:
+  - title: Zigbee
+    icon: mdi:zigbee
+    
+    cards:
+    
+      - type: vertical-stack
+        cards:
+        - type: markdown
+          content: >
+             **Уровень заряда** 
+             
+        - type: entities
+          show_header_toggle: false
+          entities:          
+            - entity: sensor.158d0001531698_battery
+            - entity: sensor.158d0001186d82_battery
+            - entity: sensor.158d00013fc3bc_battery
+            
+        - type: markdown
+          content: >
+             **Розетки** 
+             
+        - type: entities
+          show_header_toggle: false
+          entities:          
+            - entity: switch.plug_158d000153dd8e
+            - entity: sensor.158d000153dd8e_load
+            
+        - type: markdown
+          content: >
+             **Шлюз** 
+             
+        - type: entities
+          show_header_toggle: false
+          entities:          
+            - entity: light.gateway_light_34ce0088b039
+            - entity: sensor.illumination_34ce0088b039
+
+      - type: vertical-stack
+        cards:
+        - type: markdown
+          content: >
+             **Климат, окна двери** 
+             
+        - type: entities
+          show_header_toggle: false
+          entities:   
+            - entity: sensor.humidity_158d00015aebb6
+            - entity: sensor.temperature_158d00015aebb6
+            - entity: binary_sensor.door_window_sensor_158d00013ed373
+            - entity: binary_sensor.door_window_sensor_158d000445206b
