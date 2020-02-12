@@ -203,8 +203,37 @@ views:
             - entity: binary_sensor.door_window_sensor_158d00013ed373
             - entity: binary_sensor.door_window_sensor_158d000445206b
         
-            
+  - title: СС 2531
+    icon: mdi:usb-flash-drive
+    
+    cards:
+    
+      - type: vertical-stack
+        cards:
+        - type: markdown
+          content: >
+             **Добавление устройств**     
 
+        - type: entities
+          title: Добавление Zigbee устройств
+          show_header_toggle: false
+          entities:
+             - entity: input_boolean.zigbee_permit_join
+             - entity: timer.zigbee_permit_join
+             - entity: sensor.bridge_state
+
+            
+        - type: markdown
+          content: >
+             **Розетки и реле** 
+             
+        - type: entities
+          show_header_toggle: false
+          entities:          
+            - entity: switch.0x00158d0002d7bb2b_switch_l1
+            - entity: switch.0x00158d0002d7bb2b_switch_l2
+            - entity: sensor.0x00158d0002d7bb2b_power
+            
     
           
           

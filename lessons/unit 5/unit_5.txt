@@ -1,0 +1,195 @@
+1. Сайт проекта - https://www.zigbee2mqtt.io/
+2. Загрузка SmartRF Flash Programmer - http://www.ti.com/tool/FLASH-PROGRAMMER
+3. Загрузка драйвера http://www.ti.com/general/docs/lit/getliterature.tsp?baseLiteratureNumber=swrc212&fileType=zip
+4. Загрузка прошивки https://github.com/Koenkk/Z-Stack-firmware/raw/master/coordinator/Z-Stack_Home_1.2/bin/default/CC2531_DEFAULT_20190608.zip
+
+Конфигурация mosquitoo
+
+logins:
+  - username: mqtt
+    password: mqtt
+anonymous: false
+customize:
+  active: false
+  folder: mosquitto
+certfile: fullchain.pem
+keyfile: privkey.pem
+require_certificate: false
+
+configuration.yaml
+mqtt:
+## Выбрать один из вариантов для брокера!  
+  broker: core-mosquitto  # Локальный брокер
+  broker: IP adress  # Внешний брокер
+  discovery: true
+  discovery_prefix: homeassistant  
+  username: mqtt
+  password: mqtt
+
+
+Репозиторий  zigbee2mqtt  https://github.com/danielwelch/hassio-zigbee2mqtt
+
+Настройка zigbee2mqtt - 
+data_path: /share/zigbee2mqtt
+devices: devices.yaml
+groups: groups.yaml
+homeassistant: true
+permit_join: false
+mqtt:
+  base_topic: zigbee2mqtt
+  server: 'mqtt://core-mosquitto'
+  user: mqtt
+  password: mqtt
+serial:
+  port: /dev/ttyACM0
+advanced:
+  pan_id: 6754
+  channel: 11
+  network_key:
+    - 1
+    - 3
+    - 5
+    - 7
+    - 9
+    - 11
+    - 13
+    - 15
+    - 0
+    - 2
+    - 4
+    - 6
+    - 8
+    - 10
+    - 12
+    - 13
+  availability_blacklist: []
+ban: []
+whitelist: []
+queue: {}
+socat:
+  enabled: false
+  master: 'pty,raw,echo=0,link=/dev/ttyZ2M,mode=777'
+  slave: 'tcp-listen:8485,keepalive,nodelay,reuseaddr,keepidle=1,keepintvl=1,keepcnt=5'
+  restartdelay: 1
+  initialdelay: 1
+  options: '-d -d'
+  log: false
+  
+  
+configuration.yaml - 
+#Вынос во внешние файлы
+timer: !include includes/timer.yaml
+input_boolean: !include includes/input_boolean.yaml
+group: !include includes/groups.yaml
+script: !include includes/scripts.yaml
+scene: !include includes/scenes.yaml
+recorder: !include includes/recorder.yaml
+yeelight: !include includes/yeelight.yaml
+
+#Вынос во внешние папки
+sensor: !include_dir_merge_list includes/sensor
+automation: !include_dir_merge_list includes/automation
+
+timer.yaml - 
+  zigbee_permit_join:
+    name: Time remaining
+    duration: 600
+    
+input_boolean.yaml - 
+  zigbee_permit_join:
+    name: Allow devices to join
+    initial: off
+    icon: mdi:cellphone-wireless
+
+/sensor/zigbee2mqtt.yaml - 
+  - platform: mqtt
+    name: Bridge state
+    state_topic: "zigbee2mqtt/bridge/state"
+    icon: mdi:router-wireless
+
+/automation/zigbee2mqtt.yaml
+
+  - id: Включить добавление Zigbee
+    alias: enable_zigbee_join
+    initial_state: true
+    trigger:
+      platform: state
+      entity_id: input_boolean.zigbee_permit_join
+      to: 'on'
+    action:
+    - service: mqtt.publish
+      data:
+        topic: zigbee2mqtt/bridge/config/permit_join
+        payload: 'true'
+    - service: timer.start
+      data:
+        entity_id: timer.zigbee_permit_join
+        
+  - id: Выключить добавление Zigbee
+    alias: disable_zigbee_join
+    initial_state: true
+    trigger:
+    - entity_id: input_boolean.zigbee_permit_join
+      platform: state
+      to: 'off'
+    action:
+    - service: mqtt.publish
+      data:
+        topic: zigbee2mqtt/bridge/config/permit_join
+        payload: 'false'    
+    - service: timer.cancel
+      data:
+        entity_id: timer.zigbee_permit_join
+        
+  - id: Выключение по таймеру добавления Zigbee
+    alias: disable_zigbee_join_timer
+    initial_state: true
+    trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.zigbee_permit_join
+    action:
+    - service: mqtt.publish
+      data:
+        topic: zigbee2mqtt/bridge/config/permit_join
+        payload: 'false'
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.zigbee_permit_join
+
+ui-lovelace.yaml
+
+  - title: СС 2531
+    icon: mdi:usb-flash-drive
+    
+    cards:
+    
+      - type: vertical-stack
+        cards:
+        - type: markdown
+          content: >
+             **Добавление устройств**     
+
+        - type: entities
+          title: Добавление Zigbee устройств
+          show_header_toggle: false
+          entities:
+             - entity: input_boolean.zigbee_permit_join
+             - entity: timer.zigbee_permit_join
+             - entity: sensor.bridge_state
+
+
+
+mqtt explorer  - http://mqtt-explorer.com/
+
+
+Инструкця по отвязке клавиш от реле https://www.zigbee2mqtt.io/devices/QBKG03LM.html
+
+
+
+
+
+
+
+

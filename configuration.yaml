@@ -20,10 +20,19 @@ lovelace:
 # Text to speech
 tts:
   - platform: google_translate
+  
+mqtt:
+#   broker: core-mosquitto  # Локальный брокер
+  broker: 192.168.0.77   # Внешний брокер
+  discovery: true
+  discovery_prefix: homeassistant  
+  username: mqtt
+  password: mqtt
 
 #Вынос во внешние файлы
+timer: !include includes/timer.yaml
+input_boolean: !include includes/input_boolean.yaml
 group: !include includes/groups.yaml
-automation: !include includes/automations.yaml
 script: !include includes/scripts.yaml
 scene: !include includes/scenes.yaml
 recorder: !include includes/recorder.yaml
@@ -31,6 +40,7 @@ yeelight: !include includes/yeelight.yaml
 
 #Вынос во внешние папки
 sensor: !include_dir_merge_list includes/sensor
+automation: !include_dir_merge_list includes/automation
 
 xiaomi_aqara:
   discovery_retry: 10

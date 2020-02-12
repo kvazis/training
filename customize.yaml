@@ -28,6 +28,14 @@ switch.plug_158d000153dd8e:
   friendly_name: Розетка Zigbee
   device_class: plug  
   icon: mdi:power
+switch.0x00158d0002d7bb2b_switch_l1:
+  friendly_name: Реле Aqara канал 1
+  device_class: plug  
+  icon: mdi:power
+switch.0x00158d0002d7bb2b_switch_l2:
+  friendly_name: Реле Aqara канал 2
+  device_class: plug  
+  icon: mdi:power
 
 #Сенсоры
 sensor.illumination_34ce0088b039:
@@ -39,4 +47,21 @@ sensor.humidity_158d00015aebb6:
 sensor.temperature_158d00015aebb6:
   friendly_name: Датчик температуры
   device_class: temperature
+sensor.0x00158d0002d7bb2b_power: 
+  friendly_name: Реле Aqara потребление
+  device_class: power  
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
