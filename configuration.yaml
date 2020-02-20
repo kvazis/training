@@ -33,18 +33,35 @@ mqtt:
 timer: !include includes/timer.yaml
 input_boolean: !include includes/input_boolean.yaml
 group: !include includes/groups.yaml
-script: !include includes/scripts.yaml
 scene: !include includes/scenes.yaml
 recorder: !include includes/recorder.yaml
 yeelight: !include includes/yeelight.yaml
+light: !include includes/light.yaml
+fan: !include includes/fan.yaml
+air_quality: !include includes/air_quality.yaml
+remote: !include includes/remote.yaml
 
 #Вынос во внешние папки
 sensor: !include_dir_merge_list includes/sensor
 automation: !include_dir_merge_list includes/automation
+switch: !include_dir_merge_list includes/switches
+script: !include_dir_merge_named includes/scripts
 
 xiaomi_aqara:
   discovery_retry: 10
   gateways:
+    - mac: F0:B4:29:CC:1F:11
+      key: !secret gateway1_api
+      host: 192.168.0.80
+    - mac: 28:6C:07:F0:AD:27
+      key: !secret gateway2_api
+      host: 192.168.0.81
     - mac: 34:CE:00:88:B0:39
-      key: y4hz1r7wrxk7xowv
+      key: !secret gateway3_api
       host: 192.168.0.82
+    - mac: 78:11:DC:64:F4:C8
+      key: !secret gateway4_api
+      host: 192.168.0.83
+    - mac: F0:B4:29:CC:38:13
+      key: !secret gateway5_api
+      host: 192.168.0.84

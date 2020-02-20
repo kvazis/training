@@ -1,0 +1,11 @@
+  - platform: xiaomi_miio
+    name: mi_humidifier
+    host: 192.168.0.140
+    token: 05dfc2387db38b6025d6ed2b2f132a4a
+    model: zhimi.humidifier.ca1
+    
+  - platform: xiaomi_miio
+    name: mi_purifier
+    host: 192.168.0.141
+    token: d157f795ab4f6a9686437ca98254bce1
+    model: zhimi.airpurifier.m1

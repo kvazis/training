@@ -1,0 +1,11 @@
+  - platform: xiaomi_miio
+    name: mi_usb_socket
+    host: 192.168.0.96
+    token: b7086999a920a560080c07beeb5da4cd
+    model: chuangmi.plug.v3
+
+  - platform: xiaomi_miio
+    name: mi_3usb_strip
+    host: 192.168.0.101
+    token: 29eae10bd4d757528e31dc6a783ec2ee
+    model: qmi.powerstrip.v1

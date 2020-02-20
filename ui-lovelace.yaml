@@ -120,6 +120,12 @@ views:
               name: Люстра 450 ночник            
             - entity: light.yeelight_rgb_bulb            
               name: Лампочка  
+            - entity: light.philips_ceiling           
+              name: Philips люстра
+            - entity: light.philips_bedside
+              name: Philips прикроватник          
+            - entity: light.led_light          
+              name: Выключатель 
 
       - type: vertical-stack
         cards:
@@ -149,7 +155,15 @@ views:
               name: Ночник 450
             - type: light
               entity: light.yeelight_rgb_bulb
-              name: RGB Лампочка              
+              name: RGB Лампочка 
+        - type: horizontal-stack
+          cards:
+            - type: light
+              entity: light.philips_ceiling 
+              name: Люстра
+            - type: light
+              entity: light.philips_bedside
+              name: Прикроватник
 
   - title: Zigbee
     icon: mdi:zigbee
@@ -176,8 +190,8 @@ views:
         - type: entities
           show_header_toggle: false
           entities:          
-            - entity: switch.plug_158d000153dd8e
-            - entity: sensor.158d000153dd8e_load
+            - entity: switch.plug_158d00010ec4b8
+            - entity: sensor.158d00010ec4b8_load
             
         - type: markdown
           content: >
@@ -234,10 +248,66 @@ views:
             - entity: switch.0x00158d0002d7bb2b_switch_l2
             - entity: sensor.0x00158d0002d7bb2b_power
             
+  - title: wi-fi
+    icon: mdi:wifi
     
+    cards:
+    
+      - type: vertical-stack
+        cards:
+        - type: markdown
+          content: >
+             **Wi-Fi розетки и удлинители**  
+
+        - type: entities
+          show_header_toggle: false
+          entities:          
+            - entity: switch.mi_3usb_strip
+              name: Удлинитель Xiaomi c 3 USB
+            - entity: sensor.mi_3usb_strip_load
+            - entity: switch.mi_usb_socket
+              name: Розетка Xiaomi c 2 USB
+            - entity: sensor.usb_socket_load
           
+      - type: vertical-stack
+        cards:
+        - type: markdown
+          content: >
+             **Климатическая техника**  
+
+        - type: entities
+          show_header_toggle: false
+          entities:          
+            - entity: fan.mi_humidifier
+              name: Увлажнитель Smartmi
+            - entity: sensor.smartmi_speed 
+            - entity: sensor.smartmi_water
+            - entity: sensor.smartmi_temperature 
+            - entity: sensor.smartmi_humidity
+            
+        - type: entities
+          show_header_toggle: false
+          entities:          
+            - entity: fan.mi_purifier
+              name: Очиститель Xiaomi           
+            - entity: sensor.purifier_speed
+            - entity: sensor.purifier_filter
+            - entity: sensor.purifier_temperature
+            - entity: sensor.purifier_humidity
+            - entity: sensor.purifier_pm25
           
-          
+      - type: vertical-stack
+        cards:
+        - type: markdown
+          content: >
+             **Качество воздуха**  
+
+        - type: entities
+          show_header_toggle: false
+          entities:          
+            - entity: sensor.mi_air_co2a 
+            - entity: sensor.mi_air_pm25
+            - entity: sensor.mi_air_tvoc
           
           
           
