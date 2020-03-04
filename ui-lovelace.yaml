@@ -16,12 +16,25 @@ views:
         - type: entities
           show_header_toggle: false
           entities:
+            - entity: sensor.last_boot_custom
+            - entity: sensor.online_custom
             - entity: sensor.time
               name: Текущее время
               icon: mdi:clock-outline
             - entity: sensor.date
               name: Дата
               icon: mdi:calendar-check-outline
+              
+        - type: markdown
+          content: >
+             **Резервное копирование**
+             
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - entity: sensor.last_google_backup_train
+            - entity: sensor.snapshots_in_google_drive_train
+            - entity: sensor.snapshots_in_hassio_train
               
         - type: entities
           show_header_toggle: false

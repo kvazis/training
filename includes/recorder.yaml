@@ -1,2 +1,26 @@
   db_url: mysql://hass:hass@core-mariadb/homeassistant?charset=utf8
-  purge_keep_days: 3 
+  include:
+    domains:
+      - switch
+      - light
+    entities: 
+#Объем БД
+      - sensor.maria_db_size
+#Сенсоры температуры и влажности
+      - sensor.0x00158d0001581109_temperature
+      - sensor.0x00158d000159c7e6_temperature
+      - sensor.0x00158d0001dcd47e_temperature
+      - sensor.0x00158d0001581109_humidity
+      - sensor.0x00158d000159c7e6_humidity
+      - sensor.0x00158d0001dcd47e_humidity
+# Сенсоры мощности
+      - sensor.0x00158d00010ec4b8_power
+      - sensor.0x00158d000114a1e1_power
+      - sensor.0x00158d00012896cb_power
+  exclude:
+    entities: 
+# Светильники шлюзов
+      - light.gateway_light_286c07f0ad27
+      - light.gateway_light_34ce0088b039
+      - light.gateway_light_7811dc64f4c8
+      - light.gateway_light_7811dc64f4c8

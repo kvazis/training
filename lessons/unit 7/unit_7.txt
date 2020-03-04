@@ -1,27 +1,51 @@
-  - platform: time_date
-    display_options:
-      - 'time'
-      - 'date'
-      - 'time_date'
+/config/includes/recorder.yaml
 
-  - platform: systemmonitor
-    resources:
-    - type: processor_use
-    - type: disk_use_percent
-      arg: /
-    - type: memory_use_percent
-    - type: last_boot
-    - type: disk_free
-      arg: /
+  db_url: mysql://hass:hass@core-mariadb/homeassistant?charset=utf8
+  include:
+    domains:
+      - switch
+      - light
+    entities: 
+#Объем БД
+      - sensor.maria_db_size
+#Сенсоры температуры и влажности
+      - sensor.0x00158d0001581109_temperature
+      - sensor.0x00158d000159c7e6_temperature
+      - sensor.0x00158d0001dcd47e_temperature
+      - sensor.0x00158d0001581109_humidity
+      - sensor.0x00158d000159c7e6_humidity
+      - sensor.0x00158d0001dcd47e_humidity
+# Сенсоры мощности
+      - sensor.0x00158d00010ec4b8_power
+      - sensor.0x00158d000114a1e1_power
+      - sensor.0x00158d00012896cb_power
+  exclude:
+    entities: 
+# Светильники шлюзов
+      - light.gateway_light_286c07f0ad27
+      - light.gateway_light_34ce0088b039
+      - light.gateway_light_7811dc64f4c8
+      - light.gateway_light_7811dc64f4c8
       
-  - platform: sql
-    db_url: mysql://hass:hass@core-mariadb/homeassistant?charset=utf8
-    queries:
-      - name: Maria DB size
-        query: 'SELECT table_schema "database", Round(Sum(data_length + index_length) / 1048576, 2) "value" FROM information_schema.tables WHERE table_schema="homeassistant" GROUP BY table_schema;'
-        column: 'value'
-        unit_of_measurement: MB 
-        
+/config/includes/automation/system.yaml
+
+- id: Сжатие базы
+  alias: 00_purge_everyday
+  initial_state: true
+  trigger:
+    - platform: time
+      at: '01:00:00'
+  action:
+    - service: recorder.purge
+      data:
+          keep_days: 3
+          repack: true
+          
+Hass.io Google Drive Backup Repository
+https://github.com/sabeechen/hassio-google-drive-backup
+
+/config/includes/sensor/system.yaml
+
 # Время с последней перезагрузки
   - platform: template
     sensors:
@@ -91,44 +115,6 @@
                    {{ minutes }} мин.
                {% endif %}
              {% endif %}
-        icon_template: mdi:clock         
-             
+        icon_template: mdi:clock  
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        
-        
