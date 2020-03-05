@@ -117,4 +117,20 @@ https://github.com/sabeechen/hassio-google-drive-backup
              {% endif %}
         icon_template: mdi:clock  
 
+/config/includes/sensor/google.yaml
+ - platform: template
+   sensors:
+    last_google_backup_train:
+       friendly_name: 'Последний удачный бэкап - '
+       value_template: '{{ (as_timestamp(states.sensor.snapshot_backup.attributes["last_snapshot"])) | timestamp_custom("%d.%m.%Y %H:%M") }}'
+       icon_template: mdi:calendar-check-outline
 
+    snapshots_in_google_drive_train:
+       friendly_name: 'Снапшотов на Googe Drive - '
+       value_template: '{{ states.sensor.snapshot_backup.attributes["snapshots_in_google_drive"] }}'
+       icon_template: mdi:folder-google-drive
+       
+    snapshots_in_hassio_train:
+       friendly_name: 'Снапшотов в Наssio - '
+       value_template: '{{ states.sensor.snapshot_backup.attributes["snapshots_in_hassio"] }}'
+       icon_template: mdi:home-assistant
