@@ -206,25 +206,17 @@ views:
         column: 'value'
         unit_of_measurement: MB 
 		
-##### Конфигурация Maria DB
+##### Конфигурация Maria DB - Обновлено по версии 2.0
 
-{
-  "databases": [
-    "homeassistant"
-  ],
-  "logins": [
-    {
-      "username": "hass",
-      "host": "%",
-      "password": "hass"
-    }
-  ],
-  "rights": [
-    {
-      "username": "hass",
-      "host": "%",
-      "database": "homeassistant",
-      "grant": "ALL PRIVILEGES ON"
-    }
-  ]
-}
+databases:
+  - homeassistant
+logins:
+  - username: hass
+    host: '%'
+    password: hass
+rights:
+  - username: hass
+    host: '%'
+    database: homeassistant
+    grant: ALL PRIVILEGES ON
+
