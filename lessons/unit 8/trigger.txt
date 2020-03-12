@@ -1,0 +1,173 @@
+trigger:
+
+Перечень триггеров работают по в режиме ИЛИ
+
+Запуск / остановка системы
+
+- platform: homeassistant
+  event: start
+  
+start, shutdown
+
+Время - 
+Запуск в определенное время
+
+- platform: time
+  at: "14:14:14"
+  
+Периодический запуск через указанный временной интервал
+
+Через каждые 30 секунд:
+- platform: time_pattern
+  seconds: '/30'
+  
+Каждые 2 минуты:
+- platform: time_pattern
+  minutes: '/2'
+  
+Каждые 3 часа:
+- platform: time_pattern
+  hours: '/3'
+
+Периодический запуск в шаблонное время
+  
+Каждый час в ХХ:10 минут
+- platform: time_pattern
+  minutes: 10
+  
+Каждую минуту 6 часа
+- platform: time_pattern
+  hours: "6"
+  minutes: "*"
+
+
+Состояния - 
+
+Переход в статус "Недоступно"
+- platform: state
+  entity_id: Наблюдаемое устройство
+  to: 'unavailable'
+  
+Переход из статуса "Недоступно"
+- platform: state
+  entity_id: Наблюдаемое устройство
+  from: 'unavailable'
+
+Переход из состояния включено - в состояние выключено
+
+- platform: state
+  entity_id: Наблюдаемое устройство
+  from: 'on'
+  to: 'off'
+  
+Переход в состояние выключено и нахождение в нем 5 минут
+
+- platform: state
+  entity_id: Наблюдаемое устройство
+  to: 'off'  
+  for:
+    minutes: 5
+
+цифровое значение
+
+
+- platform: numeric_state
+  entity_id: Устройство условия 
+  below: ниже указанного значения
+  
+- platform: numeric_state
+  entity_id: Устройство условия 
+  above: выше указанного значения
+  
+Завершение отсчета таймера
+
+- platform: event
+  event_type: timer.finished
+  event_data:
+    entity_id: timer.******
+
+Устройства работающие с интеграцией Zigbee2mqtt
+
+- platform: state
+  entity_id: sensor.*********_click
+  to: 
+
+Кнопка Mi WXKG01LM
+single, double, triple, quadruple, many, long, long_release click
+
+Кнопка Aqara WXKG11LM 
+single, double click (triple, quadruple, hold, release - на международных)
+
+Кнопка Aqara  WXKG12LM
+single, double, shake, hold, release
+
+Выключатели Aqara
+
+Выключатель Aqara 1 кл WXKG03LM
+single (double, hold, release, long click - на международных)
+
+Выключатель Aqara 2 кл WXKG02LM
+left, right, both (left_double, left_long, right_double, right_long, both_double, both_long - на международных)
+
+Проводные выключатели могут работать в режиме развязки клавиши и реле - decoupled mode
+
+Выключатель Aqara 1 кл проводной без нуля QBKG04LM с нулем QBKG11LM
+single 
+
+Выключатель Aqara 2 кл проводной без нуля QBKG03LM с нулем QBKG12LM
+left, right
+
+Кубики Mi / Aqara
+shake, wakeup, fall, tap, slide, flip180, flip90, rotate_left and rotate_right
+
+Устройства работающие с шлюза Xiaomi - 
+
+КЛИК
+- platform: event
+  event_type: xiaomi_aqara.click
+  event_data:
+    entity_id: binary_sensor.switch_*********
+    click_type: 
+    
+Кнопка Mi WXKG01LM
+single, double, long_click_press, long_click_release, hold
+
+Кнопка Aqara WXKG11LM 
+single, double (long_click_press - на международных)
+
+Кнопка Aqara  WXKG12LM
+single, double, long_click_press, shake
+
+Выключатели Aqara только беспроводные!!!!
+
+Выключатель Aqara 1 кл WXKG03LM
+single
+
+Выключатель 2 клAqara  WXKG02LM
+single (на каждую из клавищ) both (на обе)
+
+Выключатель Aqara 1 кл WXKG03LM - международный
+single, double, long
+
+Выключатель Aqara Aqara 2 кл  WXKG03LM - международный
+single, double, long (на каждую из клавищ) both, double_both, long_both (на обе)
+
+ДЕЙСТВИЯ КУБА
+
+  - platform: event
+    event_type: xiaomi_aqara.cube_action
+    event_data:
+      entity_id: binary_sensor.cube_********
+      action_type: 
+      
+Кубики Mi / Aqara
+flip90, flip180, move, tap_twice, shake_air, swing, alert, free_fall, rotate
+
+ДВИЖЕНИЕ (По умолчанию не чаще 1 раза в минуту, переделка датчика - каждые 5 сек)
+  - platform: event
+    event_type: xiaomi_aqara.motion
+    event_data:
+      entity_id: binary_sensor.motion_sensor_********
+
+        
+        

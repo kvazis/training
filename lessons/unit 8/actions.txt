@@ -1,0 +1,96 @@
+action:
+
+РЕЛЕ
+
+Включение
+- service: switch.turn_on
+  entity_id: switch.******
+  
+Выключение
+- service: switch.turn_off
+  entity_id: switch.******
+  
+Переключение состояния
+- service: switch.toggle
+  entity_id: switch.******
+  
+Применение одного сервиса на несколько реле
+
+  entity_id:
+    - switch.******
+    - switch.******
+    - switch.******
+    
+Светильники
+
+Включение
+- service: light.turn_on
+  entity_id: light.******
+  
+Выключение
+- service: light.turn_off
+  entity_id: light.******
+  
+Переключение состояния
+- service: light.toggle
+  entity_id: light.******
+  
+Применение одного сервиса на несколько светильников
+
+  entity_id:
+    - light.******
+    - light.******
+    - light.******
+
+Указание заданной яркости и цветовой температуры (60% 4000 К)
+
+- service: light.turn_on
+  entity_id: light.******
+  data_template:
+    brightness_pct: 60
+    kelvin: 4000
+
+Указание заданной яркости и цвета для ргб 
+
+- service: light.turn_on
+  entity_id: light.******
+  data_template:
+    brightness_pct: 60
+    rgb_color: [169, 153, 255]
+
+Таймеры
+
+Старт
+- service: timer.start
+  entity_id: timer.*****
+  
+С заданной продолжительностью отличной от дефолтной
+- service: timer.start
+  entity_id: timer.*****
+  data_template:
+     duration: 00:05:00
+     
+Отмена таймера
+- service: timer.cancel
+  entity_id: timer.*****
+
+Универсальный сервис для любых сущностей
+
+- service: homeassistant.turn_on
+  entity_id: *****
+  
+- service: homeassistant.turn_off
+  entity_id: *****
+
+Скрипты
+
+Запуск
+- service: script.turn_on
+  entity_id: script.******
+  
+Отмена
+- service: script.turn_off
+  entity_id: script.******
+
+
+

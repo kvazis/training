@@ -136,10 +136,16 @@ views:
             - entity: light.philips_ceiling           
               name: Philips люстра
             - entity: light.philips_bedside
-              name: Philips прикроватник          
-            - entity: light.led_light          
-              name: Выключатель 
+              name: Philips прикроватник   
+              
+        - type: entities
+          show_header_toggle: false
+          entities:          
+            - entity: script.unit8_light_on_full
+            - entity: script.unit8_light_on_medium
+            - entity: script.unit8_light_off
 
+              
       - type: vertical-stack
         cards:
         - type: markdown

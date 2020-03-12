@@ -1,0 +1,23 @@
+unit8_light_on_full:
+  alias: Включение люстры яркость 100%
+  sequence:
+   - service: light.turn_on
+     entity_id: light.yeelight_450
+     data_template:
+       brightness_pct: 100
+       kelvin: 4000
+       
+unit8_light_on_medium:
+  alias: Включение люстры яркость 50%
+  sequence:
+   - service: light.turn_on
+     entity_id: light.yeelight_450
+     data_template:
+       brightness_pct: 50
+       kelvin: 4000
+       
+unit8_light_off:
+  alias: Выключение люстры
+  sequence:
+   - service: light.turn_off
+     entity_id: light.yeelight_450
