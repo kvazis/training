@@ -24,6 +24,7 @@ views:
             - entity: sensor.date
               name: Дата
               icon: mdi:calendar-check-outline
+            - entity: sensor.rpi_power_status
               
         - type: markdown
           content: >

@@ -1,0 +1,32 @@
+Проект Girhub
+https://github.com
+
+Получение токена
+https://github.com/settings/tokens
+
+Последний релиз HACS
+https://github.com/custom-components/hacs/releases/latest
+
+
+Создаем папку в config
+custom_components
+
+/config/configuration.yaml
+hacs:
+  token: !secret HACS_github
+  appdaemon: true
+  python_script: true
+  theme: true
+
+/config/secrets.yaml
+HACS_github: 45366646tokena41ca75f317f91d94b2b
+
+Папка для тем
+frontend:
+  themes: !include_dir_merge_named themes
+
+Сенсор питания для Raspberry
+/config/includes/sensor/system.yaml
+
+  - platform: rpi_power
+    text_state: true
