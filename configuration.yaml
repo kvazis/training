@@ -45,7 +45,7 @@ input_boolean: !include includes/input_boolean.yaml
 group: !include includes/groups.yaml
 scene: !include includes/scenes.yaml
 recorder: !include includes/recorder.yaml
-yeelight: !include includes/yeelight.yaml
+#yeelight: !include includes/yeelight.yaml
 light: !include includes/light.yaml
 fan: !include includes/fan.yaml
 air_quality: !include includes/air_quality.yaml
