@@ -36,6 +36,11 @@ yeelight: !include includes/yeelight.yaml
 #Вынос во внешние папки
 sensor: !include_dir_merge_list includes/sensor
 
+/config/includes/recorder.yaml
+
+  db_url: mysql://hass:hass@core-mariadb/homeassistant?charset=utf8
+  purge_keep_days: 3
+
 
   
 ##### ui-lovelace.yaml
