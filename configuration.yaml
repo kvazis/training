@@ -32,8 +32,8 @@ tts:
   - platform: google_translate
   
 mqtt:
-  broker: core-mosquitto  # Локальный брокер
-#   broker: 192.168.0.77   # Внешний брокер
+#   broker: core-mosquitto  # Локальный брокер
+  broker: 192.168.0.71   # Внешний брокер
   discovery: true
   discovery_prefix: homeassistant  
   username: mqtt
@@ -56,6 +56,7 @@ sensor: !include_dir_merge_list includes/sensor
 automation: !include_dir_merge_list includes/automation
 switch: !include_dir_merge_list includes/switches
 script: !include_dir_merge_named includes/scripts
+binary_sensor: !include_dir_merge_list includes/bin_sensor
 
 xiaomi_aqara:
   discovery_retry: 10

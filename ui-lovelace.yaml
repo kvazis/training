@@ -329,8 +329,94 @@ views:
             - entity: sensor.mi_air_pm25
             - entity: sensor.mi_air_tvoc
           
+  - title: Шаблоны
+    icon: mdi:alpha-t-box
+    
+    cards:
+    
+      - type: vertical-stack
+        cards:
+  
+        - type: markdown
+          content: >
+             **Составной сенсор движения**          
+        - type: glance  
+          show_state: false
+          entities:
+             - entity: binary_sensor.ln_moving_occupancy
+               name: Движение 1
+             - entity: binary_sensor.cr_moving_occupancy
+               name: Движение 2
+             - entity: binary_sensor.lr_balcony_moving_occupancy
+               name: Движение 3
+
+        - type: glance
+          show_state: false
+          entities:
+             - entity: binary_sensor.super_motion
+
+        - type: markdown
+          content: >
+             **Составной сенсор окон**   
+             
+        - type: glance  
+          show_state: false
+          entities:
+             - entity: binary_sensor.dd_window_contact
+               name: Окно 1
+             - entity: binary_sensor.da_window_contact
+               name: Окно 2
+             - entity: binary_sensor.lr_window_contact
+               name: Окно 3
           
-          
+        - type: glance
+          show_state: false
+          entities:
+             - entity: binary_sensor.super_windows
+ 
+      - type: vertical-stack
+        cards:     
+
+        - type: markdown
+          content: >
+             **Составной сенсор для увлажнения**  
+        
+        - type: glance  
+          entities:
+             - entity: binary_sensor.tod_day
+               name: Дневное время
+             - entity: sensor.kn_climate_humidity
+               name: Влажность
+               
+        - type: glance
+          show_state: false
+          entities:
+             - entity: binary_sensor.super_windows_day
+
+        - type: markdown
+          content: >
+             **Сенсоры светильников**  
+
+        - type: entities
+          show_header_toggle: false
+          entities:
+             - entity: light.philips_bedside
+               name: Светильник
+             - entity: binary_sensor.cr_moving_occupancy
+               name: Движение
+             - entity: binary_sensor.auto_light
+
+        - type: markdown
+          content: >
+             **Нагрузка**  
+             
+        - type: entities
+          show_header_toggle: false
+          entities:
+             - entity: switch.mi_3usb_strip
+             - entity: sensor.mi_3usb_strip_load
+             - entity: binary_sensor.check_load
+               
           
           
           
