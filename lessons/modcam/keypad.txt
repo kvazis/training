@@ -1,0 +1,15 @@
+Пульт Zigbee V2. страница на сайте проекта - https://modkam.ru/?p=1264
+
+Телеграмм, поддержка - https://t.me/zigbeer
+Телеграмм, барахолка (покупка в РФ) - https://t.me/zigberu
+
+Купить Пульт Zigbee V2.0 и другие разработки zigbee в Украине - https://izi.ua/m-106842-id106842
+
+Пример бинарника для кнопки пульта:
+
+- platform: mqtt
+  name: keypad_btn_1
+  state_topic: "zigbee2mqtt/0x00124b001f83102d"
+  value_template: '{{ value_json.btn_1 }}'
+  payload_on: true
+  payload_off: false
