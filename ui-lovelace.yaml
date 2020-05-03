@@ -212,7 +212,7 @@ views:
           entities:          
             - entity: switch.plug_158d00010ec4b8
             - entity: sensor.158d00010ec4b8_load
-            
+              
         - type: markdown
           content: >
              **Шлюз** 
@@ -264,9 +264,9 @@ views:
         - type: entities
           show_header_toggle: false
           entities:          
-            - entity: switch.0x00158d0002d7bb2b_switch_l1
-            - entity: switch.0x00158d0002d7bb2b_switch_l2
-            - entity: sensor.0x00158d0002d7bb2b_power
+            - entity: switch.dd_wd_n_2ch_switch_left
+            - entity: switch.dd_wd_n_2ch_switch_right
+            - entity: sensor.dd_wd_n_2ch_power
             
   - title: wi-fi
     icon: mdi:wifi
@@ -284,6 +284,7 @@ views:
           entities:          
             - entity: switch.mi_3usb_strip
               name: Удлинитель Xiaomi c 3 USB
+              secondary_info: last-changed
             - entity: sensor.mi_3usb_strip_load
             - entity: switch.mi_usb_socket
               name: Розетка Xiaomi c 2 USB
@@ -418,7 +419,63 @@ views:
              - entity: binary_sensor.check_load
                
           
-          
+  - title: Packages
+    icon: mdi:package-variant
+    
+    cards:
+        - type: entities
+          show_header_toggle: false
+          entities:
+             - entity: light.yeelight_320_ceiling
+               name: Светильник
+             - entity: binary_sensor.0x00158d0001a24e71_occupancy
+               name: Движение
+             - entity: binary_sensor.unit_10_1_ex1
+             - entity: binary_sensor.unit_10_1_ex1_day
+               name: День
+             - entity: binary_sensor.unit_10_1_ex1_night
+               name: Ночь 
+             - entity: timer.unit_10_1_ex1
+
+
+        - type: entities
+          show_header_toggle: false
+          state_color: true
+          entities:
+             - entity: light.yeelight_450
+               name: Светильник 2
+             - entity: binary_sensor.ln_moving_occupancy
+               name: Движение
+             - entity: binary_sensor.unit_10_1_ex2
+             - entity: sensor.kn_light_sensor_illuminance
+               name: Освещенность
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
           
           
           

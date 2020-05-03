@@ -6,8 +6,8 @@
     
   - platform: xiaomi_miio
     name: philips_ceiling
-    host: 192.168.0.119 
-    token: d3388c79d4c6c0709da9c5361776fa1f
+    host: 192.168.0.117 
+    token: f73f6c18ac3fd594c2ff3dfae32bb20f
     
   - platform: switch
     name: led_light
