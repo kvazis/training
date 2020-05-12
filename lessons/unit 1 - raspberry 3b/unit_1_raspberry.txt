@@ -70,5 +70,7 @@ docker run -d -p 9000:9000 --name portainer --restart always -v /var/run/docker.
 
 Установка hass.io (список ключей тут - https://github.com/home-assistant/supervised-installer)
 curl -sL https://raw.githubusercontent.com/home-assistant/supervised-installer/master/installer.sh | bash -s -- -m raspberrypi3
+ВНИМАНИЕ - если оригинальный скрипт вылетает на диалоге - type not supported - используйте исправленный скрипт - 
+curl -sL https://raw.githubusercontent.com/kvazis/training/master/install/install.sh | bash -s - -m raspberrypi3
 
 Веб интерфейс Hass.io - IP adress:8123
