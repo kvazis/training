@@ -1,0 +1,15 @@
+Телеграмм, поддержка - https://t.me/zigbeer
+Телеграмм, барахолка (покупка в РФ) - https://t.me/zigberu
+
+Купить пульт v 3 и другие разработки zigbee в Украине - https://izi.ua/m-106842-id106842
+
+Интеграция пульта :
+
+sensor:
+
+    - platform: mqtt
+      name: keypad_12
+      state_topic: "ZigbeeB790/0x00124B001F830960"
+      availability_topic: "ZigbeeB790/bridge/state"
+      icon: "mdi:toggle-switch"
+      value_template: "{{ value_json.click }}"
