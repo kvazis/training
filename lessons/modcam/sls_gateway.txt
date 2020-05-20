@@ -1,8 +1,9 @@
 Страница проекта: https://github.com/slsys/Gateway
 Telegram-канал проекта: https://t.me/slsys 
 Купить SLS шлюз в РФ можно https://t.me/avenit
-
 Купить SLS шлюз и другие разработки zigbee в Украине - https://izi.ua/m-106842-id106842
+
+Страница проекта - https://modkam.ru/?p=1342
 
 Статус шлюза
 binary_sensor:
