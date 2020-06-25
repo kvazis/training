@@ -38,8 +38,8 @@ Ctrl+X - сохранение, Y для подтверждения
 Прошивки на ветке бета
 ls -la /lib/firmware/raspberrypi/bootloader/beta/ 
 
-Запись бета версии 
-sudo rpi-eeprom-update -d -f /lib/firmware/raspberrypi/bootloader/beta/pieeprom-2020-05-15.bin
+Запись бета версии (обновил версию)
+sudo rpi-eeprom-update -d -f /lib/firmware/raspberrypi/bootloader/beta/pieeprom-2020-06-15.bin
 
 Перезагрузка
 sudo reboot
@@ -49,6 +49,8 @@ vcgencmd bootloader_version
 
 Порядок загрузки
 vcgencmd bootloader_config
+
+> Подключаем SSD
 
 Создание папки
 sudo mkdir /mnt/ssddisk
