@@ -1,0 +1,117 @@
+Package управления освещением:
+
+light_dimmer:
+
+    input_select:
+
+      temp_bedside:
+        name: Цветовая температура
+        options:
+          - Теплый
+          - Нейтральный
+          - Холодный
+        initial: Нейтральный
+        icon: mdi:temperature-kelvin    
+    
+    automation:
+    
+        - alias: light
+          id: 'Включение и выключение'
+          initial_state: true
+          trigger:
+            - platform: state
+              entity_id: sensor.0x000d6f00133b856a_click
+              to: 'single'
+          action:
+            - service: script.turn_on
+              data_template:
+                entity_id: >-
+                  {%- if states('light.yeelight_05_bedside2') == 'off' -%}
+                  script.light_on
+                  {%- else -%}
+                  script.light_off
+                  {%- endif -%} 
+                  
+        - alias: light_temp_select
+          id: 'Регулировка цветовой температуры кнопкой'
+          initial_state: true
+          trigger:
+            - platform: state
+              entity_id: sensor.0x000d6f00133b856a_click
+              to: 'double'
+          condition:
+            - condition: state
+              entity_id: light.yeelight_05_bedside2
+              state: 'on'
+          action:
+            - service: input_select.select_next
+              entity_id: input_select.temp_bedside
+
+        - alias: light_temp
+          id: 'Регулировка цветовой температуры'
+          initial_state: true
+          trigger:
+            - platform: state
+              entity_id: input_select.temp_bedside
+          condition:
+            - condition: state
+              entity_id: light.yeelight_05_bedside2
+              state: 'on'
+          action:
+            - service: light.turn_on
+              entity_id: light.yeelight_05_bedside2
+              data_template:
+                kelvin: >
+                  {% if states('input_select.temp_bedside') == 'Теплый' %}
+                  3000
+                  {% elif states('input_select.temp_bedside') == 'Нейтральный' %}
+                  4000
+                  {% elif states('input_select.temp_bedside') == 'Холодный' %}
+                  5000
+                  {% endif %}
+                  
+        - alias: light_brightness
+          id: 'Плавная регулировка яркости'
+          initial_state: true
+          trigger:
+            - platform: state
+              entity_id: sensor.0x000d6f00133b856a_number
+          condition:
+            - condition: state
+              entity_id: light.yeelight_05_bedside2
+              state: 'on'
+          action:
+            - service: light.turn_on
+              entity_id: light.yeelight_05_bedside2
+              data_template:
+                brightness_step_pct: >
+                  {% set plus = (states('sensor.0x000d6f00133b856a_number') | int) %}
+                  {% set minus = (states('sensor.0x000d6f00133b856a_number') | int) * -1 %}
+                  {% if states('sensor.0x000d6f00133b856a_direction') == 'clockwise' %}
+                  {{plus}}
+                  {% else %}
+                  {{minus}}
+                  {% endif %}
+                  
+    script:
+          light_on:
+            alias: Включение лампы
+            sequence:
+              - service: light.turn_on
+                entity_id: light.yeelight_05_bedside2
+                data_template:
+                  brightness_pct: 90
+                  kelvin: >
+                    {% if states('input_select.temp_bedside') == 'Теплый' %}
+                    3000
+                    {% elif states('input_select.temp_bedside') == 'Нейтральный' %}
+                    4000
+                    {% elif states('input_select.temp_bedside') == 'Холодный' %}
+                    5000
+                    {% endif %}
+                  
+          light_off:
+            alias: Выключение лампы
+            sequence:
+              - service: light.turn_off
+                entity_id: light.yeelight_05_bedside2
