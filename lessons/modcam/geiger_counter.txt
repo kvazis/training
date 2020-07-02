@@ -1,0 +1,102 @@
+Счетчик Гейгера на сайте проекта - https://modkam.ru/?p=1591
+
+Телеграмм, поддержка - https://t.me/zigbeer
+Телеграмм, барахолка (покупка в РФ) - https://t.me/zigberu
+
+Купить дозиметр и другие разработки zigbee в Украине - телеграмм @Khaidakin
+
+Пути для MQTT топиков, применяемых для настроек (название топика устройства вместо 0x00124b001d3bde2f подставляем свое)
+
+zigbee2mqtt/0x00124b001d3bde2f/1/set/alert_threshold - целое число, значение фона при превышении которого пройдет событие on на сенсоре action
+zigbee2mqtt/0x00124b001d3bde2f/1/set/led_feedback - записывать значение ON или OFF - включение / выключение светодиода
+zigbee2mqtt/0x00124b001d3bde2f/1/set/sensors_count - 1 или 2 - количество трубок
+zigbee2mqtt/0x00124b001d3bde2f/1/set/buzzer_feedback - включение / выключение пищалки (пока не поддерживается, на будущее)
+
+Для отключения - нельзя просто удалить из базы (придется перепрошивать датчик), нужно
+в топик аддона zigbee2mqtt/bridge/config/remove отправить адрес устройства в виде строки 0x00124b001d3bde2f (поменять на свой)
+
+Пакадж:
+radioactive:
+
+    sensor: 
+    
+        - platform: mqtt
+          state_topic: "radioactive/alarm_per_day"
+          name: '0x00124b001d3bde2f_alarm_per_day'
+          
+        - platform: mqtt
+          state_topic: "radioactive/alarm_yesterday"
+          name: '0x00124b001d3bde2f_alarm_yesterday'
+    
+    automation:
+    
+        - alias: radiation_alarm_save
+          id: 'Запись превышения уровня'
+          initial_state: true
+          trigger:
+            - platform: state
+              entity_id: sensor.0x00124b001d3bde2f_action
+              to: 'on'
+          action:
+            - service: mqtt.publish
+              data_template:
+                topic: "radioactive/alarm_per_day"
+                payload: "{{(states('sensor.0x00124b001d3bde2f_alarm_per_day') | int + 1) }}"
+                retain: true
+
+        - alias: radiation_alarm_yesterday
+          id: 'Сохранение показаний за предыдущий день'
+          initial_state: true
+          trigger:
+            - platform: time
+              at: '00:00:01'
+          action:
+            - service: mqtt.publish
+              data_template:
+                topic: "radioactive/alarm_yesterday"
+                payload: "{{(states('sensor.0x00124b001d3bde2f_alarm_per_day') | int ) }}"
+                retain: true
+                  
+        - alias: radiation_alarm_reset
+          id: 'Обнуление показания счетчика'
+          initial_state: true
+          trigger:
+            - platform: time
+              at: '00:00:05'
+          action:
+            - service: mqtt.publish
+              data_template:
+                topic: "radioactive/alarm_per_day"
+                payload: '{{ 0 }}'
+                retain: true
+                
+Карты в lovelace
+
+        - type: markdown
+          content: >
+             **Счетчик Гейгера**
+
+        - type: custom:mini-graph-card
+          icon: mdi:radioactive
+          entities:
+           - entity: sensor.0x00124b001d3bde2f_radiation_dose_per_hour
+             name: Фон в мкР/ч
+          color_thresholds:
+            - value: 1
+              color: "#7fff0c"
+            - value: 20
+              color: "#fffb5a"
+            - value: 25
+              color: "#ff1438"
+          animate: true
+          line_width: 3
+
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: sensor.0x00124b001d3bde2f_alarm_per_day
+            name: Алармов по превышению уровня за день
+            icon: mdi:alarm-light
+          - entity: sensor.0x00124b001d3bde2f_alarm_yesterday
+            name: Алармов по превышению уровня за вчера
+            icon: mdi:alarm-light-outline
