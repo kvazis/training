@@ -1,0 +1,91 @@
+Перечень доступных bluetooth адаптеров
+sudo hciconfig
+
+Пример создания сенсора на 2х Bluetoth с ключом шифрования
+  - platform: mitemp_bt
+    hci_interface:
+                   - 0
+                   - 1
+    encryptors:
+             '58:ХХ:ХХ:ХХ:ХХ:5E': '5ccf***bc57***f2fdc***9cc***103c'
+
+Сканирование BLE устройств 
+sudo hcitool lescan
+Остановить - Ctrl C
+
+Перезагрузка bluetooth
+sudo systemctl restart bluetooth
+
+Правка файла crontab
+sudo crontab -e
+
+Выбираем 1 - nano
+
+Ежечасный запуск перезагрузки
+0 */1 * * * systemctl restart bluetooth
+
+Выход с сохранением
+Ctrl-X  Y
+
+Просмотр файла crontab
+sudo crontab -l
+
+Пример с дополнительными параметрами
+
+  - platform: mitemp_bt
+    rounding: True
+    decimals: 2
+    period: 60
+    log_spikes: False
+    use_median: False
+    active_scan: True
+    hci_interface:
+                  - 0
+                  - 1
+    encryptors:
+             '58:ХХ:ХХ:ХХ:ХХ:5E': '5ccf***bc57***f2fdc***9cc***103c'
+    whitelist: True
+
+Сайты ESP Home - 
+Стабильная - https://esphome.io/
+DEV - https://next.esphome.io/
+
+Описание устройство в esp home
+sensor:
+
+  - platform: xiaomi_cgd1
+    mac_address: 58:ХХ:ХХ:ХХ:ХХ:5E
+    bindkey: "5ccf***bc57***f2fdc***9cc***103c"
+    temperature:
+      name: cgd1_temperature
+    humidity:
+      name: cgd1_humidity
+    battery_level:
+      name: cgd1_battery
+	  
+	  
+Python - https://www.python.org/downloads/
+Вариант пути установки (папка скриптов) - 
+
+C:\Users\USERNAME\AppData\Local\Programs\Python\Python38\Scripts
+
+Win-R
+cmd
+cd      (вставить путь правой клавишей мышки)
+
+Установка ESPHome
+pip install --pre -U https://github.com/esphome/esphome/archive/dev.zip
+
+C:\Users\USERNAME\AppData\Local\Programs\Python\Python38\Lib\site-packages\esphome\components
+
+папка с названием устройста, файл sensor.py (может быть binary_sensor.py)
+cg.add_library("mbedtls", "cdf462088d") заменить на cg.add_library("mbedtls", None)
+
+Компиляция 
+esphome filename.yaml compile
+
+Заливка
+esphome filename.yaml upload
+
+Просмотр сообщений
+esphome filename.yaml logs
