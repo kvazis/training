@@ -60,18 +60,18 @@ switch: !include_dir_merge_list includes/switches
 script: !include_dir_merge_named includes/scripts
 binary_sensor: !include_dir_merge_list includes/bin_sensor
 
-xiaomi_aqara:
-  discovery_retry: 10
-  gateways:
-    - mac: F0:B4:29:CC:1F:11
-      key: !secret gateway1_api
-      host: 192.168.0.80
-    - mac: 28:6C:07:F0:AD:27
-      key: !secret gateway2_api
-      host: 192.168.0.81
-    - mac: 34:CE:00:88:B0:39
-      key: !secret gateway3_api
-      host: 192.168.0.82
-    - mac: 78:11:DC:64:F4:C8
-      key: !secret gateway4_api
-      host: 192.168.0.83
+# xiaomi_aqara:
+#   discovery_retry: 10
+#   gateways:
+#     - mac: F0:B4:29:CC:1F:11
+#       key: !secret gateway1_api
+#       host: 192.168.0.80
+#     - mac: 28:6C:07:F0:AD:27
+#       key: !secret gateway2_api
+#       host: 192.168.0.81
+#     - mac: 34:CE:00:88:B0:39
+#       key: !secret gateway3_api
+#       host: 192.168.0.82
+#     - mac: 78:11:DC:64:F4:C8
+#       key: !secret gateway4_api
+#       host: 192.168.0.83
