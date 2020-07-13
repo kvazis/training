@@ -449,10 +449,21 @@ views:
              - entity: binary_sensor.unit_10_1_ex2
              - entity: sensor.kn_light_sensor_illuminance
                name: Освещенность
-             
-             
-             
-             
+
+  - title: telegram
+    icon: mdi:telegram
+    
+    cards:
+        - type: entities
+          show_header_toggle: false
+          entities:
+             - entity: script.send_message_1
+               name: Сервис уведомлений
+             - entity: script.system_report
+             - entity: sensor.unavailable_now_light
+             - entity: sensor.unavailable_now_switch             
+             - entity: sensor.unavailable_now_sensor             
+             - entity: sensor.unavailable_now_binary_sensor             
              
              
              
