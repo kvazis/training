@@ -1,0 +1,10 @@
+Удаление устройства - роутера
+В топик
+zigbee2mqtt/bridge/config/remove
+Отправить адрес в формате
+0x00158D0001D35BC0
+
+Удаление конечного устройства
+Физически из файлов 
+\share\zigbee2mqtt\devices.yaml
+\share\zigbee2mqtt\database.db
