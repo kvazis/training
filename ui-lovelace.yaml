@@ -463,10 +463,45 @@ views:
              - entity: sensor.unavailable_now_light
              - entity: sensor.unavailable_now_switch             
              - entity: sensor.unavailable_now_sensor             
-             - entity: sensor.unavailable_now_binary_sensor             
+             - entity: sensor.unavailable_now_binary_sensor
              
-             
-             
+  - title: mqtt_command
+    icon: mdi:animation-outline
+    
+    cards:
+        - type: entities
+          show_header_toggle: false
+          entities:
+             - entity: script.set_interlock_on
+               name: Включить интерлок
+               icon: mdi:lock
+             - entity: script.set_interlock_off
+               name: Выключить интерлок
+               icon: mdi:lock-open 
+             - entity: binary_sensor.relay_interlock
+               name: Интерлок
+             - type: divider
+             - entity: script.set_outage_on
+               name: Включить восстановление питания
+               icon: mdi:power-cycle 
+             - entity: script.set_outage_off
+               name: Выключить восстановление питания
+               icon: mdi:power-off
+             - entity: binary_sensor.switch_outage
+               name: Восстановление после сбоя питания
+             - type: divider
+             - entity: script.set_decoupled_left
+               name: Отключить левую кнопку
+               icon: mdi:toggle-switch-off-outline
+             - entity: script.set_decoupled_right
+               name: Отключить правую кнопку
+               icon: mdi:toggle-switch-outline
+             - entity: script.set_control_left
+               name: Включить левую кнопку
+               icon: mdi:toggle-switch-off
+             - entity: script.set_control_right
+               name: Включить правую кнопку
+               icon: mdi:toggle-switch
              
              
              

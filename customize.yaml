@@ -50,6 +50,51 @@ sensor.temperature_158d00015aebb6:
 sensor.0x00158d0002d7bb2b_power: 
   friendly_name: Реле Aqara потребление
   device_class: power  
+  
+# Relay Aqara LLKZMK11LM
+sensor.da_2ch_relay_consumption:
+  friendly_name: Aqara LKZMK11LM расход
+  unit_of_measurement: 'КВт/ч'
+sensor.da_2ch_relay_linkquality:
+  friendly_name: Aqara LKZMK11LM сигнал
+sensor.da_2ch_relay_power:
+  friendly_name: Aqara LKZMK11LM потребление
+  unit_of_measurement: 'Вт'
+switch.da_2ch_relay_switch_l1:
+  friendly_name: Aqara LKZMK11LM канал 1
+switch.da_2ch_relay_switch_l2:
+  friendly_name: Aqara LKZMK11LM канал 2
+sensor.da_2ch_relay_temperature:
+  friendly_name: Aqara LKZMK11LM температура
+  
+# Switch Aqara QBKG12LM
+sensor.dd_wd_n_2ch_click:
+  friendly_name: Aqara QBKG12LM клик
+sensor.dd_wd_n_2ch_linkquality:
+  friendly_name: Aqara QBKG12LM сигнал
+sensor.dd_wd_n_2ch_power:
+  friendly_name: Aqara QBKG12LM потребление
+  unit_of_measurement: 'Вт'
+switch.dd_wd_n_2ch_switch_left:
+  friendly_name: Aqara QBKG12LM левая
+switch.dd_wd_n_2ch_switch_right:
+  friendly_name: Aqara QBKG12LM правая
+sensor.dd_wd_n_2ch_temperature:
+  friendly_name: Aqara QBKG12LM температура
+  
+# Switch Mi ZNCZ02LM
+sensor.lr_thermostat_2_consumption:
+  friendly_name: Mi ZNCZ02LM расход
+  unit_of_measurement: 'КВт/ч'
+sensor.lr_thermostat_2_linkquality:
+  friendly_name: Mi ZNCZ02LM сигнал
+sensor.lr_thermostat_2_power:
+  friendly_name: Mi ZNCZ02LM потребление
+switch.lr_thermostat_2_switch:
+  friendly_name: Mi ZNCZ02LM розетка
+sensor.lr_thermostat_2_temperature:
+  friendly_name: Mi ZNCZ02LM температура
+
 
  
  

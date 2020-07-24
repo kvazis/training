@@ -7,7 +7,7 @@ homeassistant:
   time_zone: Europe/Kiev
   customize: !include customize.yaml
   packages: !include_dir_merge_named includes/packages
-    
+
 
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
@@ -17,7 +17,7 @@ panel_iframe:
     title: 'SLS Gateway'
     icon: mdi:zigbee
     url: 'http://192.168.0.84'
-
+    
 frontend:
   themes: !include_dir_merge_named themes
 
@@ -41,7 +41,7 @@ tts:
   
 mqtt:
 #   broker: core-mosquitto  # Локальный брокер
-  broker: 192.168.0.71   # Внешний брокер
+  broker: 192.168.0.75   # Внешний брокер
   discovery: true
   discovery_prefix: homeassistant  
   username: mqtt
