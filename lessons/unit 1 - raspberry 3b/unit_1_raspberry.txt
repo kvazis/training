@@ -52,10 +52,8 @@ sudo apt-get install -y bash curl git jq avahi-daemon dbus apparmor-utils networ
 
 Установка docker - sudo curl -fsSL get.docker.com -o get-docker.sh && sh get-docker.sh
 
-Добавляем группу docker и добавляем в нее пользователя
-sudo groupadd docker
+Добавляем пользователя в группу docker
 sudo gpasswd -a $USER docker
-newgrp docker
 
 ставим Portainer - 
 docker pull portainer/portainer
