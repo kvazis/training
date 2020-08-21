@@ -41,7 +41,7 @@ tts:
   
 mqtt:
 #   broker: core-mosquitto  # Локальный брокер
-  broker: 192.168.0.75   # Внешний брокер
+  broker: 192.168.0.74   # Внешний брокер
   discovery: true
   discovery_prefix: homeassistant  
   username: mqtt

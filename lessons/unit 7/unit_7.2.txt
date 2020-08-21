@@ -1,0 +1,35 @@
+Удаление и переустановка контейнеров hassio
+
+Остановка сервисов
+sudo systemctl stop hassio-supervisor.service
+sudo systemctl stop hassio-apparmor.service
+
+Отключение сервисов
+sudo systemctl disable hassio-supervisor.service
+sudo systemctl disable hassio-apparmor.service
+
+Удаление сервисов
+sudo rm -rf /etc/systemd/system/hassio-supervisor.service
+sudo rm -rf /etc/systemd/system/hassio-apparmor.service
+
+Удаление всех файлов и папок
+sudo rm -rf /usr/sbin/hassio-supervisor
+sudo rm -rf /usr/sbin/hassio-apparmor
+sudo rm -rf /usr/share/hassio/
+
+Список запущенных контейнеров
+docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}"
+
+Переход в режим root
+sudo su
+
+Установка hass.io (список ключей тут - https://github.com/home-assistant/supervised-installer)
+curl -sL https://raw.githubusercontent.com/home-assistant/supervised-installer/master/installer.sh | bash -s -- -m raspberrypi3
+
+Мой вариант установочного скрипта (убраны проверки, ведущие к ошибками, которые были на момент съемки урока)
+curl -sL https://raw.githubusercontent.com/kvazis/training/master/install/install.sh | bash -s -- -m raspberrypi3
+
+Путь к папке бекапа
+
+\\ИП АДРЕС СЕРВЕРА\backup
+

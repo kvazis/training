@@ -4,13 +4,8 @@ set -e
 function error { echo -e "[Error] $*"; exit 1; }
 function warn  { echo -e "[Warning] $*"; }
 
-warn "This installer is no longer supported."
 warn ""
-warn "Home Assistant might work today, tomorrow maybe not."
-warn ""
-warn "If you want more control over your own system, run"
-warn "Home Assistant as a VM or run Home Assistant Core"
-warn "via a Docker container."
+warn "Optimized by Alex Kvazis"
 warn ""
 
 ARCH=$(uname -m)
@@ -32,8 +27,8 @@ command -v jq > /dev/null 2>&1 || error "Please install jq first"
 command -v curl > /dev/null 2>&1 || error "Please install curl first"
 command -v avahi-daemon > /dev/null 2>&1 || error "Please install avahi first"
 command -v dbus-daemon > /dev/null 2>&1 || error "Please install dbus first"
-command -v nmcli > /dev/null 2>&1 || warn "No NetworkManager support on host."
-command -v apparmor_parser > /dev/null 2>&1 || warn "No AppArmor support on host."
+command -v nmcli > /dev/null 2>&1 || error "No NetworkManager support on host."
+command -v apparmor_parser > /dev/null 2>&1 || error "No AppArmor support on host."
 
 
 # Check if Modem Manager is enabled
@@ -86,47 +81,34 @@ CONFIG=$SYSCONFDIR/hassio.json
 case $ARCH in
     "i386" | "i686")
         MACHINE=${MACHINE:=qemux86}
-        HOMEASSISTANT_DOCKER="$DOCKER_REPO/$MACHINE-homeassistant"
         HASSIO_DOCKER="$DOCKER_REPO/i386-hassio-supervisor"
     ;;
     "x86_64")
         MACHINE=${MACHINE:=qemux86-64}
-        HOMEASSISTANT_DOCKER="$DOCKER_REPO/$MACHINE-homeassistant"
         HASSIO_DOCKER="$DOCKER_REPO/amd64-hassio-supervisor"
     ;;
     "arm" |"armv6l")
         if [ -z $MACHINE ]; then
             error "Please set machine for $ARCH"
         fi
-        HOMEASSISTANT_DOCKER="$DOCKER_REPO/$MACHINE-homeassistant"
         HASSIO_DOCKER="$DOCKER_REPO/armhf-hassio-supervisor"
     ;;
     "armv7l")
         if [ -z $MACHINE ]; then
             error "Please set machine for $ARCH"
         fi
-        HOMEASSISTANT_DOCKER="$DOCKER_REPO/$MACHINE-homeassistant"
         HASSIO_DOCKER="$DOCKER_REPO/armv7-hassio-supervisor"
     ;;
     "aarch64")
         if [ -z $MACHINE ]; then
             error "Please set machine for $ARCH"
         fi
-        HOMEASSISTANT_DOCKER="$DOCKER_REPO/$MACHINE-homeassistant"
         HASSIO_DOCKER="$DOCKER_REPO/aarch64-hassio-supervisor"
     ;;
     *)
         error "$ARCH unknown!"
     ;;
 esac
-
-if [ -z "${HOMEASSISTANT_DOCKER}" ]; then
-    error "Found no Home Assistant Docker images for this host!"
-fi
-
-if [[ ! "intel-nuc odroid-c2 odroid-n2 odroid-xu qemuarm qemuarm-64 qemux86 qemux86-64 raspberrypi raspberrypi2 raspberrypi3 raspberrypi4 raspberrypi3-64 raspberrypi4-64 tinker" = *"${MACHINE}"* ]]; then
-    error "Unknown machine type ${MACHINE}!"
-fi
 
 ### Main
 
@@ -143,7 +125,7 @@ HASSIO_VERSION=$(curl -s $URL_VERSION | jq -e -r '.supervisor')
 cat > "$CONFIG" <<- EOF
 {
     "supervisor": "${HASSIO_DOCKER}",
-    "homeassistant": "${HOMEASSISTANT_DOCKER}",
+    "machine": "${MACHINE}",
     "data": "${DATA_SHARE}"
 }
 EOF
@@ -190,7 +172,7 @@ fi
 
 ##
 # Init system
-echo "[Info] Run Hass.io"
+echo "[Info] Run Home Assistant Supervised"
 systemctl start hassio-supervisor.service
 
 ##
