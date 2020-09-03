@@ -33,13 +33,17 @@ sudo apt install rpi-eeprom
 Изменение канала загрузки
 sudo nano /etc/default/rpi-eeprom-update
 Поменять на beta
+###UPDATE - Меняем на stable!
 Ctrl+X - сохранение, Y для подтверждения
 
 Прошивки на ветке бета
 ls -la /lib/firmware/raspberrypi/bootloader/beta/ 
+###UPDATE - ls -la /lib/firmware/raspberrypi/bootloader/stable/
 
 Запись бета версии (обновил версию)
 sudo rpi-eeprom-update -d -f /lib/firmware/raspberrypi/bootloader/beta/pieeprom-2020-06-15.bin
+###UPDATE - Запись стабильной версии (обновил версию)
+sudo rpi-eeprom-update -d -f /lib/firmware/raspberrypi/bootloader/stable/pieeprom-2020-07-31.bin
 
 Перезагрузка
 sudo reboot
@@ -110,6 +114,7 @@ Ctrl-X выход - подтверждаем изменения нажав на 
 Изменение канала загрузки
 sudo nano /etc/default/rpi-eeprom-update
 Поменять на beta
+###UPDATE - Меняем на stable!
 Ctrl+X - сохранение, Y для подтверждения
 
 Установка пакетов нужных для работы и установки Hass.io

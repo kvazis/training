@@ -1,13 +1,15 @@
 import asyncio
-import importlib
 import glob
-from os.path import dirname, join
-from custom_components.hacs.share import get_hacs, SHARE
+import importlib
+from os.path import dirname, join, sep
+
+from custom_components.hacs.share import SHARE, get_hacs
 
 
 def _initialize_rules():
     rules = glob.glob(join(dirname(__file__), "**/*.py"))
     for rule in rules:
+        rule = rule.replace(sep, "/")
         rule = rule.split("custom_components/hacs")[-1]
         rule = f"custom_components/hacs{rule}".replace("/", ".")[:-3]
         importlib.import_module(rule)
