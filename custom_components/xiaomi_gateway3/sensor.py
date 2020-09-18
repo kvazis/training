@@ -1,4 +1,5 @@
 import logging
+import time
 
 from homeassistant.const import *
 
@@ -9,9 +10,11 @@ _LOGGER = logging.getLogger(__name__)
 
 UNITS = {
     DEVICE_CLASS_TEMPERATURE: TEMP_CELSIUS,
-    DEVICE_CLASS_HUMIDITY: UNIT_PERCENTAGE,
+    DEVICE_CLASS_HUMIDITY: '%',
+    DEVICE_CLASS_PRESSURE: 'hPa',
     DEVICE_CLASS_ILLUMINANCE: 'lm',
     DEVICE_CLASS_POWER: POWER_WATT,
+    'consumption': ENERGY_WATT_HOUR
 }
 
 
@@ -75,20 +78,36 @@ VIBRATION = {
 
 
 class Gateway3Action(Gateway3Device):
+    _state = ''
+
     @property
     def state(self):
         return self._state
 
+    @property
+    def state_attributes(self):
+        return self._attrs
+
     def update(self, data: dict = None):
+        new_state = None
         for k, v in data.items():
             if k == 'button':
-                self._state = BUTTON[v]
+                new_state = BUTTON[v]
             elif k == 'button_both':
-                self._state = k + '_' + BUTTON_BOTH[v]
+                new_state = k + '_' + BUTTON_BOTH[v]
             elif k.startswith('button'):
-                self._state = k + '_' + BUTTON[v]
+                new_state = k + '_' + BUTTON[v]
             elif k == 'vibration':
-                self._state = VIBRATION[v]
+                new_state = VIBRATION[v]
             elif k == 'action':
-                self._state = v
-        self.schedule_update_ha_state()
+                new_state = v
+
+        if new_state:
+            self._attrs = data
+            self._state = new_state
+            self.async_write_ha_state()
+
+            time.sleep(.1)
+
+            self._state = ''
+            self.async_schedule_update_ha_state()
