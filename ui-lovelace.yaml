@@ -24,7 +24,7 @@ views:
             - entity: sensor.date
               name: Дата
               icon: mdi:calendar-check-outline
-            - entity: sensor.rpi_power_status
+            - entity: binary_sensor.rpi_power_status
               
         - type: markdown
           content: >
@@ -105,6 +105,9 @@ views:
 
         - type: weather-forecast
           entity: weather.home_assistant 
+          
+        - type: weather-forecast
+          entity: weather.openweathermap 
           
           
   - title: Освещение
@@ -464,6 +467,11 @@ views:
              - entity: sensor.unavailable_now_switch             
              - entity: sensor.unavailable_now_sensor             
              - entity: sensor.unavailable_now_binary_sensor
+             
+        - type: entities
+          show_header_toggle: false
+          entities:
+             - entity: script.climate_report
              
   - title: mqtt_command
     icon: mdi:animation-outline
