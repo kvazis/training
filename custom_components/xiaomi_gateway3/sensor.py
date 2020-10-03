@@ -14,7 +14,15 @@ UNITS = {
     DEVICE_CLASS_PRESSURE: 'hPa',
     DEVICE_CLASS_ILLUMINANCE: 'lm',
     DEVICE_CLASS_POWER: POWER_WATT,
-    'consumption': ENERGY_WATT_HOUR
+    'consumption': ENERGY_WATT_HOUR,
+    'gas density': '% LEL',
+    'smoke density': '% obs/ft',
+}
+
+ICONS = {
+    'consumption': 'mdi:flash',
+    'gas density': 'mdi:google-circles-communities',
+    'smoke density': 'mdi:google-circles-communities',
 }
 
 
@@ -26,7 +34,7 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
             Gateway3Sensor(gateway, device, attr)
         ])
 
-    gw: Gateway3 = hass.data[DOMAIN][config_entry.unique_id]
+    gw: Gateway3 = hass.data[DOMAIN][config_entry.entry_id]
     gw.add_setup('sensor', setup)
 
 
@@ -42,6 +50,10 @@ class Gateway3Sensor(Gateway3Device):
     @property
     def unit_of_measurement(self):
         return UNITS.get(self._attr)
+
+    @property
+    def icon(self):
+        return ICONS.get(self._attr)
 
     def update(self, data: dict = None):
         if self._attr not in data:
@@ -89,25 +101,31 @@ class Gateway3Action(Gateway3Device):
         return self._attrs
 
     def update(self, data: dict = None):
-        new_state = None
         for k, v in data.items():
             if k == 'button':
-                new_state = BUTTON[v]
+                data[self._attr] = BUTTON[v]
+                break
             elif k == 'button_both':
-                new_state = k + '_' + BUTTON_BOTH[v]
+                data[self._attr] = k + '_' + BUTTON_BOTH[v]
+                break
             elif k.startswith('button'):
-                new_state = k + '_' + BUTTON[v]
-            elif k == 'vibration':
-                new_state = VIBRATION[v]
-            elif k == 'action':
-                new_state = v
+                data[self._attr] = k + '_' + BUTTON[v]
+                break
+            elif k == 'vibration' and v != 2:  # skip tilt and wait tilt_angle
+                data[self._attr] = VIBRATION[v]
+                break
+            elif k == 'tilt_angle':
+                data = {'vibration': 2, 'angle': v, self._attr: 'tilt'}
+                break
 
-        if new_state:
-            self._attrs = data
-            self._state = new_state
-            self.async_write_ha_state()
+        if self._attr not in data:
+            return
 
-            time.sleep(.1)
+        self._attrs = data
+        self._state = data[self._attr]
+        self.async_write_ha_state()
 
-            self._state = ''
-            self.async_schedule_update_ha_state()
+        time.sleep(.1)
+
+        self._state = ''
+        self.async_schedule_update_ha_state()

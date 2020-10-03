@@ -24,7 +24,7 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
             Gateway3BinarySensor(gateway, device, attr)
         ])
 
-    gw: Gateway3 = hass.data[DOMAIN][config_entry.unique_id]
+    gw: Gateway3 = hass.data[DOMAIN][config_entry.entry_id]
     gw.add_setup('binary_sensor', setup)
 
 
@@ -62,7 +62,8 @@ class Gateway3MotionSensor(Gateway3BinarySensor):
     def update(self, data: dict = None):
         if self._attr not in data:
             return
-        self._state = data[self._attr] == 1
+        # gas and smoke => 1 and 2
+        self._state = data[self._attr] >= 1
         self.schedule_update_ha_state()
 
         if self._state:

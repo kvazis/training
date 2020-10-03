@@ -10,6 +10,8 @@ from homeassistant.helpers.typing import HomeAssistantType
 
 # https://github.com/Koenkk/zigbee-herdsman-converters/blob/master/devices.js#L390
 # https://slsys.io/action/devicelists.html
+# All lumi models:
+#   https://github.com/rytilahti/python-miio/issues/699#issuecomment-643208618
 # Zigbee Model: [Manufacturer, Device Name, Device Model]
 # params: [lumi res name, xiaomi prop name, hass attr name, hass domain]
 DEVICES = [{
@@ -116,7 +118,7 @@ DEVICES = [{
     'lumi.sensor_cube': ["Aqara", "Cube", "MFKZQ01LM"],
     'lumi.sensor_cube.aqgl01': ["Aqara", "Cube", "MFKZQ01LM"],  # tested
     'params': [
-        # ['0.2.85', '?', '?', '?'],
+        ['0.2.85', None, 'duration', None],
         ['0.3.85', None, 'angle', None],
         ['13.1.85', None, 'action', 'sensor'],
         ['8.0.2001', 'battery', 'battery', 'sensor'],
@@ -126,6 +128,10 @@ DEVICES = [{
     'lumi.light.aqcn02': ["Aqara", "Bulb", "ZNLDP12LM"],
     'lumi.light.cwopcn02': ["Aqara", "Opple MX650", "XDD12LM"],
     'lumi.light.cwopcn03': ["Aqara", "Opple MX480", "XDD13LM"],
+    'ikea.light.led1545g12': ["IKEA", "Bulb E27 980 lm", "LED1545G12"],
+    'ikea.light.led1546g12': ["IKEA", "Bulb E27 950 lm", "LED1546G12"],
+    'ikea.light.led1536g5': ["IKEA", "Bulb E14 400 lm", "LED1536G5"],
+    'ikea.light.led1537r6': ["IKEA", "Bulb GU10 400 lm", "LED1537R6"],
     'params': [
         ['4.1.85', 'power_status', 'light', 'light'],
         ['14.1.85', 'light_level', 'brightness', None],
@@ -133,7 +139,9 @@ DEVICES = [{
     ]
 }, {
     # light with brightness
-    'ikea.light.led1649c5': ["IKEA", "Bulb E14"],  # tested
+    'ikea.light.led1623g12': ["IKEA", "Bulb E27 1000 lm", "LED1623G12"],
+    'ikea.light.led1650r5': ["IKEA", "Bulb GU10 400 lm", "LED1650R5"],
+    'ikea.light.led1649c5': ["IKEA", "Bulb E14", "LED1649C5"],  # tested
     'params': [
         ['4.1.85', 'power_status', 'light', 'light'],
         ['14.1.85', 'light_level', 'brightness', None],
@@ -225,7 +233,7 @@ DEVICES = [{
     'lumi.vibration.aq1': ["Aqara", "Vibration Sensor", "DJT11LM"],
     'params': [
         ['0.1.85', None, 'bed_activity', None],
-        ['0.2.85', None, 'final_tilt_angle', None],
+        ['0.2.85', None, 'tilt_angle', None],
         ['0.3.85', None, 'vibrate_intensity', None],
         ['13.1.85', None, 'vibration', None],
         ['14.1.85', None, 'vibration_level', None],
@@ -237,6 +245,38 @@ DEVICES = [{
     'params': [
         ['2.1', '2.1', 'illuminance', 'sensor'],
         ['3.1', '3.1', 'battery', 'sensor'],
+    ]
+}, {
+    'lumi.sensor_smoke': ["Honeywell", "Smoke Sensor", "JTYJ-GD-01LM/BW"],
+    'params': [
+        ['0.1.85', 'density', 'smoke density', 'sensor'],
+        ['13.1.85', 'alarm', 'smoke', 'binary_sensor'],
+        ['8.0.2001', 'battery', 'battery', 'sensor'],
+    ]
+}, {
+    'lumi.sensor_natgas': ["Honeywell", "Gas Sensor", "JTQJ-BF-01LM/BW"],
+    'params': [
+        ['0.1.85', 'density', 'gas density', 'sensor'],
+        ['13.1.85', 'alarm', 'gas', 'binary_sensor'],
+        ['8.0.2001', 'battery', 'battery', 'sensor'],
+    ]
+}, {
+    'lumi.curtain': ["Aqara", "Curtain", "ZNCLDJ11LM"],
+    'lumi.curtain.aq2': ["Aqara", "Roller Shade", "ZNGZDJ11LM"],
+    'params': [
+        ['1.1.85', 'curtain_level', 'position', None],
+        ['14.2.85', None, 'motor', 'cover'],
+        ['14.3.85', 'cfg_param', 'cfg_param', None],
+        ['14.4.85', 'run_state', 'run_state', None],
+    ]
+}, {
+    'lumi.curtain.hagl04': ["Aqara", "B1 Curtain", "ZNCLDJ12LM"],
+    'params': [
+        ['1.1.85', 'curtain_level', 'position', None],
+        ['14.2.85', None, 'motor', 'cover'],
+        ['14.3.85', 'cfg_param', 'cfg_param', None],
+        ['14.4.85', 'run_state', 'run_state', None],
+        ['8.0.2001', 'battery', 'battery', 'sensor'],
     ]
 }, {  # OTHER MANUFACTURERS
     'TRADFRI bulb E27 W opal 1000lm': ["IKEA", "Bulb E27"],
@@ -302,6 +342,23 @@ def get_device(zigbee_model: str) -> Optional[dict]:
             }
 
     return None
+
+
+def fix_xiaomi_props(params) -> dict:
+    for k, v in params.items():
+        if k in ('temperature', 'humidity', 'pressure'):
+            params[k] = v / 100.0
+        elif v in ('on', 'open'):
+            params[k] = 1
+        elif v in ('off', 'close'):
+            params[k] = 0
+        elif k == 'battery' and v and v > 1000:
+            params[k] = round((min(v, 3200) - 2500) / 7)
+        elif k == 'run_state':
+            params[k] = ['offing', 'oning', 'stop',
+                         'hinder_stop'].index(v)
+
+    return params
 
 
 TITLE = "Xiaomi Gateway 3 Debug"

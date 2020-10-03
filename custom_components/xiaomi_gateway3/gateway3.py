@@ -16,8 +16,13 @@ from .utils import GLOBAL_PROP
 
 _LOGGER = logging.getLogger(__name__)
 
+RE_NWK_KEY = re.compile(r'lumi send-nwk-key (0x.+?) {(.+?)}')
+
 
 class Gateway3(Thread):
+    pair_model = None
+    pair_payload = None
+
     def __init__(self, host: str, token: str, config: dict):
         super().__init__(daemon=True)
 
@@ -237,11 +242,11 @@ class Gateway3(Thread):
 
                 # skip unknown model
                 if desc is None:
-                    _LOGGER.debug(f"Unsupported model: {model}")
+                    _LOGGER.debug(f"{did} has an unsupported modell: {model}")
                     continue
 
                 retain = json.loads(data[did + '.prop'])['props']
-                _LOGGER.debug(f"{self.host} | {model} retain: {retain}")
+                _LOGGER.debug(f"{self.host} | {did} {model} retain: {retain}")
 
                 params = {
                     p[2]: retain.get(p[1])
@@ -249,24 +254,13 @@ class Gateway3(Thread):
                     if p[1] is not None
                 }
 
-                # fix some param values
-                for k, v in params.items():
-                    if k in ('temperature', 'humidity'):
-                        params[k] = v / 100.0
-                    elif v in ('on', 'open'):
-                        params[k] = 1
-                    elif v in ('off', 'close'):
-                        params[k] = 0
-                    elif k == 'battery' and v and v > 1000:
-                        params[k] = round((min(v, 3200) - 2500) / 7)
-
                 device = {
                     'did': did,
                     'mac': '0x' + data[did + '.mac'],
                     'model': data[did + '.model'],
                     'type': 'zigbee',
                     'zb_ver': data[did + '.version'],
-                    'init': params
+                    'init': utils.fix_xiaomi_props(params)
                 }
                 devices.append(device)
 
@@ -306,15 +300,20 @@ class Gateway3(Thread):
             telnet = Telnet(self.host)
             telnet.read_until(b"login: ")
             telnet.write(b"admin\r\n")
-            telnet.read_very_eager()  # skip response
+            telnet.read_until(b"\r\n# ")  # skip greeting
 
             # enable public mqtt
             telnet.write(b"killall mosquitto\r\n")
-            telnet.read_very_eager()  # skip response
-            time.sleep(.5)
+            telnet.read_until(b"\r\n")  # skip command
+            time.sleep(.5)  # it's important to wait
             telnet.write(b"mosquitto -d\r\n")
-            telnet.read_very_eager()  # skip response
-            time.sleep(1)
+            telnet.read_until(b"\r\n")  # skip command
+            time.sleep(.5)  # it's important to wait
+
+            # fix CPU 90% full time bug
+            telnet.write(b"killall zigbee_gw\r\n")
+            telnet.read_until(b"\r\n")  # skip command
+            time.sleep(.5)  # it's important to wait
 
             telnet.close()
             return True
@@ -338,6 +337,8 @@ class Gateway3(Thread):
         if msg.topic == 'zigbee/send':
             payload = json.loads(msg.payload)
             self.process_message(payload)
+        elif self.pair_model and msg.topic.endswith('/commands'):
+            self.process_pair(msg.payload)
 
     def setup_devices(self, devices: list):
         """Add devices to hass."""
@@ -407,10 +408,17 @@ class Gateway3(Thread):
                 prop = next((p[2] for p in device['params']
                              if p[0] == prop), prop)
 
-            if prop in ('temperature', 'humidity'):
+            if prop in ('temperature', 'humidity', 'pressure'):
                 payload[prop] = param['value'] / 100.0
             elif prop == 'battery' and param['value'] > 1000:
+                # xiaomi light sensor
                 payload[prop] = round((min(param['value'], 3200) - 2500) / 7)
+            elif prop == 'angle':
+                # xiaomi cube 100 points = 360 degrees
+                payload[prop] = param['value'] * 4
+            elif prop == 'duration':
+                # xiaomi cube
+                payload[prop] = param['value'] / 1000.0
             else:
                 payload[prop] = param['value']
 
@@ -425,7 +433,32 @@ class Gateway3(Thread):
             # 'version': '21', 'zb_ver': '3.0'}
             device = payload['added_device']
             device['mac'] = '0x' + device['mac']
+            device['type'] = 'zigbee'
+            device['init'] = payload
             self.setup_devices([device])
+
+    def process_pair(self, raw: bytes):
+        # get shortID and eui64 of paired device
+        if b'lumi send-nwk-key' in raw:
+            # create model response
+            payload = f"0x18010105000042{len(self.pair_model):02x}" \
+                      f"{self.pair_model.encode().hex()}"
+            m = RE_NWK_KEY.search(raw.decode())
+            self.pair_payload = json.dumps({
+                'sourceAddress': m[1],
+                'eui64': '0x' + m[2],
+                'profileId': '0x0104',
+                'clusterId': '0x0000',
+                'sourceEndpoint': '0x01',
+                'destinationEndpoint': '0x01',
+                'APSCounter': '0x01',
+                'APSPlayload': payload
+            }, separators=(',', ':'))
+
+        # send model response "from device"
+        elif b'zdo active ' in raw:
+            mac = self.device['mac'][2:].upper()
+            self.mqtt.publish(f"gw/{mac}/MessageReceived", self.pair_payload)
 
     def process_ble_event(self, raw: Union[bytes, str]):
         data = json.loads(raw[10:])['params'] \
@@ -497,6 +530,12 @@ class Gateway3(Thread):
         payload = json.dumps(payload, separators=(',', ':')).encode()
         self.mqtt.publish('zigbee/recv', payload)
 
+    def get_device(self, mac: str) -> Optional[dict]:
+        for device in self.devices.values():
+            if device.get('mac') == mac:
+                return device
+        return None
+
 
 class GatewayBLE(Thread):
     def __init__(self, gw: Gateway3):
@@ -510,14 +549,14 @@ class GatewayBLE(Thread):
                 telnet = Telnet(self.gw.host, timeout=5)
                 telnet.read_until(b"login: ")
                 telnet.write(b"admin\r\n")
-                telnet.read_until(b'\r\n# ')  # skip greeting
+                telnet.read_until(b"\r\n# ")  # skip greeting
 
                 telnet.write(b"killall silabs_ncp_bt; "
                              b"silabs_ncp_bt /dev/ttyS1 1\r\n")
-                telnet.read_until(b'\r\n')  # skip command
+                telnet.read_until(b"\r\n")  # skip command
 
                 while True:
-                    raw = telnet.read_until(b'\r\n')
+                    raw = telnet.read_until(b"\r\n")
 
                     if 'bluetooth' in self.gw.debug:
                         _LOGGER.debug(f"[BT] {raw}")
@@ -525,7 +564,7 @@ class GatewayBLE(Thread):
                     if b'_async.ble_event' in raw:
                         self.gw.process_ble_event(raw)
 
-            except (ConnectionRefusedError, ConnectionResetError,
+            except (ConnectionRefusedError, ConnectionResetError, EOFError,
                     socket.timeout):
                 pass
             except Exception as e:

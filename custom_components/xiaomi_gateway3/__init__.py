@@ -2,7 +2,7 @@ import logging
 
 import voluptuous as vol
 from homeassistant.const import STATE_UNKNOWN
-from homeassistant.core import HomeAssistant
+from homeassistant.core import HomeAssistant, Event
 from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.entity import Entity
 
@@ -37,23 +37,64 @@ async def async_setup(hass: HomeAssistant, hass_config: dict):
 
     hass.data[DOMAIN] = {'config': config}
 
+    await _handle_device_remove(hass)
+
     return True
 
 
 async def async_setup_entry(hass: HomeAssistant, config_entry):
     config = hass.data[DOMAIN]['config']
 
-    hass.data[DOMAIN][config_entry.unique_id] = \
+    hass.data[DOMAIN][config_entry.entry_id] = \
         gw = Gateway3(**config_entry.data, config=config)
 
     # init setup for each supported domains
-    for domain in ('binary_sensor', 'light', 'remote', 'sensor', 'switch'):
+    for domain in (
+            'binary_sensor', 'cover', 'light', 'remote', 'sensor', 'switch'
+    ):
         hass.async_create_task(hass.config_entries.async_forward_entry_setup(
             config_entry, domain))
 
     gw.start()
 
     return True
+
+
+# async def async_unload_entry(hass: HomeAssistant, config_entry):
+#     return True
+
+
+async def _handle_device_remove(hass: HomeAssistant):
+    """Remove device from Hass and Mi Home if the device is renamed to
+    `delete`.
+    """
+
+    async def device_registry_updated(event: Event):
+        if event.data['action'] != 'update':
+            return
+
+        registry = hass.data['device_registry']
+        hass_device = registry.async_get(event.data['device_id'])
+
+        domain, mac = next(iter(hass_device.identifiers))
+        # handle only our devices
+        if domain != DOMAIN or hass_device.name_by_user != 'delete':
+            return
+
+        # remove from Mi Home
+        for gw in hass.data[DOMAIN].values():
+            if not isinstance(gw, Gateway3):
+                continue
+            gw_device = gw.get_device(mac)
+            if not gw_device:
+                continue
+            gw.miio.send('remove_device', [gw_device['did']])
+            break
+
+        # remove from Hass
+        registry.async_remove_device(hass_device.id)
+
+    hass.bus.async_listen('device_registry_updated', device_registry_updated)
 
 
 class Gateway3Device(Entity):
