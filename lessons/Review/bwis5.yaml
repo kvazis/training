@@ -1,0 +1,47 @@
+## Обнаружение протечки
+- alias: water_leak_on
+  initial_state: true
+  trigger:       
+   platform: state
+   entity_id: binary_sensor.0xec1bbdfffe8f1e42_water_leak
+   to: 'on'
+  action:
+  - service: telegram_bot.send_message
+    data_template:
+      target:
+          - !secret chat_id_group
+      message: 'Обнаружена протечка! Датчик возле стиральной машины. Время события - {{ states.sensor.time_date.state }}'
+  - service: light.turn_on
+    entity_id: 
+      - light.yeelight_rgb
+      - light.yeelight_bedside2
+    data_template:
+      brightness_pct: 100
+      rgb_color: [255, 0, 0]
+      
+## Протечка устранена
+- alias: water_leak_off
+  initial_state: true
+  trigger:       
+   platform: state
+   entity_id: binary_sensor.0xec1bbdfffe8f1e42_water_leak
+   from: 'on'
+   to: 'off'
+  action:
+  - service: telegram_bot.send_message
+    data_template:
+      target:
+          - !secret chat_id_group
+      message: 'Все в порядке, протечка устранена. Датчик возле стиральной машины. Время события - {{ states.sensor.time_date.state }}'
+  - service: light.turn_on
+    entity_id: 
+      - light.yeelight_rgb
+      - light.yeelight_bedside2
+    data_template:
+      brightness_pct: 100
+      rgb_color: [0, 255, 0]
+  - delay: 00:00:10
+  - service: light.turn_off
+    entity_id: 
+      - light.yeelight_rgb
+      - light.yeelight_bedside2
