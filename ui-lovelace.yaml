@@ -511,14 +511,23 @@ views:
                name: Включить правую кнопку
                icon: mdi:toggle-switch
              
+  - title: camera
+    icon: mdi:cctv
+    
+    cards:   
+        - type: picture-entity
+          entity: camera.reolink_e1_zoom_profile000_mainstream
+          camera_view: live 
+          show_state: false
+          show_name: false
              
-             
-             
-             
-             
-             
-             
-             
+        - type: entities
+          show_header_toggle: false
+          entities:
+             - entity: script.photo_reolink             
+             - entity: script.video_reolink 
+             - entity: script.photo_reolink_telegram
+             - entity: script.video_reolink_telegram
              
              
              

@@ -9,19 +9,23 @@ from .gateway3 import Gateway3
 _LOGGER = logging.getLogger(__name__)
 
 UNITS = {
-    DEVICE_CLASS_TEMPERATURE: TEMP_CELSIUS,
     DEVICE_CLASS_HUMIDITY: '%',
-    DEVICE_CLASS_PRESSURE: 'hPa',
-    DEVICE_CLASS_ILLUMINANCE: 'lm',
+    DEVICE_CLASS_ILLUMINANCE: 'lx',  # zb light and motion and ble flower - lux
     DEVICE_CLASS_POWER: POWER_WATT,
+    DEVICE_CLASS_PRESSURE: 'hPa',
+    DEVICE_CLASS_TEMPERATURE: TEMP_CELSIUS,
+    'conductivity': "µS/cm",
     'consumption': ENERGY_WATT_HOUR,
     'gas density': '% LEL',
     'smoke density': '% obs/ft',
+    'moisture': '%',
 }
 
 ICONS = {
+    'conductivity': 'mdi:flower',
     'consumption': 'mdi:flash',
     'gas density': 'mdi:google-circles-communities',
+    'moisture': 'mdi:water-percent',
     'smoke density': 'mdi:google-circles-communities',
 }
 
@@ -56,9 +60,8 @@ class Gateway3Sensor(Gateway3Device):
         return ICONS.get(self._attr)
 
     def update(self, data: dict = None):
-        if self._attr not in data:
-            return
-        self._state = data[self._attr]
+        if self._attr in data:
+            self._state = data[self._attr]
         self.schedule_update_ha_state()
 
 
@@ -100,6 +103,10 @@ class Gateway3Action(Gateway3Device):
     def state_attributes(self):
         return self._attrs
 
+    @property
+    def icon(self):
+        return 'mdi:bell'
+
     def update(self, data: dict = None):
         for k, v in data.items():
             if k == 'button':
@@ -118,14 +125,14 @@ class Gateway3Action(Gateway3Device):
                 data = {'vibration': 2, 'angle': v, self._attr: 'tilt'}
                 break
 
-        if self._attr not in data:
-            return
+        if self._attr in data:
+            # TODO: fix me
+            self._attrs = data
+            self._state = data[self._attr]
+            self.async_write_ha_state()
 
-        self._attrs = data
-        self._state = data[self._attr]
-        self.async_write_ha_state()
+            time.sleep(.1)
 
-        time.sleep(.1)
+            self._state = ''
 
-        self._state = ''
         self.async_schedule_update_ha_state()

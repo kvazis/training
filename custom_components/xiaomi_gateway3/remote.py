@@ -21,9 +21,24 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
 class Gateway3Entity(Gateway3Device, ToggleEntity):
     _state = False
 
+    async def async_added_to_hass(self):
+        await super().async_added_to_hass()
+
+        if self.gw.zha and not self.hass.config_entries.async_entries('zha'):
+            persistent_notification.async_create(
+                self.hass,
+                "Integration: **Zigbee Home Automation**\n"
+                "Radio Type: **EZSP**\n"
+                f"Path: `socket://{self.gw.host}:8888`\n"
+                "Speed: `115200`", "Please create manually")
+
     @property
     def is_on(self) -> bool:
         return self._state
+
+    @property
+    def state_attributes(self):
+        return self._attrs
 
     @property
     def icon(self):
@@ -32,12 +47,9 @@ class Gateway3Entity(Gateway3Device, ToggleEntity):
     def update(self, data: dict = None):
         if 'pairing_start' in data:
             self._state = True
-            self.schedule_update_ha_state()
 
         elif 'pairing_stop' in data:
             self._state = False
-            self.schedule_update_ha_state()
-
             self.gw.pair_model = None
 
         elif 'added_device' in data:
@@ -46,6 +58,11 @@ class Gateway3Entity(Gateway3Device, ToggleEntity):
             )
             persistent_notification.async_create(self.hass, text,
                                                  "Xiaomi Gateway 3")
+
+        elif 'network_pan_id' in data:
+            self._attrs.update(data)
+
+        self.schedule_update_ha_state()
 
     def turn_on(self):
         self.gw.send(self.device, {'pairing_start': 60})
@@ -64,3 +81,7 @@ class Gateway3Entity(Gateway3Device, ToggleEntity):
                 self.gw.pair_model = (model[:-3] if model.endswith('.v1')
                                       else model)
                 self.turn_on()
+            elif cmd == 'reboot':
+                self.gw.send_telnet('reboot')
+            elif cmd == 'publishstate':
+                self.gw.send_mqtt('publishstate')

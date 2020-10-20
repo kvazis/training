@@ -1,0 +1,45 @@
+  photo_reolink:
+    alias: Фотография Reolink E1 zoom
+    sequence:
+       - service: camera.snapshot
+         data:
+              entity_id: camera.reolink_e1_zoom_profile000_mainstream
+              filename: "/config/www/cam_captures/reolink.jpg"
+              
+  video_reolink:
+    alias: Запись с камеры Reolink E1 zoom
+    sequence:
+    - service: camera.record
+      data_template:
+        entity_id: camera.reolink_e1_zoom_profile000_mainstream
+        filename: "/config/www/cam_captures/reolink.mp4"
+        duration: 10 
+        
+  photo_reolink_telegram:
+    alias: Фотография Reolink E1 zoom и отправка в телеграм
+    sequence:
+       - service: camera.snapshot
+         data:
+              entity_id: camera.reolink_e1_zoom_profile000_mainstream
+              filename: "/config/www/cam_captures/reolink.jpg"
+       - delay: 00:00:15
+       - service: telegram_bot.send_photo
+         data_template:
+           target: 
+            - !secret telegram_id_1
+           file: "/config/www/cam_captures/reolink.jpg" 
+           
+  video_reolink_telegram:
+    alias: Запись с камеры Reolink E1 zoom и отправка в телеграм
+    sequence:
+    - service: camera.record
+      data_template:
+        entity_id: camera.reolink_e1_zoom_profile000_mainstream
+        filename: "/config/www/cam_captures/reolink.mp4"
+        duration: 10
+    - delay: 00:00:45
+    - service: telegram_bot.send_video
+      data_template:
+        target:
+            - !secret telegram_id_1
+        file: "/config/www/cam_captures/reolink.mp4"

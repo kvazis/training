@@ -1,5 +1,23 @@
 from datetime import datetime
-from typing import Optional
+from typing import Optional, Union
+
+DEVICES = {
+    # BLE
+    152: ["Xiaomi", "Flower Care", "HHCCJCY01"],
+    426: ["Xiaomi", "TH Sensor", "LYWSDCGQ/01ZM"],
+    1034: ["Xiaomi", "Mosquito Repellent", "WX08ZM"],
+    1115: ["Xiaomi", "TH Clock", "LYWSD02MMC"],
+    1249: ["Xiaomi", "Magic Cube", "XMMF01JQD"],
+    1371: ["Xiaomi", "TH Sensor 2", "LYWSD03MMC"],
+    1398: ["Xiaomi", "Alarm Clock", "CGD1"],
+    1694: ["Aqara", "Door Lock N100", "ZNMS16LM"],
+    1747: ["Xaiomi", "ZenMeasure Clock", "MHO-C303"],
+    1983: ["Yeelight", "Button S1", "YLAI003"],
+    2443: ["Xiaomi", "Door Sensor 2", "MCCGQ02HL"],
+    # Mesh
+    1771: ["Xiaomi", "Mesh Bulb", "MJDP09YL"],
+    2342: ["Yeelight", "Mesh Bulb M2", "YLDP25YL/YLDP26YL"],
+}
 
 BLE_FINGERPRINT_ACTION = [
     "Match successful", "Match failed", "Timeout", "Low quality",
@@ -103,7 +121,7 @@ def parse_xiaomi_ble(event: dict) -> Optional[dict]:
         return {'humidity': int.from_bytes(data, 'little') / 10.0}
 
     elif eid == 0x1007 and length == 3:
-        # Range: 0-120000
+        # Range: 0-120000, lux
         return {'illuminance': int.from_bytes(data, 'little')}
 
     elif eid == 0x1008 and length == 1:
@@ -220,3 +238,52 @@ def parse_xiaomi_ble(event: dict) -> Optional[dict]:
         }
 
     return None
+
+
+MESH_PROPS = [None, 'light', 'brightness', 'color_temp']
+
+
+def parse_xiaomi_mesh(data: list):
+    """Can receive multiple properties from multiple devices."""
+    result = {}
+
+    for payload in data:
+        if payload['siid'] != 2 or payload.get('code', 0) != 0:
+            continue
+
+        did = payload['did']
+        key = MESH_PROPS[payload['piid']]
+        result.setdefault(did, {})[key] = payload['value']
+
+    return result
+
+
+def pack_xiaomi_mesh(did: str, data: Union[dict, list]):
+    if isinstance(data, dict):
+        return [{
+            'did': did,
+            'siid': 2,
+            'piid': MESH_PROPS.index(k),
+            'value': v
+        } for k, v in data.items()]
+    else:
+        return [{
+            'did': did,
+            'siid': 2,
+            'piid': MESH_PROPS.index(k),
+        } for k in data]
+
+
+def get_device(pdid: int, default_name: str) -> Optional[dict]:
+    if pdid in DEVICES:
+        desc = DEVICES[pdid]
+        return {
+            'device_manufacturer': desc[0],
+            'device_name': desc[0] + ' ' + desc[1],
+            'device_model': desc[2] if len(desc) > 2 else pdid
+        }
+    else:
+        return {
+            'device_name': default_name,
+            'device_model': pdid
+        }
