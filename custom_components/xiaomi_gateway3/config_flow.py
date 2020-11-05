@@ -6,7 +6,9 @@ from homeassistant.config_entries import ConfigFlow, OptionsFlow
 from homeassistant.core import callback
 from homeassistant.helpers.aiohttp_client import async_create_clientsession
 
-from . import DOMAIN, gateway3, MiCloud
+from . import DOMAIN
+from .core import gateway3
+from .core.xiaomi_cloud import MiCloud
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -139,7 +141,7 @@ class OptionsFlowHandler(OptionsFlow):
         elif not self.hass.data[DOMAIN].get('devices'):
             device_info = "No devices in account"
         else:
-            device_info = "SELECT device FROM list"
+            device_info = "Select device from list"
 
         devices = {
             device['did']: f"{device['name']} ({device['localip']})"

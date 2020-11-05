@@ -9,9 +9,9 @@ from homeassistant.helpers.entity import Entity
 from homeassistant.helpers.storage import Store
 from homeassistant.util import sanitize_filename
 
-from . import utils
-from .gateway3 import Gateway3
-from .xiaomi_cloud import MiCloud
+from .core import utils
+from .core.gateway3 import Gateway3
+from .core.xiaomi_cloud import MiCloud
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -19,6 +19,7 @@ DOMAIN = 'xiaomi_gateway3'
 
 CONF_DEVICES = 'devices'
 CONF_DEBUG = 'debug'
+CONF_BUZZER = 'buzzer'
 
 CONFIG_SCHEMA = vol.Schema({
     DOMAIN: vol.Schema({
@@ -27,6 +28,7 @@ CONFIG_SCHEMA = vol.Schema({
                 vol.Optional('occupancy_timeout'): cv.positive_int,
             }, extra=vol.ALLOW_EXTRA),
         },
+        vol.Optional(CONF_BUZZER): cv.boolean,
         vol.Optional(CONF_DEBUG): cv.string,
     }, extra=vol.ALLOW_EXTRA),
 }, extra=vol.ALLOW_EXTRA)
@@ -178,7 +180,8 @@ class Gateway3Device(Entity):
         self._attrs = {}
 
         self._unique_id = f"{self.device['mac']}_{self._attr}"
-        self._name = self.device['device_name'] + ' ' + self._attr.title()
+        self._name = (self.device['device_name'] + ' ' +
+                      self._attr.replace('_', ' ').title())
 
         self.entity_id = f"{DOMAIN}.{self._unique_id}"
 
@@ -227,9 +230,9 @@ class Gateway3Device(Entity):
                 'sw_version': self.device['zb_ver'],
                 'via_device': (DOMAIN, self.gw.device['mac'])
             }
-        elif type_ == 'bluetooth':
+        else:  # ble and mesh
             return {
-                'connections': {(type_, self.device['mac'])},
+                'connections': {('bluetooth', self.device['mac'])},
                 'identifiers': {(DOMAIN, self.device['mac'])},
                 'manufacturer': self.device.get('device_manufacturer'),
                 'model': self.device['device_model'],

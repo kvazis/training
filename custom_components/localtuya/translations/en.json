@@ -1,0 +1,111 @@
+{
+    "config": {
+        "abort": {
+            "already_configured": "Device has already been configured."
+        },
+        "error": {
+            "cannot_connect": "Cannot connect to device. Verify that address is correct and try again.",
+            "invalid_auth": "Failed to authenticate with device. Verify that device id and local key are correct.",
+            "unknown": "An unknown error occurred. See log for details.",
+            "entity_already_configured": "Entity with this ID has already been configured.",
+            "discovery_failed": "Failed to discover devices. You can still add a device manually."
+        },
+        "step": {
+            "user": {
+                "title": "Device Discovery",
+                "description": "Pick one of the automatically discovered devices or `...` to manually to add a device.",
+                "data": {
+                    "discovered_device": "Discovered Device"
+                }
+            },
+            "basic_info": {
+                "title": "Add Tuya device",
+                "description": "Fill in the basic device details. The name entered here will be used to identify the integration itself (as seen in the `Integrations` page). You will add entities and give them names in the following steps.",
+                "data": {
+                    "friendly_name": "Name",
+                    "host": "Host",
+                    "device_id": "Device ID",
+                    "local_key": "Local key",
+                    "protocol_version": "Protocol Version"
+                }
+            },
+            "pick_entity_type": {
+                "title": "Entity type selection",
+                "description": "Please pick the type of entity you want to add.",
+                "data": {
+                    "platform_to_add": "Platform",
+                    "no_additional_platforms": "Do not add any more entities"
+                }
+            },
+            "add_entity": {
+                "title": "Add new entity",
+                "description": "Please fill out the details for an entity with type `{platform}`. All settings except for `ID` can be changed from the Options page later.",
+                "data": {
+                    "id": "ID",
+                    "friendly_name": "Friendly name",
+                    "current": "Current",
+                    "current_consumption": "Current Consumption",
+                    "voltage": "Voltage",
+                    "open_close_cmds": "Open/Close Commands",
+                    "positioning_mode": "Positioning mode",
+                    "current_position_dp": "Current Position (when Position mode is *position*)",
+                    "set_position_dp": "Set Position (when Position Mode is *position*)",
+                    "span_time": "Full opening time, in secs. (when Position Mode is fake*)",
+                    "unit_of_measurement": "Unit of Measurement",
+                    "device_class": "Device Class",
+                    "scaling": "Scaling Factor",
+                    "state_on": "On Value",
+                    "state_off": "Off Value",
+                    "brightness": "Brightness",
+                    "brightness_lower": "Brightness Lower Value",
+                    "brightness_upper": "Brightness Upper Value",
+                    "color_temp": "Color Temperature"
+                }
+            }
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Configure Tuya Device",
+                "description": "Basic configuration for device id `{device_id}`.",
+                "data": {
+                    "friendly_name": "Friendly Name",
+                    "host": "Host",
+                    "local_key": "Local key",
+                    "protocol_version": "Protocol Version"
+                }
+            },
+            "entity": {
+                "title": "Entity Configuration",
+                "description": "Editing entity with DPS `{id}` and platform `{platform}`.",
+                "data": {
+                    "id": "ID",
+                    "friendly_name": "Friendly name",
+                    "current": "Current",
+                    "current_consumption": "Current Consumption",
+                    "voltage": "Voltage",
+                    "open_close_cmds": "Open/Close Commands",
+                    "positioning_mode": "Positioning mode",
+                    "current_position_dp": "Current Position (for *position* mode only)",
+                    "set_position_dp": "Set Position (for *position* mode only)",
+                    "span_time": "Full opening time, in secs. (for *fake* mode only)",
+                    "unit_of_measurement": "Unit of Measurement",
+                    "device_class": "Device Class",
+                    "scaling": "Scaling Factor",
+                    "state_on": "On Value",
+                    "state_off": "Off Value",
+                    "brightness": "Brightness",
+                    "brightness_lower": "Brightness Lower Value",
+                    "brightness_upper": "Brightness Upper Value",
+                    "color_temp": "Color Temperature"
+                }
+            },
+            "yaml_import": {
+                "title": "Not Supported",
+                "description": "Options cannot be edited when configured via YAML."
+            }
+        }
+    },
+    "title": "LocalTuya"
+}

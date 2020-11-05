@@ -5,7 +5,7 @@ from homeassistant.components.remote import ATTR_DEVICE
 from homeassistant.helpers.entity import ToggleEntity
 
 from . import DOMAIN, Gateway3Device
-from .gateway3 import Gateway3
+from .core.gateway3 import Gateway3
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -81,7 +81,7 @@ class Gateway3Entity(Gateway3Device, ToggleEntity):
                 self.gw.pair_model = (model[:-3] if model.endswith('.v1')
                                       else model)
                 self.turn_on()
-            elif cmd == 'reboot':
-                self.gw.send_telnet('reboot')
+            elif cmd in ('reboot', 'ftp'):
+                self.gw.send_telnet(cmd)
             elif cmd == 'publishstate':
                 self.gw.send_mqtt('publishstate')

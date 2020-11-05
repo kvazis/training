@@ -1,0 +1,23 @@
+Платформа разработчиков - 
+iot.tuya.com
+
+Раздел - Cloud Development
+
+Включить - 
+Authorization management
+Device Management
+Device Control
+
+Обновление - 
+sudo apt-get update
+sudo apt-get -y upgrade
+
+Установка
+sudo apt-get install npm
+sudo npm i @tuyapi/cli -g
+
+Извлечение ключей
+tuya-cli wizard
+
+Интеграция
+https://github.com/rospogrigio/localtuya
