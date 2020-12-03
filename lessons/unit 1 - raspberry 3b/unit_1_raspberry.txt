@@ -69,6 +69,7 @@ docker run -d -p 9000:9000 --name portainer --restart always -v /var/run/docker.
 Разрядность системы - getconf LONG_BIT
 
 Установка hass.io (список ключей тут - https://github.com/home-assistant/supervised-installer)
-curl -sL https://raw.githubusercontent.com/home-assistant/supervised-installer/master/installer.sh | bash -s -- -m raspberrypi3
+curl -Lo installer.sh https://raw.githubusercontent.com/home-assistant/supervised-installer/master/installer.sh
+bash installer.sh --machine raspberrypi3
 
 Веб интерфейс Hass.io - IP adress:8123

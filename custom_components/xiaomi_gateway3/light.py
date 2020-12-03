@@ -6,7 +6,6 @@ from homeassistant.components.light import LightEntity, SUPPORT_BRIGHTNESS, \
 from homeassistant.util import color
 
 from . import DOMAIN, Gateway3Device
-from .core import bluetooth
 from .core.gateway3 import Gateway3
 
 _LOGGER = logging.getLogger(__name__)
@@ -16,6 +15,8 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
     def setup(gateway: Gateway3, device: dict, attr: str):
         if device['type'] == 'zigbee':
             async_add_entities([Gateway3Light(gateway, device, attr)])
+        elif 'childs' in device:
+            async_add_entities([Gateway3MeshGroup(gateway, device, attr)])
         else:
             async_add_entities([Gateway3MeshLight(gateway, device, attr)])
 
@@ -58,7 +59,7 @@ class Gateway3Light(Gateway3Device, LightEntity):
         if 'color_temp' in data:
             self._color_temp = data['color_temp']
 
-        self.schedule_update_ha_state()
+        self.async_write_ha_state()
 
     def turn_on(self, **kwargs):
         payload = {}
@@ -114,21 +115,23 @@ class Gateway3MeshLight(Gateway3Device, LightEntity):
 
     def update(self, data: dict = None):
         if data is None:
+            # process poll update
             did = self.device['did']
             try:
                 payload = [{'did': did, 'siid': 2, 'piid': p}
                            for p in range(1, 4)]
                 resp = self.gw.miio.send('get_properties', payload)
-                data = bluetooth.parse_xiaomi_mesh(resp)[did]
-            except Exception as e:
+                self.gw.process_mesh_data(resp)
+
+            except:
                 _LOGGER.debug(f"{self.gw.host} | {did} poll error")
                 self.device['online'] = False
-                return
+                self.async_write_ha_state()
+            return
 
-            _LOGGER.debug(f"{self.gw.host} | {did} poll mesh <= {data}")
-        else:
-            did = None
+        self._update(data)
 
+    def _update(self, data: dict):
         self.device['online'] = True
 
         if self._attr in data:
@@ -141,8 +144,7 @@ class Gateway3MeshLight(Gateway3Device, LightEntity):
             self._color_temp = \
                 color.color_temperature_kelvin_to_mired(data['color_temp'])
 
-        if did is None:
-            self.schedule_update_ha_state()
+        self.async_write_ha_state()
 
     def turn_on(self, **kwargs):
         payload = {}
@@ -164,3 +166,26 @@ class Gateway3MeshLight(Gateway3Device, LightEntity):
     def turn_off(self):
         self.gw.send_mesh(self.device, {self._attr: False})
         time.sleep(.5)  # delay before poll actual status
+
+
+class Gateway3MeshGroup(Gateway3MeshLight):
+    async def async_added_to_hass(self):
+        if 'childs' in self.device:
+            for did in self.device['childs']:
+                self.gw.add_update(did, self.update)
+
+    async def async_will_remove_from_hass(self) -> None:
+        if 'childs' in self.device:
+            for did in self.device['childs']:
+                self.gw.remove_update(did, self.update)
+
+    @property
+    def should_poll(self):
+        return False
+
+    @property
+    def icon(self):
+        return 'mdi:lightbulb-group'
+
+    def update(self, data: dict = None):
+        self._update(data)
