@@ -121,6 +121,11 @@ Ctrl+X - сохранение, Y для подтверждения
 
 sudo apt-get install -y bash curl git jq avahi-daemon dbus apparmor-utils network-manager libavahi-compat-libdnssd-dev libatlas3-base apt-transport-https ca-certificates socat software-properties-common ftpd mc 
 
+# Нада останавит dhcpcd он недружит с network-manager
+sudo systemctl stop dhcpcd
+sudo systemctl disable dhcpcd
+sudo apt remove dhcpcd5
+
 Перезагрузка - sudo reboot
 
 Установка docker - sudo curl -fsSL get.docker.com -o get-docker.sh && sh get-docker.sh
