@@ -1,34 +1,34 @@
 """Config flow for LocalTuya integration integration."""
+import errno
 import logging
 from importlib import import_module
 
+import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
-
 from homeassistant import config_entries, core, exceptions
-from homeassistant.core import callback
 from homeassistant.const import (
-    CONF_ENTITIES,
-    CONF_ID,
-    CONF_HOST,
     CONF_DEVICE_ID,
+    CONF_ENTITIES,
     CONF_FRIENDLY_NAME,
+    CONF_HOST,
+    CONF_ID,
     CONF_PLATFORM,
 )
-import homeassistant.helpers.config_validation as cv
+from homeassistant.core import callback
 
 from . import pytuya
-from .const import (  # pylint: disable=unused-import
+from .const import CONF_DPS_STRINGS  # pylint: disable=unused-import
+from .const import (
     CONF_LOCAL_KEY,
+    CONF_PRODUCT_KEY,
     CONF_PROTOCOL_VERSION,
-    CONF_DPS_STRINGS,
+    DATA_DISCOVERY,
     DOMAIN,
     PLATFORMS,
 )
 from .discovery import discover
 
 _LOGGER = logging.getLogger(__name__)
-
-DISCOVER_TIMEOUT = 6.0
 
 PLATFORM_TO_ADD = "platform_to_add"
 NO_ADDITIONAL_PLATFORMS = "no_additional_platforms"
@@ -179,6 +179,11 @@ async def validate_input(hass: core.HomeAssistant, data):
         if interface:
             interface.close()
 
+    # Indicate an error if no datapoints found as the rest of the flow
+    # won't work in this case
+    if not detected_dps:
+        raise EmptyDpsList
+
     return dps_string_list(detected_dps)
 
 
@@ -204,23 +209,36 @@ class LocaltuyaConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self.entities = []
 
     async def async_step_user(self, user_input=None):
-        """Handle initial step."""
+        """Handle the initial step."""
         errors = {}
         if user_input is not None:
             if user_input[DISCOVERED_DEVICE] != CUSTOM_DEVICE:
-                self.selected_device = user_input[DISCOVERED_DEVICE].split(" ")[0]
+                device = user_input[DISCOVERED_DEVICE].split(" ")[0]
+                self.selected_device = self.devices[device]
             return await self.async_step_basic_info()
 
-        try:
-            devices = await discover(DISCOVER_TIMEOUT, self.hass.loop)
-            self.devices = {
-                ip: dev
-                for ip, dev in devices.items()
-                if dev["gwId"] not in self._async_current_ids()
-            }
-        except Exception:  # pylint: disable=broad-except
-            _LOGGER.exception("discovery failed")
-            errors["base"] = "discovery_failed"
+        # Use cache if available or fallback to manual discovery
+        devices = {}
+        data = self.hass.data.get(DOMAIN)
+        if data and DATA_DISCOVERY in data:
+            devices = data[DATA_DISCOVERY].devices
+        else:
+            try:
+                devices = await discover()
+            except OSError as ex:
+                if ex.errno == errno.EADDRINUSE:
+                    errors["base"] = "address_in_use"
+                else:
+                    errors["base"] = "discovery_failed"
+            except Exception:
+                _LOGGER.exception("discovery failed")
+                errors["base"] = "discovery_failed"
+
+        self.devices = {
+            ip: dev
+            for ip, dev in devices.items()
+            if dev["gwId"] not in self._async_current_ids()
+        }
 
         return self.async_show_form(
             step_id="user", errors=errors, data_schema=user_schema(self.devices)
@@ -235,12 +253,18 @@ class LocaltuyaConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
             try:
                 self.basic_info = user_input
+                if self.selected_device is not None:
+                    self.basic_info[CONF_PRODUCT_KEY] = self.selected_device[
+                        "productKey"
+                    ]
                 self.dps_strings = await validate_input(self.hass, user_input)
                 return await self.async_step_pick_entity_type()
             except CannotConnect:
                 errors["base"] = "cannot_connect"
             except InvalidAuth:
                 errors["base"] = "invalid_auth"
+            except EmptyDpsList:
+                errors["base"] = "empty_dps"
             except Exception:  # pylint: disable=broad-except
                 _LOGGER.exception("Unexpected exception")
                 errors["base"] = "unknown"
@@ -248,10 +272,9 @@ class LocaltuyaConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         defaults = {}
         defaults.update(user_input or {})
         if self.selected_device is not None:
-            device = self.devices[self.selected_device]
-            defaults[CONF_HOST] = device.get("ip")
-            defaults[CONF_DEVICE_ID] = device.get("gwId")
-            defaults[CONF_PROTOCOL_VERSION] = device.get("version")
+            defaults[CONF_HOST] = self.selected_device.get("ip")
+            defaults[CONF_DEVICE_ID] = self.selected_device.get("gwId")
+            defaults[CONF_PROTOCOL_VERSION] = self.selected_device.get("version")
 
         return self.async_show_form(
             step_id="basic_info",
@@ -397,3 +420,7 @@ class CannotConnect(exceptions.HomeAssistantError):
 
 class InvalidAuth(exceptions.HomeAssistantError):
     """Error to indicate there is invalid auth."""
+
+
+class EmptyDpsList(exceptions.HomeAssistantError):
+    """Error to indicate no datapoints found."""

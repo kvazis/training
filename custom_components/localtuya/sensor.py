@@ -3,20 +3,18 @@ import logging
 from functools import partial
 
 import voluptuous as vol
-
-from homeassistant.components.sensor import DOMAIN, DEVICE_CLASSES
+from homeassistant.components.sensor import DEVICE_CLASSES, DOMAIN
 from homeassistant.const import (
     CONF_DEVICE_CLASS,
     CONF_UNIT_OF_MEASUREMENT,
     STATE_UNKNOWN,
 )
 
-from .const import CONF_SCALING
 from .common import LocalTuyaEntity, async_setup_entry
+from .const import CONF_SCALING
 
 _LOGGER = logging.getLogger(__name__)
 
-DEFAULT_SCALING = 1.0
 DEFAULT_PRECISION = 2
 
 
@@ -25,7 +23,7 @@ def flow_schema(dps):
     return {
         vol.Optional(CONF_UNIT_OF_MEASUREMENT): str,
         vol.Optional(CONF_DEVICE_CLASS): vol.In(DEVICE_CLASSES),
-        vol.Optional(CONF_SCALING, default=DEFAULT_SCALING): vol.All(
+        vol.Optional(CONF_SCALING): vol.All(
             vol.Coerce(float), vol.Range(min=-1000000.0, max=1000000.0)
         ),
     }
@@ -42,7 +40,7 @@ class LocaltuyaSensor(LocalTuyaEntity):
         **kwargs,
     ):
         """Initialize the Tuya sensor."""
-        super().__init__(device, config_entry, sensorid, **kwargs)
+        super().__init__(device, config_entry, sensorid, _LOGGER, **kwargs)
         self._state = STATE_UNKNOWN
 
     @property
@@ -64,7 +62,7 @@ class LocaltuyaSensor(LocalTuyaEntity):
         """Device status was updated."""
         state = self.dps(self._dp_id)
         scale_factor = self._config.get(CONF_SCALING)
-        if scale_factor is not None:
+        if scale_factor is not None and isinstance(state, (int, float)):
             state = round(state * scale_factor, DEFAULT_PRECISION)
         self._state = state
 

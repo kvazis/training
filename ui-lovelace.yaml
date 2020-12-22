@@ -529,12 +529,36 @@ views:
              - entity: script.photo_reolink_telegram
              - entity: script.video_reolink_telegram
              
+  - title: thermostat
+    icon: mdi:home-thermometer
+    
+    cards:             
+        - type: thermostat
+          entity: climate.termos           
              
-             
-             
-             
-             
-             
+  - title: Blueprints
+    icon: mdi:script
+    
+    cards:
+
+      - type: vertical-stack
+        cards: 
+            - type: glance  
+              entities:
+                 - entity: binary_sensor.0x00158d00013f7894_occupancy
+                   name: Движение
+                 - entity: binary_sensor.motion_no_light
+                 - entity: binary_sensor.no_motion_light
+      
+            - type: light
+              entity: light.0x00158d000420dbab_light
+              name: Лампочка
+                 
+            - type: entities
+              show_header_toggle: false
+              entities:
+                 - entity: timer.unit_10_3  
+  
              
              
              

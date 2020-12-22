@@ -2,7 +2,7 @@
 
 В консоли - 
 
-docker pull portainer/portainer
+docker pull portainer/portainer-ce
 
 docker stop portainer
 
