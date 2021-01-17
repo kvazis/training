@@ -2,7 +2,6 @@ import logging
 
 from homeassistant.components import persistent_notification
 from homeassistant.components.remote import ATTR_DEVICE
-from homeassistant.const import STATE_OFF, STATE_ON
 from homeassistant.helpers.entity import ToggleEntity
 
 from . import DOMAIN, Gateway3Device, utils
@@ -19,13 +18,16 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
     gw.add_setup('remote', setup)
 
 
-class Gateway3Entity(Gateway3Device, ToggleEntity):
-    _state = STATE_OFF
+async def async_unload_entry(hass, entry):
+    return True
 
+
+class Gateway3Entity(Gateway3Device, ToggleEntity):
     async def async_added_to_hass(self):
         await super().async_added_to_hass()
 
-        if self.gw.zha and not self.hass.config_entries.async_entries('zha'):
+        zha = self.gw.options.get('zha')
+        if zha and not self.hass.config_entries.async_entries('zha'):
             persistent_notification.async_create(
                 self.hass,
                 "Integration: **Zigbee Home Automation**\n"
@@ -34,12 +36,8 @@ class Gateway3Entity(Gateway3Device, ToggleEntity):
                 "Speed: `115200`", "Please create manually")
 
     @property
-    def state(self):
-        return self._state
-
-    @property
     def is_on(self):
-        return self._state == STATE_ON
+        return self._state
 
     @property
     def icon(self):
@@ -47,10 +45,10 @@ class Gateway3Entity(Gateway3Device, ToggleEntity):
 
     def update(self, data: dict = None):
         if 'pairing_start' in data:
-            self._state = STATE_ON
+            self._state = True
 
         elif 'pairing_stop' in data:
-            self._state = STATE_OFF
+            self._state = False
             self.gw.pair_model = None
 
         elif 'added_device' in data:
@@ -63,9 +61,6 @@ class Gateway3Entity(Gateway3Device, ToggleEntity):
         elif 'removed_did' in data:
             self.debug(f"Handle removed_did: {data['removed_did']}")
             utils.remove_device(self.hass, data['removed_did'])
-
-        elif 'network_pan_id' in data:
-            self._attrs.update(data)
 
         self.async_write_ha_state()
 
@@ -104,5 +99,4 @@ class Gateway3Entity(Gateway3Device, ToggleEntity):
             elif cmd == 'publishstate':
                 self.gw.send_mqtt('publishstate')
             elif cmd == 'info':
-                raw = self.gw.get_gateway_info()
-                persistent_notification.async_create(self.hass, raw)
+                self.gw.get_gateway_info()

@@ -1,7 +1,6 @@
 import logging
 
 from homeassistant.components import persistent_notification
-from homeassistant.const import STATE_ON, STATE_OFF
 from homeassistant.helpers.entity import ToggleEntity
 
 from . import DOMAIN, Gateway3Device
@@ -22,18 +21,18 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
     gw.add_setup('switch', setup)
 
 
+async def async_unload_entry(hass, entry):
+    return True
+
+
 class Gateway3Switch(Gateway3Device, ToggleEntity):
     @property
-    def state(self):
-        return self._state
-
-    @property
     def is_on(self):
-        return self._state == STATE_ON
+        return self._state
 
     def update(self, data: dict = None):
         if self._attr in data:
-            self._state = STATE_ON if data[self._attr] else STATE_OFF
+            self._state = bool(data[self._attr])
         self.async_write_ha_state()
 
     def turn_on(self):
@@ -50,7 +49,7 @@ class FirmwareLock(Gateway3Switch):
 
     def turn_on(self):
         if self.gw.lock_firmware(enable=True):
-            self._state = STATE_ON
+            self._state = True
             self.async_write_ha_state()
 
             persistent_notification.async_create(
@@ -60,5 +59,5 @@ class FirmwareLock(Gateway3Switch):
 
     def turn_off(self):
         if self.gw.lock_firmware(enable=False):
-            self._state = STATE_OFF
+            self._state = False
             self.async_write_ha_state()

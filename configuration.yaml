@@ -52,6 +52,7 @@ light: !include includes/light.yaml
 fan: !include includes/fan.yaml
 air_quality: !include includes/air_quality.yaml
 remote: !include includes/remote.yaml
+mqtt_statestream: !include includes/mqtt_statestream.yaml
 
 #Вынос во внешние папки
 sensor: !include_dir_merge_list includes/sensor

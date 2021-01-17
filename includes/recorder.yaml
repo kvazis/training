@@ -17,6 +17,7 @@
       - sensor.0x00158d00010ec4b8_power
       - sensor.0x00158d000114a1e1_power
       - sensor.0x00158d00012896cb_power
+      - binary_sensor.0x00158d00054495dc_contact
   exclude:
     entities: 
 # Светильники шлюзов
@@ -24,3 +25,4 @@
       - light.gateway_light_34ce0088b039
       - light.gateway_light_7811dc64f4c8
       - light.gateway_light_7811dc64f4c8
+

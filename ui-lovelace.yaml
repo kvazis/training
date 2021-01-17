@@ -559,7 +559,21 @@ views:
               entities:
                  - entity: timer.unit_10_3  
   
-             
+  - title: History
+    icon: mdi:script
+    
+    cards:
+
+      - type: vertical-stack
+        cards: 
+            - type: entities
+              show_header_toggle: false
+              entities:
+                 - entity: binary_sensor.0x00158d00054495dc_contact
+                 - entity: sensor.binary_state
+                 - entity: sensor.binary_state_custom
+      
+       
              
              
              

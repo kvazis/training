@@ -4,6 +4,8 @@ from homeassistant.components.climate.const import *
 from . import DOMAIN, Gateway3Device
 from .core.gateway3 import Gateway3
 
+_LOGGER = logging.getLogger(__name__)
+
 HVAC_MODES = [HVAC_MODE_HEAT, HVAC_MODE_COOL, HVAC_MODE_OFF]
 FAN_MODES = [FAN_LOW, FAN_MEDIUM, FAN_HIGH, FAN_AUTO]
 
@@ -28,6 +30,10 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
 
     gw: Gateway3 = hass.data[DOMAIN][config_entry.entry_id]
     gw.add_setup('climate', setup)
+
+
+async def async_unload_entry(hass, entry):
+    return True
 
 
 class Gateway3Climate(Gateway3Device, ClimateEntity):
@@ -76,18 +82,34 @@ class Gateway3Climate(Gateway3Device, ClimateEntity):
         return SUPPORT_TARGET_TEMPERATURE | SUPPORT_FAN_MODE
 
     def update(self, data: dict = None):
-        if 'power' in data:  # 0 - off, 1 - on
-            self._is_on = data['power']
-        if 'mode' in data:  # 0 - heat, 1 - cool
-            self._hvac_mode = HVAC_MODES[data['mode']]
-        if 'fan_mode' in data:  # 0 - low, 3 - auto
-            self._fan_mode = FAN_MODES[data['fan_mode']]
-        if 'current_temperature' in data:
-            self._current_temp = data['current_temperature']
-        if 'target_temperature' in data:
-            self._target_temp = data['target_temperature']
-        if self._attr in data:
-            self._state = bytearray(data[self._attr].to_bytes(4, 'big'))
+        try:
+            if 'power' in data:  # 0 - off, 1 - on
+                self._is_on = data['power']
+
+                # with power off all data come with empty values
+                # https://github.com/AlexxIT/XiaomiGateway3/issues/101#issuecomment-747305596
+                if self._is_on:
+                    if 'mode' in data:  # 0 - heat, 1 - cool, 15 - off
+                        self._hvac_mode = HVAC_MODES[data['mode']]
+                    if 'fan_mode' in data:  # 0 - low, 3 - auto, 15 - off
+                        self._fan_mode = FAN_MODES[data['fan_mode']]
+                    if 'target_temperature' in data:  # 255 - off
+                        self._target_temp = data['target_temperature']
+
+                else:
+                    self._fan_mode = None
+                    self._hvac_mode = None
+                    self._target_temp = None
+
+            if 'current_temperature' in data:
+                self._current_temp = data['current_temperature']
+
+            if self._attr in data:
+                self._state = bytearray(data[self._attr].to_bytes(4, 'big'))
+
+        except:
+            _LOGGER.exception(f"Can't read climate data: {data}")
+
         self.async_write_ha_state()
 
     def set_temperature(self, **kwargs) -> None:
