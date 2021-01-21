@@ -1,0 +1,29 @@
+      - platform: template
+        switches:              
+          thermostat_in:
+            friendly_name: "Термостат - Сенсор IN"
+            value_template: "{{ is_state_attr('climate.0x5c0272fffeebcc3', 'sensor', 'IN') }}"
+            turn_on:
+              - service: mqtt.publish
+                data_template:
+                  topic: "zigbee2mqtt/0x5c0272fffeebcc3/set"
+                  payload_template: '{"sensor": "IN"}'
+            turn_off:
+              - service: mqtt.publish
+                data_template:
+                  topic: "zigbee2mqtt/0x5c0272fffeebcc3/set"
+                  payload_template: '{"sensor": "AL"}'
+                  
+          thermostat_out:
+            friendly_name: "Термостат - Сенсор OUT"
+            value_template: "{{ is_state_attr('climate.0x5c0272fffeebcc3', 'sensor', 'OU') }}"
+            turn_on:
+              - service: mqtt.publish
+                data_template:
+                  topic: "zigbee2mqtt/0x5c0272fffeebcc3/set"
+                  payload_template: '{"sensor": "OU"}'
+            turn_off:
+              - service: mqtt.publish
+                data_template:
+                  topic: "zigbee2mqtt/0x5c0272fffeebcc3/set"
+                  payload_template: '{"sensor": "AL"}'
