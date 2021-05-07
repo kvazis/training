@@ -51,6 +51,8 @@ sudo apt-get install -y bash curl git jq avahi-daemon dbus apparmor-utils networ
 Перезагрузка - sudo reboot
 
 Установка docker - sudo curl -fsSL get.docker.com -o get-docker.sh && sh get-docker.sh
+теперь этой командой устанавливается несовместимая версия, советуют использовать  wget -qO- https://get.docker.com/ | sed 's/docker-ce/docker-ce=5:19.03.13~3-0~raspbian-buster/' | sh
+
 
 Добавляем группу docker и добавляем в нее пользователя
 sudo groupadd docker
