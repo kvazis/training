@@ -1,0 +1,57 @@
+Изменения версий HA - https://github.com/home-assistant/home-assistant/releases
+Временные зоны - http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+Платформы сенсоров - https://www.home-assistant.io/integrations/#sensor
+
+
+Конфиги второго урока :
+
+##### configuration.yaml
+
+homeassistant:
+  name: My Smart Home
+  latitude: !secret latitude_coord
+  longitude: !secret longitude_coord
+  elevation: 179
+  unit_system: metric
+  time_zone: Europe/Kiev
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# http:
+#   base_url: example.duckdns.org:8123
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+sensor:
+  - platform: time_date
+    display_options:
+      - 'time'
+      - 'date'
+      - 'time_date'
+
+  - platform: systemmonitor
+    resources:
+    - type: processor_use
+    - type: disk_use_percent
+      arg: /
+    - type: memory_use_percent
+    - type: last_boot
+    - type: disk_free
+      arg: /
+	  
+##### secrets.yaml
+# Use this file to store secrets like usernames and passwords.
+# Learn more at https://home-assistant.io/docs/configuration/secrets/
+some_password: welcome
+
+latitude_coord: 50.445876
+longitude_coord: 30.540875

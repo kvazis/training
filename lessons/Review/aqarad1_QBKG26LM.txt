@@ -1,0 +1,49 @@
+Список поддерживаемых устройств
+https://www.zigbee2mqtt.io/information/supported_devices.html
+
+Как добавить новое устройство
+https://www.zigbee2mqtt.io/how_tos/how_to_support_new_devices.html
+
+Заявка на добавление выключателя Aqara D1 Triple Neutral
+https://github.com/Koenkk/zigbee-herdsman-converters/issues/1274#issuecomment-638374832
+
+Файл устройств
+https://github.com/Koenkk/zigbee-herdsman-converters/blob/master/devices.js#L798
+
+Команда вывода списка контейнеров с форматированием
+docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}"		
+
+Вход в контейнер
+docker exec -it ID_контейнера  bash
+
+Редакторование списка устройств в контейнере
+vi /app/node_modules/zigbee-herdsman-converters/devices.js
+
+Промежуточное описание для выключателя QBKG26LM
+{
+    zigbeeModel: ['lumi.switch.n3acn3'],
+    model: 'QBKG26LM',
+    vendor: 'Xiaomi',
+    description: 'Aqara D1 3 gang smart wall switch (with neutral wire)',
+    supports: 'on/off, power measurement, temperature',
+    fromZigbee: [
+        fz.on_off_xiaomi_ignore_endpoint_4_5_6, fz.QBKG25LM_click, fz.xiaomi_power,
+        fz.generic_device_temperature, fz.xiaomi_power_from_basic,
+    ],
+    toZigbee: [tz.on_off, tz.xiaomi_switch_operation_mode],
+    meta: {multiEndpoint: true},
+    endpoint: (device) => {
+        return {'left': 1, 'center': 2, 'right': 3, 'system': 1};
+    },
+    onEvent: xiaomi.prevent_reset,
+},
+
+Команды vi
+i - редактировать
+правая клавиша вставить
+ESC - выход из редактирования
+:wq - сохранение и выход
+
+Выход и перезагрузка контейнера
+exit
+docker restart ID_контейнера

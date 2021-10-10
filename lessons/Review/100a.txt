@@ -1,0 +1,28 @@
+Скрипт для обнуления счетчика
+
+  counter_reset:
+    sequence:
+     - service: mqtt.publish
+       data_template:
+         topic: "z2m_cc2652/0x00124b001ed16fac/set/l2"
+         payload: '0'
+
+Сенсоры для синхронизации с счетчиком
+
+- platform: template
+  sensors:
+      power_consumption:
+        friendly_name: "Потребление электроэнергии"
+        unit_of_measurement: 'Вт⋅ч'
+        value_template: "{{ 451312 + (states('sensor.0x00124b001ed16fac_energy_l2') | float ) }}"
+        icon_template: mdi:gauge
+
+- platform: template
+  sensors:
+
+      power_consumption:
+        friendly_name: "Потребление электроэнергии"
+        unit_of_measurement: 'КВт⋅ч'
+        value_template: "{{ (451312 + (states('sensor.0x00124b001ed16fac_energy_l2') | float )) /1000 }}"
+        icon_template: mdi:gauge
+         

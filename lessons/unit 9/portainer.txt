@@ -1,0 +1,3 @@
+docker stop portainer
+docker rm portainer
+docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}"

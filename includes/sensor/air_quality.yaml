@@ -1,0 +1,19 @@
+  - platform: template
+    sensors:
+      mi_air_co2a:
+        friendly_name: 'mi air СО2а - '
+        value_template: "{{ state_attr('air_quality.mi_air_monitor', 'carbon_dioxide_equivalent') }}"  
+        icon_template: mdi:periodic-table-co2
+        unit_of_measurement: 'ppm'
+        
+      mi_air_tvoc:
+        friendly_name: 'mi air ЛОВ - '
+        value_template: "{{ state_attr('air_quality.mi_air_monitor', 'total_volatile_organic_compounds') }}"  
+        icon_template: mdi:alpha-t
+        unit_of_measurement: 'mg_m3'
+        
+      mi_air_pm25:
+        friendly_name: 'mi air PM 2.5 - '
+        value_template: "{{ state_attr('air_quality.mi_air_monitor', 'particulate_matter_2_5') }}"  
+        icon_template: mdi:alpha-p
+        unit_of_measurement: 'ppm'        

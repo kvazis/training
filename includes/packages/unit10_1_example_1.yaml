@@ -1,0 +1,160 @@
+example_1:
+
+
+    binary_sensor:
+    # Сенсоры времени
+      - platform: tod
+        name: unit_10_1_ex1_day
+        after: '09:00'
+        before: '21:00'
+        
+      - platform: tod
+        name: unit_10_1_ex1_night
+        after: '23:00'
+        before: '07:00'
+
+    
+    # Сенсор автоотключения света 
+      - platform: template
+        sensors:
+          unit_10_1_ex1:
+            friendly_name: "Автоотключение"
+            value_template: >-
+              {{ is_state('light.yeelight_320_ceiling', 'on')  
+                 and is_state('binary_sensor.0x00158d0001a24e71_occupancy', 'off')  }}
+            icon_template: >-
+              {% if is_state("binary_sensor.unit_10_1_ex1", "on") %}
+              mdi:timer
+              {% else %}
+              mdi:timer-off
+              {% endif %}
+
+
+    timer:
+        
+          unit_10_1_ex1:
+            name: Люстра выкл через -
+            duration: '00:10:00'        
+
+
+    yeelight:
+    
+        devices:
+          192.168.0.106:
+            name: yeelight_320_ceiling
+            transition: 200
+            model: ceiling1
+            
+    automation:
+
+        # Включение освещения 
+        - alias: unit_10_1_ex1_light_on
+          initial_state: false
+          trigger:
+        # Выключатель Aqara
+          - platform: state
+            entity_id: sensor.0x00158d00014dceb3_click
+            to: 'left'
+        ## Датчик движения
+          - platform: state
+            entity_id: binary_sensor.0x00158d0001a24e71_occupancy
+            to: 'on'
+          condition:
+          - condition: state
+            entity_id: light.yeelight_320_ceiling
+            state: 'off'
+          action:
+          - service: light.turn_on
+            entity_id:
+              - light.yeelight_320_ceiling
+              
+        # Выключение освещения 
+        - alias: unit_10_1_ex1_light_off
+          initial_state: false
+          trigger:
+        # Выключатель Aqara
+          - platform: state
+            entity_id: sensor.0x00158d00014dceb3_click
+            to: 'left'
+        # Таймер
+          - platform: event
+            event_type: timer.finished
+            event_data:
+              entity_id: timer.unit_10_1_ex1
+          condition:
+          - condition: state
+            entity_id: light.yeelight_320_ceiling
+            state: 'on'
+          action:
+          - service: light.turn_off
+            entity_id:
+              - light.yeelight_320_ceiling
+              
+        # Автоматическая установка яркости
+        - alias: unit_10_1_ex1_light_bright
+          initial_state: false
+          trigger:
+          - platform: state
+            entity_id: light.yeelight_320_ceiling
+            to: 'on'
+          action:
+          - service: light.turn_on
+            entity_id:
+              - light.yeelight_320_ceiling
+            data_template:
+               brightness_pct: >
+                 {%- if states("binary_sensor.unit_10_1_ex1_night") == 'on' -%}
+                 25
+                 {%- elif states("binary_sensor.unit_10_1_ex1_day") == 'on'  -%}
+                 100
+                 {%- else -%}
+                 70
+                 {% endif %}
+               kelvin: 4000   
+               
+
+        ## Таймер автоотключения
+        - alias: unit_10_1_ex1_timer_on
+          initial_state: false
+          trigger:
+        # Условия для запуска таймера освещения
+          - platform: state
+            entity_id: binary_sensor.unit_10_1_ex1
+            to: 'on'
+          action:
+            service: timer.start
+            entity_id: timer.unit_10_1_ex1
+            data_template: 
+                duration: > 
+                 {%- if states("binary_sensor.unit_10_1_ex1_night") == 'on' -%}
+                 00:03:00
+                 {%- elif states("binary_sensor.unit_10_1_ex1_day") == 'on'  -%}
+                 00:10:00
+                 {%- else -%}
+                 00:05:00
+                 {% endif %} 
+                 
+        # Сброс таймера при выключении
+        - alias: unit_10_1_ex1_timer_off
+          initial_state: false
+          trigger:
+          - platform: state
+            entity_id: binary_sensor.unit_10_1_ex1
+            to: 'off'
+          action:
+          - service: timer.cancel
+            entity_id: timer.unit_10_1_ex1
+       
+       
+       
+       
+       
+       
+              
+              
+              
+              
+              
+              
+              
+              

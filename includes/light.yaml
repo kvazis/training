@@ -1,0 +1,14 @@
+  - platform: xiaomi_miio    
+    name: philips_bedside
+    host: 192.168.0.118
+    token: 1b58a63916d95ba59607f36065d5f6e3
+    model: philips.light.moonlight
+    
+  - platform: xiaomi_miio
+    name: philips_ceiling
+    host: 192.168.0.117 
+    token: f73f6c18ac3fd594c2ff3dfae32bb20f
+    
+  - platform: switch
+    name: led_light
+    entity_id: switch.wall_switch_158d00014a1abd

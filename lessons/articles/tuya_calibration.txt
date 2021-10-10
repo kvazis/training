@@ -1,0 +1,69 @@
+Copyright - @anonimNO (Большая благодраность за предоставление наработок)
+
+Привязка термоголовок tuya к внешним датчикам температуры на Home Assistant
+
+“Привязка” конечно сильно сказано, но работающее решение есть.
+
+Пишу эту статью потому что вопросы по этой автоматизации поступают уже несколько недель и пытаюсь в ней ответить на все вопросы сразу (а ведь я просто упомянул про эту автоматизацию в посте про термоголовки у Квазиса).
+
+В общем заказал термоголовки tuya https://aliexpress.ru/item/4001043738901.html по совету многоуважаемоего Алекса Квазиса https://t.me/smarthomesell и установил дома.
+
+Термоголовки в принципе работают самостоятельно по установленной целевой температуре и им даже не нужно цеплятся к умному дому.
+И все бы хорошо, кроме одной термоголовки которая у меня сильно закрыта подоконниками и шторами, вследствие чего температура на датчике термоголовки, при работающей батарее, сильно завышается по отношению к температуре в комнате.
+Я устанавливал завышенную целевую температуру, но работа все равно была не очень адекватна.
+И так было до тех пор, пока я в чате https://t.me/zigbeer не наткнулся на сообщение, что человек устанавливает температуру туевской термоголовки путем калибровки датчика локальной температуры.
+На уточняющие вопросы человек не ответил, но идея в принципе была понятна и я начал писать.
+Термоголовка у вас должна быть сопряжена с zigbe2mqtt. Калибровку температуры термоголовки можно устанавливать публикацией соответствующего сообщения в топик mqtt.
+У меня получилось три варианта автоматизаций и в итоге я уже месяц доволен последним.
+
+  - alias: Корректировка температуры на термостате в спальне 
+trigger:
+      - platform: time_pattern
+        minutes: "/10"
+    condition:
+      condition: or
+      conditions:
+        - condition: template
+          value_template: '{{ states.sensor.temperature_sensor_spalnya_temperature.state | float | round(1) - state_attr("climate.thermostat_spalnya", "local_temperature") | float | round(1) > 0.5 }}'
+        - condition: template
+          value_template: '{{ states.sensor.temperature_sensor_spalnya_temperature.state | float | round(1) - state_attr("climate.thermostat_spalnya", "local_temperature") | float | round(1) < -0.5 }}'
+    action:
+      - service: mqtt.publish
+        data:
+          topic: zigbee2mqtt/Thermostat spalnya/set/local_temperature_calibration
+          payload: '{{ state_attr("climate.thermostat_spalnya", "local_temperature_calibration") | float | round(1) + ( states.sensor.temperature_sensor_spalnya_temperature.state | float | round(1) - state_attr("climate.thermostat_spalnya", "local_temperature") | float | round(1) )  | float | round(1) }}'
+
+
+Вот так всё просто. Конечно же вам надо на заменить свои названия сенсоров и атрибутов. Если вы не понимаете что здесь происходит, то вам прямая дорога на канал Квазиса https://www.youtube.com/c/AlexKvazis/ изучать как работает Home Assistant
+А теперь нюансы. 
+Сначала я сделал с отбросом десятых градусов температуры. 23=23, 24=24 и т.д. Несмотря на то что в комнате было 23,1 а на клапане 24,9.
+Получилось не очень, температура в комнате держалась в пределах +-1,5 градуса.
+Я начал делать с поддержкой десятых и в принципе сделал, но только тогда я узнал, что точность датчика температуры термоголовки tuya 0,5 градусов. Получилось опять не очень хоть и разброс по температуре получился +-1 градус.
+Пришлось делать с точностью 0,5 в итоге я пришел к автоматизации которая описана выше, только сначала я поставил автоматизацию на срабатывание раз в минуту и термоголовка очень часто двигала клапаном. Я поменял на 10 минут и получил не частое срабатывание клапана и разброс температур в комнате 0,5 градусов, что меня устроило. 
+Конечно же надо учитывать, что открытое окно зимой или яркое солнце в окна летом могут выбить этот разброс температур за пределы 0,5 градусов.
+
+Та же самая автоматизация, но с сообщениями в телеграм, если вы хотите все контролировать
+  - alias: Корректировка температуры на термостате в спальне
+    trigger:
+      - platform: time_pattern
+        minutes: "/10"
+    condition:
+      condition: or
+      conditions:
+        - condition: template
+          value_template: '{{ states.sensor.temperature_sensor_spalnya_temperature.state | float | round(1) - state_attr("climate.thermostat_spalnya", "local_temperature") | float | round(1) > 0.5 }}'
+        - condition: template
+          value_template: '{{ states.sensor.temperature_sensor_spalnya_temperature.state | float | round(1) - state_attr("climate.thermostat_spalnya", "local_temperature") | float | round(1) < -0.5 }}'
+    action:
+      - service: notify.telegram
+        data:
+          message: "Корректировка температуры \nКомната: {{ states('sensor.temperature_sensor_spalnya_temperature') | float | round(1) }} \nКлапан: {{ state_attr(\"climate.thermostat_spalnya\", \"local_temperature\") | float | round(1) }} \nТекущая корректировка: {{ ( states.sensor.temperature_sensor_spalnya_temperature.state | float | round(1) - state_attr(\"climate.thermostat_spalnya\", \"local_temperature\") | float | round(1) )  | float | round(1) }} \nИтоговая корректировка: {{ state_attr(\"climate.thermostat_spalnya\", \"local_temperature_calibration\") | float | round(1) + ( states.sensor.temperature_sensor_spalnya_temperature.state | float | round(1) - state_attr(\"climate.thermostat_spalnya\", \"local_temperature\") | float | round(1) )  | float | round(1) }} "
+      - service: mqtt.publish
+        data:
+          topic: zigbee2mqtt/Thermostat spalnya/set/local_temperature_calibration
+          payload: '{{ state_attr("climate.thermostat_spalnya", "local_temperature_calibration") | float | round(1) + ( states.sensor.temperature_sensor_spalnya_temperature.state | float | round(1) - state_attr("climate.thermostat_spalnya", "local_temperature") | float | round(1) )  | float | round(1) }}'
+      - delay: '00:00:30'
+      - service: notify.telegram
+        data:
+          message: "Комната: {{ states('sensor.temperature_sensor_spalnya_temperature') | float | round(1) }} \nКлапан: {{ state_attr(\"climate.thermostat_spalnya\", \"local_temperature\") | float | round(1) }}"
+Напоминаю что точность 0,5. Возможно конкретно ваши батареи могут быть более слабыми или более мощными и дадут другой разброс температур.

@@ -1,0 +1,4 @@
+  - platform: xiaomi_miio
+    name: 05_air_monitor
+    host: 192.168.0.242
+    token: 5233595a56594a4e56784b4967513542

@@ -1,0 +1,234 @@
+Карта auto-entities
+
+configuration.yaml
+
+Ручной режим и ресурсы:
+lovelace:
+  mode: yaml
+  resources:
+   - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
+     type: module  
+     
+ui-lovelace.yaml
+
+  - title: Панель управления
+    icon: mdi:keyboard
+
+    cards:
+
+    - type: vertical-stack
+      cards: 
+
+            - type: markdown
+              content: >
+                  **Все светильники**
+
+            - type: custom:auto-entities
+              show_empty: true
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - domain: light
+
+            - type: markdown
+              content: >
+                  **Активные светильники**
+                      
+            - type: custom:auto-entities
+              show_empty: true
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - domain: light
+                   state: 'on'
+                   options:
+                      secondary_info: last-changed
+
+
+            - type: markdown
+              content: >
+                  **Активные переключатели**
+            - type: custom:auto-entities
+              show_empty: true
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - domain: switch
+                   state: 'on'
+                   options:
+                      secondary_info: last-changed
+
+    - type: vertical-stack
+      cards: 
+
+            - type: markdown
+              content: >
+                  **Движение**
+
+            - type: custom:auto-entities
+              show_empty: true
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: binary_sensor.*occupancy
+                   state: 'on'
+                   options:
+                      secondary_info: last-changed
+
+            - type: markdown
+              content: >
+                  **Открытые окна и двери**
+
+            - type: custom:auto-entities
+              show_empty: true
+              card:
+                type: glance
+                show_state: false
+              filter:
+                include:
+                 - entity_id: binary_sensor.*contact
+                   state: 'on'
+
+            - type: markdown
+              content: >
+                  **Мощность более 10 Ватт**
+
+            - type: custom:auto-entities
+              show_empty: true
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: sensor.*_power
+                exclude:
+                 - state: '< 10.0'
+
+            - type: markdown
+              content: >
+                  **Влажность менее 30%**
+                      
+            - type: custom:auto-entities
+              show_empty: true
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: sensor.*_humidity
+                exclude:
+                 - state: '> 30.0'
+
+            - type: markdown
+              content: >
+                  **Температура менее 20 С**
+                      
+            - type: custom:auto-entities
+              show_empty: true
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: sensor.*_temperature
+                exclude:
+                 - state: '> 20.0'
+
+    - type: vertical-stack
+      cards: 
+
+            - type: markdown
+              content: >
+                  **Батарейки**
+
+            - type: custom:auto-entities
+              show_empty: true
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: sensor.*battery*
+                exclude:
+                 - state: '> 70.0'
+                 - state: 'unknown'
+
+            - type: markdown
+              content: >
+                  **Аварийные датчики**
+      
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: binary_sensor.*water_leak
+                   state: 'on'
+                   options:
+                      secondary_info: last-changed
+                 - entity_id: binary_sensor.*smoke
+                   state: 'on'
+                   options:
+                      secondary_info: last-changed
+
+            - type: markdown
+              content: >
+                  **Отвалившиеся светильники**
+                      
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - domain: light
+                   state: 'unavailable'
+                   options:
+                      secondary_info: last-changed
+
+            - type: markdown
+              content: >
+                  **Отвалившиеся переключатели**
+                      
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - domain: switch
+                   state: 'unavailable'
+                   options:
+                      secondary_info: last-changed
+                      
+            - type: markdown
+              content: >
+                  **Отвалившиеся сенсоры**
+                      
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - domain: sensor
+                   state: 'unavailable'
+                   options:
+                      secondary_info: last-changed
+                 - domain: binary_sensor
+                   state: 'unavailable'
+                   options:
+                      secondary_info: last-changed

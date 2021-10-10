@@ -1,0 +1,182 @@
+##### Ручное добавление устройства
+
+Из консоли - 
+docker exec -it homeassistant /bin/bash
+
+cd /./usr/local/lib/python3.8/site-packages/broadlink
+
+vi __init__.py
+
+Режим редактирования -
+i
+
+Вставляем строку
+0x6184: (rm4pro, "RM4 pro", "Broadlink"),
+
+Выход из режима редактирования
+esc
+
+Сохранение
+:w
+
+Выход из редактора
+:q!
+
+Выход из контейнера
+exit
+
+##### Скрипты показанные в уроке
+
+  broadlink_learn_rm4:
+    alias: Обучение Broadlink RM4C pro
+    sequence:
+      - service: remote.learn_command
+        target:
+          entity_id: remote.rm4c_pro_remote
+        data:
+          device: tv
+          command: power
+          
+
+  broadlink_learn_rm4_2:
+    alias: Обучение Broadlink RM4C pro
+    sequence:
+      - service: remote.learn_command
+        target:
+          entity_id: remote.rm4c_pro_remote
+        data:
+          device: light
+          command: power on
+          command_type: rf
+
+  broadlink_learn_tv_command:
+    alias: Телевизионный пульт
+    sequence:
+      - service: remote.learn_command
+        target:
+          entity_id: remote.rm4c_pro_remote
+        data:
+          device: tv
+          command: 
+             - power
+             - volume +
+             - volume -
+             - menu
+             
+  tv_broadlink_power:
+    alias: Питание телевизора
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.rm4c_pro_remote
+        data:
+          device: tv
+          command: power
+          
+  tv_broadlink_volume_up:
+    alias: Звук телевизора + 5
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.rm4c_pro_remote
+        data:
+          device: tv
+          command: volume +
+          num_repeats: 5
+          
+  tv_broadlink_power_volume:
+    alias: Включить и добавить звук
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.rm4c_pro_remote
+        data:
+          device: tv          
+          command: 
+             - power
+             - volume + 
+             - volume +
+             - volume +
+             
+  broadlink_send_rm4:
+    alias: Отправка Broadlink RM4C pro
+    sequence:        
+      - service: remote.send_command
+        data:
+          entity_id: remote.rm4c_pro_remote
+          command:
+            - b64:JgBoACQRFhAWLRYtFhEWLBYRFi0WERUtFi0WAAFhJBEWERYtFS0WERYtFhEVLRYRFi0WLRYAAWEjEhURFi0WLRYQFi0WERYtFREWLRYtFgABYSQRFhAWLRYtFhEWLBYRFi0WERUtFi0WAA0F==
+            - b64:JgBoACQRFhAWLRYtFhEWLBYRFi0WERUtFi0WAAFhJBEWERYtFS0WERYtFhEVLRYRFi0WLRYAAWEjEhURFi0WLRYQFi0WERYtFREWLRYtFgABYSQRFhAWLRYtFhEWLBYRFi0WERUtFi0WAA0F==
+            - b64:JgBoACQRFhAWLRYtFhEWLBYRFi0WERUtFi0WAAFhJBEWERYtFS0WERYtFhEVLRYRFi0WLRYAAWEjEhURFi0WLRYQFi0WERYtFREWLRYtFgABYSQRFhAWLRYtFhEWLBYRFi0WERUtFi0WAA0F==
+
+  air_conditioner:
+    alias: Кондиционер
+    sequence:
+      - service: remote.learn_command
+        target:
+          entity_id: remote.rm4c_pro_remote
+        data:
+          device: conditioner
+          command: 
+             - cold
+             - power off             
+             
+  delete_command:
+    sequence:
+      - service: remote.delete_command
+        target:
+          entity_id: remote.rm4c_pro_remote
+        data:
+          device: light
+          command: ON
+          
+##### Пакадж для управление кондиционером
+
+broadlink:
+
+    switch:
+      - platform: template
+        switches:
+
+          air_conditioner:
+            friendly_name: "Кондиционер"
+            value_template: "{{ states('sensor.0x04cf8cdf3c764e0a_power') | float > 10 }}"
+            turn_on:
+              service: remote.send_command
+              target:
+                entity_id: remote.rm4c_pro_remote
+              data:
+                device: conditioner
+                command: 
+                   - cold
+            turn_off:
+              service: remote.send_command
+              target:
+                entity_id: remote.rm4c_pro_remote
+              data:
+                device: conditioner
+                command: 
+                   - power off
+            icon_template: >-
+              {% if is_state("switch.air_conditioner", "on") %}
+              mdi:air-conditioner
+              {% else %}
+              mdi:power-off
+              {% endif %}
+              
+    climate:
+      - platform: generic_thermostat
+        name: air_conditioner
+        heater: switch.air_conditioner
+        target_sensor: sensor.0x00158d000156e92e_temperature
+        target_temp: 22
+        min_temp: 21
+        max_temp: 25
+        ac_mode: true
+        cold_tolerance: 0.5
+        hot_tolerance: 0.5
+        min_cycle_duration:
+          minutes: 5
+        keep_alive:
+          minutes: 3
+        initial_hvac_mode: "cool"

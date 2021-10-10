@@ -1,0 +1,49 @@
+Автоматизации вынос в папку
+https://github.com/kvazis/training/blob/master/configuration.yaml
+
+automation: !include_dir_merge_list includes/automation
+
+Триггеры:
+https://github.com/kvazis/training/tree/master/lessons/unit 8/trigger.txt
+
+Условия:
+https://github.com/kvazis/training/tree/master/lessons/unit 8/condition.txt
+
+Действия:
+https://github.com/kvazis/training/tree/master/lessons/unit 8/actions.txt
+
+
+Автоматизации 8 урока
+https://github.com/kvazis/training/blob/master/includes/automation/unit8.yaml
+
+
+Таймеры вынос в файл 
+https://github.com/kvazis/training/blob/master/configuration.yaml
+
+timer: !include includes/timer.yaml
+
+Таймеры - 
+https://github.com/kvazis/training/blob/master/includes/timer.yaml
+  vent:
+    name: Вентиляция выкл через -
+    duration: 600
+
+Скрипты вынос в папку
+https://github.com/kvazis/training/blob/master/configuration.yaml
+
+script: !include_dir_merge_named includes/scripts
+
+Скрипты 8 урока
+https://github.com/kvazis/training/tree/master/includes/scripts/unit8.yaml
+
+
+Скрипты на карточке в ловлейс
+
+        - type: entities
+          show_header_toggle: false
+          entities:          
+            - entity: script.unit8_light_on_full
+            - entity: script.unit8_light_on_medium
+            - entity: script.unit8_light_off
+
+

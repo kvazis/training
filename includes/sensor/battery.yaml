@@ -1,0 +1,26 @@
+  - platform: template
+    sensors:
+     158d0001531698_battery:
+       value_template: "{{ state_attr('binary_sensor.switch_158d0001531698', 'battery_level') }}"
+       unit_of_measurement: '%'
+       entity_id: binary_sensor.switch_158d0001531698
+       device_class: battery
+       friendly_name: 'Кнопка Mijia батарейка'
+
+  - platform: template
+    sensors:
+     158d0001186d82_battery:
+       value_template: "{{ state_attr('binary_sensor.cube_158d0001186d82', 'battery_level') }}"
+       unit_of_measurement: '%'
+       entity_id: binary_sensor.cube_158d0001186d82
+       device_class: battery
+       friendly_name: 'Кубик Aqara батарейка'
+       
+  - platform: template
+    sensors:
+     158d00013fc3bc_battery:
+       value_template: "{{ state_attr('binary_sensor.wall_switch_both_158d00013fc3bc', 'battery_level') }}"
+       unit_of_measurement: '%'
+       entity_id: binary_sensor.wall_switch_both_158d00013fc3bc
+       device_class: battery
+       friendly_name: 'Выключатель Aqara батарейка'

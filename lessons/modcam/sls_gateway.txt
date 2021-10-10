@@ -1,0 +1,56 @@
+Страница проекта: https://github.com/slsys/Gateway
+Telegram-канал проекта: https://t.me/slsys 
+Купить SLS шлюз в РФ можно https://t.me/avenit
+Купить SLS шлюз и другие разработки zigbee в Украине - https://izi.ua/m-106842-id106842
+
+Страница проекта - https://modkam.ru/?p=1342
+
+Статус шлюза
+binary_sensor:
+    - platform: mqtt
+      name: sls_state
+      state_topic: "ZigbeeB790/bridge/state"
+      device_class: connectivity
+      payload_on: online
+      payload_off: offline
+      json_attributes_topic: "ZigbeeB790/bridge/config"
+      json_attributes_template: ""
+
+Кнопка Aqara - click & battery 
+
+sensor:
+## Для действий типа click 
+    - platform: mqtt
+      name: aqara_button_click
+      state_topic: "ZigbeeB790/0x00158D0001E79190"
+      availability_topic: "ZigbeeB790/bridge/state"
+      icon: "mdi:toggle-switch"
+      value_template: "{{ value_json.click }}"
+
+## Для действий типа hold / release / shake      
+    - platform: mqtt
+      name: aqara_button_click
+      state_topic: "ZigbeeB790/0x00158D0001E79190"
+      availability_topic: "ZigbeeB790/bridge/state"
+      icon: "mdi:toggle-switch"
+      value_template: "{{ value_json.action }}"
+
+## Для получения уровня заряда    
+    - platform: mqtt
+      name: aqara_button_battery
+      state_topic: "ZigbeeB790/0x00158D0001E79190"
+      availability_topic: "ZigbeeB790/bridge/state"
+      unit_of_measurement: "%"
+      device_class: "battery"
+      value_template: "{{ value_json.battery }}"
+      
+Выклчатель на 1 линию
+
+    - platform: mqtt
+      name: tuya_switch
+      state_topic: "ZigbeeB790/0x680AE2FFFE71AE63"
+      availability_topic: "ZigbeeB790/bridge/state"
+      payload_off: "OFF"
+      payload_on: "ON"
+      value_template: "{{ value_json.state }}"
+      command_topic: "ZigbeeB790/0x680AE2FFFE71AE63/set"

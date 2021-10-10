@@ -1,0 +1,107 @@
+Raspberry Pi OS Lite
+Загрузка программы для записи образа - https://www.raspberrypi.org/software/
+
+Обновляем bootloader для загрузки с USB
+
+Удобный SSH клиент - https://www.putty.org/
+
+Логин / пароль по умолчанию - ubuntu / ubuntu
+
+Вставлять скопированный текст в консоль - правой клавишей мышки
+
+Создание нового пользователя - 
+sudo adduser имя
+
+Добавление пользователя в группу sudo
+sudo usermod -aG sudo имя
+
+Переключение на нового пользователя
+su имя
+
+Репозиторий и список пакетов
+sudo add-apt-repository universe && sudo apt update
+
+Обновление пакетов
+sudo apt upgrade
+
+Настройка сети
+
+Установка сетевых инструментов и Network Manager
+
+sudo apt install net-tools network-manager
+sudo systemctl start NetworkManager.service
+sudo systemctl enable NetworkManager.service
+
+sudo reboot
+
+Список файлов - 
+ls /etc/netplan
+
+Делаем копию файла
+sudo cp /etc/netplan/50-cloud-init.yaml /etc/netplan/50-cloud-init.yaml.BAK
+
+Передаем управление network-manager
+sudo nano /etc/netplan/50-cloud-init.yaml
+Ctrl-K - удаление строки
+
+network:
+    version: 2
+    renderer: NetworkManager
+
+Выход - Ctrl-X 
+Сохранить изменения - Y
+
+sudo netplan generate
+sudo netplan apply
+sudo reboot
+
+sudo nmtui
+
+sudo reboot
+
+### FTP сервер Midnight Commander  APP armor git watchdog ntpdate
+sudo apt-get -y install ftpd mc apparmor git watchdog bluez ntpdate
+
+### Часовой пояс
+sudo dpkg-reconfigure tzdata
+
+### Зависимости и докер
+sudo apt-get -y install avahi-daemon jq docker.io
+
+### Добавление пользователя
+sudo usermod -aG docker ##имя пользователя
+
+### Перезагрузка
+sudo reboot
+
+
+### Входим на новый адрес
+
+### переходим в режим рута
+sudo su
+
+### Установка Hass.io для 64 разрядных ARM
+
+curl -Lo installer.sh https://raw.githubusercontent.com/home-assistant/supervised-installer/master/installer.sh
+bash installer.sh --machine raspberrypi4-64
+
+### Веб интерфейс Home Assistant
+http://YOUR IP:8123/
+
+### Установка Portainer
+docker pull portainer/portainer-ce
+docker volume create portainer_data
+docker run -d -p 9000:9000 --name portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
+
+### Выход из консоли
+exit - возможно несколько раз
+
+### Веб интерфейс Portainer
+http://YOUR IP:9000/
+
+### Список интерфейсов
+ifconfig
+
+## Маршруты
+route
+

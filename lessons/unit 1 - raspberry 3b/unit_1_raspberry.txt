@@ -1,0 +1,75 @@
+Загрузка дистрибутива - https://www.raspberrypi.org/downloads/raspbian/ 
+Загрузка программы для записи образа - https://www.balena.io/etcher/
+
+Разворачиваем образ на карту памяти и создаем в корневом каталоге пустой файл ssh
+
+Удобный SSH клиент - https://www.putty.org/
+
+login - pi 
+pass  - raspberry
+## Для вставки из  буфера обмена в терминале - кликаем правую клавишу мышки
+смена текущего пароля - passwd
+
+Добавление пользователя - sudo adduser имя
+
+Добавление в группу sudo - sudo usermod -aG sudo имя
+
+Обновления - 
+Прошивка - sudo rpi-update
+Перезагрузка - sudo reboot
+Обновление списка пакетов - sudo apt-get update
+Обновление пакетов - sudo apt-get -y upgrade
+
+Настраиваем сеть:
+Открываем файл - sudo nano /etc/network/interfaces
+Вставляем (правая клавиша мыши) 
+
+auto lo
+iface lo inet loopback
+
+#iface eth0 inet manual
+
+allow-hotplug eth0
+iface eth0 inet static
+    address 192.168.0.100
+    netmask 255.255.255.0
+    gateway 192.168.0.1
+
+Адрес и шлюз меняем на нужные
+Ctrl-X выход - подтверждаем изменения нажав на Y 
+Перезагрузка - sudo reboot
+
+Приложение для настройки - sudo raspi-config
+8 Update - обновление приложение
+4 Localisation Options / I1 Change Locale - ищем и выбираем пробелом ru_RU.UTF-8 UTF-8
+4 Localisation Options / I2 Change Timezone - выбираем часовой пояс
+
+Установка пакетов нужных для работы и установки Hass.io
+
+sudo apt-get install -y bash curl git jq avahi-daemon dbus apparmor-utils network-manager libavahi-compat-libdnssd-dev libatlas3-base apt-transport-https ca-certificates socat software-properties-common ftpd mc 
+
+Перезагрузка - sudo reboot
+
+Установка docker - sudo curl -fsSL get.docker.com -o get-docker.sh && sh get-docker.sh
+
+Добавляем группу docker и добавляем в нее пользователя
+sudo groupadd docker
+sudo gpasswd -a $USER docker
+newgrp docker
+
+ставим Portainer - 
+docker pull portainer/portainer-ce
+docker volume create portainer_data
+docker run -d -p 9000:9000 --name portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
+
+Веб интерфейс Portainer - IP adress:9000
+
+Переходим в режим root - sudo su
+
+Разрядность системы - getconf LONG_BIT
+
+Установка hass.io (список ключей тут - https://github.com/home-assistant/supervised-installer)
+curl -Lo installer.sh https://raw.githubusercontent.com/home-assistant/supervised-installer/master/installer.sh
+bash installer.sh --machine raspberrypi3
+
+Веб интерфейс Hass.io - IP adress:8123

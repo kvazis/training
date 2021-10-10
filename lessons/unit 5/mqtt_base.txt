@@ -1,0 +1,280 @@
+Заменить на свои - 
+0x00000abcd0000abcd - адрес устройства для добавления 
+ZigbeeSLS - корневой mqtt топик шлюза
+
+
+########################## SWITCH ##########################
+homeassistant/switch/0x00000abcd0000abcd/switch/config
+
+{"payload_off":"OFF",
+"payload_on":"ON",
+"value_template":"{{ value_json.state }}",
+"command_topic":"ZigbeeSLS/0x00000abcd0000abcd/set/state",
+"state_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"json_attributes_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"name":"0x00000abcd0000abcd_switch",
+"unique_id":"0x00000abcd0000abcd_switch_ZigbeeSLS",
+"device":{"identifiers":["ZigbeeSLS_0x00000abcd0000abcd"],
+"name":"Имя для устройства",
+"sw_version":"ZigbeeSLS",
+"model":"Zigbee Switch",
+"manufacturer":"Xiaomi"},
+"availability_topic":"ZigbeeSLS/bridge/state"}
+
+########################## LIGHT ##########################
+homeassistant/light/0x00158d000420dbab/light/config
+
+{"brightness":true,
+"color_temp":true,
+"schema":"json",
+"command_topic":"ZigbeeSLS/0x00000abcd0000abcd/set/",
+"brightness_scale":254,
+"state_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"json_attributes_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"name":"0x00000abcd0000abcd_light",
+"unique_id":"0x00158d000420dbab_light_ZigbeeSLS",
+"device":{"identifiers":["ZigbeeSLS_0x00000abcd0000abcd"],
+"name":"Имя для устройства",
+"sw_version":"ZigbeeSLS",
+"model":"Zigbee Light",
+"manufacturer":"Xiaomi"},
+"availability_topic":"ZigbeeSLS/bridge/state"}
+
+
+########################## SENSORS ##########################
+##########################  POWER  ##########################
+
+homeassistant/sensor/0x00000abcd0000abcd/power/config
+
+{"unit_of_measurement":"W",
+"icon":"mdi:flash",
+"value_template":"{{ value_json.power }}",
+"state_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"json_attributes_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"name":"0x00000abcd0000abcd_power",
+"unique_id":"0x00000abcd0000abcd_power_ZigbeeSLS",
+"device":{"identifiers":["ZigbeeSLS_0x00000abcd0000abcd"],
+"name":"Имя для устройства",
+"sw_version":"ZigbeeSLS",
+"model":"Zigbee Sensor",
+"manufacturer":"Xiaomi"},
+"availability_topic":"ZigbeeSLS/bridge/state"}
+
+########################## CONSUMPTION ##########################
+
+homeassistant/sensor/0x00000abcd0000abcd/consumption/config
+
+{"unit_of_measurement":"kWh",
+"value_template":"{{ value_json.consumption }}",
+"icon":"mdi:flash",
+"state_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"json_attributes_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"name":"0x00000abcd0000abcd_consumption",
+"unique_id":"0x00000abcd0000abcd_consumption_ZigbeeSLS",
+"device":{"identifiers":["ZigbeeSLS_0x00000abcd0000abcd"],
+"name":"Имя для устройства",
+"sw_version":"ZigbeeSLS",
+"model":"Zigbee Sensor",
+"manufacturer":"Xiaomi"},
+"availability_topic":"ZigbeeSLS/bridge/state"}
+
+########################## CURRENT ##########################
+
+homeassistant/sensor/0x00000abcd0000abcd/current/config
+
+{"unit_of_measurement":"A",
+"icon":"mdi:current-ac",
+"value_template":"{{ value_json.current }}",
+"state_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"json_attributes_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"name":"0x00000abcd0000abcd_current",
+"unique_id":"0x00000abcd0000abcd_current_ZigbeeSLS",
+"device":{"identifiers":["ZigbeeSLS_0x00000abcd0000abcd"],
+"name":"Имя для устройства",
+"sw_version":"ZigbeeSLS",
+"model":"Zigbee Sensor",
+"manufacturer":"Xiaomi"},
+"availability_topic":"ZigbeeSLS/bridge/state"}
+
+
+########################## VOLTAGE ##########################
+
+homeassistant/sensor/0x00000abcd0000abcd/voltage/config
+
+{"unit_of_measurement":"V",
+"icon":"mdi:alpha-v",
+"value_template":"{{ value_json.voltage }}",
+"state_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"json_attributes_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"name":"0x00000abcd0000abcd_voltage",
+"unique_id":"0x00000abcd0000abcd_voltage_ZigbeeSLS",
+"device":{"identifiers":["ZigbeeSLS_0x00000abcd0000abcd"],
+"name":"Имя для устройства",
+"sw_version":"ZigbeeSLS",
+"model":"Zigbee Sensor",
+"manufacturer":"Xiaomi"},
+"availability_topic":"ZigbeeSLS/bridge/state"}
+
+########################## TEMPERATURE ##########################
+
+homeassistant/sensor/0x00000abcd0000abcd/temperature/config
+
+{"unit_of_measurement":"°C",
+"device_class":"temperature",
+"value_template":"{{ value_json.temperature }}",
+"state_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"json_attributes_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"name":"0x00000abcd0000abcd_temperature",
+"unique_id":"0x00158d0001fa8321_temperature_ZigbeeSLS",
+"device":{"identifiers":["ZigbeeSLS_0x00000abcd0000abcd"],
+"name":"Имя для устройства",
+"sw_version":"ZigbeeSLS",
+"model":"Zigbee Sensor",
+"manufacturer":"Xiaomi"},
+"availability_topic":"ZigbeeSLS/bridge/state"}
+
+########################## HUMIDITY ##########################
+
+homeassistant/sensor/0x00000abcd0000abcd/humidity/config
+
+{"unit_of_measurement":"%",
+"device_class":"humidity",
+"value_template":"{{ value_json.humidity }}",
+"state_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"json_attributes_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"name":"0x00000abcd0000abcd_humidity",
+"unique_id":"0x00158d0001fa8321_humidity_ZigbeeSLS",
+"device":{"identifiers":["ZigbeeSLS_0x00000abcd0000abcd"],
+"name":"Имя для устройства",
+"sw_version":"ZigbeeSLS",
+"model":"Zigbee Sensor",
+"manufacturer":"Xiaomi"},
+"availability_topic":"ZigbeeSLS/bridge/state"}
+
+########################## PRESSURE ##########################
+
+homeassistant/sensor/0x00000abcd0000abcd/pressure/config
+
+{"unit_of_measurement":"hPa",
+"device_class":"pressure",
+"value_template":"{{ value_json.pressure }}",
+"state_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"json_attributes_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"name":"0x00000abcd0000abcd_pressure",
+"unique_id":"0x00158d0001fa8321_pressure_ZigbeeSLS",
+"device":{"identifiers":["ZigbeeSLS_0x00000abcd0000abcd"],
+"name":"Имя для устройства",
+"sw_version":"ZigbeeSLS",
+"model":"Zigbee Sensor",
+"manufacturer":"Xiaomi"},
+"availability_topic":"ZigbeeSLS/bridge/state"}
+
+########################## CLICK ##########################
+
+homeassistant/sensor/0x00000abcd0000abcd/click/config
+
+{"icon":"mdi:toggle-switch",
+"value_template":"{{ value_json.click }}",
+"state_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"json_attributes_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"name":"0x00000abcd0000abcd_click",
+"unique_id":"0x00000abcd0000abcd_click_ZigbeeSLS",
+"device":{"identifiers":["ZigbeeSLS_0x00000abcd0000abcd"],
+"name":"Имя для устройства",
+"sw_version":"ZigbeeSLS",
+"model":"Zigbee Sensor",
+"manufacturer":"Xiaomi"},
+"availability_topic":"ZigbeeSLS/bridge/state"}
+
+########################## ACTION ##########################
+
+homeassistant/sensor/0x00000abcd0000abcd/action/config
+
+{"icon":"mdi:gesture-double-tap",
+"value_template":"{{ value_json.action }}",
+"state_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"json_attributes_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"name":"0x00000abcd0000abcd_action",
+"unique_id":"0x00158d00028f6fe6_action_ZigbeeSLS",
+"device":{"identifiers":["ZigbeeSLS_0x00000abcd0000abcd"],
+"name":"Имя для устройства",
+"sw_version":"ZigbeeSLS",
+"model":"Zigbee Sensor",
+"manufacturer":"Xiaomi"},
+"availability_topic":"ZigbeeSLS/bridge/state"}
+
+##########################  LINKQ  ##########################
+
+homeassistant/sensor/0x00000abcd0000abcd/linkquality/config
+
+{"icon":"mdi:signal",
+"unit_of_measurement":"lqi",
+"value_template":"{{ value_json.linkquality }}",
+"state_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"json_attributes_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"name":"0x00000abcd0000abcd_linkquality",
+"unique_id":"0x00000abcd0000abcd_linkquality_ZigbeeSLS",
+"device":{"identifiers":["ZigbeeSLS_0x00000abcd0000abcd"],
+"name":"Имя для устройства",
+"sw_version":"ZigbeeSLS",
+"model":"Zigbee Sensor",
+"manufacturer":"Xiaomi"},
+"availability_topic":"ZigbeeSLS/bridge/state"}
+
+
+##########################  BATTERY  ##########################
+
+homeassistant/sensor/0x00000abcd0000abcd/battery/config
+
+{"unit_of_measurement":"%",
+"device_class":"battery",
+"value_template":"{{ value_json.battery }}",
+"state_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"json_attributes_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"name":"0x00000abcd0000abcd_battery",
+"unique_id":"0x00000abcd0000abcd_battery_ZigbeeSLS",
+"device":{"identifiers":["ZigbeeSLS_0x00000abcd0000abcd"],
+"name":"Имя для устройства",
+"sw_version":"ZigbeeSLS",
+"model":"Zigbee Sensor",
+"manufacturer":"Xiaomi"},
+"availability_topic":"ZigbeeSLS/bridge/state"}
+
+##################### BINARY SENSORS ##########################
+########################## CONTACT  ###########################
+
+homeassistant/binary_sensor/0x00000abcd0000abcd/contact/config
+
+{"payload_on":false,
+"payload_off":true,
+"value_template":"{{ value_json.contact }}",
+"device_class":"door",
+"state_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"json_attributes_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"name":"0x00000abcd0000abcd_contact",
+"unique_id":"0x00000abcd0000abcd_contact_ZigbeeSLS",
+"device":{"identifiers":["ZigbeeSLS_0x00000abcd0000abcd"],
+"name":"Имя для устройства",
+"sw_version":"ZigbeeSLS",
+"model":"Zigbee Sensor",
+"manufacturer":"Xiaomi"},
+"availability_topic":"ZigbeeSLS/bridge/state"}
+
+########################## OCCUPANCY ###########################
+
+homeassistant/binary_sensor/0x00000abcd0000abcd/occupancy/config
+
+{"payload_on":true,
+"payload_off":false,
+"value_template":"{{ value_json.occupancy }}",
+"device_class":"motion",
+"state_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"json_attributes_topic":"ZigbeeSLS/0x00000abcd0000abcd",
+"name":"0x00000abcd0000abcd_occupancy",
+"unique_id":"0x00158d00016d56f5_occupancy_ZigbeeSLS",
+"device":{"identifiers":["ZigbeeSLS_0x00000abcd0000abcd"],
+"name":"Имя для устройства",
+"sw_version":"ZigbeeSLS",
+"model":"Zigbee Sensor",
+"manufacturer":"Xiaomi"},
+"availability_topic":"ZigbeeSLS/bridge/state"}

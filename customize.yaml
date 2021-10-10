@@ -1,0 +1,112 @@
+#Бинарные сенсоры
+binary_sensor.cube_158d0001186d82:
+  friendly_name: Кубик Aqara
+  icon: mdi:cube-outline
+binary_sensor.wall_switch_left_158d00013fc3bc:
+  friendly_name: Выключатель Aqara левая клавиша
+binary_sensor.wall_switch_right_158d00013fc3bc:
+  friendly_name: Выключатель Aqara правая клавиша
+binary_sensor.wall_switch_both_158d00013fc3bc:
+  friendly_name: Выключатель Aqara обе клавиши
+binary_sensor.switch_158d0001531698:
+  friendly_name: Кнопка Mijia
+  icon: mdi:radiobox-blank
+binary_sensor.door_window_sensor_158d00013ed373:
+  friendly_name: Окно
+  device_class: window 
+binary_sensor.door_window_sensor_158d000445206b:
+  friendly_name: Дверь
+  device_class: door
+  
+#Светильники
+light.gateway_light_34ce0088b039:
+  friendly_name: Шлюз ночник
+  icon: mdi:star-circle-outline
+
+#Розетки, выключатели 
+switch.plug_158d000153dd8e:
+  friendly_name: Розетка Zigbee
+  device_class: plug  
+  icon: mdi:power
+switch.0x00158d0002d7bb2b_switch_l1:
+  friendly_name: Реле Aqara канал 1
+  device_class: plug  
+  icon: mdi:power
+switch.0x00158d0002d7bb2b_switch_l2:
+  friendly_name: Реле Aqara канал 2
+  device_class: plug  
+  icon: mdi:power
+
+#Сенсоры
+sensor.illumination_34ce0088b039:
+  friendly_name: Шлюз освещенность
+  device_class: illuminance
+sensor.humidity_158d00015aebb6:
+  friendly_name: Датчик влажности
+  device_class: humidity
+sensor.temperature_158d00015aebb6:
+  friendly_name: Датчик температуры
+  device_class: temperature
+sensor.0x00158d0002d7bb2b_power: 
+  friendly_name: Реле Aqara потребление
+  device_class: power  
+  
+# Relay Aqara LLKZMK11LM
+sensor.da_2ch_relay_consumption:
+  friendly_name: Aqara LKZMK11LM расход
+  unit_of_measurement: 'КВт/ч'
+sensor.da_2ch_relay_linkquality:
+  friendly_name: Aqara LKZMK11LM сигнал
+sensor.da_2ch_relay_power:
+  friendly_name: Aqara LKZMK11LM потребление
+  unit_of_measurement: 'Вт'
+switch.da_2ch_relay_switch_l1:
+  friendly_name: Aqara LKZMK11LM канал 1
+switch.da_2ch_relay_switch_l2:
+  friendly_name: Aqara LKZMK11LM канал 2
+sensor.da_2ch_relay_temperature:
+  friendly_name: Aqara LKZMK11LM температура
+  
+# Switch Aqara QBKG12LM
+sensor.dd_wd_n_2ch_click:
+  friendly_name: Aqara QBKG12LM клик
+sensor.dd_wd_n_2ch_linkquality:
+  friendly_name: Aqara QBKG12LM сигнал
+sensor.dd_wd_n_2ch_power:
+  friendly_name: Aqara QBKG12LM потребление
+  unit_of_measurement: 'Вт'
+switch.dd_wd_n_2ch_switch_left:
+  friendly_name: Aqara QBKG12LM левая
+switch.dd_wd_n_2ch_switch_right:
+  friendly_name: Aqara QBKG12LM правая
+sensor.dd_wd_n_2ch_temperature:
+  friendly_name: Aqara QBKG12LM температура
+  
+# Switch Mi ZNCZ02LM
+sensor.lr_thermostat_2_consumption:
+  friendly_name: Mi ZNCZ02LM расход
+  unit_of_measurement: 'КВт/ч'
+sensor.lr_thermostat_2_linkquality:
+  friendly_name: Mi ZNCZ02LM сигнал
+sensor.lr_thermostat_2_power:
+  friendly_name: Mi ZNCZ02LM потребление
+switch.lr_thermostat_2_switch:
+  friendly_name: Mi ZNCZ02LM розетка
+sensor.lr_thermostat_2_temperature:
+  friendly_name: Mi ZNCZ02LM температура
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

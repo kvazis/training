@@ -1,0 +1,31 @@
+- platform: template
+  sensors:
+    last_google_backup_train:
+      friendly_name: 'Последний удачный бэкап - '
+      value_template: >-
+        {% if state_attr("sensor.snapshot_backup","last_snapshot") %}
+        {{as_timestamp(state_attr("sensor.snapshot_backup","last_snapshot"))|timestamp_custom("%d.%m.%Y %H:%M")}}
+        {% else %} 
+        Получение данных...
+        {% endif %}
+      icon_template: mdi:calendar-check-outline
+
+    snapshots_in_google_drive_train:
+      friendly_name: 'Снапшотов на Googe Drive - '
+      value_template: >- 
+         {% if state_attr("sensor.snapshot_backup","snapshots_in_google_drive") %}
+         {{state_attr("sensor.snapshot_backup","snapshots_in_google_drive")}}
+         {% else %} 
+         Получение данных...         
+         {% endif %}
+      icon_template: mdi:folder-google-drive
+       
+    snapshots_in_hassio_train:
+      friendly_name: 'Снапшотов в Наssio - '
+      value_template: >- 
+          {% if state_attr("sensor.snapshot_backup","snapshots_in_hassio") %}
+          {{state_attr("sensor.snapshot_backup","snapshots_in_hassio")}}
+          {% else %} 
+          Получение данных...          
+          {% endif %}
+      icon_template: mdi:home-assistant

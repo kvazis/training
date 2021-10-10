@@ -1,0 +1,24 @@
+Перечень интерфейсов
+ifconfig
+
+Таблица маршрутизации
+route
+
+Запуск Midnight Commander
+sudo mc
+
+Путь к настройкам интерфейсов
+/etc/NetworkManager/system-connections/ 
+
+F4 - редактировать, при выборе редактора - выбираем nano
+
+Прописываем метрику
+route-metric=105
+
+Выход - Ctrl X
+Подтверждение - Y
+
+F10 - выход из Midnight Commander
+
+Рестарт Network Manager
+sudo systemctl restart NetworkManager

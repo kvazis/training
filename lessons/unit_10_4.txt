@@ -1,0 +1,36 @@
+  - platform: template
+    sensors:
+      sitting:
+        friendly_name: Отслеживание сидения
+        value_template: "{{ is_state('binary_sensor.0x00124b002265ba65_contact', 'off') }}"
+        device_class: presence
+        delay_off: 
+            seconds: 60
+
+- id: Настольная лампа
+  alias: table_lamp
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.sitting
+  action:
+    - choose:
+      - conditions:
+         - condition: state
+           entity_id: binary_sensor.sitting
+           state: 'on'
+        sequence:
+         - service: light.turn_on
+           entity_id:
+             - light.yeelight_table
+           data_template:
+             brightness_pct: 100 
+             kelvin: 4000
+      - conditions:
+         - condition: state
+           entity_id: binary_sensor.sitting
+           state: 'off'
+        sequence:
+         - service: light.turn_off
+           entity_id:
+             - light.yeelight_table

@@ -1,0 +1,116 @@
+Raspberry Pi OS Lite
+Загрузка программы для записи образа - https://www.raspberrypi.org/software/
+
+Обновляем bootloader для загрузки с USB
+
+Удобный SSH клиент - https://www.putty.org/
+
+Разворачиваем образ на носитель и создаем в корневом каталоге пустой файл ssh
+
+Логин и пароль по умолчанию - pi / raspberry
+
+Обновление списка пакетов и пакетов
+sudo apt update
+sudo apt upgrade -y
+
+Обновление прошивки
+sudo rpi-update
+
+Перезагрузка
+sudo reboot
+
+Добавление пользователя - 
+sudo adduser имя
+
+Добавление в группу sudo - 
+sudo usermod -aG sudo имя
+
+Переключение на нового пользователя - su имя
+
+sudo apt-get install -y network-manager
+
+Отключаем dhcpcd
+sudo nano /etc/dhcpcd.conf
+denyinterfaces wlan0
+denyinterfaces eth0
+
+Выход - Ctrl-X 
+Сохранить изменения - Y
+
+
+sudo nano /etc/NetworkManager/NetworkManager.conf
+[main]
+plugins=ifupdown,keyfile
+dhcp=internal
+
+[ifupdown]
+managed=true
+
+Выход - Ctrl-X 
+Сохранить изменения - Y
+
+sudo reboot
+
+sudo systemctl stop dhcpcd
+sudo systemctl disable dhcpcd
+
+sudo nmtui
+
+Activate connection - подключаем wi-fi
+Edit connection - настройки IP
+
+Отключение случайного МАС
+sudo nano /etc/NetworkManager/conf.d/100-disable-wifi-mac-randomization.conf
+
+[connection]
+wifi.mac-address-randomization=1
+
+[device]
+wifi.scan-rand-mac-address=no
+
+sudo reboot
+
+Проверка сетевых интерфейсов
+ifconfig
+
+Приложение для настройки - sudo raspi-config
+8 Update - обновление приложение
+5 Localisation Options / I1 Change Locale - ищем и выбираем пробелом ru_RU.UTF-8 UTF-8
+5 Localisation Options / I2 Change Timezone - выбираем часовой пояс
+
+Установка пакетов нужных для работы и установки Hass.io
+
+sudo apt-get install -y bash curl git jq avahi-daemon dbus apparmor-utils libavahi-compat-libdnssd-dev libatlas3-base apt-transport-https ca-certificates socat software-properties-common ftpd mc 
+
+Перезагрузка - 
+sudo reboot
+
+Установка docker - 
+sudo curl -fsSL get.docker.com -o get-docker.sh && sh get-docker.sh
+
+Добавляем группу docker и добавляем в нее пользователя
+sudo groupadd docker
+sudo gpasswd -a $USER docker
+newgrp docker
+
+ставим Portainer - 
+docker pull portainer/portainer-ce
+docker volume create portainer_data
+docker run -d -p 9000:9000 --name portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
+
+Веб интерфейс Portainer - IP adress:9000
+
+Переходим в режим root - sudo su
+
+Установка hass.io (список ключей тут - https://github.com/home-assistant/supervised-installer)
+
+Скрипт
+curl -Lo installer.sh https://raw.githubusercontent.com/home-assistant/supervised-installer/master/installer.sh
+
+Для Raspberry 3
+bash installer.sh --machine raspberrypi3
+
+Для Raspberry 4
+bash installer.sh --machine raspberrypi4
+
+Веб интерфейс Home Assistant - IP adress:8123

@@ -1,0 +1,13 @@
+Дополнение 1 к 5 уроку
+
+Координатор Zigbee V3, описание - https://modkam.ru/?p=1112
+
+Телеграмм, поддержка - https://t.me/zigbeer
+Телеграмм, барахолка (покупка в РФ) - https://t.me/zigberu
+
+Купить стик 3.0 и другие разработки zigbee в Украине - https://izi.ua/m-106842-id106842
+
+Репозиторий Zigbee2mqtt Assistant  https://github.com/yllibed/hassio
+
+Биндинг - https://www.zigbee2mqtt.io/information/binding.html
+

@@ -1,0 +1,17 @@
+  - platform: template
+    switches:
+      led_smart:
+        friendly_name: "LED Подсветка"
+        value_template: "{{  is_state('binary_sensor.dp20', 'on') }}"
+        turn_on:
+              service: localtuya.set_dp
+              data:
+                device_id: ID_your_device
+                dp: 20
+                value: "{{true}}"
+        turn_off:
+              service: localtuya.set_dp
+              data:
+                device_id: ID_your_device
+                dp: 20
+                value: "{{false}}"
