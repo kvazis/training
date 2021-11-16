@@ -1,0 +1,9 @@
+1. Сайт проекта - https://www.zigbee2mqtt.io/
+2. Загрузка SmartRF Flash Programmer - http://www.ti.com/tool/FLASH-PROGRAMMER
+3. Загрузка драйвера http://www.ti.com/general/docs/lit/getliterature.tsp?baseLiteratureNumber=swrc212&fileType=zip
+4. SmartRF Flash Programmer + драйвера в одном архиве (пароль kvazis)
+https://github.com/kvazis/training/blob/master/lessons/unit%205.1/Unit%205.1.zip
+5. Прошивка для CC2531 ZStack 1.2
+https://github.com/Koenkk/Z-Stack-firmware/blob/master/coordinator/Z-Stack_Home_1.2/bin/default/CC2531_DEFAULT_20201127.zip
+5. Прошивка для CC2531 ZStack 3.0
+https://github.com/Koenkk/Z-Stack-firmware/blob/master/coordinator/Z-Stack_3.0.x/bin/CC2531_20190425.zip

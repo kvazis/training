@@ -1,0 +1,32 @@
+Купить в Украине - @Khaidakin
+Купить в PФ - @avenit
+
+Проект стик v.3 - https://modkam.ru/?p=1112
+Проект стик v.4 - - https://github.com/egony/cc2652p_E72-2G4M20S1E/wiki
+
+Поддерживаемые стики - https://www.zigbee2mqtt.io/information/supported_adapters.html
+
+Качаем и устанавливаем python: http://www.python.org/download
+Проверенные версии 3.8.3, 3.8.6
+Качаем и распаковываем прошивальщик: https://github.com/JelmerT/cc2538-bsl
+Последняя версия прошивки: https://github.com/egony/cc2652p_E72-2G4M20S1E/tree/master/firmware/coordinator
+
+Копируем путь к папке Scripts
+Win+R - окно выполнить
+cmd - консоль
+cd .../..../Scripts
+
+Устанавливаем необходимые дополнения:
+pip3 install pyserial
+pip3 install intelhex
+
+Зажать кнопки RESET и FLASH, вставить в USB, затем отпускаете RESET, затем отпускаете FLASH
+
+
+python.exe cc2538-bsl.py -p COM5 -e -w -v znp_CC2652P_E72_sdk_4_40_00_44_20210211.hex
+
+Для СС2531 и v.3
+port: /dev/ttyACM0
+
+Для v.3+ и v.4 
+port: /dev/ttyUSB0
