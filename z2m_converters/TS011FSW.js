@@ -18,10 +18,10 @@ const definition = {
     // it's usually necessary to provide a fingerprint instead of a zigbeeModel
     fingerprint: [{modelID: 'TS011F', manufacturerName: '_TZ3000_1hwjutgo'}],
         model: 'ZJSB9-80Z',
-        vendor: 'Mumubiz',
+        vendor: 'WDYK',
         description: 'Automatic Switch',
         extend: extend.switch(),
-        whiteLabel: [{vendor: 'Mumubiz', model: 'ZJSB9-80Z'}],
+        whiteLabel: [{vendor: 'WDYK', model: 'ZJSB9-80Z'}],
     };
 
 module.exports = definition;
