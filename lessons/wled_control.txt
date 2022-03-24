@@ -1,0 +1,85 @@
+wled_light:
+
+    automation:
+    
+        - id: wled_light_control
+          alias: WLED управление
+          initial_state: true
+          trigger:       
+           - platform: state
+             entity_id: sensor.0x00158d0001718ca8_action
+             to: 'single_left'
+          action:
+            - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: light.wled
+                    state: 'off'
+                sequence:
+                  - service: light.turn_on
+                    data:
+                      entity_id: light.wled
+                      effect: Police
+              - conditions:
+                  - condition: state
+                    entity_id: light.wled
+                    state: 'on'
+                sequence:
+                  - service: light.turn_off
+                    entity_id: 
+                       - light.wled
+
+        - id: wled_light_preset
+          alias: WLED пресеты
+          initial_state: true
+          trigger:       
+           - platform: state
+             entity_id: sensor.0x00158d0002af829b_action
+             to: 'single'
+          action:
+            - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: light.wled
+                    state: 'off'
+                sequence:
+                  - service: select.select_option
+                    data:
+                      entity_id: select.wled_preset
+                      option: Preset 1
+              - conditions:
+                  - condition: state
+                    entity_id: light.wled
+                    state: 'on'
+                sequence:
+                  - service: light.turn_off
+                    entity_id: 
+                       - light.wled
+                       
+        - id: wled_light_playlist
+          alias: WLED плейлисты
+          initial_state: true
+          trigger:       
+           - platform: state
+             entity_id: sensor.0x00158d0002af829b_action
+             to: 'double'
+          action:
+            - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: light.wled
+                    state: 'off'
+                sequence:
+                  - service: select.select_option
+                    data:
+                      entity_id: select.wled_playlist
+                      option: Playlist 4
+              - conditions:
+                  - condition: state
+                    entity_id: light.wled
+                    state: 'on'
+                sequence:
+                  - service: light.turn_off
+                    entity_id: 
+                       - light.wled
+

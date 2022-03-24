@@ -1,3 +1,8 @@
+// Название: Haozee Tuya Zigbee 3.0 EU Plug 3680W 16A
+// Модель: nas wr01b
+// modelID: TS011F
+// manufacturerName: _TZ3000_w0qqde0g
+
 const fz = require('zigbee-herdsman-converters/converters/fromZigbee');
 const tz = require('zigbee-herdsman-converters/converters/toZigbee');
 const exposes = require('zigbee-herdsman-converters/lib/exposes');

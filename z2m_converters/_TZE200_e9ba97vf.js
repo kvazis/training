@@ -1,3 +1,8 @@
+// Название: Moes TV 01 ZigBee3.0 Smart Radiator Valve Actuator
+// Модель: TV 01
+// modelID: TS0601
+// manufacturerName: _TZE200_e9ba97vf
+
 //// Based on:
 // https://gist.github.com/basveeling/96ff0f16cd7185b0277a26c8d9305633
 // https://github.com/Koenkk/zigbee-herdsman-converters/issues/1803

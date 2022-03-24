@@ -1,3 +1,8 @@
+// Название: Girier Zigbee Mini Smart Switch
+// Модель: JR-ZDS01
+// modelID: TS0001
+// manufacturerName: _TZ3000_majwnphg
+
 const fz = require('zigbee-herdsman-converters/converters/fromZigbee');
 const tz = require('zigbee-herdsman-converters/converters/toZigbee');
 const exposes = require('zigbee-herdsman-converters/lib/exposes');

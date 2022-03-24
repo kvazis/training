@@ -1,3 +1,7 @@
+// Название: Yanohi Tuya Zigbee Smart Light Lamp E27 Dimmable RGB+W+CCT
+// modelID: TS0505B
+// manufacturerName: _TZ3000_12sxjap4
+
 const fz = require('zigbee-herdsman-converters/converters/fromZigbee');
 const tz = require('zigbee-herdsman-converters/converters/toZigbee');
 const exposes = require('zigbee-herdsman-converters/lib/exposes');

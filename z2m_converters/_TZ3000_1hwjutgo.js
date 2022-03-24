@@ -1,3 +1,8 @@
+// Название: WDYK Din Zigbee relay
+// Модель: ZJSB9-80Z
+// modelID: TS011F
+// manufacturerName: _TZ3000_1hwjutgo
+
 const fz = require('zigbee-herdsman-converters/converters/fromZigbee');
 const tz = require('zigbee-herdsman-converters/converters/toZigbee');
 const exposes = require('zigbee-herdsman-converters/lib/exposes');
