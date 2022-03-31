@@ -1,0 +1,116 @@
+best_con_light:
+
+    script:
+    
+          broadlink_learn:
+            alias: Learn Bestcon LED strip
+            sequence:
+              - service: remote.learn_command
+                target:
+                  entity_id: remote.broadlink_ir_remote
+                data:
+                  device: led_strip
+                  command: 
+                     - power_on
+                     - power_off
+                     - speed
+                     - fade
+                     - jump
+                     - afade
+                     - ajump
+        
+          best_con_light_on:
+            alias: Включить Bestcon LED strip
+            sequence:
+              - service: remote.send_command
+                target:
+                  entity_id: remote.broadlink_ir_remote
+                data:
+                  device: led_strip
+                  command: power_on
+                  
+          best_con_light_off:
+            alias: Выключить Bestcon LED strip
+            sequence:
+              - service: remote.send_command
+                target:
+                  entity_id: remote.broadlink_ir_remote
+                data:
+                  device: led_strip
+                  command: power_off
+                  
+          best_con_light_speed:
+            alias: Bestcon LED speed
+            sequence:
+              - service: remote.send_command
+                target:
+                  entity_id: remote.broadlink_ir_remote
+                data:
+                  device: led_strip
+                  command: speed
+                  
+    input_select:               
+               
+      best_con_light_mode:
+        name: mode
+        options:
+          - fade
+          - jump
+          - afade
+          - ajump
+          
+    automation:               
+               
+               
+    - id: Смена режимов
+      alias: change_mode
+      initial_state: true
+      trigger:
+        - platform: state
+          entity_id: input_select.best_con_light_mode
+      action:
+        - choose:
+          - conditions:
+              - condition: state
+                entity_id: input_select.best_con_light_mode
+                state: "fade"               
+            sequence:
+              - service: remote.send_command
+                target:
+                  entity_id: remote.broadlink_ir_remote
+                data:
+                  device: led_strip
+                  command: fade      
+          - conditions:
+              - condition: state
+                entity_id: input_select.best_con_light_mode
+                state: "jump"               
+            sequence:
+              - service: remote.send_command
+                target:
+                  entity_id: remote.broadlink_ir_remote
+                data:
+                  device: led_strip
+                  command: jump          
+          - conditions:
+              - condition: state
+                entity_id: input_select.best_con_light_mode
+                state: "afade"               
+            sequence:
+              - service: remote.send_command
+                target:
+                  entity_id: remote.broadlink_ir_remote
+                data:
+                  device: led_strip
+                  command: afade           
+          - conditions:
+              - condition: state
+                entity_id: input_select.best_con_light_mode
+                state: "ajump"               
+            sequence:
+              - service: remote.send_command
+                target:
+                  entity_id: remote.broadlink_ir_remote
+                data:
+                  device: led_strip
+                  command: ajump 
