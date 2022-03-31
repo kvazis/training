@@ -1,0 +1,12 @@
+Запуск через интеграцию Xiaomi Gateway 3
+
+Панель разработчика — Службы — режим YAML
+
+Указываем имя сущности шлюза и цифровой ID розетки
+
+service: remote.send_command
+target: 
+  entity_id: remote.0x680ae2fffe83f67a_pair
+data:
+  command: ota
+  device: 158d000153dd8e
