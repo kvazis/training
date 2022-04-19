@@ -62,3 +62,13 @@ switch:
 Аналогично при действии turn_off — в топик пишется значение OFF, которое деактивирует сенсор.
 В конце — в разделе icon_template, указаны иконки, которые будет присвоены для отображения выключателя, в зависимости от его состояния.
 Таким образом — режим состояния вынесен из внутренней базы Home Assistant в MQTT брокер, где он будет хранится постоянно и может использоваться другими серверами — для этого можно либо подключать все интеграции MQTT к одному брокеру, либо синхронизировать брокеры в режиме моста.
+
+# Как поддержать развитие проекта?
+* [Стать спонсором моего Youtube](http://kvazis.link/sponsorship)
+* [Подписаться на Patreon](http://kvazis.link/patreon)
+* [Перевод через Paypal](http://kvazis.link/paypal)
+* Webmoney - Z243592584952
+* BTC - 1Gzr7WQugfnPuWVawu47EiCMTDUBqCAshj
+* ETH - 0xa0ce3E29Cf537013649Ae9cdbc08C4853fF91FAc
+* LTC - ltc1qs493yk2wk9ywx5h6aruk4p9zm75hx42ekv4ym2
+* TRX - TFTCLqvS1tMBwokRHBwz1TCDJ4oD1Z5zPk

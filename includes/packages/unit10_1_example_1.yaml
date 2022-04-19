@@ -37,13 +37,13 @@ example_1:
             duration: '00:10:00'        
 
 
-    yeelight:
+    # yeelight:
     
-        devices:
-          192.168.0.106:
-            name: yeelight_320_ceiling
-            transition: 200
-            model: ceiling1
+    #     devices:
+    #       192.168.0.106:
+    #         name: yeelight_320_ceiling
+    #         transition: 200
+    #         model: ceiling1
             
     automation:
 

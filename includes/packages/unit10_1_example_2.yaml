@@ -21,14 +21,14 @@ example_2:
     
     
     
-    yeelight:
+    # yeelight:
     
-        devices:
-          192.168.0.112:
-            name: yeelight_450
-            transition: 1000
-            nightlight_switch_type: light
-            model: ceiling3
+    #     devices:
+    #       192.168.0.112:
+    #         name: yeelight_450
+    #         transition: 1000
+    #         nightlight_switch_type: light
+    #         model: ceiling3
             
             
     automation:
