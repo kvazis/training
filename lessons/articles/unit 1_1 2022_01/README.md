@@ -58,7 +58,7 @@ sudo raspi-config
 5 Localisation Options / I1 Change Locale - ищем и выбираем пробелом ru_RU.UTF-8 UTF-8
 5 Localisation Options / I2 Change Timezone - выбираем часовой пояс
 ```
-# Управление вентилятором
+* Управление вентилятором
 * Установка скрипта
 ```yaml
 curl https://download.argon40.com/argon1.sh | bash
@@ -78,7 +78,7 @@ Y для сохранения
 ```yaml
 sudo reboot
 ```
-# Приоретизация сети
+* Приоретизация сети
 * Таблица маршрутизации
 ```yaml
 route
