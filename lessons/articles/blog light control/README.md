@@ -6,16 +6,11 @@
 
 
 ```yaml
-    template:
-     
-      - binary_sensor:
 
-          - name: 0x54ef44100035a3eb_control
-            state: >
-              {{ is_state('sensor.0x00158d0001718ca8_action', 'single_left')  
-                 or is_state('sensor.0x00158d0002af829b_action', 'single')
-              }}
-            delay_off: 00:00:03
+    input_boolean:
+      yeelight_color_0x531e4b4:
+        name: unavailable
+        icon: mdi:lightbulb-off-outline
             
     automation:
 
@@ -91,11 +86,17 @@
 
 ```yaml
 
-    input_boolean:
-      yeelight_color_0x531e4b4:
-        name: unavailable
-        icon: mdi:lightbulb-off-outline
-        
+    template:
+     
+      - binary_sensor:
+
+          - name: 0x54ef44100035a3eb_control
+            state: >
+              {{ is_state('sensor.0x00158d0001718ca8_action', 'single_left')  
+                 or is_state('sensor.0x00158d0002af829b_action', 'single')
+              }}
+            delay_off: 00:00:03
+
     automation:
     
       - id: Управление лампочкой версия 2
