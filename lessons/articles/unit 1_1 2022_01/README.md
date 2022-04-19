@@ -1,6 +1,6 @@
 * [Supervised Home Assistant. Легкая установка на RaspiOS 64 - Raspberry PI 4B в корпусе Argon One M.2](https://youtu.be/C3684jm62q8)
 
-# Текстовая версия ссылки и команды из урока
+# Текстовая версия - ссылки и команды из урока
 
 * Raspberry Pi Imager
 * [Загрузка программы для записи образа](https://www.raspberrypi.org/software/)

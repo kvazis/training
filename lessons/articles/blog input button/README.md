@@ -28,7 +28,6 @@
 
 ```
 
-
 # Как поддержать развитие проекта?
 * [Стать спонсором моего Youtube](http://kvazis.link/sponsorship)
 * [Подписаться на Patreon](http://kvazis.link/patreon)
