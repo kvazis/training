@@ -149,7 +149,7 @@
         - service: light.turn_off
           entity_id: light.0x54ef44100035a3eb
 
-```yaml
+```
 
 # Как поддержать развитие проекта?
 * [Стать спонсором моего Youtube](http://kvazis.link/sponsorship)
