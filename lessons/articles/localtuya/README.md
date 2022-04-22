@@ -8,34 +8,34 @@ Create Cloud Project
 
 Добавляем Device Status Notification
 
-# Подключение приложения:
+* Подключение приложения:
 Device — Link Tuya App Account — Add App Account
 
 Настройки — Интеграции — Добавить интеграцию — Tuya
 
 С страницы Authorization — берем Access ID/Client ID, Access Secret/Client Secret
 
-# HACS
+* HACS
 ```yaml
 sudo bash
 wget -O - https://get.hacs.xyz | bash -
 ```
 
-# Установка tuya-cli
+* Установка tuya-cli
 ```yaml
 sudo apt-get install npm
 sudo npm i @tuyapi/cli -g
 ```
 
-# Получение ключей
+* Получение ключей
 ```yaml
 tuya-cli wizard
 ```
 
-# Ручное получение ключей
+* Ручное получение ключей
 API Explorer — Smart Home Management System — Device Management — Get device details
 
-#Пример изменения datapoint
+* Пример изменения datapoint
 ```yaml
   - service: localtuya.set_dp
     data:
