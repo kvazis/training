@@ -1,3 +1,9 @@
+* [Home Assistant. Урок 10.6 Практические кейсы - увлажнение воздуха в помещении](https://youtu.be/MPtem0rtt0o)
+
+# Пакадж управления увлажнителем из урока - 
+
+
+```yaml
 unit_10_6:
 
 # Увлажнитель воздуха с механическим управлением
@@ -135,25 +141,15 @@ unit_10_6:
                     - !secret chat_id_group
                 message: | 
                      {{"\U0001F6B1"}} Закончилась вода в увлажнителе или он выключен вручную {{ states('sensor.time_date') }} 
+```
 
 
-
-
-
-
-
-
-            
-            
-            
-            
-            
-            
-            
-              
-              
-              
-              
-              
-              
-              
+# Как поддержать развитие проекта?
+* [Стать спонсором моего Youtube](http://kvazis.link/sponsorship)
+* [Подписаться на Patreon](http://kvazis.link/patreon)
+* [Перевод через Paypal](http://kvazis.link/paypal)
+* Webmoney - Z243592584952
+* BTC - 1Gzr7WQugfnPuWVawu47EiCMTDUBqCAshj
+* ETH - 0xa0ce3E29Cf537013649Ae9cdbc08C4853fF91FAc
+* LTC - ltc1qs493yk2wk9ywx5h6aruk4p9zm75hx42ekv4ym2
+* TRX - TFTCLqvS1tMBwokRHBwz1TCDJ4oD1Z5zPk
