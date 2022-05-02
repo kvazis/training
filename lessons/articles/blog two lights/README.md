@@ -32,10 +32,6 @@
         - platform: state
           entity_id: sensor.0x00158d00013fc3bc_action
           to: 'single_both'
-        condition:
-        - condition: state
-          entity_id: switch.control_mode
-          state: 'on'
         action:
             - choose:
             # Оба светильника выключены - включается лампочка в прихожей
