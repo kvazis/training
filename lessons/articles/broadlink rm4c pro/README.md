@@ -1,31 +1,48 @@
-##### Ручное добавление устройства
+* [wifi пульт для IR и RF кодов Broadlink RM4C Pro, работа в Home Assistant - управляем кондиционером](https://youtu.be/mnUF-dpVvGo)
+
+# Команды и скрипты из обзора
+
+* Ручное добавление устройства
 
 Из консоли - 
+```yaml
 docker exec -it homeassistant /bin/bash
 
 cd /./usr/local/lib/python3.8/site-packages/broadlink
 
 vi __init__.py
+```
 
 Режим редактирования -
+```yaml
 i
+```
 
 Вставляем строку
+```yaml
 0x6184: (rm4pro, "RM4 pro", "Broadlink"),
+```
 
-Выход из режима редактирования
-esc
+Выход из режима редактирования - escape
 
 Сохранение
+```yaml
 :w
+```
 
 Выход из редактора
+```yaml
 :q!
+```
 
 Выход из контейнера
+```yaml
 exit
+```
 
-##### Скрипты показанные в уроке
+* Скрипты показанные в уроке
+
+```yaml
 
   broadlink_learn_rm4:
     alias: Обучение Broadlink RM4C pro
@@ -129,9 +146,11 @@ exit
         data:
           device: light
           command: ON
-          
-##### Пакадж для управление кондиционером
+```
 
+* Пакадж для управление кондиционером
+
+```yaml
 broadlink:
 
     switch:
@@ -180,3 +199,15 @@ broadlink:
         keep_alive:
           minutes: 3
         initial_hvac_mode: "cool"
+```
+
+
+# Как поддержать развитие проекта?
+* [Стать спонсором моего Youtube](http://kvazis.link/sponsorship)
+* [Подписаться на Patreon](http://kvazis.link/patreon)
+* [Перевод через Paypal](http://kvazis.link/paypal)
+* Webmoney - Z243592584952
+* BTC - 1Gzr7WQugfnPuWVawu47EiCMTDUBqCAshj
+* ETH - 0xa0ce3E29Cf537013649Ae9cdbc08C4853fF91FAc
+* LTC - ltc1qs493yk2wk9ywx5h6aruk4p9zm75hx42ekv4ym2
+* TRX - TFTCLqvS1tMBwokRHBwz1TCDJ4oD1Z5zPk
