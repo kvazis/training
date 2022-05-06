@@ -1,9 +1,12 @@
-Урок 12.2
+* [Home Assistant. Урок 12.2 Интерфейс - Lovelace, карта Multiple Entity Row](https://youtu.be/m8WkJv7M9CY)
+
+# Код из урока в текстовом виде - 
 
 Multiple Entity Row
 
 Ручной режим lovelace и кастомные карты auto-entities и multiple-entity-row в ресурсах 
 
+```yaml
 lovelace:
   mode: yaml
   resources:
@@ -11,9 +14,11 @@ lovelace:
      type: module  
    - url: /hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js
      type: module 
-     
+```
+
 Страница из урока с картами - 
 
+```yaml
   - title: Устройства
     icon: mdi:gauge
 
@@ -194,3 +199,15 @@ lovelace:
                 name: Отклик
               - entity: sensor.en_cupboard_round_linkquality
                 name: Сигнал
+                   
+```
+
+# Как поддержать развитие проекта?
+* [Стать спонсором моего Youtube](http://kvazis.link/sponsorship)
+* [Подписаться на Patreon](http://kvazis.link/patreon)
+* [Перевод через Paypal](http://kvazis.link/paypal)
+* Webmoney - Z243592584952
+* BTC - 1Gzr7WQugfnPuWVawu47EiCMTDUBqCAshj
+* ETH - 0xa0ce3E29Cf537013649Ae9cdbc08C4853fF91FAc
+* LTC - ltc1qs493yk2wk9ywx5h6aruk4p9zm75hx42ekv4ym2
+* TRX - TFTCLqvS1tMBwokRHBwz1TCDJ4oD1Z5zPk
