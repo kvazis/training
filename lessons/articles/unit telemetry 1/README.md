@@ -1,4 +1,4 @@
-* [Блог. Home Assistant - Телеметрия, часть 1. Отслеживание состояний в режиме онлайн](  )
+* [Уроки Home Assistant - Телеметрия, часть 1. Отслеживание состояний в режиме онлайн](https://youtu.be/VuRrD-YYV70)
 
 * Ccылки на репозитории используемых карточек lovelace
 * [Stack In Card](https://github.com/custom-cards/stack-in-card)
