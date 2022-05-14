@@ -2,23 +2,21 @@
 
 #### Команды и ссылки из урока:  
 
-*Raspberry Pi OS Lite* - [Загрузка программы для записи образа](https://www.raspberrypi.org/software/)    
+**Raspberry Pi OS Lite** - [Загрузка программы для записи образа](https://www.raspberrypi.org/software/)    
 
 Обновляем bootloader для загрузки с USB
 
-Удобный SSH клиент [Putty](https://www.putty.org/)
+Удобный SSH клиент - [Putty](https://www.putty.org/)
 
 Логин / пароль по умолчанию - `ubuntu / ubuntu`    
 Вставлять скопированный текст в консоль - правой клавишей мышки    
 
+Создание нового пользователя - `sudo adduser имя`    
+Добавление пользователя в группу sudo - `sudo usermod -aG sudo имя`
+Переключение на нового пользователя - `su имя`
 
-*Объявление в configuration.yaml*    
 ```yaml
-tts:
-  - platform: reversotts
-    language: 'Alyona-Russian'
-    pitch: "100"
-    bitrate: "128k"
+
 ```
 
 Медиа контент в configuration.yaml
