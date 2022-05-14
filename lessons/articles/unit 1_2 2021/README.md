@@ -1,23 +1,33 @@
 ### [Home Assistant. Урок 1.2 - Установка Ubuntu Server на Raspberry PI 4B или 3B+, boot from USB SSD](https://youtu.be/GMOo0Af9eTw)
 
-#### Команды и ссылки из урока:  
+#### :ru: Команды и ссылки из урока:  
 
-**Raspberry Pi OS Lite** - [Загрузка программы для записи образа](https://www.raspberrypi.org/software/)    
+:white_check_mark: **Raspberry Pi OS Lite** - [Загрузка программы для записи образа](https://www.raspberrypi.org/software/)    
 
-Обновляем bootloader для загрузки с USB
+:ballot_box_with_check: Обновляем bootloader для загрузки с USB
 
-Удобный SSH клиент - [Putty](https://www.putty.org/)
+:white_check_mark: **Удобный SSH клиент** - [Putty](https://www.putty.org/)
 
-Логин / пароль по умолчанию - `ubuntu / ubuntu`    
-Вставлять скопированный текст в консоль - правой клавишей мышки    
+:ballot_box_with_check: Логин / пароль по умолчанию - `ubuntu / ubuntu`    
 
-Создание нового пользователя - `sudo adduser имя`    
-Добавление пользователя в группу sudo - `sudo usermod -aG sudo имя`
-Переключение на нового пользователя - `su имя`
+:heavy_exclamation_mark:Вставлять скопированный текст в консоль - правой клавишей мышки    
 
+:ballot_box_with_check: Создание нового пользователя - `sudo adduser имя`    
+:ballot_box_with_check: Добавление пользователя в группу sudo - `sudo usermod -aG sudo имя`    
+:ballot_box_with_check: Переключение на нового пользователя - `su имя`    
+:ballot_box_with_check: Репозиторий и список пакетов - `sudo add-apt-repository universe && sudo apt update`    
+:ballot_box_with_check: Обновление пакетов - `sudo apt upgrade`    
+
+:ballot_box_with_check: Настройка сети - Установка сетевых инструментов и Network Manager
 ```yaml
+sudo apt install net-tools network-manager
+sudo systemctl start NetworkManager.service
+sudo systemctl enable NetworkManager.service
 
+sudo reboot
 ```
+
+
 
 Медиа контент в configuration.yaml
 
