@@ -1,8 +1,8 @@
-* [Xiaomi Gateway 2 DGNWG02LM - локальная запись mp3 файлов, звуковые уведомления в Home Assistant](https://youtu.be/xKbEj7pE9iU)
+### [Xiaomi Gateway 2 DGNWG02LM - локальная запись mp3 файлов, звуковые уведомления в Home Assistant](https://youtu.be/xKbEj7pE9iU)
 
-# Текстовая версия конфигурации и команд из видео урока
+#### Текстовая версия конфигурации и команд из видео урока
 
-* Samba share конфигурация
+:ballot_box_with_check: Samba share конфигурация    
 
 ```yaml
 
@@ -22,82 +22,83 @@ veto_files:
 workgroup: WORKGROUP
 
 ```
-
-* Обновление
+:ballot_box_with_check: Обновление    
 ```yaml
 sudo apt update
 sudo apt upgrade -y
 ```
-* Установка php, bc, ffmpeg
+:ballot_box_with_check: Установка php, bc, ffmpeg    
 ```yaml
 sudo apt-get -y install php bc ffmpeg
 ```
-* Установка php-miio
+:ballot_box_with_check: Установка php-miio
 ```yaml
 sudo git clone https://github.com/skysilver-lab/php-miio.git
 ```
-* Тестовый запрос
+:ballot_box_with_check: Тестовый запрос
 ```yaml
 php /home/ИМЯ пользователя/php-miio/miio-cli.php --ip IP_УСТРОЙСТВА --token ТОКЕН --info
 ```
-* Записываем mp3 файл
+:ballot_box_with_check: Записываем mp3 файл
 ```yaml
-Бот Максим - @Maksobot
+
+:white_check_mark: Бот Максим - `@Maksobot`
+
 ```
-* Конвертируем
+:ballot_box_with_check: Конвертируем
 ```yaml
 sudo ffmpeg -i /usr/share/hassio/homeassistant/mp3/test.mp3 -b:a 64k /usr/share/hassio/homeassistant/mp3/test.aac
 ```
-* Переносим в корневую папка apache
+:ballot_box_with_check: Переносим в корневую папка apache
 ```yaml
 sudo mv /usr/share/hassio/homeassistant/mp3/test.aac /var/www/html/test.aac
 ```
-* Удаляем mp3
+:ballot_box_with_check: Удаляем mp3
 ```yaml
 sudo rm /usr/share/hassio/homeassistant/mp3/test.mp3
 ```
-* Пишем на шлюз
+:ballot_box_with_check: Пишем на шлюз
 ```yaml
 php /home/ИМЯ пользователя/php-miio/miio-cli.php --ip IP_ШЛЮЗА --token ТОКЕН_ШЛЮЗА  --sendcmd '{"id":1,"method":"download_user_music","params":["НОМЕР СЛОТА ОТ 1000","http://IP_СЕРВЕРА/test.aac"]}'
 ```
-* Статус загрузки
+:ballot_box_with_check: Статус загрузки
 ```yaml
 php /home/ИМЯ пользователя/php-miio/miio-cli.php --ip IP_ШЛЮЗА --token ТОКЕН_ШЛЮЗА  --sendcmd '{"id":1,"method":"get_download_progress","params":[]}'
 ```
-* Воспроизведение
+:ballot_box_with_check: Воспроизведение
 ```yaml
 php /home/ИМЯ пользователя/php-miio/miio-cli.php --ip IP_ШЛЮЗА --token ТОКЕН_ШЛЮЗА  --sendcmd '{"id":1,"method":"play_music_new","params":["НОМЕР СЛОТА ОТ 1000",10]}'
 ```
-* Данные о занятых слотах
+:ballot_box_with_check: Данные о занятых слотах
 ```yaml
 php /home/ИМЯ пользователя/php-miio/miio-cli.php --ip IP_ШЛЮЗА --token ТОКЕН_ШЛЮЗА  --sendcmd '{"id":1,"method":"get_music_info","params":[0]}'
 ```
-* Данные о занятой памяти
+:ballot_box_with_check: Данные о занятой памяти
 ```yaml
 php /home/ИМЯ пользователя/php-miio/miio-cli.php --ip IP_ШЛЮЗА --token ТОКЕН_ШЛЮЗА  --sendcmd '{"id":1,"method":"get_music_free_space","params":[]}'
 ```
-* Удаление слота с музыкой
+:ballot_box_with_check: Удаление слота с музыкой
 ```yaml
 php /home/ИМЯ пользователя/php-miio/miio-cli.php --ip IP_ШЛЮЗА --token ТОКЕН_ШЛЮЗА  --sendcmd '{"id":1,"method":"delete_user_music","params":["НОМЕР СЛОТА ОТ 1000"]}'
 ```
-* Удаляем aac
+:ballot_box_with_check: Удаляем aac
 ```yaml
 sudo rm /var/www/html/test.aac
 ```
-* Проверка файлов в корневой папке apache
+:ballot_box_with_check: Проверка файлов в корневой папке apache
 ```yaml
 sudo ls /var/www/html/
 ```
-* Запуск в НА
+:ballot_box_with_check: Запуск в НА голосового сообщения из слота 10001
 ```yaml
-Запуск голосового сообщения из слота 10001
       - service: xiaomi_aqara.play_ringtone
         data:
           gw_mac: 34:CE:00:88:B0:39
           ringtone_id: 10001
           ringtone_vol: 50
-
-Запуск с подсветкой		  
+```
+:ballot_box_with_check: Запуск с подсветкой
+```yaml
       - service: light.turn_on
         entity_id:
             - light.gateway_light_34ce0088b039
@@ -115,7 +116,8 @@ sudo ls /var/www/html/
             - light.gateway_light_34ce0088b039 
 ```
 
-# Как поддержать развитие проекта?
+____
+### Как поддержать развитие проекта?
 * [Стать спонсором моего Youtube](http://kvazis.link/sponsorship)
 * [Подписаться на Patreon](http://kvazis.link/patreon)
 * [Перевод через Paypal](http://kvazis.link/paypal)
