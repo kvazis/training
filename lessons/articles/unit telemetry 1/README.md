@@ -6,6 +6,7 @@
 :ballot_box_with_check: [card-mod](https://github.com/thomasloven/lovelace-card-mod)    
 :ballot_box_with_check: [Multiple Entity Row](https://github.com/benct/lovelace-multiple-entity-row)    
 :ballot_box_with_check: [auto-entities](https://github.com/thomasloven/lovelace-auto-entities)    
+:ballot_box_with_check: [Battery State Card / Entity Row](https://github.com/maxwroc/battery-state-card)    
 
 :ballot_box_with_check: Страница телеметрии в lovelace 
 
