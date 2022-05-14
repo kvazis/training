@@ -1,7 +1,6 @@
-* [BlitzWolf BW-IS22 - Сигнализация, wi-fi + GSM,  Tuya Smart, интеграция и управление в Home Assistant](https://youtu.be/q8662SThzoQ)
+### [BlitzWolf BW-IS22 - Сигнализация, wi-fi + GSM,  Tuya Smart, интеграция и управление в Home Assistant](https://youtu.be/q8662SThzoQ)
 
-# Пакадж показанный в обзоре - описание data point и пример применения
-
+#### :ru: Пакадж показанный в обзоре - описание data point и пример применения    
 
 ```yaml
 tuya_security:
@@ -98,7 +97,6 @@ tuya_security:
            dp: 3
            value: "{{ states('input_number.alarm_time')| int }}"
 
-
     switch:                   
       - platform: template
         switches:
@@ -125,7 +123,8 @@ tuya_security:
               {% endif %}        
 ```
 
-# Как поддержать развитие проекта?
+____
+### Как поддержать развитие проекта?
 * [Стать спонсором моего Youtube](http://kvazis.link/sponsorship)
 * [Подписаться на Patreon](http://kvazis.link/patreon)
 * [Перевод через Paypal](http://kvazis.link/paypal)

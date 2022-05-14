@@ -1,8 +1,8 @@
-* [Блог. Home Assistant - контроль включения светильников после восстановления питания](https://youtu.be/Ib7lZYB35E8)
+### [Блог. Home Assistant - контроль включения светильников после восстановления питания](https://youtu.be/Ib7lZYB35E8)
 
-# Примеры кода из обзора 
+#### :ru: Примеры кода из обзора 
 
-* Метод 1 - отработка по состоянию unavailable
+:ballot_box_with_check: Метод 1 - отработка по состоянию unavailable
 
 ```yaml
 
@@ -80,7 +80,7 @@
                       - light.yeelight_color_0x531e4b4
 ```
 
-* Метод 2 - отработка правомерности включения светильника
+:ballot_box_with_check: Метод 2 - отработка правомерности включения светильника
 
 ```yaml
 
@@ -149,8 +149,8 @@
           entity_id: light.0x54ef44100035a3eb
 
 ```
-
-# Как поддержать развитие проекта?
+____
+### Как поддержать развитие проекта?
 * [Стать спонсором моего Youtube](http://kvazis.link/sponsorship)
 * [Подписаться на Patreon](http://kvazis.link/patreon)
 * [Перевод через Paypal](http://kvazis.link/paypal)

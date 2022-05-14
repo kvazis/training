@@ -1,7 +1,6 @@
-* [Atom Hydrogen - универсальный контроллер умного дома, обзор, возможности, ESP Home, Home Assistant](https://youtu.be/MBxUk2AMBFQ)
+### [Atom Hydrogen - универсальный контроллер умного дома, обзор, возможности, ESP Home, Home Assistant](https://youtu.be/MBxUk2AMBFQ)
 
-# Файл проекта ESPHome
-
+#### :ru: Файл проекта ESPHome    
 
 ```yaml
 esphome:
@@ -237,7 +236,8 @@ light:
           fade_out_rate: 120
 ```
 
-# Как поддержать развитие проекта?
+____
+### Как поддержать развитие проекта?
 * [Стать спонсором моего Youtube](http://kvazis.link/sponsorship)
 * [Подписаться на Patreon](http://kvazis.link/patreon)
 * [Перевод через Paypal](http://kvazis.link/paypal)

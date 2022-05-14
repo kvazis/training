@@ -1,6 +1,6 @@
-* [Блог. Home Assistant - контроль входных дверей, отправка уведомления и фото с камер в телеграм](https://youtu.be/YxzUqcTerSE)
+### [Блог. Home Assistant - контроль входных дверей, отправка уведомления и фото с камер в телеграм](https://youtu.be/YxzUqcTerSE)
 
-# Пакадж показанный в блоге - отправка уведомлений и фото в телеграм при открытии входной двери
+#### :ru: Пакадж показанный в блоге - отправка уведомлений и фото в телеграм при открытии входной двери
 
 ```yaml
 
@@ -51,7 +51,6 @@ en_camera:
               - input_button.reolink_410
               - input_button.xiaofang
 
-    
       - id: Reolink 411 ws - фото и отправка в телеграмм
         alias: reolink411_photo
         initial_state: true
@@ -121,11 +120,9 @@ en_camera:
              target:
               - !secret chat_id_group
              file: "/config/www/cam_captures/xiaofang.jpg" 
-
-
 ```
-
-# Как поддержать развитие проекта?
+____
+### Как поддержать развитие проекта?
 * [Стать спонсором моего Youtube](http://kvazis.link/sponsorship)
 * [Подписаться на Patreon](http://kvazis.link/patreon)
 * [Перевод через Paypal](http://kvazis.link/paypal)

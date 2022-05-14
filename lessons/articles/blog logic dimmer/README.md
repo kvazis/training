@@ -1,7 +1,6 @@
-* [Блог. Home Assistant - используем проводной zigbee диммер для управления умным светильником](https://youtu.be/tniWxwntQbM)
+### [Блог. Home Assistant - используем проводной zigbee диммер для управления умным светильником](https://youtu.be/tniWxwntQbM)
 
-# Сенсоры и автоматизации показанные в видео
-
+#### :ru: Сенсоры и автоматизации показанные в видео
 
 ```yaml
 dimm_light:
@@ -160,7 +159,8 @@ dimm_light:
 
 ```
 
-# Как поддержать развитие проекта?
+____
+### Как поддержать развитие проекта?
 * [Стать спонсором моего Youtube](http://kvazis.link/sponsorship)
 * [Подписаться на Patreon](http://kvazis.link/patreon)
 * [Перевод через Paypal](http://kvazis.link/paypal)
