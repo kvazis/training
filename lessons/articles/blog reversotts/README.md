@@ -1,8 +1,8 @@
-* [Блог. Home Assistant - Text to speech, озвучка уведомлений, Reverso TTS](https://youtu.be/Ib7lZYB35E8)
+### [Блог. Home Assistant - Text to speech, озвучка уведомлений, Reverso TTS](https://youtu.be/Ib7lZYB35E8)
 
-# Примеры кода из обзора 
+#### Примеры кода из обзора 
 
-Объявление в configuration.yaml
+:ballot_box_with_check: Объявление в configuration.yaml    
 
 ```yaml
 tts:
@@ -12,13 +12,13 @@ tts:
     bitrate: "128k"
 ```
 
-Медиа контент в configuration.yaml
+:ballot_box_with_check: Медиа контент в configuration.yaml    
 
 ```yaml
 media_source:
 ```
 
-* Пример автоматизации
+:ballot_box_with_check: Пример автоматизации
 
 ```yaml
     automation:
@@ -44,9 +44,8 @@ media_source:
             message: "Здравствуйте друзья, тест голосового сообщения"
 
 ```
-
-
-# Как поддержать развитие проекта?
+____
+### Как поддержать развитие проекта?
 * [Стать спонсором моего Youtube](http://kvazis.link/sponsorship)
 * [Подписаться на Patreon](http://kvazis.link/patreon)
 * [Перевод через Paypal](http://kvazis.link/paypal)

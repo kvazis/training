@@ -1,6 +1,6 @@
 ### [Блог. Home Assistant 2022 - Input Button, создаем виртуальную кнопку для запуска автоматизаций](https://youtu.be/b4VB-Sm9rvs)
 
-#### :ru: Примеры кода для использования input button
+#### Примеры кода для использования input button
 
 :ballot_box_with_check: Использование в качестве триггера автоматизации    
 

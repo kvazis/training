@@ -1,7 +1,6 @@
-* [BestCon BroadLink Fairy Light - гирлянда с динамическими сценами, интегрируем в Home Assistant](https://youtu.be/WW3_n8uLo7A)
+### [BestCon BroadLink Fairy Light - гирлянда с динамическими сценами, интегрируем в Home Assistant](https://youtu.be/WW3_n8uLo7A)
 
-# Пакадж показанный в обзоре - обучение командам с пульта, применение в автоматизациях
-
+#### Пакадж показанный в обзоре - обучение командам с пульта, применение в автоматизациях
 
 ```yaml
 best_con_light:
@@ -65,8 +64,7 @@ best_con_light:
           - afade
           - ajump
           
-    automation:               
-               
+    automation: 
                
     - id: Смена режимов
       alias: change_mode
@@ -122,7 +120,8 @@ best_con_light:
                   command: ajump 
 ```
 
-# Как поддержать развитие проекта?
+____
+### Как поддержать развитие проекта?
 * [Стать спонсором моего Youtube](http://kvazis.link/sponsorship)
 * [Подписаться на Patreon](http://kvazis.link/patreon)
 * [Перевод через Paypal](http://kvazis.link/paypal)

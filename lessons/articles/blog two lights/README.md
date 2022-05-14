@@ -1,7 +1,6 @@
-* [Блог. Home Assistant - пример управления двумя светильниками одним действием](https://youtu.be/FpKBj1hDmRA)
+### [Блог. Home Assistant - пример управления двумя светильниками одним действием](https://youtu.be/FpKBj1hDmRA)
 
-# Пакадж из обзора
-
+#### Пакадж из обзора
 
 ```yaml
 
@@ -107,8 +106,8 @@
                       
 ```
 
-
-# Как поддержать развитие проекта?
+____
+### Как поддержать развитие проекта?
 * [Стать спонсором моего Youtube](http://kvazis.link/sponsorship)
 * [Подписаться на Patreon](http://kvazis.link/patreon)
 * [Перевод через Paypal](http://kvazis.link/paypal)

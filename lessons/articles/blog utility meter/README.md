@@ -1,6 +1,6 @@
-* [Блог. Home Assistant 2022 - Utility meter, как создать сенсор потребления электроэнергии в месяц ?](https://youtu.be/rUFduUE0ZMc)
+### [Блог. Home Assistant 2022 - Utility meter, как создать сенсор потребления электроэнергии в месяц ?](https://youtu.be/rUFduUE0ZMc)
 
-# Пример карточки с отображением сенсора utility meter. 
+#### Пример карточки с отображением сенсора utility meter. 
 
 ```yaml
     - entity: switch.0x60a423fffe6850e1
@@ -19,7 +19,8 @@
         unit: 'Ватт'
 ```
 
-# Как поддержать развитие проекта?
+____
+### Как поддержать развитие проекта?
 * [Стать спонсором моего Youtube](http://kvazis.link/sponsorship)
 * [Подписаться на Patreon](http://kvazis.link/patreon)
 * [Перевод через Paypal](http://kvazis.link/paypal)

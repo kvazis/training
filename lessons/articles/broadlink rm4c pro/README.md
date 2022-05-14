@@ -1,10 +1,9 @@
-* [wifi пульт для IR и RF кодов Broadlink RM4C Pro, работа в Home Assistant - управляем кондиционером](https://youtu.be/mnUF-dpVvGo)
+### [wifi пульт для IR и RF кодов Broadlink RM4C Pro, работа в Home Assistant - управляем кондиционером](https://youtu.be/mnUF-dpVvGo)
 
-# Команды и скрипты из обзора
+#### Команды и скрипты из обзора
 
-* Ручное добавление устройства
+:white_check_mark: Ручное добавление устройства (команды из консоли)    
 
-Из консоли - 
 ```yaml
 docker exec -it homeassistant /bin/bash
 
@@ -12,35 +11,14 @@ cd /./usr/local/lib/python3.8/site-packages/broadlink
 
 vi __init__.py
 ```
+:ballot_box_with_check: Режим редактирования - `i`    
+:ballot_box_with_check: Вставляем строку - `0x6184: (rm4pro, "RM4 pro", "Broadlink"),`    
+:ballot_box_with_check: Выход из режима редактирования - `escape`    
+:ballot_box_with_check: Сохранение - `:w`    
+:ballot_box_with_check: Выход из редактора - `:q!`    
+:ballot_box_with_check: Выход из контейнера - `exit`    
 
-Режим редактирования -
-```yaml
-i
-```
-
-Вставляем строку
-```yaml
-0x6184: (rm4pro, "RM4 pro", "Broadlink"),
-```
-
-Выход из режима редактирования - escape
-
-Сохранение
-```yaml
-:w
-```
-
-Выход из редактора
-```yaml
-:q!
-```
-
-Выход из контейнера
-```yaml
-exit
-```
-
-* Скрипты показанные в уроке
+:white_check_mark: Скрипты показанные в уроке    
 
 ```yaml
 
@@ -148,7 +126,7 @@ exit
           command: ON
 ```
 
-* Пакадж для управление кондиционером
+:white_check_mark: Пакадж для управление кондиционером    
 
 ```yaml
 broadlink:
@@ -201,8 +179,8 @@ broadlink:
         initial_hvac_mode: "cool"
 ```
 
-
-# Как поддержать развитие проекта?
+____
+### Как поддержать развитие проекта?
 * [Стать спонсором моего Youtube](http://kvazis.link/sponsorship)
 * [Подписаться на Patreon](http://kvazis.link/patreon)
 * [Перевод через Paypal](http://kvazis.link/paypal)
