@@ -1,10 +1,10 @@
-# Как поддержать развитие проекта Умный дом с Alex Kvazis ?
+### Как поддержать развитие проекта Умный дом с Alex Kvazis ?
 
-Поддержка на постоянной основе (автоматическое ежемесячное списание) - 
+:white_check_mark: Поддержка на постоянной основе (автоматическое ежемесячное списание) -    
 * [Стать спонсором моего Youtube](http://kvazis.link/sponsorship)
 * [Подписаться на Patreon](http://kvazis.link/patreon)
 
-Разовая поддержка выбранной суммы - 
+:white_check_mark:  Разовая поддержка выбранной суммы -    
 * [Перевод через Paypal](http://kvazis.link/paypal)
 * Webmoney - Z243592584952
 * BTC - 1Gzr7WQugfnPuWVawu47EiCMTDUBqCAshj

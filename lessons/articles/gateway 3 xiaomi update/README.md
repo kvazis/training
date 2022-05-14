@@ -1,12 +1,11 @@
-* [Xiaomi ZNCZ02LM - устраняем проблемы с работой zigbee сети, прошивка обновления v 90](https://youtu.be/4YD3qf5lw-A)
+### [Xiaomi ZNCZ02LM - устраняем проблемы с работой zigbee сети, прошивка обновления v 90](https://youtu.be/4YD3qf5lw-A)
 
-# Текстовая версия инструкции по обновлению розетки Xiaomi ZNCZ02LM
+#### Текстовая версия инструкции по обновлению розетки Xiaomi ZNCZ02LM
 
-* Запуск через интеграцию Xiaomi Gateway 3
+:ballot_box_with_check: Запуск через интеграцию Xiaomi Gateway 3    
+:ballot_box_with_check: Панель разработчика — `Службы — режим YAML`    
+:ballot_box_with_check: Указываем имя сущности шлюза и цифровой ID розетки    
 
-* Панель разработчика — Службы — режим YAML
-
-* Указываем имя сущности шлюза и цифровой ID розетки
 ```yaml
 service: remote.send_command
 target: 
@@ -16,7 +15,8 @@ data:
   device: 158d000153dd8e
 ```
 
-# Как поддержать развитие проекта?
+____
+### Как поддержать развитие проекта?
 * [Стать спонсором моего Youtube](http://kvazis.link/sponsorship)
 * [Подписаться на Patreon](http://kvazis.link/patreon)
 * [Перевод через Paypal](http://kvazis.link/paypal)

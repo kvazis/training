@@ -1,41 +1,32 @@
-* [Home Assistant. Урок 9.5 - Интеграции Tuya и Local Tuya, Обновление 11.2021](https://youtu.be/RjlwAIPTk-4)
+### [Home Assistant. Урок 9.5 - Интеграции Tuya и Local Tuya, Обновление 11.2021](https://youtu.be/RjlwAIPTk-4)
 
-# Текстовая версия инструкции по интеграциям Tuya и Local Tuya
+####  Текстовая версия инструкции по интеграциям Tuya и Local Tuya
 
-Cloud — Development — My Cloud Projects
+:ballot_box_with_check: `Cloud — Development — My Cloud Projects`    
+:ballot_box_with_check: `Create Cloud Project`    
+:ballot_box_with_check: Добавляем `Device Status Notification`    
+:ballot_box_with_check: Подключение приложения - `Device — Link Tuya App Account — Add App Account`
+:ballot_box_with_check: Настройки — Интеграции — Добавить интеграцию — Tuya    
+:ballot_box_with_check: С страницы Authorization — берем `Access ID/Client ID`, `Access Secret/Client Secret`    
 
-Create Cloud Project
-
-Добавляем Device Status Notification
-
-* Подключение приложения:
-Device — Link Tuya App Account — Add App Account
-
-Настройки — Интеграции — Добавить интеграцию — Tuya
-
-С страницы Authorization — берем Access ID/Client ID, Access Secret/Client Secret
-
-* HACS
+:ballot_box_with_check: HACS
 ```yaml
 sudo bash
 wget -O - https://get.hacs.xyz | bash -
 ```
 
-* Установка tuya-cli
+:ballot_box_with_check: Установка tuya-cli
 ```yaml
 sudo apt-get install npm
 sudo npm i @tuyapi/cli -g
 ```
-
-* Получение ключей
+:ballot_box_with_check: Получение ключей
 ```yaml
 tuya-cli wizard
 ```
+:ballot_box_with_check: Ручное получение ключей - `API Explorer — Smart Home Management System — Device Management — Get device details`    
 
-* Ручное получение ключей
-API Explorer — Smart Home Management System — Device Management — Get device details
-
-* Пример изменения datapoint
+:ballot_box_with_check: Пример изменения datapoint
 ```yaml
   - service: localtuya.set_dp
     data:
@@ -44,7 +35,8 @@ API Explorer — Smart Home Management System — Device Management — Get devi
       value: "scene"
 ```
 
-# Как поддержать развитие проекта?
+____
+### Как поддержать развитие проекта?
 * [Стать спонсором моего Youtube](http://kvazis.link/sponsorship)
 * [Подписаться на Patreon](http://kvazis.link/patreon)
 * [Перевод через Paypal](http://kvazis.link/paypal)
