@@ -12,9 +12,9 @@
 
 :heavy_exclamation_mark:Вставлять скопированный текст в консоль - правой клавишей мышки    
 
-:ballot_box_with_check: Создание нового пользователя - `sudo adduser *имя пользователя*`    
-:ballot_box_with_check: Добавление пользователя в группу sudo - `sudo usermod -aG sudo *имя пользователя*`    
-:ballot_box_with_check: Переключение на нового пользователя - `su *имя пользователя*`    
+:ballot_box_with_check: Создание нового пользователя - `sudo adduser #имя пользователя`    
+:ballot_box_with_check: Добавление пользователя в группу sudo - `sudo usermod -aG sudo #имя пользователя`    
+:ballot_box_with_check: Переключение на нового пользователя - `su #имя пользователя`    
 :ballot_box_with_check: Репозиторий и список пакетов - `sudo add-apt-repository universe && sudo apt update`    
 :ballot_box_with_check: Обновление пакетов - `sudo apt upgrade`    
 
@@ -48,16 +48,37 @@ sudo nmtui
 
 sudo reboot
 ```
-:ballot_box_with_check: FTP сервер Midnight Commander  APP armor git watchdog ntpdate - `sudo apt-get -y install ftpd mc apparmor git watchdog bluez ntpdate`    
+:ballot_box_with_check: FTP сервер Midnight Commander  APP armor git watchdog ntpdate -    
+`sudo apt-get -y install ftpd mc apparmor git watchdog bluez ntpdate`    
+
 :ballot_box_with_check: Часовой пояс - `sudo dpkg-reconfigure tzdata`    
 :ballot_box_with_check: Зависимости и докер - `sudo apt-get -y install avahi-daemon jq docker.io`    
-:ballot_box_with_check: Добавление пользователя -`sudo usermod -aG docker *имя пользователя*`    
+:ballot_box_with_check: Добавление пользователя -`sudo usermod -aG docker #имя пользователя`    
+:ballot_box_with_check: Перезагрузка - `sudo reboot`    
 
-### Перезагрузка
-sudo reboot
+:ballot_box_with_check: Входим на новый адрес    
+:ballot_box_with_check: Переходим в режим рута - `sudo su`    
+:ballot_box_with_check: Установка Hass.io для 64 разрядных ARM -     
+```yaml
+curl -Lo installer.sh https://raw.githubusercontent.com/home-assistant/supervised-installer/master/installer.sh
+bash installer.sh --machine raspberrypi4-64
+```
+:ballot_box_with_check: Веб интерфейс Home Assistant - `http://YOUR IP:8123/`    
 
+:ballot_box_with_check: Установка Portainer -     
+```yaml
+docker pull portainer/portainer-ce
+docker volume create portainer_data
+docker run -d -p 9000:9000 --name portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
+```
+:ballot_box_with_check: Выход из консоли - `exit` - возможно несколько раз    
+:ballot_box_with_check: Веб интерфейс Portainer - `http://YOUR IP:9000/`    
 
-# Как поддержать развитие проекта?
+:ballot_box_with_check: Список интерфейсов - `ifconfig`    
+:ballot_box_with_check: Маршруты - `route`    
+
+____
+### Как поддержать развитие проекта?
 * [Стать спонсором моего Youtube](http://kvazis.link/sponsorship)
 * [Подписаться на Patreon](http://kvazis.link/patreon)
 * [Перевод через Paypal](http://kvazis.link/paypal)
