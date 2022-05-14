@@ -1,7 +1,6 @@
-* [Home Assistant. Урок 8.3 Scene Изучаем сцены, применяем для управления освещением](https://youtu.be/mqZJx1eOLAk)
+### [Home Assistant. Урок 8.3 Scene Изучаем сцены, применяем для управления освещением](https://youtu.be/mqZJx1eOLAk)
 
-# Код из урока в текстовом виде - 
-
+####  Код из урока в текстовом виде - 
 
 ```yaml
 scene_light:
@@ -262,8 +261,8 @@ scene_light:
                    
 ```
 
-
-# Как поддержать развитие проекта?
+____
+### Как поддержать развитие проекта?
 * [Стать спонсором моего Youtube](http://kvazis.link/sponsorship)
 * [Подписаться на Patreon](http://kvazis.link/patreon)
 * [Перевод через Paypal](http://kvazis.link/paypal)

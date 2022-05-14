@@ -1,15 +1,13 @@
-* [Уроки Home Assistant - Телеметрия, часть 1. Отслеживание состояний в режиме онлайн](https://youtu.be/VuRrD-YYV70)
+### [Уроки Home Assistant - Телеметрия, часть 1. Отслеживание состояний в режиме онлайн](https://youtu.be/VuRrD-YYV70)
 
-* Ccылки на репозитории используемых карточек lovelace
-* [Stack In Card](https://github.com/custom-cards/stack-in-card)
-* [card-mod](https://github.com/thomasloven/lovelace-card-mod)
-* [Multiple Entity Row](https://github.com/benct/lovelace-multiple-entity-row)
-* [auto-entities](https://github.com/thomasloven/lovelace-auto-entities)
+#### Команды и ссылки из урока:    
+:white_check_mark:  Ccылки на репозитории используемых карточек lovelace    
+:ballot_box_with_check: [Stack In Card](https://github.com/custom-cards/stack-in-card)    
+:ballot_box_with_check: [card-mod](https://github.com/thomasloven/lovelace-card-mod)    
+:ballot_box_with_check: [Multiple Entity Row](https://github.com/benct/lovelace-multiple-entity-row)    
+:ballot_box_with_check: [auto-entities](https://github.com/thomasloven/lovelace-auto-entities)    
 
-
-# Код из урока в текстовом виде - 
-
-Страница телеметрии в lovelace 
+:ballot_box_with_check: Страница телеметрии в lovelace 
 
 ```yaml
 ############################ Телеметрия ############################
@@ -834,7 +832,7 @@ cards:
 
 ```
 
-Пакадж с сенсорами
+:ballot_box_with_check: Пакадж с сенсорами
 
 ```yaml
 telemetry:
@@ -1103,9 +1101,8 @@ telemetry:
             icon: mdi:alert-circle
 
 ```
-
-
-# Как поддержать развитие проекта?
+____
+### Как поддержать развитие проекта?
 * [Стать спонсором моего Youtube](http://kvazis.link/sponsorship)
 * [Подписаться на Patreon](http://kvazis.link/patreon)
 * [Перевод через Paypal](http://kvazis.link/paypal)

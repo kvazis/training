@@ -1,7 +1,6 @@
-* [Управляем адресными светодиодами на ESP32, прошивка WLED, применение в Home Assistant](https://youtu.be/QrwpbsMGq_s)
+### [Управляем адресными светодиодами на ESP32, прошивка WLED, применение в Home Assistant](https://youtu.be/QrwpbsMGq_s)
 
-# Пакадж для управления адресной лентой через контроллер WLED из Home Assistant
-
+#### Пакадж для управления адресной лентой через контроллер WLED из Home Assistant
 
 ```yaml
 wled_light:
@@ -90,7 +89,8 @@ wled_light:
                        - light.wled
 ```
 
-# Как поддержать развитие проекта?
+____
+### Как поддержать развитие проекта?
 * [Стать спонсором моего Youtube](http://kvazis.link/sponsorship)
 * [Подписаться на Patreon](http://kvazis.link/patreon)
 * [Перевод через Paypal](http://kvazis.link/paypal)

@@ -1,7 +1,6 @@
-* [Home Assistant. Урок 8.4 – Виртуализация. Изучаем возможности платформы template, практика](https://youtu.be/7jbtovItjVQ)
+### [Home Assistant. Урок 8.4 – Виртуализация. Изучаем возможности платформы template, практика](https://youtu.be/7jbtovItjVQ)
 
-# Код из урока в текстовом виде - 
-
+#### Код из урока в текстовом виде - 
 
 ```yaml
 unit_8_4:
@@ -274,8 +273,8 @@ unit_8_4:
                    
 ```
 
-
-# Как поддержать развитие проекта?
+____
+### Как поддержать развитие проекта?
 * [Стать спонсором моего Youtube](http://kvazis.link/sponsorship)
 * [Подписаться на Patreon](http://kvazis.link/patreon)
 * [Перевод через Paypal](http://kvazis.link/paypal)
