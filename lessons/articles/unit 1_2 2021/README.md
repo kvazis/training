@@ -12,9 +12,9 @@
 
 :heavy_exclamation_mark:Вставлять скопированный текст в консоль - правой клавишей мышки    
 
-:ballot_box_with_check: Создание нового пользователя - `sudo adduser имя`    
-:ballot_box_with_check: Добавление пользователя в группу sudo - `sudo usermod -aG sudo имя`    
-:ballot_box_with_check: Переключение на нового пользователя - `su имя`    
+:ballot_box_with_check: Создание нового пользователя - `sudo adduser *имя пользователя*`    
+:ballot_box_with_check: Добавление пользователя в группу sudo - `sudo usermod -aG sudo *имя пользователя*`    
+:ballot_box_with_check: Переключение на нового пользователя - `su *имя пользователя*`    
 :ballot_box_with_check: Репозиторий и список пакетов - `sudo add-apt-repository universe && sudo apt update`    
 :ballot_box_with_check: Обновление пакетов - `sudo apt upgrade`    
 
@@ -27,55 +27,34 @@ sudo systemctl enable NetworkManager.service
 sudo reboot
 ```
 
+:ballot_box_with_check: Список файлов - `ls /etc/netplan`    
+:ballot_box_with_check: Делаем копию файла - `sudo cp /etc/netplan/50-cloud-init.yaml /etc/netplan/50-cloud-init.yaml.BAK`
 
-
-Медиа контент в configuration.yaml
-
+:ballot_box_with_check: Передаем управление network-manager - `sudo nano /etc/netplan/50-cloud-init.yaml`    
+:heavy_exclamation_mark: Ctrl-K - удаление строки    
 ```yaml
-media_source:
+network:
+    version: 2
+    renderer: NetworkManager
 ```
-
-* Пример автоматизации
-
+:heavy_exclamation_mark: Выход - Ctrl-X    
+:heavy_exclamation_mark: Сохранить изменения - Y    
 ```yaml
+sudo netplan generate
+sudo netplan apply
+sudo reboot
 
+sudo nmtui
+
+sudo reboot
 ```
+:ballot_box_with_check: FTP сервер Midnight Commander  APP armor git watchdog ntpdate - `sudo apt-get -y install ftpd mc apparmor git watchdog bluez ntpdate`    
+:ballot_box_with_check: Часовой пояс - `sudo dpkg-reconfigure tzdata`    
+:ballot_box_with_check: Зависимости и докер - `sudo apt-get -y install avahi-daemon jq docker.io`    
+:ballot_box_with_check: Добавление пользователя -`sudo usermod -aG docker *имя пользователя*`    
 
-```yaml
-
-```
-
-```yaml
-
-```
-
-```yaml
-
-```
-
-```yaml
-
-```
-
-```yaml
-
-```
-
-```yaml
-
-```
-
-```yaml
-
-```
-
-```yaml
-
-```
-
-```yaml
-
-```
+### Перезагрузка
+sudo reboot
 
 
 # Как поддержать развитие проекта?
