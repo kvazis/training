@@ -1,10 +1,10 @@
-* [Home Assistant. Урок 12.2 Интерфейс - Lovelace, карта Multiple Entity Row](https://youtu.be/m8WkJv7M9CY)
+### [Home Assistant. Урок 12.2 Интерфейс - Lovelace, карта Multiple Entity Row](https://youtu.be/m8WkJv7M9CY)
 
-# Код из урока в текстовом виде - 
+####  Код из урока в текстовом виде - 
 
-Multiple Entity Row
+:white_check_mark: **Multiple Entity Row**    
 
-Ручной режим lovelace и кастомные карты auto-entities и multiple-entity-row в ресурсах 
+:ballot_box_with_check: Ручной режим `lovelace` и кастомные карты `auto-entities` и `multiple-entity-row` в ресурсах - `configuration.yaml`
 
 ```yaml
 lovelace:
@@ -16,7 +16,7 @@ lovelace:
      type: module 
 ```
 
-Страница из урока с картами - 
+:ballot_box_with_check: Страница из урока с картами - 
 
 ```yaml
   - title: Устройства
@@ -202,7 +202,8 @@ lovelace:
                    
 ```
 
-# Как поддержать развитие проекта?
+____
+### Как поддержать развитие проекта?
 * [Стать спонсором моего Youtube](http://kvazis.link/sponsorship)
 * [Подписаться на Patreon](http://kvazis.link/patreon)
 * [Перевод через Paypal](http://kvazis.link/paypal)

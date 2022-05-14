@@ -63,7 +63,7 @@ sudo reboot
 curl -Lo installer.sh https://raw.githubusercontent.com/home-assistant/supervised-installer/master/installer.sh
 bash installer.sh --machine raspberrypi4-64
 ```
-:ballot_box_with_check: Веб интерфейс Home Assistant - `http://YOUR IP:8123/`    
+:arrow_right: Веб интерфейс Home Assistant - `http://YOUR IP:8123/`    
 
 :ballot_box_with_check: Установка Portainer -     
 ```yaml
@@ -72,7 +72,7 @@ docker volume create portainer_data
 docker run -d -p 9000:9000 --name portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
 ```
 :ballot_box_with_check: Выход из консоли - `exit` - возможно несколько раз    
-:ballot_box_with_check: Веб интерфейс Portainer - `http://YOUR IP:9000/`    
+:arrow_right: Веб интерфейс Portainer - `http://YOUR IP:9000/`    
 
 :ballot_box_with_check: Список интерфейсов - `ifconfig`    
 :ballot_box_with_check: Маршруты - `route`    

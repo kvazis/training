@@ -1,7 +1,6 @@
-* [Home Assistant. Урок 10.5 Практические кейсы - энергомониторинг на данных от устройства](https://youtu.be/t-AhgPKRpAA)
+### [Home Assistant. Урок 10.5 Практические кейсы - энергомониторинг на данных от устройства](https://youtu.be/t-AhgPKRpAA)
 
-# Пакадж для энергомониторинга
-
+#### Пакадж для энергомониторинга
 
 ```yaml
 unit_10_5:
@@ -154,9 +153,8 @@ unit_10_5:
             value_template: "{{ (states('sensor.0x04cf8cdf3c764e0a_energy') | float - (states('sensor.consumption_new_month') | float))|round(2) }}"
             icon_template: mdi:flash             
 ```
-
-
-# Как поддержать развитие проекта?
+____
+### Как поддержать развитие проекта?
 * [Стать спонсором моего Youtube](http://kvazis.link/sponsorship)
 * [Подписаться на Patreon](http://kvazis.link/patreon)
 * [Перевод через Paypal](http://kvazis.link/paypal)
