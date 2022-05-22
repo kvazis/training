@@ -4,14 +4,14 @@
 
 Доработка датчика движения Aqara от Žydrūnas Vaičekauskas для сужения угла зрения, для того чтобы сенсор не срабатывал на домашнее животное. По информации от автора, доработанные таким образом датчики размещены на высоте груди, отлично срабатывают на людей, игнорируя кота. Используется более года.
 
-![photo1](https://raw.githubusercontent.com/kvazis/training/master/lessons/articles/aqara mod/IMG_8809.JPG)    
-![photo2](https://raw.githubusercontent.com/kvazis/training/master/lessons/articles/aqara mod/IMG_8810.JPG)    
-![photo3](https://raw.githubusercontent.com/kvazis/training/master/lessons/articles/aqara mod/IMG_8811.JPG)    
-![photo4](https://raw.githubusercontent.com/kvazis/training/master/lessons/articles/aqara mod/IMG_8813.JPG)    
+![photo1](https://raw.githubusercontent.com/kvazis/training/master/lessons/articles/aqara_mod/IMG_8809.JPG)    
+![photo2](https://raw.githubusercontent.com/kvazis/training/master/lessons/articles/aqara_mod/IMG_8810.JPG)    
+![photo3](https://raw.githubusercontent.com/kvazis/training/master/lessons/articles/aqara_mod/IMG_8811.JPG)    
+![photo4](https://raw.githubusercontent.com/kvazis/training/master/lessons/articles/aqara_mod/IMG_8813.JPG)    
 
 #### Исходники для печати    
-[Aqara_MOD_v3.SLDPRT](https://raw.githubusercontent.com/kvazis/training/master/lessons/articles/aqara mod/Aqara_MOD_v3.SLDPRT)    
-[Aqara_MOD_v3.STL](https://raw.githubusercontent.com/kvazis/training/master/lessons/articles/aqara mod/Aqara_MOD_v3.STL)    
+[Aqara_MOD_v3.SLDPRT](https://raw.githubusercontent.com/kvazis/training/master/lessons/articles/aqara_mod/Aqara_MOD_v3.SLDPRT)    
+[Aqara_MOD_v3.STL](https://raw.githubusercontent.com/kvazis/training/master/lessons/articles/aqara_mod/Aqara_MOD_v3.STL)    
 
 ____
 ### Как поддержать развитие проекта?
