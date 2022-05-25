@@ -1,5 +1,7 @@
 ### [Home Assistant. Урок 11.1 Уведомления Telegram - создание бота, отправка сообщений, прием команд](https://youtu.be/tV8RjvevVHs)
 
+Вторая часть урока - [Уроки Home Assistant - Управление умным домом через Telegram из любой точки мира](https://youtu.be/tPYXpQwDLYc)
+
 #### Текстовый материалы урока (обновлено в 2022, добавил про группы в телеграм) -    
 
 :ballot_box_with_check: Создание своего чат бота:    
@@ -47,7 +49,7 @@ notify:
     chat_id: ID пользователя 2
 ```    
     
-[Коды для телеграмм смайлов](https://apps.timwhitlock.info/emoji/tables/unicode)
+:ballot_box_with_check: Unicode для эмодзи - [timwhitlock](https://apps.timwhitlock.info/emoji/tables/unicode) ; [emojipedia](https://emojipedia.org/)
 
 :ballot_box_with_check: Пакадж из урока -    
 ```yaml      
