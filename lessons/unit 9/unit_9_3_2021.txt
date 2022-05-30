@@ -9,7 +9,7 @@
 admin
 
 ОБНОВЛЕНИЕ ПРОЦЕССА ПРОШИВКИ:
-wget -O /tmp/curl " http://master.dl.sourceforge.net/project/mgl03/bin/curl?viasf=1 "  && chmod + x /tmp/curl
+wget -O /tmp/curl "http://master.dl.sourceforge.net/project/mgl03/bin/curl?viasf=1"  && chmod +x /tmp/curl
 export PATH="$PATH:/tmp"
 
 Скрипт выбора прошивки
