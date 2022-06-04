@@ -2,6 +2,8 @@
 
 Первая часть - [Home Assistant. Урок 11.1 Уведомления Telegram - создание бота, отправка сообщений, прием команд](https://youtu.be/tV8RjvevVHs)    
 Третья часть - [Уроки Home Assistant - Управление через Telegram, текстовые диалоги, права пользователей](https://youtu.be/gksZK58ZLDQ)
+Четвертая часть - [Уроки Home Assistant - Управляем адресным светильником WLED через меню в Telegram](https://youtu.be/KqjjBY3QaCg)    
+
 
 #### Текстовые материалы урока -    
 

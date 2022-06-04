@@ -2,6 +2,7 @@
 
 Вторая часть урока - [Уроки Home Assistant - Управление умным домом через Telegram из любой точки мира](https://youtu.be/tPYXpQwDLYc)    
 Третья часть - [Уроки Home Assistant - Управление через Telegram, текстовые диалоги, права пользователей](https://youtu.be/gksZK58ZLDQ)    
+Четвертая часть - [Уроки Home Assistant - Управляем адресным светильником WLED через меню в Telegram](https://youtu.be/KqjjBY3QaCg)    
 
 #### Текстовый материалы урока (обновлено в 2022, добавил про группы в телеграм) -    
 
