@@ -1,14 +1,14 @@
 ### Как поддержать развитие проекта Умный дом с Alex Kvazis ?
 
-:white_check_mark: Поддержка на постоянной основе (автоматическое ежемесячное списание) -    
+:white_check_mark: Сервисы для подиски и доната    
 * [Стать спонсором моего Youtube](http://kvazis.link/sponsorship)
-* [Подписаться на Patreon](http://kvazis.link/patreon)
+
 <a href="http://kvazis.link/patreon" target="_blank"><img src="https://raw.githubusercontent.com/kvazis/training/master/lessons/img/patreon-button.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+<a href="https://www.buymeacoffee.com/greatkvazis" target="_blank"><img src="https://raw.githubusercontent.com/kvazis/training/master/lessons/img/buymeacoffee.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
 
 
-:white_check_mark:  Разовая поддержка - перевод фиксированной суммы -    
+:white_check_mark:  Перевод на кошельки -    
 
-<a href="https://www.buymeacoffee.com/greatkvazis" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
 * [Перевод через Paypal](http://kvazis.link/paypal)
 * Webmoney - Z243592584952
 * BTC - 1Gzr7WQugfnPuWVawu47EiCMTDUBqCAshj
