@@ -1,4 +1,4 @@
-### [Уроки Home Assistant. Как сделать сенсор-секундомер и history stats на любой интервал времени](https://youtu.be/R5QPxvpPEh4)     
+### [Уроки Home Assistant. Как сделать сенсор-секундомер и history stats на любой интервал времени](https://youtu.be/O13Rbm_sdLE)     
 
 <a href="https://www.youtube.com/channel/UCcq9onYHbs6go3kDpfBoqhg?sub_confirmation=1" target="_blank"><img src="https://raw.githubusercontent.com/kvazis/training/master/lessons/img/subscribe.png" alt="Subscribe" style="height: 71px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
 
