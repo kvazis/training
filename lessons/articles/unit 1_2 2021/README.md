@@ -1,6 +1,8 @@
 ### [Home Assistant. Урок 1.2 - Установка Ubuntu Server на Raspberry PI 4B или 3B+, boot from USB SSD](https://youtu.be/GMOo0Af9eTw)
 
-#### Команды и ссылки из урока:  
+<a href="https://www.youtube.com/channel/UCcq9onYHbs6go3kDpfBoqhg?sub_confirmation=1" target="_blank"><img src="https://raw.githubusercontent.com/kvazis/training/master/lessons/img/subscribe.png" alt="Subscribe" style="height: 71px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+
+#### Команды и ссылки из урока:    
 
 :white_check_mark: **Raspberry Pi OS Lite** - [Загрузка программы для записи образа](https://www.raspberrypi.org/software/)    
 
