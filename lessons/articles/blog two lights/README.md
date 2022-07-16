@@ -1,5 +1,8 @@
 ### [Блог. Home Assistant - пример управления двумя светильниками одним действием](https://youtu.be/FpKBj1hDmRA)
 
+<a href="https://www.youtube.com/channel/UCcq9onYHbs6go3kDpfBoqhg?sub_confirmation=1" target="_blank"><img src="https://raw.githubusercontent.com/kvazis/training/master/lessons/img/subscribe.png" alt="Subscribe" style="height: 71px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+
+
 #### Пакадж из обзора
 
 ```yaml
