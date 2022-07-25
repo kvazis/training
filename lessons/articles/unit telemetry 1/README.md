@@ -4,7 +4,7 @@
 
 ### [Уроки Home Assistant - Телеметрия, часть 2. Аварийные уведомления - датчики протечки и дыма.](https://youtu.be/IKxOpfoptzg)     
 ### [Уроки Home Assistant - Телеметрия, часть 3. Мониторинг состояния системы в телеграмм](https://youtu.be/EGxy2jm5Sb8)    
-
+### [Уроки Home Assistant - Телеметрия, часть 4. Доступность zigbee2mqtt устройств - Availability, Last seen](https://youtu.be/Wq7WyZcCSM8)     
 
 #### Команды и ссылки из урока:    
 :white_check_mark:  Ccылки на репозитории используемых карточек lovelace    

@@ -4,7 +4,7 @@
 
 ### [Уроки Home Assistant - Телеметрия, часть 1. Отслеживание состояний в режиме онлайн](https://youtu.be/VuRrD-YYV70)    
 ### [Уроки Home Assistant - Телеметрия, часть 2. Аварийные уведомления - датчики протечки и дыма.](https://youtu.be/IKxOpfoptzg)         
-
+### [Уроки Home Assistant - Телеметрия, часть 4. Доступность zigbee2mqtt устройств - Availability, Last seen](https://youtu.be/Wq7WyZcCSM8)     
 
 :ballot_box_with_check: Пакадж из урока    
 
