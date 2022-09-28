@@ -74,7 +74,7 @@
     # Время с последней перезагрузки сервера
           - name: last_boot_custom
             state: >
-               {% set s = (states("sensor.time_1_sec") | int - as_timestamp(states('sensor.last_boot')) | int) %}
+               {% set s = (as_timestamp(now()) | round(default=0) | int - as_timestamp(states('sensor.last_boot')) | int) %}
                {{ '{:d} дн. {:02d}:{:02d}:{:02d}'.format (s // 86400, s % 86400 // 3600, s % 3600 // 60, s % 60) }}    
     
 ```
