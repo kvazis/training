@@ -1,15 +1,15 @@
-  - platform: "mqtt"
-    name: relay_interlock
-    state_topic: "zigbee2mqtt/DA 2ch relay"
-    availability_topic: "zigbee2mqtt/bridge/state"
-    payload_on: true
-    payload_off: false
-    value_template: "{{ value_json.interlock }}"
+#   - platform: "mqtt"
+#     name: relay_interlock
+#     state_topic: "zigbee2mqtt/DA 2ch relay"
+#     availability_topic: "zigbee2mqtt/bridge/state"
+#     payload_on: true
+#     payload_off: false
+#     value_template: "{{ value_json.interlock }}"
     
-  - platform: "mqtt"
-    name: switch_outage
-    state_topic: "zigbee2mqtt/LR thermostat 2"
-    availability_topic: "zigbee2mqtt/bridge/state"
-    payload_on: true
-    payload_off: false
-    value_template: "{{ value_json.power_outage_memory }}"
+#   - platform: "mqtt"
+#     name: switch_outage
+#     state_topic: "zigbee2mqtt/LR thermostat 2"
+#     availability_topic: "zigbee2mqtt/bridge/state"
+#     payload_on: true
+#     payload_off: false
+#     value_template: "{{ value_json.power_outage_memory }}"

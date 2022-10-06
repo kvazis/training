@@ -14,17 +14,17 @@
     - type: disk_free
       arg: /
       
-  - platform: sql
-    db_url: mysql://hass:QazXsw321$@core-mariadb/homeassistant?charset=utf8
-    queries:
-      - name: Maria DB size
-        query: 'SELECT table_schema "database", Round(Sum(data_length + index_length) / 1048576, 2) "value" FROM information_schema.tables WHERE table_schema="homeassistant" GROUP BY table_schema;'
-        column: 'value'
-        unit_of_measurement: MB 
+#   - platform: sql
+#     db_url: mysql://hass:QazXsw321$@core-mariadb/homeassistant?charset=utf8
+#     queries:
+#       - name: Maria DB size
+#         query: 'SELECT table_schema "database", Round(Sum(data_length + index_length) / 1048576, 2) "value" FROM information_schema.tables WHERE table_schema="homeassistant" GROUP BY table_schema;'
+#         column: 'value'
+#         unit_of_measurement: MB 
 
-  - platform: uptime
-    name: online
-    unit_of_measurement: minutes
+#   - platform: uptime
+#     name: online
+#     unit_of_measurement: minutes
         
   - platform: template
     sensors:
