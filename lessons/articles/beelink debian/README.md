@@ -10,7 +10,7 @@
 :white_check_mark: **Оригинальная инструкция** - [Community Home Assistant Forum](https://community.home-assistant.io/t/installing-home-assistant-supervised-on-debian-11/200253#installing-home-assistant-supervised-on-debian-11-1)    
 
 :white_check_mark: **Официальный репозиторий Debian 11** - [Загрузка образа](https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/)    
-:white_check_mark: **Неофициальный репозиторий Debian 11 non-free с драйверами** - [Загрузка образа](https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/11.4.0+nonfree/amd64/iso-dvd/)    
+:white_check_mark: **Неофициальный репозиторий Debian 11 non-free с драйверами** - [Загрузка образа](https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/11.5.0+nonfree/amd64/iso-dvd/)    
 
 :white_check_mark: **Удобный SSH клиент** - [Putty](https://www.putty.org/)    
 
@@ -71,8 +71,8 @@ curl -fsSL get.docker.com | sh
 
 :ballot_box_with_check: Установка OS-Agent    
 :white_check_mark: [Последний релиз](https://github.com/home-assistant/os-agent/releases/latest)    
-Загружаем - `wget https://github.com/home-assistant/os-agent/releases/download/1.3.0/os-agent_1.3.0_linux_x86_64.deb` (номер меняем на актуальный)    
-Установка - `dpkg -i os-agent_1.3.0_linux_x86_64.deb`  
+Загружаем - `wget https://github.com/home-assistant/os-agent/releases/download/1.4.1/os-agent_1.4.1_linux_x86_64.deb` (номер меняем на актуальный)    
+Установка - `dpkg -i os-agent_1.4.1_linux_x86_64.deb`  
 
 :ballot_box_with_check: Установка Home Assisistant Supervised    
 Загружаем - `wget https://github.com/home-assistant/supervised-installer/releases/latest/download/homeassistant-supervised.deb`    
