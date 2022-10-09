@@ -5,7 +5,7 @@
           - name: date_week_month_ua
             state: >
                 {% set month_num = ["Січня", "Лютого", "Березня", "Квітня", "Травня", "Червня", "Липня", "Серпня", "Вересня", "Жовтня", "Листопада", "Грудня"] %}
-                {% set month_of_year = month_num[now().month] %}
+                {% set month_of_year = month_num[now().month-1] %}
                 {% set week_month_num = now().day + now().replace(day=1).weekday() %}
                 {% set day_num = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятница", "Субота", "Неділя"] %}
                 {% set day_of_week = day_num[now().weekday()] %}
@@ -15,7 +15,7 @@
           - name: date_week_month_ru
             state: >
                 {% set month_num = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"] %}
-                {% set month_of_year = month_num[now().month] %}
+                {% set month_of_year = month_num[now().month-1] %}
                 {% set week_month_num = now().day + now().replace(day=1).weekday() %}
                 {% set day_num = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"] %}
                 {% set day_of_week = day_num[now().weekday()] %}
