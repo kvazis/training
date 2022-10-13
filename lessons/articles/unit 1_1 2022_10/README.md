@@ -79,9 +79,9 @@ newgrp docker
 Загружаем - `wget https://github.com/home-assistant/supervised-installer/releases/latest/download/homeassistant-supervised.deb`    
 Установка - `sudo dpkg -i homeassistant-supervised.deb`    
 
-:arrow_right: Веб интерфейс Home Assistant - http://IP adress:8123    
+:arrow_right: Веб интерфейс Home Assistant - `http://IP adress:8123`    
 
-:arrow_right: Информация о системе - http://IP adress:8123/hassio/system    
+:arrow_right: Информация о системе - `http://IP adress:8123/hassio/system`    
 
 hassio/system
 
