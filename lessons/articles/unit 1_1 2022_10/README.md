@@ -72,8 +72,8 @@ newgrp docker
 
 :ballot_box_with_check: Установка OS-Agent    
 :white_check_mark: [Последний релиз](https://github.com/home-assistant/os-agent/releases/latest)    
-Загружаем - `wget https://github.com/home-assistant/os-agent/releases/download/1.4.1/os-agent_1.4.1_linux_aarch64.deb` (номер меняем на актуальный)    
-Установка - `sudo dpkg -i os-agent_1.4.1_linux_aarch64.deb`    
+Загружаем - `wget https://github.com/home-assistant/os-agent/releases/download/1.4.1/os-agent_1.4.1_linux_armv7.deb` (номер меняем на актуальный)    
+Установка - `sudo dpkg -i os-agent_1.4.1_linux_armv7.deb`    
 
 :ballot_box_with_check: Установка Home Assisistant Supervised    
 Загружаем - `wget https://github.com/home-assistant/supervised-installer/releases/latest/download/homeassistant-supervised.deb`    

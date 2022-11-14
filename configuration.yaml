@@ -29,13 +29,16 @@ lovelace:
 tts:
   - platform: google_translate
   
-# mqtt:
-#   broker: core-mosquitto  # Локальный брокер
-#   broker: 192.168.0.70   # Внешний брокер
-#   discovery: true
-#   discovery_prefix: homeassistant  
-#   username: mqtt
-#   password: mqtt
+panel_custom:
+  - name: server_state
+    sidebar_title: 'Система'
+    sidebar_icon: mdi:server
+    js_url: /api/hassio/app/entrypoint.js
+    url_path: 'hassio/system'
+    embed_iframe: true
+    require_admin: true
+    config:
+      ingress: core_configurator 
 
 #Вынос во внешние файлы
 timer: !include includes/timer.yaml
