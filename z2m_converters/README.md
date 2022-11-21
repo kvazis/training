@@ -27,4 +27,4 @@
 :point_right: [Aubess Relay 16A with Energy Monitor](https://raw.githubusercontent.com/kvazis/training/master/z2m_converters/converters/_TZ3000_xkap8wtb.js) - Реле с энергомониторингом в подрозетник от Aubess    
 :point_right: [MatSeePlus Relay 16A with Energy Monitor](https://raw.githubusercontent.com/kvazis/training/master/z2m_converters/converters/_TZ3000_cjrngdr3.js) - Реле с быстрым энергомониторингом в подрозетник от MatSeePlus    
 :point_right: [MOES 9W E27 CCT+RGB Bulb](https://raw.githubusercontent.com/kvazis/training/master/z2m_converters/converters/TZ3210_wxa85bwk.js) - Лампочка RGB+CCT в патрон E27 от Moes    
-:point_right: [Tuya presense sensor](https://raw.githubusercontent.com/kvazis/training/master/z2m_converters/converters/_TZE204_ztc6ggyl.jss) - конвертер для микроволнового датчика присутствия Tuya    
+:point_right: [Tuya presense sensor](https://raw.githubusercontent.com/kvazis/training/master/z2m_converters/converters/_TZE204_ztc6ggyl.js) - конвертер для микроволнового датчика присутствия Tuya    
