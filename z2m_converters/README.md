@@ -30,3 +30,4 @@
 :point_right: [MOES 9W E27 CCT+RGB Bulb](https://raw.githubusercontent.com/kvazis/training/master/z2m_converters/converters/TZ3210_wxa85bwk.js) - Лампочка RGB+CCT в патрон E27 от Moes    
 :point_right: [Tuya presense sensor](https://raw.githubusercontent.com/kvazis/training/master/z2m_converters/converters/_TZE204_ztc6ggyl.js) - конвертер для микроволнового датчика присутствия Tuya    
 :point_right: [Tuya Floodlight LED Reflector](https://raw.githubusercontent.com/kvazis/training/master/z2m_converters/converters/_TZ3210_leyz4rju.js) - конвертер для RGB+CCT LED прожектора с опцией do not disturb    
+:point_right: [Aqara Air Monitoring Panel S1](https://raw.githubusercontent.com/kvazis/training/master/z2m_converters/converters/KQJCMB11LM.js) - конвертер для Aqara Air Monitoring Panel S1 - монитора качества воздуха     
