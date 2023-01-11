@@ -1,0 +1,12 @@
+info  2022-12-17 21:58:57: Logging to console and directory: '/config/zigbee2mqtt/log/2022-12-17.21-58-57' filename: log.txt
+info  2022-12-17 21:58:57: Starting Zigbee2MQTT version 1.28.4 (commit #unknown)
+info  2022-12-17 21:58:57: Starting zigbee-herdsman (0.14.76)
+info  2022-12-17 21:59:02: zigbee-herdsman started (resumed)
+info  2022-12-17 21:59:02: Coordinator firmware version: '{"meta":{"maintrel":"3 ","majorrel":"6","minorrel":"10","product":8,"revision":"6.10.3.0 build 297"},"type":"EZSP v8"}'
+info  2022-12-17 21:59:02: Currently 0 devices are joined:
+info  2022-12-17 21:59:02: Zigbee: disabling joining new devices.
+info  2022-12-17 21:59:02: Connecting to MQTT server at mqtt://core-mosquitto:1883
+error 2022-12-17 21:59:02: MQTT error: Connection refused: Not authorized
+error 2022-12-17 21:59:02: MQTT failed to connect, exiting...
+info  2022-12-17 21:59:02: Stopping zigbee-herdsman...
+info  2022-12-17 21:59:03: Stopped zigbee-herdsman

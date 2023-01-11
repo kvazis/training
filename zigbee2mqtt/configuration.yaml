@@ -1,0 +1,41 @@
+homeassistant: true
+mqtt:
+  base_topic: zigbee2mqtt
+  user: mqtt
+  password: mqtt
+  server: mqtt://core-mosquitto:1883
+serial:
+  port: /dev/ttyUSB0
+  adapter: ezsp
+frontend:
+  port: 8099
+advanced:
+  log_level: info
+  pan_id: 6499
+  channel: 15
+  network_key:
+    - 4
+    - 6
+    - 3
+    - 9
+    - 10
+    - 11
+    - 12
+    - 14
+    - 0
+    - 2
+    - 4
+    - 6
+    - 8
+    - 10
+    - 12
+    - 13
+  availability_blocklist: []
+  availability_passlist: []
+  last_seen: ISO_8601
+  homeassistant_legacy_entity_attributes: false
+  legacy_api: false
+  legacy_availability_payload: false
+device_options:
+  legacy: false
+devices: {}
