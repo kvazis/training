@@ -3719,3 +3719,15 @@ debug 2023-02-18 16:17:22: Saving state to file /config/zigbee2mqtt/state.json
 warn  2023-02-18 16:21:48: Failed to ping '0x84b4dbfffec084c6' (attempt 1/1, Read 0x84b4dbfffec084c6/1 genBasic(["zclVersion"], {"sendWhen":"immediate","timeout":10000,"disableResponse":false,"disableRecovery":true,"disableDefaultResponse":true,"direction":0,"srcEndpoint":null,"reservedBits":0,"manufacturerCode":null,"transactionSequenceNumber":null,"writeUndiv":false}) failed (Data request failed with error: 'No network route' (205)))
 debug 2023-02-18 16:21:51: Active device '0x84b4dbfffec084c6' was last seen '22588.69' minutes ago.
 debug 2023-02-18 16:22:22: Saving state to file /config/zigbee2mqtt/state.json
+debug 2023-02-18 16:27:22: Saving state to file /config/zigbee2mqtt/state.json
+warn  2023-02-18 16:31:54: Failed to ping '0x84b4dbfffec084c6' (attempt 1/1, Read 0x84b4dbfffec084c6/1 genBasic(["zclVersion"], {"sendWhen":"immediate","timeout":10000,"disableResponse":false,"disableRecovery":true,"disableDefaultResponse":true,"direction":0,"srcEndpoint":null,"reservedBits":0,"manufacturerCode":null,"transactionSequenceNumber":null,"writeUndiv":false}) failed (Data request failed with error: 'No network route' (205)))
+debug 2023-02-18 16:31:57: Active device '0x84b4dbfffec084c6' was last seen '22598.79' minutes ago.
+debug 2023-02-18 16:32:22: Saving state to file /config/zigbee2mqtt/state.json
+debug 2023-02-18 16:37:22: Saving state to file /config/zigbee2mqtt/state.json
+warn  2023-02-18 16:42:00: Failed to ping '0x84b4dbfffec084c6' (attempt 1/1, Read 0x84b4dbfffec084c6/1 genBasic(["zclVersion"], {"sendWhen":"immediate","timeout":10000,"disableResponse":false,"disableRecovery":true,"disableDefaultResponse":true,"direction":0,"srcEndpoint":null,"reservedBits":0,"manufacturerCode":null,"transactionSequenceNumber":null,"writeUndiv":false}) failed (Data request failed with error: 'No network route' (205)))
+debug 2023-02-18 16:42:03: Active device '0x84b4dbfffec084c6' was last seen '22608.88' minutes ago.
+debug 2023-02-18 16:42:22: Saving state to file /config/zigbee2mqtt/state.json
+debug 2023-02-18 16:47:22: Saving state to file /config/zigbee2mqtt/state.json
+warn  2023-02-18 16:52:06: Failed to ping '0x84b4dbfffec084c6' (attempt 1/1, Read 0x84b4dbfffec084c6/1 genBasic(["zclVersion"], {"sendWhen":"immediate","timeout":10000,"disableResponse":false,"disableRecovery":true,"disableDefaultResponse":true,"direction":0,"srcEndpoint":null,"reservedBits":0,"manufacturerCode":null,"transactionSequenceNumber":null,"writeUndiv":false}) failed (Data request failed with error: 'No network route' (205)))
+debug 2023-02-18 16:52:09: Active device '0x84b4dbfffec084c6' was last seen '22618.98' minutes ago.
+debug 2023-02-18 16:52:22: Saving state to file /config/zigbee2mqtt/state.json

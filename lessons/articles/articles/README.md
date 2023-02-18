@@ -2,6 +2,7 @@
 
 #### Home Assistant    
 :arrow_right: [Что такое Home Asisstant](https://github.com/kvazis/training/tree/master/lessons/articles/about)    
+:arrow_right: [Установка Home Asisstant](https://github.com/kvazis/training/tree/master/lessons/articles/setup)    
 :arrow_right: [Структура Home Asisstant](https://github.com/kvazis/training/tree/master/lessons/articles/structure)    
 :arrow_right: [Recorder — запись событий в Home Assistant, контроль базы данных](https://github.com/kvazis/training/tree/master/lessons/articles/recorder)    
 :arrow_right: [MQTT — хранение состояний режимов работы автоматизаций Home Assistant](https://github.com/kvazis/training/tree/master/lessons/articles/mqtt%20state)    
