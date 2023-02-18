@@ -1,9 +1,0 @@
-info  2022-12-17 21:59:12: Logging to console and directory: '/config/zigbee2mqtt/log/2022-12-17.21-59-12' filename: log.txt
-info  2022-12-17 21:59:12: Starting Zigbee2MQTT version 1.28.4 (commit #unknown)
-info  2022-12-17 21:59:12: Starting zigbee-herdsman (0.14.76)
-error 2022-12-17 21:59:16: Failed to call 'Frontend' 'stop' (TypeError: Cannot read properties of null (reading 'clients')
-    at Frontend.stop (/app/lib/extension/frontend.ts:59:39)
-    at Controller.callExtensions (/app/lib/controller.ts:316:40)
-    at Controller.stop (/app/lib/controller.ts:193:9)
-    at stop (/app/index.js:111:5)
-    at process.handleQuit (/app/index.js:117:9))

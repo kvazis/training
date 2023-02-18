@@ -1,1 +1,13 @@
-{}
+{
+    "0x84b4dbfffec084c6": {
+        "last_seen": "2023-02-02T21:53:10.443Z",
+        "linkquality": 112,
+        "current": 0,
+        "voltage": 229,
+        "power": 0,
+        "energy": 0.03,
+        "state": "OFF",
+        "threshold1_value": 30,
+        "threshold2_value": 0
+    }
+}
