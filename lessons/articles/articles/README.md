@@ -8,7 +8,10 @@
 :arrow_right: [MQTT — хранение состояний режимов работы автоматизаций Home Assistant](https://github.com/kvazis/training/tree/master/lessons/articles/mqtt%20state)    
 
 #### Протоколы передачи данных    
+:arrow_right: [Что такое Zigbee?](https://github.com/kvazis/training/tree/master/lessons/articles/zigbee_about)    
 :arrow_right: [Zigbee vs Bluetooth - разбираемся в тонкостях](https://github.com/kvazis/training/tree/master/lessons/articles/zigbee%20vs%20bluetooth)    
+:arrow_right: [Что такое Zigbee2MQTT?](https://github.com/kvazis/training/tree/master/lessons/articles/z2m_about)    
+
 
 #### DIY    
 :arrow_right: [Доработка датчика движения Aqara для сужения угла обзора](https://github.com/kvazis/training/tree/master/lessons/articles/aqara_mod)    
