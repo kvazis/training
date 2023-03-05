@@ -9,7 +9,7 @@ serial:
 frontend:
   port: 8099
 advanced:
-  log_level: debug
+  log_level: info
   pan_id: 6499
   channel: 15
   network_key:
@@ -38,10 +38,15 @@ advanced:
 device_options:
   legacy: false
 devices:
-  '0x84b4dbfffec084c6':
-    friendly_name: '0x84b4dbfffec084c6'
   '0x00124b0023ae464d':
     friendly_name: '0x00124b0023ae464d'
+  '0x00124b00231ff227':
+    friendly_name: '0x00124b00231ff227'
+  '0x00124b002265ba65':
+    friendly_name: '0x00124b002265ba65'
+  '0x086bd7fffe3f4a24':
+    friendly_name: '0x086bd7fffe3f4a24'
 external_converters:
   - _TZE204_davzgqq0.js
 availability: true
+groups: {}

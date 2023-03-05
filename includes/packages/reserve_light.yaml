@@ -1,0 +1,115 @@
+reserve_light:
+
+    automation:
+
+      - alias: control_screen_light
+        id: control_screen_light
+        description: Управление подсветкой на зеркале
+        initial_state: true
+        trigger:
+        - platform: state
+          entity_id: binary_sensor.0x00124b002265ba65_contact
+          from: 'off'
+          to: 'on'
+        - platform: state
+          entity_id: binary_sensor.0x00124b002265ba65_contact
+          from: 'on'
+          to: 'off'
+        action:
+            - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: binary_sensor.0x00124b002265ba65_contact
+                    state: 'on'
+                  - condition: state
+                    entity_id: binary_sensor.electricity
+                    state: 'off'                    
+                sequence:        
+                  - service: switch.turn_on
+                    entity_id: switch.0x00124b0023ae464d_right
+              - conditions:
+                  - condition: state
+                    entity_id: binary_sensor.0x00124b002265ba65_contact
+                    state: 'off'
+                  - condition: state
+                    entity_id: binary_sensor.electricity
+                    state: 'off' 
+                sequence:        
+                  - service: switch.turn_off
+                    entity_id: switch.0x00124b0023ae464d_right
+              - conditions:
+                  - condition: state
+                    entity_id: binary_sensor.0x00124b002265ba65_contact
+                    state: 'on'
+                  - condition: state
+                    entity_id: binary_sensor.electricity
+                    state: 'on'                    
+                sequence:        
+                  - service: switch.turn_on
+                    entity_id: switch.0x00124b0023ae464d_left
+              - conditions:
+                  - condition: state
+                    entity_id: binary_sensor.0x00124b002265ba65_contact
+                    state: 'off'
+                  - condition: state
+                    entity_id: binary_sensor.electricity
+                    state: 'on'                    
+                sequence:        
+                  - service: switch.turn_off
+                    entity_id: switch.0x00124b0023ae464d_left
+                    
+      - alias: switch_screen_light
+        id: switch_screen_light
+        description: Переключение подсветки на зеркале
+        initial_state: true
+        trigger:
+        - platform: state
+          entity_id: binary_sensor.electricity
+          from: 'off'
+          to: 'on'
+        - platform: state
+          entity_id: binary_sensor.electricity
+          from: 'on'
+          to: 'off'
+        action:
+            - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: binary_sensor.electricity
+                    state: 'on'
+                  - condition: state
+                    entity_id: switch.0x00124b0023ae464d_right
+                    state: 'on' 
+                sequence:        
+                  - service: switch.turn_on
+                    entity_id: switch.0x00124b0023ae464d_left
+            - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: binary_sensor.electricity
+                    state: 'off'
+                  - condition: state
+                    entity_id: switch.0x00124b0023ae464d_left
+                    state: 'on' 
+                sequence:        
+                  - service: switch.turn_on
+                    entity_id: switch.0x00124b0023ae464d_right
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    

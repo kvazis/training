@@ -1,13 +1,22 @@
 {
-    "0x84b4dbfffec084c6": {
-        "last_seen": "2023-02-02T21:53:10.443Z",
-        "linkquality": 112,
-        "current": 0,
-        "voltage": 229,
-        "power": 0,
-        "energy": 0.03,
-        "state": "OFF",
-        "threshold1_value": 30,
-        "threshold2_value": 0
+    "0x00124b002265ba65": {
+        "voltage": 2800,
+        "battery": 32.5,
+        "contact": false,
+        "tamper": false,
+        "battery_low": false,
+        "last_seen": "2023-03-04T21:15:38.010Z",
+        "linkquality": 153
+    },
+    "0x00124b0023ae464d": {
+        "state_left": "OFF",
+        "state_right": "OFF",
+        "last_seen": "2023-03-04T21:15:44.904Z",
+        "linkquality": 149
+    },
+    "0x086bd7fffe3f4a24": {
+        "state": "ON",
+        "last_seen": "2023-03-04T21:15:35.416Z",
+        "linkquality": 102
     }
 }
