@@ -22,7 +22,7 @@ virtual:
       - alias: test_auto_light
         id: test_auto_light
         description: Тестирование автономного светильника
-        initial_state: true
+        initial_state: false
         trigger:
     # Перезагрузка раз в 6 часов
         - platform: time_pattern
@@ -34,7 +34,7 @@ virtual:
       - alias: test_backup_light
         id: test_backup_light
         description: Тестирование USB светильника
-        initial_state: true
+        initial_state: false
         trigger:
     # Переключение раз в 15 минут
         - platform: time_pattern
@@ -56,7 +56,7 @@ virtual:
       - alias: test_backup_light_off
         id: test_backup_light_off
         description: Безусловное отключение вечером
-        initial_state: true
+        initial_state: false
         trigger:
         - platform: state
           entity_id: binary_sensor.test_tod_day

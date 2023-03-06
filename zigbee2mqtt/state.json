@@ -1,22 +1,22 @@
 {
     "0x00124b002265ba65": {
-        "voltage": 2800,
-        "battery": 32.5,
-        "contact": false,
+        "voltage": 3100,
+        "battery": 100,
+        "contact": true,
         "tamper": false,
         "battery_low": false,
-        "last_seen": "2023-03-04T21:15:38.010Z",
-        "linkquality": 153
+        "last_seen": "2023-03-05T20:35:28.950Z",
+        "linkquality": 171
     },
     "0x00124b0023ae464d": {
         "state_left": "OFF",
         "state_right": "OFF",
-        "last_seen": "2023-03-04T21:15:44.904Z",
-        "linkquality": 149
+        "last_seen": "2023-03-05T20:35:44.664Z",
+        "linkquality": 123
     },
     "0x086bd7fffe3f4a24": {
         "state": "ON",
-        "last_seen": "2023-03-04T21:15:35.416Z",
-        "linkquality": 102
+        "last_seen": "2023-03-05T20:32:02.270Z",
+        "linkquality": 138
     }
 }

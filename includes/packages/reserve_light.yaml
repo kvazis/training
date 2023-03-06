@@ -5,7 +5,7 @@ reserve_light:
       - alias: control_screen_light
         id: control_screen_light
         description: Управление подсветкой на зеркале
-        initial_state: true
+        initial_state: false
         trigger:
         - platform: state
           entity_id: binary_sensor.0x00124b002265ba65_contact
@@ -61,7 +61,7 @@ reserve_light:
       - alias: switch_screen_light
         id: switch_screen_light
         description: Переключение подсветки на зеркале
-        initial_state: true
+        initial_state: false
         trigger:
         - platform: state
           entity_id: binary_sensor.electricity
