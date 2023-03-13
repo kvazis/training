@@ -1,22 +1,25 @@
 {
+    "108": {
+        "state": "OFF"
+    },
     "0x00124b002265ba65": {
-        "voltage": 3100,
+        "voltage": 3000,
         "battery": 100,
-        "contact": true,
+        "contact": false,
         "tamper": false,
         "battery_low": false,
-        "last_seen": "2023-03-05T20:35:28.950Z",
-        "linkquality": 171
-    },
-    "0x00124b0023ae464d": {
-        "state_left": "OFF",
-        "state_right": "OFF",
-        "last_seen": "2023-03-05T20:35:44.664Z",
-        "linkquality": 123
+        "last_seen": "2023-03-09T15:52:28.553Z",
+        "linkquality": 145
     },
     "0x086bd7fffe3f4a24": {
         "state": "ON",
-        "last_seen": "2023-03-05T20:32:02.270Z",
-        "linkquality": 138
+        "last_seen": "2023-03-09T16:11:43.018Z",
+        "linkquality": 178
+    },
+    "0x003c84fffebb7d2f": {
+        "last_seen": "2023-03-09T16:09:32.888Z",
+        "linkquality": 178,
+        "battery": 100,
+        "voltage": 3000
     }
 }
