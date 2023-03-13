@@ -2,7 +2,7 @@
 
 :arrow_right: [Вернуться к оглавлению](https://github.com/kvazis/training/tree/master/lessons/articles/articles)
 
-:point_right: [FrankEver Tuya Zigbee Valve TS0601 _TZE200_5uodvhgc](https://raw.githubusercontent.com/kvazis/training/master/z2m_converters/converters/_TZE200_5uodvhgc.js) - Внешний конвертер для управляемых zigbee кранов с неподдерживаемым официально кодом производителя.    
+:point_right: **TS0601 _TZE200_5uodvhgc** [FrankEver Tuya Zigbee Valve](https://raw.githubusercontent.com/kvazis/training/master/z2m_converters/converters/_TZE200_5uodvhgc.js) - Внешний конвертер для управляемых zigbee кранов с неподдерживаемым официально кодом производителя.    
 :point_right: [Aqara Human body Exists Sensor FP1 lumi.motion.ac01 RTCZCGQ11LM](https://raw.githubusercontent.com/kvazis/training/master/z2m_converters/converters/RTCZCGQ11LM.js) - Внешний конвертер под микроволновый датчик присутствия. Первая рабочая версия.    
 :point_right: [Aubess Tuya Zigbee Smart Socket 16A 3800W EU TS011F _TZ3000_gjnozsaz](https://raw.githubusercontent.com/kvazis/training/master/z2m_converters/converters/_TZ3000_gjnozsaz.js) - Конвертер для розеток обновлённых до 1.0.10, отключающий принудительный опрос раз в 30 сек. Обновление шлётся раз в 5 сек.    
 :point_right: [Bseed Tuya ZigBee Wall Power Smart Sockets TS011F _TZ3000_o1jzcxou](https://raw.githubusercontent.com/kvazis/training/master/z2m_converters/converters/_TZ3000_o1jzcxou.js) - Встраиваемая розетка без энергомониторинга.    
