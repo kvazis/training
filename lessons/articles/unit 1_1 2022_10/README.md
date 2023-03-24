@@ -45,11 +45,11 @@ sudo raspi-config
 5 Localisation Options / I2 Change Timezone - выбираем часовой пояс
 ```
 
-:ballot_box_with_check: Дополнительные настройки 
+:ballot_box_with_check: Дополнительные настройки для устранения ошибок в НА    
 ```yaml
 nano /boot/cmdline.txt
 ```
-В конец файла вставляем `systemd.unified_cgroup_hierarchy=false lsm=apparmor`    
+В конец первой строки файла вставляем `systemd.unified_cgroup_hierarchy=false lsm=apparmor`    
 `Ctrl X` - для выхода    
 `Y` для сохранения    
 

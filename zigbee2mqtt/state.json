@@ -1,7 +1,7 @@
 {
     "0x00124b002265ba65": {
         "voltage": 2900,
-        "battery": 78.5,
+        "battery": 76.5,
         "contact": true,
         "tamper": false,
         "battery_low": false,
