@@ -48,10 +48,9 @@ devices:
     friendly_name: '0x086bd7fffe3f4a24'
   '0x003c84fffebb7d2f':
     friendly_name: '0x003c84fffebb7d2f'
+  '0xa4c138940f10d76d':
+    friendly_name: '0xa4c138940f10d76d'
 external_converters:
-  - _TZE204_davzgqq0.js
+  - _TZE200_eaac7dkw.js
 availability: true
-groups:
-  '108':
-    friendly_name: zigbeeremote
-    devices: []
+groups: {}

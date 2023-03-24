@@ -11,6 +11,7 @@
 :arrow_right: [Что такое Zigbee?](https://github.com/kvazis/training/tree/master/lessons/articles/zigbee_about)    
 :arrow_right: [Zigbee vs Bluetooth - разбираемся в тонкостях](https://github.com/kvazis/training/tree/master/lessons/articles/zigbee%20vs%20bluetooth)    
 :arrow_right: [Что такое Zigbee2MQTT?](https://github.com/kvazis/training/tree/master/lessons/articles/z2m_about)    
+:arrow_right: [Что такое Matter?](https://github.com/kvazis/training/tree/master/lessons/articles/matter_about/)    
 
 
 #### DIY    
