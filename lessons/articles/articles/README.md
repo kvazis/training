@@ -12,7 +12,7 @@
 :arrow_right: [Zigbee vs Bluetooth - разбираемся в тонкостях](https://github.com/kvazis/training/tree/master/lessons/articles/zigbee%20vs%20bluetooth)    
 :arrow_right: [Что такое Zigbee2MQTT?](https://github.com/kvazis/training/tree/master/lessons/articles/z2m_about)    
 :arrow_right: [Что такое Matter?](https://github.com/kvazis/training/tree/master/lessons/articles/matter_about/)    
-
+:arrow_right: [Bluetooth BLE Bluetooth mesh, разбираемся в деталях](https://github.com/kvazis/training/tree/master/lessons/articles/bluetooth%20ble%20mesh/)    
 
 #### DIY    
 :arrow_right: [Доработка датчика движения Aqara для сужения угла обзора](https://github.com/kvazis/training/tree/master/lessons/articles/aqara_mod)    
