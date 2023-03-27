@@ -13,6 +13,8 @@
 :arrow_right: [Что такое Zigbee2MQTT?](https://github.com/kvazis/training/tree/master/lessons/articles/z2m_about)    
 :arrow_right: [Что такое Matter?](https://github.com/kvazis/training/tree/master/lessons/articles/matter_about/)    
 :arrow_right: [Bluetooth BLE Bluetooth mesh, разбираемся в деталях](https://github.com/kvazis/training/tree/master/lessons/articles/bluetooth%20ble%20mesh/)    
+:arrow_right: [Что такое Thread ?](https://github.com/kvazis/training/tree/master/lessons/articles/thread_about/)    
+
 
 #### DIY    
 :arrow_right: [Доработка датчика движения Aqara для сужения угла обзора](https://github.com/kvazis/training/tree/master/lessons/articles/aqara_mod)    
