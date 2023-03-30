@@ -8,7 +8,7 @@ virtual:
           - name: electricity
             state: >
               {{  is_state('switch.0x086bd7fffe3f4a24', 'off')  }}
-              
+
     binary_sensor:
     
       - platform: tod
