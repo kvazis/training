@@ -1,5 +1,12 @@
 ### Статьи по теме умного дома
 
+#### Пользовательские экосистемы умного дома
+:arrow_right: [Умный дом, понятие экосистемы](https://github.com/kvazis/training/tree/master/lessons/articles/smarthome_2023_part_1/)    
+:arrow_right: [Tuya Smart, Smart Life](https://github.com/kvazis/training/tree/master/lessons/articles/smarthome_2023_part_2/)    
+:arrow_right: [Mihome, Aqara Home](https://github.com/kvazis/training/tree/master/lessons/articles/smarthome_2023_part_3/)    
+:arrow_right: [eWeLink, BroadLink, Orvibo](https://github.com/kvazis/training/tree/master/lessons/articles/smarthome_2023_part_4/)    
+:arrow_right: [Apple HomeKit, Google Home](https://github.com/kvazis/training/tree/master/lessons/articles/smarthome_2023_part_5/)    
+
 #### Home Assistant    
 :arrow_right: [Что такое Home Asisstant](https://github.com/kvazis/training/tree/master/lessons/articles/about)    
 :arrow_right: [Установка Home Asisstant](https://github.com/kvazis/training/tree/master/lessons/articles/setup)    
@@ -15,12 +22,11 @@
 :arrow_right: [Bluetooth BLE Bluetooth mesh, разбираемся в деталях](https://github.com/kvazis/training/tree/master/lessons/articles/bluetooth%20ble%20mesh/)    
 :arrow_right: [Что такое Thread ?](https://github.com/kvazis/training/tree/master/lessons/articles/thread_about/)    
 
-
 #### DIY    
 :arrow_right: [Доработка датчика движения Aqara для сужения угла обзора](https://github.com/kvazis/training/tree/master/lessons/articles/aqara_mod)    
 
 
-:hash: [Коллекция внешних конвертеров для zigbee2mqtt](https://github.com/kvazis/training/tree/master/z2m_converters)
+:hash: [Коллекция внешних конвертеров для zigbee2mqtt](https://github.com/kvazis/training/tree/master/z2m_converters)    
 
 ____
 #### Поддержать развитие проекта *Умный дом с Alex Kvazis*    
