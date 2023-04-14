@@ -1,0 +1,7 @@
+review_recorder:
+
+    recorder:
+      include:
+        entities:
+           - sensor.0xa4c1386302a703bc_temperature
+           - sensor.0xa4c1386302a703bc_humidity
