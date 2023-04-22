@@ -109,8 +109,126 @@ views:
         - type: weather-forecast
           entity: weather.openweathermap 
           
+  - title: dingtian
+    icon: mdi:toggle-switch
+    
+    cards:
+
+      - type: vertical-stack
+        cards:
+
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - entity: switch.dingtian_relay11781_switch_all
+              name: Все реле
+            - entity: switch.dingtian_relay11781_switch_1
+              name: Реле 1
+            - entity: switch.dingtian_relay11781_switch_2
+              name: Реле 2
+            - entity: switch.dingtian_relay11781_switch_3
+              name: Реле 3
+            - entity: switch.dingtian_relay11781_switch_4
+              name: Реле 4
+            - entity: switch.dingtian_relay11781_switch_5
+              name: Реле 5  
+            - entity: switch.dingtian_relay11781_switch_6
+              name: Реле 6            
+            - entity: switch.dingtian_relay11781_switch_7
+              name: Реле 7
+            - entity: switch.dingtian_relay11781_switch_8
+              name: Реле 8
+
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - entity: switch.dingtian_relay11781_switch_r1_r2
+              name: Реле 1-2 Интерлок 
+            - entity: switch.dingtian_relay11781_switch_r2_r1
+              name: Реле 2-1 Интерлок 
+
+      - type: vertical-stack
+        cards:
+              
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - entity: switch.dingtian_relay11781_switch_alljogging_500ms
+              name: Все реле Импульс
+            - entity: switch.dingtian_relay11781_switch_1_jogging_500ms
+              name: Реле 1 Импульс
+            - entity: switch.dingtian_relay11781_switch_2_jogging_500ms
+              name: Реле 2 Импульс
+            - entity: switch.dingtian_relay11781_switch_3_jogging_500ms
+              name: Реле 3 Импульс
+            - entity: switch.dingtian_relay11781_switch_4_jogging_500ms
+              name: Реле 4 Импульс
+            - entity: switch.dingtian_relay11781_switch_5_jogging_500ms
+              name: Реле 5 Импульс
+            - entity: switch.dingtian_relay11781_switch_6_jogging_500ms
+              name: Реле 6 Импульс
+            - entity: switch.dingtian_relay11781_switch_7_jogging_500ms
+              name: Реле 7 Импульс
+            - entity: switch.dingtian_relay11781_switch_8_jogging_500ms
+              name: Реле 8 Импульс
+
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - entity: binary_sensor.dingtian_relay11781_i1
+            - entity: binary_sensor.dingtian_relay11781_i2
+            - entity: binary_sensor.dingtian_relay11781_i3
+            - entity: binary_sensor.dingtian_relay11781_i4
+            - entity: binary_sensor.dingtian_relay11781_i5
+            - entity: binary_sensor.dingtian_relay11781_i6
+            - entity: binary_sensor.dingtian_relay11781_i7
+            - entity: binary_sensor.dingtian_relay11781_i8
 
 
+              
+      - type: vertical-stack
+        cards:
+              
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - entity: switch.dingtian_relay11781_switch_alldelay_5s
+              name: Все реле Задержка 
+            - entity: switch.dingtian_relay11781_r1_delay_5s
+              name: Реле 1 Задержка 
+            - entity: switch.dingtian_relay11781_r2_delay_5s
+              name: Реле 2 Задержка               
+            - entity: switch.dingtian_relay11781_r3_delay_5s
+              name: Реле 3 Задержка               
+            - entity: switch.dingtian_relay11781_r4_delay_5s
+              name: Реле 4 Задержка               
+            - entity: switch.dingtian_relay11781_r5_delay_5s
+              name: Реле 5 Задержка               
+            - entity: switch.dingtian_relay11781_r6_delay_5s
+              name: Реле 6 Задержка               
+            - entity: switch.dingtian_relay11781_r7_delay_5s
+              name: Реле 7 Задержка               
+            - entity: switch.dingtian_relay11781_r8_delay_5s
+              name: Реле 8 Задержка               
+              
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - entity: sensor.dingtian_relay11781_lwt_availability
+            - entity: sensor.dingtian_relay11781_ip
+            - entity: sensor.dingtian_relay11781_mac
+            - entity: sensor.dingtian_relay11781_sw_version
+            - entity: sensor.dingtian_relay11781_hw_version
+            - entity: sensor.dingtian_relay11781_sn
 
-          
-          
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              

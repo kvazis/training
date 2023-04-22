@@ -1,6 +1,11 @@
 virtual:
 
 
+    recorder:
+      include:
+        entities:
+          - binary_sensor.0xa4c138efbcfd0a22_occupancy
+
     template:
      
       - binary_sensor:
