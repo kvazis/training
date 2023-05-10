@@ -25,7 +25,9 @@ lovelace:
   resources:
    - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
      type: module  
-
+   - url: /hacsfiles/power-flow-card-plus/power-flow-card-plus.js
+     type: module
+     
 # Text to speech
 tts:
   - platform: google_translate
