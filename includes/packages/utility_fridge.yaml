@@ -1,0 +1,152 @@
+utility_fridge:
+
+    homeassistant:
+      customize:
+        sensor.0x60a423fffe7ff8c8_power:
+          friendly_name: Холодильник мощность
+          unit_of_measurement: Вт
+          device_class: power
+          icon: mdi:fridge
+        sensor.0x60a423fffe7ff8c8_energy:
+          friendly_name: Холодильник энергия
+          icon: mdi:chart-line
+
+        sensor.fridge_clear:
+          friendly_name: Холодильник всего
+          icon: mdi:fridge
+          unit_of_measurement: кВт/ч        
+        sensor.fridge_day:
+          friendly_name: Холодильник день
+          icon: mdi:white-balance-sunny
+          unit_of_measurement: кВт/ч
+        sensor.fridge_night:
+          friendly_name: Холодильник ночь
+          icon: mdi:moon-waning-crescent
+          unit_of_measurement: кВт/ч
+
+        sensor.fridge_clear_cost:
+          friendly_name: Холодильник всего
+          icon: mdi:cash-multiple
+          unit_of_measurement: грн
+        sensor.fridge_day_cost:
+          friendly_name: Холодильник день
+          icon: mdi:cash-clock
+          unit_of_measurement: грн
+        sensor.fridge_night_cost:
+          friendly_name: Холодильник ночь
+          icon: mdi:cash-fast
+          unit_of_measurement: грн
+
+    recorder:
+      include:
+        entities:
+           - sensor.0x60a423fffe7ff8c8_power
+
+
+    utility_meter:
+
+      fridge:
+        source: sensor.0x60a423fffe7ff8c8_energy
+        cycle: monthly
+        offset:
+          days: 0
+          hours: 12
+          minutes: 0
+        tariffs:
+          - night
+          - day
+
+    input_text:
+
+      fridge_day:
+        name: Холодильник день
+      fridge_night:
+        name: Холодильник ночь
+        
+
+    input_button:
+
+      fridge_day:
+        name: Холодильник день
+        icon: mdi:white-balance-sunny
+      fridge_night:
+        name: Холодильник ночь
+        icon: mdi:moon-waning-crescent
+
+    template:
+    
+      - sensor:
+
+          - name: fridge_clear
+            state: >
+                {{(
+                   states('sensor.fridge_day')|float(0) +
+                   states('sensor.fridge_night')|float(0)
+                  )|round(2)}}
+      
+          - name: fridge_clear_cost
+            state: >
+                {{(
+                   states('sensor.fridge_day_cost')|float(0) +
+                   states('sensor.fridge_night_cost')|float(0)
+                  )|round(2)}}
+
+          - name: fridge_day_cost
+            state: >
+                {% if states('sensor.meter_total_energy_clear')|float <= states('input_text.consumption_limit')|float %}
+                {{ states('sensor.fridge_day')|float * states('input_text.in_limit')|float }}
+                {% else  %}
+                {{ states('sensor.fridge_day')|float * states('input_text.off_limit')|float }}
+                {% endif %}
+                
+          - name: fridge_night_cost
+            state: >
+                {% if states('sensor.meter_total_energy_clear')|float <= states('input_text.consumption_limit')|float %}
+                {{ states('sensor.fridge_night')|float * states('input_text.in_limit')|float * states('input_text.night_coefficient')|float }}
+                {% else  %}
+                {{ states('sensor.fridge_night')|float * states('input_text.off_limit')|float * states('input_text.night_coefficient')|float }}
+                {% endif %}
+
+
+    automation:
+    
+      - alias: fridge_calibrate
+        id: fridge_calibrate
+        description: Калибровка потребления холодильника
+        initial_state: true
+        trigger:
+    ## Дневное потребление
+        - platform: state
+          entity_id: input_button.fridge_day
+          id: fridge_day
+    ## Ночное потребление
+        - platform: state
+          entity_id: input_button.fridge_night
+          id: fridge_night
+        action:
+            - choose:
+              - conditions:
+                  - condition: trigger
+                    id: fridge_day
+                sequence:
+                  - service: utility_meter.calibrate
+                    data_template:
+                      value: >
+                         {{states('input_text.fridge_day')|float}}
+                    target:
+                      entity_id:
+                        - sensor.fridge_day
+              - conditions:
+                  - condition: trigger
+                    id: fridge_night
+                sequence:
+                  - service: utility_meter.calibrate
+                    data_template:
+                      value: >
+                         {{states('input_text.fridge_night')|float}}
+                    target:
+                      entity_id:
+                        - sensor.fridge_night
+                        
+                        
+                        

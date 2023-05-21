@@ -1,0 +1,162 @@
+utility_light_kn:
+
+    homeassistant:
+      customize:
+        sensor.0x086bd7fffe3f4a24_power:
+          friendly_name: Освещение мощность
+          unit_of_measurement: Вт
+          device_class: power
+          icon: mdi:laptop
+        sensor.0x086bd7fffe3f4a24_energy:
+          friendly_name: Освещение энергия
+          icon: mdi:chart-line
+
+        sensor.light_kn_clear:
+          friendly_name: Освещение всего
+          icon: mdi:laptop
+          unit_of_measurement: кВт/ч
+        sensor.light_kn_day:
+          friendly_name: Освещение день
+          icon: mdi:white-balance-sunny
+          unit_of_measurement: кВт/ч
+        sensor.light_kn_night:
+          friendly_name: Освещение ночь
+          icon: mdi:moon-waning-crescent
+          unit_of_measurement: кВт/ч
+
+        sensor.light_kn_clear_cost:
+          friendly_name: Освещение всего
+          icon: mdi:cash-multiple
+          unit_of_measurement: грн
+        sensor.light_kn_day_cost:
+          friendly_name: Освещение день
+          icon: mdi:cash-clock
+          unit_of_measurement: грн
+        sensor.light_kn_night_cost:
+          friendly_name: Освещение ночь
+          icon: mdi:cash-fast
+          unit_of_measurement: грн
+          
+    recorder:
+      include:
+        entities:
+           - sensor.0x086bd7fffe3f4a24_power
+
+    utility_meter:
+
+      light_kn:
+        source: sensor.0x086bd7fffe3f4a24_energy
+        cycle: monthly
+        offset:
+          days: 0
+          hours: 12
+          minutes: 0
+        tariffs:
+          - night
+          - day
+
+    sensor:
+
+      - platform: integration
+        name: '0x086bd7fffe3f4a24_energy'
+        source: sensor.0x086bd7fffe3f4a24_power
+        unit_prefix: k
+        round: 2
+
+    input_text:
+
+      light_kn_day:
+        name: Освещение день
+      light_kn_night:
+        name: Освещение ночь
+
+    input_button:
+
+      light_kn_day:
+        name: Освещение день
+        icon: mdi:white-balance-sunny
+      light_kn_night:
+        name: Освещение ночь
+        icon: mdi:moon-waning-crescent
+
+    template:
+    
+      - sensor:
+
+          - name: '0x086bd7fffe3f4a24_power'
+            state: >
+                {% if states('light.0x086bd7fffe3f4a24') == 'on' %}
+                100
+                {% else  %}
+                0
+                {% endif %}
+
+          - name: light_kn_clear
+            state: >
+                {{(
+                   states('sensor.light_kn_day')|float(0) +
+                   states('sensor.light_kn_night')|float(0)
+                  )|round(2)}}
+      
+          - name: light_kn_clear_cost
+            state: >
+                {{(
+                   states('sensor.light_kn_day_cost')|float(0) +
+                   states('sensor.light_kn_night_cost')|float(0)
+                  )|round(2)}}
+
+          - name: light_kn_day_cost
+            state: >
+                {% if states('sensor.meter_total_energy_clear')|float <= states('input_text.consumption_limit')|float %}
+                {{ states('sensor.light_kn_day')|float * states('input_text.in_limit')|float }}
+                {% else  %}
+                {{ states('sensor.light_kn_day')|float * states('input_text.off_limit')|float }}
+                {% endif %}
+                
+          - name: light_kn_night_cost
+            state: >
+                {% if states('sensor.meter_total_energy_clear')|float <= states('input_text.consumption_limit')|float %}
+                {{ states('sensor.light_kn_night')|float * states('input_text.in_limit')|float * states('input_text.night_coefficient')|float }}
+                {% else  %}
+                {{ states('sensor.light_kn_night')|float * states('input_text.off_limit')|float * states('input_text.night_coefficient')|float }}
+                {% endif %}
+        
+    automation:
+    
+      - alias: light_kn_calibrate
+        id: light_kn_calibrate
+        description: Калибровка общего освещения
+        initial_state: true
+        trigger:
+    ## Дневное потребление
+        - platform: state
+          entity_id: input_button.light_kn_day
+          id: light_kn_day
+    ## Ночное потребление
+        - platform: state
+          entity_id: input_button.light_kn_night
+          id: light_kn_night
+        action:
+            - choose:
+              - conditions:
+                  - condition: trigger
+                    id: light_kn_day
+                sequence:
+                  - service: utility_meter.calibrate
+                    data_template:
+                      value: >
+                         {{states('input_text.light_kn_day')|float}}
+                    target:
+                      entity_id:
+                        - sensor.light_kn_day
+              - conditions:
+                  - condition: trigger
+                    id: light_kn_night
+                sequence:
+                  - service: utility_meter.calibrate
+                    data_template:
+                      value: >
+                         {{states('input_text.light_kn_night')|float}}
+                    target:
+                      entity_id:
+                        - sensor.light_kn_night

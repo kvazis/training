@@ -27,6 +27,13 @@ lovelace:
      type: module  
    - url: /hacsfiles/power-flow-card-plus/power-flow-card-plus.js
      type: module
+   - url: /hacsfiles/stack-in-card/stack-in-card.js
+     type: module
+   - url: /hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js
+     type: module                
+   - url: /hacsfiles/lovelace-mushroom/mushroom.js
+     type: module 
+     
      
 # Text to speech
 tts:

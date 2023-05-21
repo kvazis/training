@@ -1,0 +1,146 @@
+utility_worlplace:
+
+    homeassistant:
+      customize:
+        sensor.0xa4c138716822e6a7_power:
+          friendly_name: Рабочее место мощность
+          unit_of_measurement: Вт
+          device_class: power
+          icon: mdi:laptop
+        sensor.0xa4c138716822e6a7_energy:
+          friendly_name: Рабочее место энергия
+          icon: mdi:chart-line
+
+        sensor.workplace_clear:
+          friendly_name: Рабочее место всего
+          icon: mdi:laptop
+          unit_of_measurement: кВт/ч
+        sensor.workplace_day:
+          friendly_name: Рабочее место день
+          icon: mdi:white-balance-sunny
+          unit_of_measurement: кВт/ч
+        sensor.workplace_night:
+          friendly_name: Рабочее место ночь
+          icon: mdi:moon-waning-crescent
+          unit_of_measurement: кВт/ч
+
+        sensor.workplace_clear_cost:
+          friendly_name: Рабочее место всего
+          icon: mdi:cash-multiple
+          unit_of_measurement: грн
+        sensor.workplace_day_cost:
+          friendly_name: Рабочее место день
+          icon: mdi:cash-clock
+          unit_of_measurement: грн
+        sensor.workplace_night_cost:
+          friendly_name: Рабочее место ночь
+          icon: mdi:cash-fast
+          unit_of_measurement: грн
+          
+    recorder:
+      include:
+        entities:
+           - sensor.0xa4c138716822e6a7_power
+
+    utility_meter:
+
+      workplace:
+        source: sensor.0xa4c138716822e6a7_energy
+        cycle: monthly
+        offset:
+          days: 0
+          hours: 12
+          minutes: 0
+        tariffs:
+          - night
+          - day
+
+    input_text:
+
+      workplace_day:
+        name: Рабочее место день
+      workplace_night:
+        name: Рабочее место ночь
+
+    input_button:
+
+      workplace_day:
+        name: Рабочее место день
+        icon: mdi:white-balance-sunny
+      workplace_night:
+        name: Рабочее место ночь
+        icon: mdi:moon-waning-crescent
+
+    template:
+    
+      - sensor:
+
+          - name: workplace_clear
+            state: >
+                {{(
+                   states('sensor.workplace_day')|float(0) +
+                   states('sensor.workplace_night')|float(0)
+                  )|round(2)}}
+      
+          - name: workplace_clear_cost
+            state: >
+                {{(
+                   states('sensor.workplace_day_cost')|float(0) +
+                   states('sensor.workplace_night_cost')|float(0)
+                  )|round(2)}}
+
+          - name: workplace_day_cost
+            state: >
+                {% if states('sensor.meter_total_energy_clear')|float <= states('input_text.consumption_limit')|float %}
+                {{ states('sensor.workplace_day')|float * states('input_text.in_limit')|float }}
+                {% else  %}
+                {{ states('sensor.workplace_day')|float * states('input_text.off_limit')|float }}
+                {% endif %}
+                
+          - name: workplace_night_cost
+            state: >
+                {% if states('sensor.meter_total_energy_clear')|float <= states('input_text.consumption_limit')|float %}
+                {{ states('sensor.workplace_night')|float * states('input_text.in_limit')|float * states('input_text.night_coefficient')|float }}
+                {% else  %}
+                {{ states('sensor.workplace_night')|float * states('input_text.off_limit')|float * states('input_text.night_coefficient')|float }}
+                {% endif %}
+        
+    automation:
+    
+      - alias: workplace_calibrate
+        id: workplace_calibrate
+        description: Калибровка общего рабочего места
+        initial_state: true
+        trigger:
+    ## Дневное потребление
+        - platform: state
+          entity_id: input_button.workplace_day
+          id: workplace_day
+    ## Ночное потребление
+        - platform: state
+          entity_id: input_button.workplace_night
+          id: workplace_night
+        action:
+            - choose:
+              - conditions:
+                  - condition: trigger
+                    id: workplace_day
+                sequence:
+                  - service: utility_meter.calibrate
+                    data_template:
+                      value: >
+                         {{states('input_text.workplace_day')|float}}
+                    target:
+                      entity_id:
+                        - sensor.workplace_day
+              - conditions:
+                  - condition: trigger
+                    id: workplace_night
+                sequence:
+                  - service: utility_meter.calibrate
+                    data_template:
+                      value: >
+                         {{states('input_text.workplace_night')|float}}
+                    target:
+                      entity_id:
+                        - sensor.workplace_night

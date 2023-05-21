@@ -1,0 +1,882 @@
+##################   Энергомониторинг   ##################
+
+title: Power
+icon: mdi:home-lightning-bolt
+cards:
+
+############################ Колонка 1 ############################
+
+    - type: vertical-stack
+      cards:
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+
+            - type: markdown
+              content: >
+                 **Учет потребления энергии**
+
+            - type: custom:mushroom-entity-card
+              entity: sensor.month
+              secondary_info: state
+
+            - type: horizontal-stack
+              cards:
+
+                - type: custom:mushroom-template-card
+                  primary: Время
+                  secondary: |-
+                        {{states ('sensor.time')}} 
+                  layout: horizontal
+                  entity: sensor.time
+                  icon_color: indigo
+                  icon: mdi:clock-time-four
+                  tap_action:
+                    action: more-info
+    
+                - type: custom:mushroom-template-card
+                  primary: Активный тариф
+                  secondary: |-
+                    {% if is_state("binary_sensor.night", "on") %}
+                    Ночной
+                    {% else %}
+                    Дневной
+                    {% endif %}
+                  layout: horizontal
+                  entity: binary_sensor.night
+                  icon_color: |-
+                    {% if is_state("binary_sensor.night", "on") %}
+                    black
+                    {% else %}
+                    amber
+                    {% endif %}
+                  icon: |-
+                    {% if is_state("binary_sensor.night", "on") %}
+                    mdi:moon-waning-crescent
+                    {% else %}
+                    mdi:moon-waning-crescent
+                    {% endif %}
+                  tap_action:
+                    action: more-info
+
+################# Электросчетчик #################
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+            - type: markdown
+              content: >
+                 **Электросчетчик**
+
+            - type: horizontal-stack
+              cards:
+
+              - type: custom:mushroom-template-card
+                primary: Общее
+                secondary: |-
+                      {{states ('sensor.counter_energy_clear')}} КВт ч
+                layout: vertical
+                entity: sensor.counter_energy_clear
+                icon_color: indigo
+                icon: mdi:counter
+                tap_action:
+                  action: more-info
+
+              - type: custom:mushroom-template-card
+                primary: День
+                secondary: |-
+                      {{states ('sensor.counter_energy_day')}} КВт ч
+                layout: vertical
+                entity: sensor.counter_energy_day
+                icon_color: amber
+                icon: mdi:white-balance-sunny
+                tap_action:
+                  action: more-info
+                  
+              - type: custom:mushroom-template-card
+                primary: Ночь
+                secondary: |-
+                      {{states ('sensor.counter_energy_night')}} КВт ч
+                layout: vertical
+                entity: sensor.counter_energy_night
+                icon_color: black
+                icon: mdi:moon-waning-crescent
+                tap_action:
+                  action: more-info
+
+        - type: conditional
+          conditions:
+            - entity: input_boolean.tariff_switch
+              state: "on"
+          card:
+              type: custom:mushroom-select-card
+              entity: select.counter_energy
+              layout: horizontal
+              name: Тариф месяц общий
+              secondary_info: none
+
+        - type: conditional
+          conditions:
+            - entity: input_boolean.calibrate_switch
+              state: "on"
+          card:
+
+              type: horizontal-stack
+              cards:
+
+                - type: entities
+                  show_header_toggle: false
+                  entities:
+                    - entity: input_text.counter_energy_day
+                    - entity: input_text.counter_energy_night    
+                - type: horizontal-stack
+                  cards:
+                    - type: button
+                      name: День
+                      entity: input_button.counter_energy_day
+                      tap_action:
+                        action: call-service
+                        service: input_button.press
+                        target:
+                          entity_id: input_button.counter_energy_day
+                    - type: button
+                      name: Ночь
+                      entity: input_button.counter_energy_night
+                      tap_action:
+                        action: call-service
+                        service: input_button.press
+                        target:
+                          entity_id: input_button.counter_energy_night
+
+################# Общее потребление за месяц #################
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+
+            - type: custom:mushroom-template-card
+              primary: Общее потребление, месяц
+              secondary: |-
+                    Мощность - {{states ('sensor.total_power')}} Вт
+              layout: horizontal
+              entity: sensor.total_power
+              icon_color: indigo
+              icon: mdi:home-lightning-bolt
+              tap_action:
+                action: more-info
+
+            - type: horizontal-stack
+              cards:
+
+              - type: custom:mushroom-template-card
+                primary: Всего за месяц
+                secondary: |-
+                      {{states ('sensor.meter_total_energy_clear')}} КВт ч
+                layout: vertical
+                entity: sensor.meter_total_energy_clear
+                icon_color: indigo
+                icon: mdi:counter
+                tap_action:
+                  action: more-info
+
+              - type: custom:mushroom-template-card
+                primary: Месяц дневной
+                secondary: |-
+                      {{states ('sensor.meter_total_energy_day')}} КВт ч
+                layout: vertical
+                entity: sensor.counter_energy_day
+                icon_color: amber
+                icon: mdi:white-balance-sunny
+                tap_action:
+                  action: more-info
+                  
+              - type: custom:mushroom-template-card
+                primary: Месяц ночной
+                secondary: |-
+                      {{states ('sensor.meter_total_energy_night')}} КВт ч
+                layout: vertical
+                entity: sensor.meter_total_energy_night
+                icon_color: black
+                icon: mdi:moon-waning-crescent
+                tap_action:
+                  action: more-info
+
+            - type: horizontal-stack
+              cards:
+
+              - type: custom:mushroom-template-card
+                primary: Всего за месяц
+                secondary: |-
+                      {{states ('sensor.total_energy_clear_cost')}} грн
+                layout: vertical
+                entity: sensor.total_energy_clear_cost
+                icon_color: green
+                icon: mdi:cash-multiple
+                tap_action:
+                  action: more-info
+
+              - type: custom:mushroom-template-card
+                primary: Месяц дневной
+                secondary: |-
+                      {{states ('sensor.total_energy_day_cost')}} грн
+                layout: vertical
+                entity: sensor.total_energy_day_cost
+                icon_color: green
+                icon: mdi:cash-clock
+                tap_action:
+                  action: more-info
+                  
+              - type: custom:mushroom-template-card
+                primary: Месяц ночной
+                secondary: |-
+                      {{states ('sensor.total_energy_night_cost')}} грн
+                layout: vertical
+                entity: sensor.total_energy_night_cost
+                icon_color: green
+                icon: mdi:cash-fast
+                tap_action:
+                  action: more-info
+
+        - type: conditional
+          conditions:
+            - entity: input_boolean.tariff_switch
+              state: "on"
+          card:
+              type: custom:mushroom-select-card
+              entity: select.meter_total_energy
+              layout: horizontal
+              name: Тариф месяц общий
+              secondary_info: none
+
+        - type: conditional
+          conditions:
+            - entity: input_boolean.calibrate_switch
+              state: "on"
+          card:
+
+              type: horizontal-stack
+              cards:
+
+                - type: entities
+                  show_header_toggle: false
+                  entities:
+                    - entity: input_text.total_day
+                    - entity: input_text.total_night     
+                - type: horizontal-stack
+                  cards:
+                    - type: button
+                      name: День
+                      entity: input_button.total_day
+                      tap_action:
+                        action: call-service
+                        service: input_button.press
+                        target:
+                          entity_id: input_button.total_day
+                    - type: button
+                      name: Ночь
+                      entity: input_button.total_night
+                      tap_action:
+                        action: call-service
+                        service: input_button.press
+                        target:
+                          entity_id: input_button.total_night
+
+############################ Колонка 2 ############################
+
+    - type: vertical-stack
+      cards:
+
+################# Холодильник #################
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+
+            - type: custom:mushroom-template-card
+              primary: Холодильник
+              secondary: |-
+                    Мощность - {{states ('sensor.0x60a423fffe7ff8c8_power')}} Вт
+              layout: horizontal
+              entity: sensor.0x60a423fffe7ff8c8_power
+              icon_color: indigo
+              icon: mdi:home-lightning-bolt
+              tap_action:
+                action: more-info
+
+            - type: horizontal-stack
+              cards:
+
+              - type: custom:mushroom-template-card
+                primary: Всего за месяц
+                secondary: |-
+                      {{states ('sensor.fridge_clear')}} КВт ч
+                layout: vertical
+                entity: sensor.fridge_clear
+                icon_color: indigo
+                icon: mdi:counter
+                tap_action:
+                  action: more-info
+
+              - type: custom:mushroom-template-card
+                primary: Месяц дневной
+                secondary: |-
+                      {{states ('sensor.fridge_day')}} КВт ч
+                layout: vertical
+                entity: sensor.fridge_day
+                icon_color: amber
+                icon: mdi:white-balance-sunny
+                tap_action:
+                  action: more-info
+                  
+              - type: custom:mushroom-template-card
+                primary: Месяц ночной
+                secondary: |-
+                      {{states ('sensor.fridge_night')}} КВт ч
+                layout: vertical
+                entity: sensor.fridge_night
+                icon_color: black
+                icon: mdi:moon-waning-crescent
+                tap_action:
+                  action: more-info
+
+            - type: horizontal-stack
+              cards:
+
+              - type: custom:mushroom-template-card
+                primary: Всего за месяц
+                secondary: |-
+                      {{states ('sensor.fridge_clear_cost')}} грн
+                layout: vertical
+                entity: sensor.fridge_clear_cost
+                icon_color: green
+                icon: mdi:cash-multiple
+                tap_action:
+                  action: more-info
+
+              - type: custom:mushroom-template-card
+                primary: Месяц дневной
+                secondary: |-
+                      {{states ('sensor.fridge_day_cost')}} грн
+                layout: vertical
+                entity: sensor.fridge_day_cost
+                icon_color: green
+                icon: mdi:cash-clock
+                tap_action:
+                  action: more-info
+                  
+              - type: custom:mushroom-template-card
+                primary: Месяц ночной
+                secondary: |-
+                      {{states ('sensor.fridge_night_cost')}} грн
+                layout: vertical
+                entity: sensor.fridge_night_cost
+                icon_color: green
+                icon: mdi:cash-fast
+                tap_action:
+                  action: more-info
+
+        - type: conditional
+          conditions:
+            - entity: input_boolean.tariff_switch
+              state: "on"
+          card:
+              type: custom:mushroom-select-card
+              entity: select.fridge
+              layout: horizontal
+              name: Тариф холодильник
+              secondary_info: none
+    
+        - type: conditional
+          conditions:
+            - entity: input_boolean.calibrate_switch
+              state: "on"
+          card:
+
+              type: horizontal-stack
+              cards:
+
+                - type: entities
+                  show_header_toggle: false
+                  entities:
+                    - entity: input_text.fridge_day
+                    - entity: input_text.fridge_night     
+                - type: horizontal-stack
+                  cards:
+                    - type: button
+                      name: День
+                      entity: input_button.fridge_day
+                      tap_action:
+                        action: call-service
+                        service: input_button.press
+                        target:
+                          entity_id: input_button.fridge_day
+                    - type: button
+                      name: Ночь
+                      entity: input_button.fridge_night
+                      tap_action:
+                        action: call-service
+                        service: input_button.press
+                        target:
+                          entity_id: input_button.fridge_night
+              
+
+################# Рабочее место #################
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+
+            - type: custom:mushroom-template-card
+              primary: Рабочее место
+              secondary: |-
+                    Мощность - {{states ('sensor.0xa4c138716822e6a7_power')}} Вт
+              layout: horizontal
+              entity: sensor.0xa4c138716822e6a7_power
+              icon_color: indigo
+              icon: mdi:home-lightning-bolt
+              tap_action:
+                action: more-info
+
+            - type: horizontal-stack
+              cards:
+
+              - type: custom:mushroom-template-card
+                primary: Всего за месяц
+                secondary: |-
+                      {{states ('sensor.workplace_clear')}} КВт ч
+                layout: vertical
+                entity: sensor.workplace_clear
+                icon_color: indigo
+                icon: mdi:counter
+                tap_action:
+                  action: more-info
+
+              - type: custom:mushroom-template-card
+                primary: Месяц дневной
+                secondary: |-
+                      {{states ('sensor.workplace_day')}} КВт ч
+                layout: vertical
+                entity: sensor.workplace_day
+                icon_color: amber
+                icon: mdi:white-balance-sunny
+                tap_action:
+                  action: more-info
+                  
+              - type: custom:mushroom-template-card
+                primary: Месяц ночной
+                secondary: |-
+                      {{states ('sensor.workplace_night')}} КВт ч
+                layout: vertical
+                entity: sensor.workplace_night
+                icon_color: black
+                icon: mdi:moon-waning-crescent
+                tap_action:
+                  action: more-info
+
+            - type: horizontal-stack
+              cards:
+
+              - type: custom:mushroom-template-card
+                primary: Всего за месяц
+                secondary: |-
+                      {{states ('sensor.workplace_clear_cost')}} грн
+                layout: vertical
+                entity: sensor.workplace_clear_cost
+                icon_color: green
+                icon: mdi:cash-multiple
+                tap_action:
+                  action: more-info
+
+              - type: custom:mushroom-template-card
+                primary: Месяц дневной
+                secondary: |-
+                      {{states ('sensor.workplace_day_cost')}} грн
+                layout: vertical
+                entity: sensor.workplace_day_cost
+                icon_color: green
+                icon: mdi:cash-clock
+                tap_action:
+                  action: more-info
+                  
+              - type: custom:mushroom-template-card
+                primary: Месяц ночной
+                secondary: |-
+                      {{states ('sensor.workplace_night_cost')}} грн
+                layout: vertical
+                entity: sensor.workplace_night_cost
+                icon_color: green
+                icon: mdi:cash-fast
+                tap_action:
+                  action: more-info
+
+        - type: conditional
+          conditions:
+            - entity: input_boolean.tariff_switch
+              state: "on"
+          card:
+              type: custom:mushroom-select-card
+              entity: select.workplace
+              layout: horizontal
+              name: Тариф рабочее место
+              secondary_info: none
+
+        - type: conditional
+          conditions:
+            - entity: input_boolean.calibrate_switch
+              state: "on"
+          card:
+
+              type: horizontal-stack
+              cards:
+
+                - type: entities
+                  show_header_toggle: false
+                  entities:
+                    - entity: input_text.workplace_day
+                    - entity: input_text.workplace_night
+                - type: horizontal-stack
+                  cards:
+                    - type: button
+                      name: День
+                      entity: input_button.workplace_day
+                      tap_action:
+                        action: call-service
+                        service: input_button.press
+                        target:
+                          entity_id: input_button.workplace_day
+                    - type: button
+                      name: Ночь
+                      entity: input_button.workplace_night
+                      tap_action:
+                        action: call-service
+                        service: input_button.press
+                        target:
+                          entity_id: input_button.workplace_night
+
+################# Освещение #################
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+
+            - type: custom:mushroom-template-card
+              primary: Освещение
+              secondary: |-
+                    Мощность - {{states ('sensor.0x086bd7fffe3f4a24_power')}} Вт
+              layout: horizontal
+              entity: sensor.0x086bd7fffe3f4a24_power
+              icon_color: indigo
+              icon: mdi:home-lightning-bolt
+              tap_action:
+                action: more-info
+
+            - type: horizontal-stack
+              cards:
+
+              - type: custom:mushroom-template-card
+                primary: Всего за месяц
+                secondary: |-
+                      {{states ('sensor.light_kn_clear')}} КВт ч
+                layout: vertical
+                entity: sensor.light_kn_clear
+                icon_color: indigo
+                icon: mdi:counter
+                tap_action:
+                  action: more-info
+
+              - type: custom:mushroom-template-card
+                primary: Месяц дневной
+                secondary: |-
+                      {{states ('sensor.light_kn_day')}} КВт ч
+                layout: vertical
+                entity: sensor.light_kn_day
+                icon_color: amber
+                icon: mdi:white-balance-sunny
+                tap_action:
+                  action: more-info
+                  
+              - type: custom:mushroom-template-card
+                primary: Месяц ночной
+                secondary: |-
+                      {{states ('sensor.light_kn_night')}} КВт ч
+                layout: vertical
+                entity: sensor.light_kn_night
+                icon_color: black
+                icon: mdi:moon-waning-crescent
+                tap_action:
+                  action: more-info
+
+            - type: horizontal-stack
+              cards:
+
+              - type: custom:mushroom-template-card
+                primary: Всего за месяц
+                secondary: |-
+                      {{states ('sensor.light_kn_clear_cost')}} грн
+                layout: vertical
+                entity: sensor.light_kn_clear_cost
+                icon_color: green
+                icon: mdi:cash-multiple
+                tap_action:
+                  action: more-info
+
+              - type: custom:mushroom-template-card
+                primary: Месяц дневной
+                secondary: |-
+                      {{states ('sensor.light_kn_day_cost')}} грн
+                layout: vertical
+                entity: sensor.light_kn_day_cost
+                icon_color: green
+                icon: mdi:cash-clock
+                tap_action:
+                  action: more-info
+                  
+              - type: custom:mushroom-template-card
+                primary: Месяц ночной
+                secondary: |-
+                      {{states ('sensor.light_kn_night_cost')}} грн
+                layout: vertical
+                entity: sensor.light_kn_night_cost
+                icon_color: green
+                icon: mdi:cash-fast
+                tap_action:
+                  action: more-info
+
+        - type: conditional
+          conditions:
+            - entity: input_boolean.tariff_switch
+              state: "on"
+          card:
+              type: custom:mushroom-select-card
+              entity: select.light_kn
+              layout: horizontal
+              name: Тариф освещение
+              secondary_info: none
+
+        - type: conditional
+          conditions:
+            - entity: input_boolean.calibrate_switch
+              state: "on"
+          card:
+
+              type: horizontal-stack
+              cards:
+
+                - type: entities
+                  show_header_toggle: false
+                  entities:
+                    - entity: input_text.light_kn_day
+                    - entity: input_text.light_kn_night
+                - type: horizontal-stack
+                  cards:
+                    - type: button
+                      name: День
+                      entity: input_button.light_kn_day
+                      tap_action:
+                        action: call-service
+                        service: input_button.press
+                        target:
+                          entity_id: input_button.light_kn_day
+                    - type: button
+                      name: Ночь
+                      entity: input_button.light_kn_night
+                      tap_action:
+                        action: call-service
+                        service: input_button.press
+                        target:
+                          entity_id: input_button.light_kn_night
+
+############################ Колонка 3 ############################
+
+    - type: vertical-stack
+      cards:
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+
+################# Переключатели #################
+
+            - type: markdown
+              content: >
+                 **Настройки**
+
+            - type: horizontal-stack
+              cards:
+
+              - type: custom:mushroom-template-card
+                primary: Калибровка
+                secondary: |-
+                  {% if is_state("input_boolean.calibrate_switch", "on") %}
+                  Показана
+                  {% else %}
+                  Скрыта
+                  {% endif %}
+                layout: horizontal
+                tap_action:
+                  action: toggle
+                entity: input_boolean.calibrate_switch
+                icon: |-
+                  {% if is_state("input_boolean.calibrate_switch", "on") %}
+                  mdi:toggle-switch
+                  {% else %}
+                  mdi:toggle-switch-off
+                  {% endif %}
+                multiline_secondary: true
+                icon_color: |-
+                  {% if is_state("input_boolean.calibrate_switch", "on") %}
+                  green
+                  {% else %}
+                  red
+                  {% endif %}
+
+              - type: custom:mushroom-template-card
+                primary: Select тарифов
+                secondary: |-
+                  {% if is_state("input_boolean.tariff_switch", "on") %}
+                  Показаны
+                  {% else %}
+                  Скрыты
+                  {% endif %}
+                layout: horizontal
+                tap_action:
+                  action: toggle
+                entity: input_boolean.tariff_switch
+                icon: |-
+                  {% if is_state("input_boolean.tariff_switch", "on") %}
+                  mdi:toggle-switch-variant
+                  {% else %}
+                  mdi:toggle-switch-variant-off
+                  {% endif %}
+                multiline_secondary: true
+                icon_color: |-
+                  {% if is_state("input_boolean.tariff_switch", "on") %}
+                  green
+                  {% else %}
+                  red
+                  {% endif %}
+
+            - type: horizontal-stack
+              cards:
+
+              - type: custom:mushroom-template-card
+                primary: Время
+                secondary: |-
+                  {% if is_state("input_boolean.time_switch", "on") %}
+                  Показано
+                  {% else %}
+                  Скрыто
+                  {% endif %}
+                layout: horizontal
+                tap_action:
+                  action: toggle
+                entity: input_boolean.time_switch
+                icon: |-
+                  {% if is_state("input_boolean.time_switch", "on") %}
+                  mdi:toggle-switch
+                  {% else %}
+                  mdi:toggle-switch-off
+                  {% endif %}
+                multiline_secondary: true
+                icon_color: |-
+                  {% if is_state("input_boolean.time_switch", "on") %}
+                  green
+                  {% else %}
+                  red
+                  {% endif %}
+
+              - type: custom:mushroom-template-card
+                primary: Стоимость
+                secondary: |-
+                  {% if is_state("input_boolean.cost_switch", "on") %}
+                  Показана
+                  {% else %}
+                  Скрыта
+                  {% endif %}
+                layout: horizontal
+                tap_action:
+                  action: toggle
+                entity: input_boolean.cost_switch
+                icon: |-
+                  {% if is_state("input_boolean.cost_switch", "on") %}
+                  mdi:toggle-switch-variant
+                  {% else %}
+                  mdi:toggle-switch-variant-off
+                  {% endif %}
+                multiline_secondary: true
+                icon_color: |-
+                  {% if is_state("input_boolean.cost_switch", "on") %}
+                  green
+                  {% else %}
+                  red
+                  {% endif %}
+
+
+            - type: custom:mushroom-template-card
+              primary: Телеграмм
+              secondary: Отправка данных
+              layout: horizontal
+              tap_action:
+                action: call-service
+                service: input_button.press
+                target:
+                  entity_id: input_button.send_stat
+              entity: input_button.send_stat
+              icon: mdi:email-fast
+              multiline_secondary: true
+              icon_color: green
+
+################# Время #################
+
+        - type: conditional
+          conditions:
+            - entity: input_boolean.time_switch
+              state: "on"
+          card:
+
+              type: custom:stack-in-card
+              mode: vertical
+              cards:
+    
+                - type: markdown
+                  content: >
+                     **Настройка времени**
+    
+                - type: entities
+                  show_header_toggle: false
+                  entities:
+    
+                    - entity: input_datetime.night_start
+                    - entity: input_datetime.night_stop
+
+################# Стоимость #################
+
+        - type: conditional
+          conditions:
+            - entity: input_boolean.cost_switch
+              state: "on"
+          card:
+
+              type: custom:stack-in-card
+              mode: vertical
+              cards:
+    
+                - type: markdown
+                  content: >
+                     **Настройка стоимости**
+    
+                - type: horizontal-stack
+                  cards:
+    
+                    - type: entities
+                      show_header_toggle: false
+                      entities:
+                        - entity: input_text.consumption_limit
+                        - entity: input_text.night_coefficient
+    
+                    - type: entities
+                      show_header_toggle: false
+                      entities:
+                        - entity: input_text.in_limit
+                        - entity: input_text.off_limit

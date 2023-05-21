@@ -1,0 +1,44 @@
+mqtt:
+  base_topic: zigbee2mqtt_poe
+  server: mqtt://core-mosquitto:1883
+  user: addons
+  password: leush4engiodoHeiDuBohf6vaevo9sheiQu6rahngaez2oDe8upheiwe5ee4sich
+advanced:
+  log_level: info
+  pan_id: 6198
+  channel: 15
+  network_key:
+    - 7
+    - 1
+    - 3
+    - 9
+    - 11
+    - 11
+    - 17
+    - 14
+    - 5
+    - 2
+    - 4
+    - 6
+    - 0
+    - 11
+    - 12
+    - 13
+  availability_blocklist: []
+  availability_passlist: []
+  last_seen: ISO_8601
+  homeassistant_legacy_entity_attributes: false
+  legacy_api: false
+  legacy_availability_payload: false
+serial:
+  port: tcp://192.168.0.165:6638
+frontend:
+  port: 8099
+device_options:
+  legacy: false
+devices: {}
+homeassistant:
+  discovery_topic: homeassistant
+  legacy_entity_attributes: true
+  legacy_triggers: true
+  status_topic: hass/status

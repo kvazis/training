@@ -97,73 +97,47 @@ views:
            - entity: sensor.maria_db_size
              name: Maria DB
                 
-              
-  - title: Power
-    icon: mdi:home-lightning-bolt
-    
-    cards:
+  - !include lovelace/utility_meter.yaml
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-        - type: entities
-          show_header_toggle: false
-          entities:
-            - entity: sensor.kitchen_power
-              name: Общая мощность
-              icon: mdi:flash
-            - type: divider
-            - entity: input_boolean.kettle
-              name: Розетка чайника
-            - entity: sensor.kettle_power
-              name: Мощность чайника
-              icon: mdi:flash-outline
-            - entity: input_button.kettle
-              name: Включить чайник
-            - type: divider
-            - entity: input_boolean.microwave
-              name: Розетка микролновки
-            - entity: sensor.microwave_power
-              name: Мощность микролновки
-              icon: mdi:flash-outline
-            - entity: input_button.microwave
-              name: Включить микролновку
-            - type: divider
-            - entity: input_boolean.stove
-              name: Розетка мультипечи
-            - entity: sensor.stove_power
-              name: Мощность мультипечи
-              icon: mdi:flash-outline
-            - entity: input_button.stove
-              name: Включить мультипечь
-              
-        - type: custom:power-flow-card-plus
-          entities:
-            grid:
 
-              name: Общая
-              entity: sensor.kitchen_power
-              display_state: one_way
-              color_circle: true
-            home:
-              entity: sensor.kettle_power
-              icon: mdi:kettle
-              name: Чайник
-              color: '#80b8ff'
-              color_icon: false
-              override_state: true
-            individual1:
-              icon: mdi:microwave
-              color: '#80b8ff'
-              name: Микролновка
-              entity: sensor.microwave_power
-            individual2:
-              icon: mdi:stove
-              color: '#80b8ff'
-              name: Мультипечь
-              entity: sensor.stove_power 
+             
               
-              
-              
-              
-              
-              
+
+
+
               
               
