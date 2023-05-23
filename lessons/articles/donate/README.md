@@ -8,7 +8,6 @@
 
 :white_check_mark:  Перевод на кошельки -    
 * Webmoney - Z243592584952
-* BTC - 1Gzr7WQugfnPuWVawu47EiCMTDUBqCAshj
-* ETH - 0xa0ce3E29Cf537013649Ae9cdbc08C4853fF91FAc
-* LTC - ltc1qs493yk2wk9ywx5h6aruk4p9zm75hx42ekv4ym2
-* TRX - TFTCLqvS1tMBwokRHBwz1TCDJ4oD1Z5zPk
+* BTC - 1PAjXcNbLtUKLY8d5HDnfxRqc5Zchj1fU3
+* USDT TRON (TRC20) - TEpnJcLDRbkwq5oQpjVET9NbPpHKB7QMrD
+* TON - UQBEShkfKCFhvqlTs_oIpa6kFIQJguJR30hDXany1cCAbCfe
