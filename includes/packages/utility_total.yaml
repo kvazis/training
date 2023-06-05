@@ -170,9 +170,9 @@ utility_total:
           - name: total_energy
             state: >
                 {{(
-                   states('sensor.0xa4c138716822e6a7_energy')|float(0) +
-                   states('sensor.0x60a423fffe7ff8c8_energy')|float(0) +
-                   states('sensor.0x086bd7fffe3f4a24_energy')|float(0)
+                   states('sensor.0xa4c138716822e6a7_energy')|float +
+                   states('sensor.0x60a423fffe7ff8c8_energy')|float +
+                   states('sensor.0x086bd7fffe3f4a24_energy')|float
                   )|round(2)}}
                   
           - name: total_power
