@@ -29,7 +29,8 @@
         "description": "You can obtain Mi Home token automatically with [Cloud integration](https://github.com/AlexxIT/XiaomiGateway3#obtain-mi-home-device-token) or [manually](https://github.com/Maxmudjon/com.xiaomi-miio/blob/master/docs/obtain_token.md).",
         "data": {
           "host": "Host",
-          "token": "Token"
+          "token": "Token",
+          "key": "Key"
         }
       }
     }
@@ -48,15 +49,12 @@
         "data": {
           "host": "Host",
           "token": "Token",
+          "key": "Key",
           "telnet_cmd": "Open Telnet command",
           "ble": "Support Bluetooth devices",
           "stats": "Add statistic sensors",
-          "debug": "Debug logs",
-          "buzzer": "[DANGER] Disable buzzer",
-          "memory": "[DANGER] Use storage in memory",
-          "zha": "[DANGER] Mode ZHA or zigbee2mqtt"
-        },
-        "description": "Change **[DANGER]** options ONLY if you know what you doing"
+          "debug": "Debug logs"
+        }
       }
     }
   },
@@ -87,7 +85,8 @@
           "firmwarelock": "Gateway firmware lock",
           "reboot": "Gateway reboot",
           "ftp": "Gateway run FTP",
-          "flashzb": "Zigbee flash EZSP"
+          "flashzb": "Zigbee flash EZSP",
+          "openmiio_reload": "OpenmiIO reload"
         }
       },
       "data": {

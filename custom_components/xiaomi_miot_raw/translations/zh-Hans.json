@@ -1,0 +1,188 @@
+{
+    "config": {
+        "abort": {
+            "already_configured": "已经配置过这个设备了",
+            "success": "登录成功！稍等片刻刷新页面，即可看到添加的设备。\n后续如果想添加更多设备，可以点击账号下的`选项`，**或者**点击`添加集成`，选择`Xiaomi MIoT`。"
+        },
+        "create_entry": {
+            "default": ""
+        },
+        "error": {
+            "unexpected_error": "发生错误，请查看日志",
+            "cannot_connect": "无法连接",
+            "connection_failed": "网络连接失败",
+            "value_error": "输入错误",
+            "bad_params": "参数有误",
+            "no_local_access": "该设备不支持本地接入，已启用云端接入。请再次点击“提交”",
+            "no_connect_warning": "连接设备失败。如果您添加的是小爱音箱，这是正常现象；否则，请检查信息是否有误。请在下方输入小爱音箱的 model。",
+            "wrong_pwd": "密码错误",
+            "need_auth": "本次登录要输验证码。请打开上面的链接，按照页面提示操作。提示 ok 后，重新登录。",
+            "account_tips": "登录账号是为了方便您添加设备，而不会自动添加所有设备。\n登录后再次添加此集成，即可选择要添加的设备。"
+        },
+        "step": {
+            "user": {
+                "data": {
+                    "name": "名称",
+                    "host": "IP",
+                    "token": "token"
+                },
+                "description": "登录小米账号以后，可以更快捷地添加设备。",
+                "title": "选择操作"
+            },
+            "xiaomi_account": {
+				"title": "小米账号登录",
+				"description": "{hint}请输入小米账号和密码。",
+				"data": {
+					"username": "邮箱/小米 ID/手机号",
+					"password": "密码",
+                    "server_location": "设备所在服务器"
+				}
+			},
+            "localinfo": {
+                "data": {
+                    "name": "名称",
+                    "host": "IP",
+                    "token": "token"
+                },
+                "description": "本地通信需要获取以下信息",
+                "title": "配置"
+            },
+            "devinfo": {
+                "title": "设备信息",
+                "data": {
+                    "devtype": "请选择设备类型",
+                    "mapping": "mapping",
+                    "params": "配置参数",
+                    "cloud_read": "从云端获取设备状态",
+                    "cloud_write": "通过云端控制设备"
+
+                },
+                "description": "{device_info}"
+            },
+            "cloudinfo": {
+                "title": "账号信息",
+                "data": {
+                    "did": "did",
+                    "userId": "userId",
+                    "serviceToken": "serviceToken",
+                    "ssecurity": "ssecurity"
+                },
+                "description": "云端通信需要获取以下信息"
+            },
+            "select_devices": {
+                "data": {
+                    "devices": "设备列表"
+                },
+                "description": "你有 {dev_count} 个设备！在下面选择要添加的设备吧！\n一次选不完没关系，之后还可以继续添加。",
+                "title": "选择要添加的设备"
+            }
+        },
+        "title": "MIoT"
+    },
+    "system_health": {
+        "info": {
+            "logged_in": "已登录小米账号",
+            "can_reach_micloud_server": "可访问米家服务器",
+            "account_devices_count": "账号米家设备数",
+            "added_devices": "插件接入设备数",
+            "accounts_count": "云端接入账号数"
+        }
+    },
+    "options": {
+        "abort": {
+            "no_configurable_options": "没有可配置的选项"
+        },
+        "error": {
+            "plz_agree": "请阅读说明",
+            "cannot_connect": "无法连接",
+            "connection_failed": "网络连接失败",
+            "wrong_pwd": "密码错误",
+            "need_auth": "本次登录要输验证码。请打开上面的链接，按照页面提示操作。提示 ok 后，重新登录。",
+            "dev_readapt_failed": "设备适配失败，参数未作改动。",
+            "invalid_json": "JSON 格式错误"
+        },
+        "step": {
+            "init": {
+                "data": {
+                    "async_step_update_xiaomi_account": "更新小米账号的密码和服务器地区",
+                    "async_step_select_devices": "批量添加设备（不要和上一项一起选中）",
+                    "async_step_light_and_lock": "显示/隐藏指示灯或童锁开关",
+                    "async_step_climate": "为空调绑定外部温度传感器",
+                    "async_step_cover": "反转卷帘上下位置",
+                    "async_step_binary_sensor": "反转二元传感器状态",
+                    "async_step_re_adapt": "重新适配设备",
+                    "async_step_edit_mpprm": "修改 mapping 和配置参数",
+                    "async_step_edit_iptoken": "更新设备 IP 和 token"
+                },
+                "description": "",
+                "title": "您想要……"
+            },
+            "update_xiaomi_account": {
+				"title": "更新小米账号信息",
+				"description": "{hint}为小米账号“{username}”更新密码和服务器地区。",
+				"data": {
+					"username": "邮箱/小米 ID/手机号",
+					"password": "密码",
+                    "server_location": "设备所在服务器"
+				}
+			},
+            "sensor": {
+                "data": {
+                },
+                "description": "勾选后，每个属性都会作为一个传感器实体出现。",
+                "title": "传感器设置"
+            },
+            "cover": {
+                "data": {
+                    "reverse_position_percentage": "反转位置百分比"
+                },
+                "description": "Home Assistant 定义的卷帘位置百分比：0 为关闭（放下），100 为开启（升起）。\n如果厂商的定义与之相反，就会出现“下降到底时上升按钮变灰”的问题。\n勾选后，位置百分比反转，可解决此问题。",
+                "title": "卷帘设置"
+            },
+            "binary_sensor": {
+                "data": {
+                    "reverse": "反转二元传感器状态"
+                },
+                "description": "如果二元传感器的状态与实际状态相反，勾选此选项可反转该设备下所有二元传感器的状态。\n如果只需要反转部分传感器的状态，您可以手动修改 mapping 和配置参数。",
+                "title": "二元传感器设置"
+            },
+            "climate": {
+                "data": {
+                    "current_temp_source": "环境温度传感器实体 ID"
+                },
+                "description": "如果您的空调没有环境温度传感器，空调实体的环境温度会显示为和目标温度一致。\n您可以在此处输入其他温度传感器的实体 ID，这样就可以把它作为环境温度来源。",
+                "title": "空调设置"
+            },
+            "light_and_lock": {
+                "data": {
+                    "show_indicator_light": "显示指示灯开关",
+                    "show_physical_controls_locked": "显示童锁开关"
+                },
+                "description": "",
+                "title": "指示灯和童锁设置"
+            },
+            "select_devices": {
+                "data": {
+                    "devices": "设备列表"
+                },
+                "description": "请选择要添加的设备。\n\n点击完成后，设备将在后台添加，请刷新页面查看已添加的设备。",
+                "title": "批量添加"
+            },
+            "edit_mpprm": {
+                "data": {
+                    "mapping": "mapping",
+                    "params": "配置参数"
+                },
+                "description": "如果您不了解以下参数，请保持默认即可。\n如果刚刚进行过“重新适配”，那么下面显示的是最新的适配结果。",
+                "title": "编辑 Mapping 和参数"
+            },
+            "edit_iptoken": {
+                "data": {
+                    "host": "IP",
+                    "token": "token"
+                },
+                "title": "更新设备 IP 和 token"
+            }
+        }
+    }
+}

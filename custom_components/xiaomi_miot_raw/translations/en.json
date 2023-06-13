@@ -1,0 +1,187 @@
+{
+    "config": {
+        "abort": {
+            "already_configured": "You have already configured this device!",
+            "success": "Login succeed! Wait a moment and refresh to see devices added.\nTo add more, click `CONFIGURATION` under your account or `ADD INTEGRATION` - `Xiaomi MIoT`."
+        },
+        "create_entry": {
+            "default": ""
+        },
+        "error": {
+            "unexpected_error": "Unexpected error. See logs for detail",
+            "cannot_connect": "Can not connect",
+            "connection_failed": "Network unreachable",
+            "value_error": "Wrong value",
+            "bad_params": "Bad params",
+            "no_local_access": "Local access is not supported on this device. Cloud Access has been enabled. Click 'SUBMIT' again.",
+            "no_connect_warning": "Failed to discover your device. If it is a Xiaomi Speaker, it is normal and you need to enter its model manually above. If not, please check your input.",
+            "wrong_pwd": "Wrong password",
+            "need_auth": "Two-factor authentication required. Open the link above to finish authentication, and log in again.",
+            "account_tips": "This is to facilitate adding devices. \nAfter logging in, come back here to select devices to add."
+        },
+        "step": {
+            "user": {
+                "data": {
+                    "name": "Name",
+                    "host": "IP",
+                    "token": "token"
+                },
+                "description": "",
+                "title": "Select Operation"
+            },
+            "xiaomi_account": {
+				"title": "Log in Xiaomi Account",
+				"description": "{hint}Enter your Xiaomi Credentials.",
+				"data": {
+					"username": "Email/Xiaomi ID",
+					"password": "Password",
+                    "server_location": "Server Location"
+				}
+			},
+            "localinfo": {
+                "data": {
+                    "name": "Name",
+                    "host": "IP",
+                    "token": "token"
+                },
+                "description": "Local access requires information above",
+                "title": "Configure"
+            },
+            "devinfo": {
+                "title": "Device info",
+                "data": {
+                    "devtype": "Device type(s)",
+                    "mapping": "mapping",
+                    "params": "params",
+                    "cloud_read": "Read status from cloud",
+                    "cloud_write": "Control device from cloud"
+
+                },
+                "description": "{device_info}"
+            },
+            "cloudinfo": {
+                "title": "Account Credentials",
+                "data": {
+                    "did": "did",
+                    "userId": "userId",
+                    "serviceToken": "serviceToken",
+                    "ssecurity": "ssecurity"
+                },
+                "description": "Cloud access requires information above"
+            },
+            "select_devices": {
+                "data": {
+                    "devices": "Devices list"
+                },
+                "description": "You have {dev_count} devices! Select devices to add below.\nYou can still select more in the future.",
+                "title": "Select Devices"
+            }
+        },
+        "title": "MIoT"
+    },
+    "system_health": {
+        "info": {
+            "logged_in": "Logged in to Xiaomi Account",
+            "can_reach_micloud_server": "Reach Xiaomi Cloud Server",
+            "account_devices_count": "Devices in account",
+            "added_devices": "Devices added",
+            "accounts_count": "Xiaomi accounts"
+        }
+    },
+    "options": {
+        "abort": {
+            "no_configurable_options": "No options available."
+        },
+        "error": {
+            "plz_agree": "Please read carefully",
+            "cannot_connect": "Cannot connect",
+            "connection_failed": "Network connection failed",
+            "wrong_pwd": "Wrong password",
+            "need_auth": "Two-factor authentication required. Open the link above to finish authentication, and log in again.",
+            "dev_readapt_failed": "Failed re-adapting device. Parameters were not changed.",
+            "invalid_json": "Invalid JSON"
+        },
+        "step": {
+            "init": {
+                "data": {
+                    "async_step_update_xiaomi_account": "Update Xiaomi Account Credential and Server Location",
+                    "async_step_select_devices": "Batch Adding Devices (Do not select with the one above)",
+                    "async_step_light_and_lock": "Show or Hide Switch for Indicator Light and Child Lock",
+                    "async_step_climate": "Attach a Sensor to Climate for Current Temperature",
+                    "async_step_cover": "Reverse Cover Position",
+                    "async_step_re_adapt": "Re-Adapt Device",
+                    "async_step_edit_mpprm": "Edit Mapping and Params",
+                    "async_step_edit_iptoken": "Update IP and Token"
+                },
+                "description": "",
+                "title": "Would you like to..."
+            },
+            "update_xiaomi_account": {
+				"title": "Update Xiaomi Account Credential",
+				"description": "{hint}Update password for “{username}”.",
+				"data": {
+					"username": "Email/Xiaomi ID",
+					"password": "Password",
+                    "server_location": "Server Location"
+				}
+			},
+            "sensor": {
+                "data": {
+                },
+                "description": "If checked, there will be a sensor entity for each attribule.",
+                "title": "Sensor Options"
+            },
+            "cover": {
+                "data": {
+                    "reverse_position_percentage": "Reverse position percentage"
+                },
+                "description": "Reversing position percentage can fix some problems.",
+                "title": "Cover Options"
+            },
+            "binary_sensor": {
+                "data": {
+                    "reverse": "Reverse binary sensor state"
+                },
+                "description": "Enable this feature to reverse states of all binary sensors that belong to this device.\nYou can also edit mapping and params to reverse only some of them.",
+                "title": "Binary Sensor Options"
+            },
+            "climate": {
+                "data": {
+                    "current_temp_source": "Environment temperature sensor entity ID"
+                },
+                "description": "Enter a entity ID of temperature sensor here to use it as the current temperature sensor.",
+                "title": "Climate Options"
+            },
+            "light_and_lock": {
+                "data": {
+                    "show_indicator_light": "Enable switch for indicator light",
+                    "show_physical_controls_locked": "Enable switch for child lock"
+                },
+                "description": "",
+                "title": "Indicator Light / Child Lock Options"
+            },
+            "select_devices": {
+                "data": {
+                    "devices": "Devices list"
+                },
+                "description": "Select devices to add.\n\nAfter submitting, devices will be added in background. Refresh to see them.",
+                "title": "Batch Adding Devices"
+            },
+            "edit_mpprm": {
+                "data": {
+                    "mapping": "mapping",
+                    "params": "params"
+                },
+                "description": "If you don’t know what they are, keep them as default.\nIf the device was re-adapted, the latest config is shown below.",
+                "title": "Edit Mapping and Params"
+            },
+            "edit_iptoken": {
+                "data": {
+                    "host": "IP",
+                    "token": "token"
+                },
+                "title": "Update IP and Token"
+            }
+        }
+    }
+}

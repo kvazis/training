@@ -56,15 +56,16 @@ class XiaomiSelect(XiaomiSelectBase, RestoreEntity):
         await self.device_read(self.subscribed_attrs)
 
 
-CMD_PAIR = "pair"
-CMD_BIND = "bind"
-CMD_OTA = "ota"
-CMD_CONFIG = "config"
-CMD_PARENTSCAN = "parentscan"
-CMD_FWLOCK = "firmwarelock"
-CMD_REBOOT = "reboot"
-CMD_FTP = "ftp"
-CMD_FLASHZB = "flashzb"
+CMD_PAIR = "pair"  # zigbee_pain
+CMD_BIND = "bind"  # zigbee_bind
+CMD_OTA = "ota"  # zigbee_ota
+CMD_CONFIG = "config"  # zigbee_config
+CMD_PARENTSCAN = "parentscan"  # zigbee_parent_scan
+CMD_FWLOCK = "firmwarelock"  # gateway_firmware_lock
+CMD_REBOOT = "reboot"  # gateway_reboot
+CMD_FTP = "ftp"  # gateway_run_ftp
+CMD_FLASHZB = "flashzb"  # zigbee_flash_chip
+CMD_OPENMIIO_RELOAD = "openmiio_reload"
 
 
 # noinspection PyAbstractClass
@@ -86,6 +87,7 @@ class CommandSelect(XEntity, SelectEntity):
                 CMD_FWLOCK,
                 CMD_REBOOT,
                 CMD_FTP,
+                CMD_OPENMIIO_RELOAD,
             ]
         else:
             self._attr_options = [
@@ -96,6 +98,7 @@ class CommandSelect(XEntity, SelectEntity):
                 CMD_PARENTSCAN,
                 CMD_REBOOT,
                 CMD_FTP,
+                CMD_OPENMIIO_RELOAD,
             ]
 
     @callback
@@ -114,12 +117,12 @@ class CommandSelect(XEntity, SelectEntity):
         elif option == CMD_FWLOCK:
             lock = await self.gw.gw3_read_lock()
             self.device.update({"command": option, "lock": lock})
-        elif option in (CMD_FTP, CMD_REBOOT):
+        elif option in (CMD_FTP, CMD_REBOOT, CMD_OPENMIIO_RELOAD):
             ok = await self.gw.telnet_send(option)
-            self.device.update({"command": option, "ok": ok})
+            self.device.update({"command": "ok", "value": ok})
         elif option == CMD_PARENTSCAN:
             await self.gw.z3_run_parent_scan()
-            self.device.update({"command": option, "ok": True})
+            self.device.update({"command": "ok", "value": True})
 
 
 OPT_ENABLED = "enabled"
@@ -312,11 +315,5 @@ class DataSelect(XEntity, SelectEntity):
         )
         self.set_end(OPT_OK if ok else OPT_ERROR)
 
-    def step_command_reboot(self, value: dict):
-        self.set_end(OPT_OK if value["ok"] else OPT_ERROR)
-
-    def step_command_ftp(self, value: dict):
-        self.step_command_reboot(value)
-
-    def step_command_parentscan(self, value: dict):
-        self.step_command_reboot(value)
+    def step_command_ok(self, value: dict):
+        self.set_end(OPT_OK if value["value"] else OPT_ERROR)

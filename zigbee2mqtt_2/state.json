@@ -1,1 +1,37 @@
-{}
+{
+    "0x60a423fffe7ff8c8": {
+        "state": "ON",
+        "power_outage_memory": "restore",
+        "indicator_mode": "off/on",
+        "voltage": 233,
+        "power": 0,
+        "current": 0,
+        "energy": 36.42,
+        "last_seen": "2023-06-09T05:49:41.646Z",
+        "linkquality": 255
+    },
+    "0x00158d000154a353": {
+        "last_seen": "2023-06-09T05:39:36.473Z",
+        "linkquality": 255,
+        "voltage": 3022,
+        "battery": 100,
+        "power_outage_count": 1449
+    },
+    "0x00124b002265ba65": {
+        "voltage": 2900,
+        "battery": 56.5,
+        "contact": false,
+        "tamper": false,
+        "battery_low": false,
+        "last_seen": "2023-06-09T05:39:09.746Z",
+        "linkquality": 255
+    },
+    "0x00158d0001718ca8": {
+        "voltage": 3035,
+        "battery": 100,
+        "device_temperature": 23,
+        "power_outage_count": 167,
+        "last_seen": "2023-06-09T05:35:31.196Z",
+        "linkquality": 255
+    }
+}

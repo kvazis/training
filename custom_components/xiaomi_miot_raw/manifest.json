@@ -1,0 +1,17 @@
+{
+  "domain": "xiaomi_miot_raw",
+  "name": "Xiaomi MIoT",
+  "config_flow": true,
+  "iot_class": "cloud_polling",
+  "documentation": "https://github.com/ha0y/xiaomi_miot_raw",
+  "issue_tracker": "https://github.com/ha0y/xiaomi_miot_raw/issues",
+  "requirements": [
+    "construct",
+    "python-miio>=0.5.3"
+  ],
+  "dependencies": [],
+  "codeowners": [
+    "@ha0y"
+  ],
+  "version": "v1.3.1"
+}

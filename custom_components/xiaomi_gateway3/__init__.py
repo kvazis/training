@@ -1,6 +1,7 @@
 import json
 import logging
 import time
+from typing import Sequence
 
 import voluptuous as vol
 from homeassistant.components.system_log import CONF_LOGGER
@@ -71,6 +72,9 @@ async def async_setup(hass: HomeAssistant, hass_config: dict):
         _LOGGER.error("Minimum supported Hass version 2022.8")
         return False
 
+    if (MAJOR_VERSION, MINOR_VERSION) >= (2022, 12):
+        PLATFORMS.append("text")
+
     config = hass_config.get(DOMAIN) or {}
 
     if CONF_LOGGER in config:
@@ -106,13 +110,18 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
     if "servers" in entry.data:
         return await _setup_micloud_entry(hass, entry)
 
-    # migrate data (also after first setup) to options
-    if entry.data:
-        hass.config_entries.async_update_entry(entry, data={}, options=entry.data)
-
+    # check if any entry has debug checkbox if the options
     entries = hass.config_entries.async_entries(DOMAIN)
     if any(e.options.get("debug") for e in entries):
         await system_health.setup_debug(hass, _LOGGER)
+
+    # try to load key from gateway if config don't have it
+    if not entry.options.get("key"):
+        info = await utils.gateway_info(entry.options["host"], entry.options["token"])
+        if key := info.get("key"):
+            options = {**entry.options, "key": key}
+            hass.config_entries.async_update_entry(entry, data={}, options=options)
+            await utils.store_gateway_key(hass, info)
 
     # add options handler
     if not entry.update_listeners:
@@ -213,7 +222,7 @@ async def _setup_micloud_entry(hass: HomeAssistant, config_entry):
     return True
 
 
-def _update_devices(devices: list):
+def _update_devices(devices: Sequence):
     for device in devices:
         did = device["did"]
         XGateway.defaults.setdefault(did, {})
