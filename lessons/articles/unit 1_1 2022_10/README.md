@@ -27,9 +27,13 @@ apt upgrade -y
 ```yaml
 rpi-update
 ```
+:ballot_box_with_check: Удалить никому ненужную программу, чтобы не вызывало предупреждений
+```yaml
+sudo apt-get purge modemmanager
+```
 :ballot_box_with_check: Установка необходимых пакетов    
 ```yaml
-apt-get install -y jq wget curl udisks2 apparmor-utils libglib2.0-bin network-manager dbus systemd-journal-remote
+apt-get install -y jq wget curl udisks2 apparmor-utils libglib2.0-bin network-manager dbus systemd-journal-remote unzip
 ```
 :ballot_box_with_check: Запуск Network Manager    
 ```yaml
@@ -38,7 +42,7 @@ systemctl start NetworkManager
 systemctl enable NetworkManager
 ```
    
-:ballot_box_with_check: Приложение для настройки - 
+:ballot_box_with_check: Приложение для настройки:
 ```yaml
 sudo raspi-config
 5 Localisation Options / I1 Change Locale - ищем и выбираем пробелом ru_RU.UTF-8 UTF-8
@@ -49,18 +53,30 @@ sudo raspi-config
 ```yaml
 nano /boot/cmdline.txt
 ```
-В конец первой строки файла вставляем `systemd.unified_cgroup_hierarchy=false lsm=apparmor`    
+В конец первой строки файла вставляем:
+```yaml
+systemd.unified_cgroup_hierarchy=false lsm=apparmor
+```
 `Ctrl X` - для выхода    
 `Y` для сохранения    
 
 :ballot_box_with_check: Управление вентилятором    
-Установка скрипта - `curl https://download.argon40.com/argon1.sh | bash`    
-Настройка включения - `argonone-config`      
+Установка скрипта:
+```yaml
+curl https://download.argon40.com/argon1.sh | bash
+```
+Настройка включения:
+```yaml
+argonone-config
+```
 
-:ballot_box_with_check: Перезагрузка - `sudo reboot` 
+:ballot_box_with_check: Перезагрузка:
+```yaml
+sudo reboot
+```
 
 
-:ballot_box_with_check: Установка docker - 
+:ballot_box_with_check: Установка docker:
 ```yaml
 sudo curl -fsSL get.docker.com | sh
 ```
@@ -72,12 +88,24 @@ newgrp docker
 
 :ballot_box_with_check: Установка OS-Agent    
 :white_check_mark: [Последний релиз](https://github.com/home-assistant/os-agent/releases/latest)    
-Загружаем - `wget https://github.com/home-assistant/os-agent/releases/download/1.5.1/os-agent_1.5.1_linux_aarch64.deb` (номер меняем на актуальный)    
-Установка - `sudo dpkg -i os-agent_1.5.1_linux_aarch64.deb`    
+Загружаем os-agent (номер меняем на актуальный):
+```yaml
+wget https://github.com/home-assistant/os-agent/releases/download/1.5.1/os-agent_1.5.1_linux_aarch64.deb
+```    
+Устанавливаем:
+```yaml
+sudo dpkg -i os-agent_1.5.1_linux_aarch64.deb
+```
 
 :ballot_box_with_check: Установка Home Assisistant Supervised    
-Загружаем - `wget https://github.com/home-assistant/supervised-installer/releases/latest/download/homeassistant-supervised.deb`    
-Установка - `sudo dpkg -i homeassistant-supervised.deb`    
+Загружаем:
+```yaml
+wget https://github.com/home-assistant/supervised-installer/releases/latest/download/homeassistant-supervised.deb
+```
+Устанавливаем:
+```yaml
+sudo dpkg -i homeassistant-supervised.deb
+```
 
 :arrow_right: Веб интерфейс Home Assistant - `http://IP adress:8123`    
 
@@ -97,6 +125,11 @@ panel_custom:
     require_admin: true
     config:
       ingress: core_configurator 
+```
+
+:ballot_box_with_check: Устанавливаем HACS:     
+```yaml
+wget -O - https://get.hacs.xyz | bash -
 ```
 ____
 #### Поддержать развитие проекта *Умный дом с Alex Kvazis*    
