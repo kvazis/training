@@ -1,0 +1,114 @@
+{
+  "config": {
+    "error": {
+      "no_servers": "Please select at least one server",
+      "cant_login": "Can't login, check username and password",
+      "cant_connect": "Can't connect to gateway",
+      "wrong_model": "Unsupported gateway model",
+      "wrong_token": "Wrong Mi Home token",
+      "wrong_telnet": "Wrong open telnet command",
+      "verify": "Click to verify url"
+    },
+    "step": {
+      "user": {
+        "title": "Select Action",
+        "data": {
+          "action": "Action"
+        }
+      },
+      "cloud": {
+        "title": "Add Mi Cloud Account",
+        "description": "Select only those servers where you have devices{verify}",
+        "data": {
+          "username": "Email / Mi Account ID",
+          "password": "Password",
+          "servers": "Servers"
+        }
+      },
+      "token": {
+        "description": "You can obtain Mi Home token automatically with [Cloud integration](https://github.com/AlexxIT/XiaomiGateway3#obtain-mi-home-device-token) or [manually](https://github.com/Maxmudjon/com.xiaomi-miio/blob/master/docs/obtain_token.md).",
+        "data": {
+          "host": "Host",
+          "token": "Token",
+          "key": "Key"
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "cloud": {
+        "title": "MiCloud devices info",
+        "data": {
+          "did": "Device"
+        },
+        "description": "{device_info}"
+      },
+      "user": {
+        "title": "Gateway Config",
+        "data": {
+          "host": "Host",
+          "token": "Token",
+          "key": "Key",
+          "telnet_cmd": "Open Telnet command",
+          "ble": "Support Bluetooth devices",
+          "stats": "Add statistic sensors",
+          "debug": "Debug logs"
+        }
+      }
+    }
+  },
+  "device_automation": {
+    "trigger_type": {
+      "button": "Button press",
+      "button_1": "1st button press",
+      "button_2": "2nd button press",
+      "button_3": "3rd button press",
+      "button_4": "4th button press",
+      "button_5": "5th button press",
+      "button_6": "6th button press",
+      "button_both": "Both button press",
+      "button_both_12": "1st and 2nd button press",
+      "button_both_13": "1st and 3rd button press",
+      "button_both_23": "2nd and 3rd button press"
+    }
+  },
+  "entity": {
+    "select": {
+      "command": {
+        "state": {
+          "pair": "Zigbee pairing",
+          "bind": "Zigbee binding",
+          "ota": "Zigbee OTA",
+          "config": "Zigbee reconfig",
+          "parentscan": "Zigbee parent scan",
+          "firmwarelock": "Gateway firmware lock",
+          "reboot": "Gateway reboot",
+          "ftp": "Gateway run FTP",
+          "flashzb": "Zigbee flash EZSP",
+          "openmiio_reload": "OpenmiIO reload"
+        }
+      },
+      "data": {
+        "state": {
+          "enabled": "Enabled",
+          "disabled": "Disabled",
+          "unknown": "Unknown",
+          "ok": "OK",
+          "error": "ERROR",
+          "permit_join": "Ready to join",
+          "stop_join": "Pairing stopped",
+          "cancel": "Cancel",
+          "key_secure": "Send network key (secure)",
+          "key_legacy": "Send network key (legacy)",
+          "no_firmware": "No firmware",
+          "bind": "Bind",
+          "unbind": "Unbind",
+          "no_devices": "No devices",
+          "original": "Original",
+          "custom": "Custom"
+        }
+      }
+    }
+  }
+}

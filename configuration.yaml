@@ -1,0 +1,92 @@
+homeassistant:
+  name: My Smart Home
+  country: UA
+  currency: UAH
+  latitude: !secret latitude_coord
+  longitude: !secret longitude_coord
+  elevation: 179
+  unit_system: metric
+  time_zone: Europe/Kiev
+  customize: !include customize.yaml
+  packages: !include_dir_merge_named includes/packages
+
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+    
+frontend:
+  themes: !include_dir_merge_named themes
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# http:
+#   base_url: example.duckdns.org:8123
+
+lovelace:
+  mode: yaml
+  resources:
+   - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
+     type: module  
+   - url: /hacsfiles/power-flow-card-plus/power-flow-card-plus.js
+     type: module
+   - url: /hacsfiles/stack-in-card/stack-in-card.js
+     type: module
+   - url: /hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js
+     type: module                
+   - url: /hacsfiles/lovelace-mushroom/mushroom.js
+     type: module 
+   - url: /hacsfiles/timer-bar-card/timer-bar-card.js
+     type: module     
+     
+# Text to speech
+tts:
+  - platform: google_translate
+  
+panel_custom:
+  - name: server_state
+    sidebar_title: 'Система'
+    sidebar_icon: mdi:server
+    js_url: /api/hassio/app/entrypoint.js
+    url_path: 'hassio/system'
+    embed_iframe: true
+    require_admin: true
+    config:
+      ingress: core_configurator 
+
+#Вынос во внешние файлы
+timer: !include includes/timer.yaml
+input_select: !include includes/input_select.yaml
+input_boolean: !include includes/input_boolean.yaml
+group: !include includes/groups.yaml
+scene: !include includes/scenes.yaml
+recorder: !include includes/recorder.yaml
+# yeelight: !include includes/yeelight.yaml
+light: !include includes/light.yaml
+fan: !include includes/fan.yaml
+# air_quality: !include includes/air_quality.yaml
+remote: !include includes/remote.yaml
+#mqtt_statestream: !include includes/mqtt_statestream.yaml
+
+#Вынос во внешние папки
+sensor: !include_dir_merge_list includes/sensor
+automation: !include_dir_merge_list includes/automation
+switch: !include_dir_merge_list includes/switches
+script: !include_dir_merge_named includes/scripts
+binary_sensor: !include_dir_merge_list includes/bin_sensor
+
+
+telegram_bot:
+  - platform: polling
+    api_key: !secret api_key_bot
+    allowed_chat_ids:
+     - !secret telegram_id_1
+     - !secret telegram_id_2    
+      
+notify:
+
+  - name: telegram_id_1
+    platform: telegram
+    chat_id: !secret telegram_id_1
+    
+  - name: telegram_id_2
+    platform: telegram
+    chat_id: !secret telegram_id_2

@@ -1,0 +1,70 @@
+#   - platform: template
+#     sensors:
+#       smartmi_speed:
+#         friendly_name: 'Скорость увлажнителя'
+#         value_template: "{{ state_attr('fan.mi_humidifier', 'speed') }}"
+#         icon_template: mdi:speedometer
+        
+#       smartmi_water:
+#         friendly_name: 'Уровень воды'
+#         unit_of_measurement: '%'
+#         value_template: "{{ [state_attr('fan.mi_humidifier', 'depth') / 1.2, 100] | min | int }}"
+#         icon_template: mdi:cup-water
+        
+#       smartmi_temperature:
+#         friendly_name: 'Увлажнитель - температура'
+#         unit_of_measurement: '°C'
+#         value_template: "{{ state_attr('fan.mi_humidifier', 'temperature') }}"
+#         icon_template: mdi:temperature-celsius
+        
+#       smartmi_humidity:
+#         friendly_name: 'Увлажнитель - влажность'
+#         unit_of_measurement: '%'
+#         value_template: "{{ state_attr('fan.mi_humidifier', 'humidity') }}"
+#         icon_template: mdi:water-percent
+        
+#       purifier_speed:
+#         friendly_name: 'Скорость очистителя'
+#         value_template: "{{ state_attr('fan.mi_purifier', 'speed') }}"
+#         icon_template: mdi:speedometer
+        
+#       purifier_filter:
+#         friendly_name: 'Фильтр израсходован на'
+#         unit_of_measurement: '%'
+#         value_template: "{{ state_attr('fan.mi_purifier', 'filter_life_remaining') }}"
+#         icon_template: mdi:ticket-percent
+        
+#       purifier_temperature:
+#         friendly_name: 'Очиститель - температура'
+#         unit_of_measurement: '°C'
+#         value_template: "{{ state_attr('fan.mi_purifier', 'temperature') }}"
+#         icon_template: mdi:temperature-celsius
+        
+#       purifier_humidity:
+#         friendly_name: 'Очиститель - влажность'
+#         unit_of_measurement: '%'
+#         value_template: "{{ state_attr('fan.mi_purifier', 'humidity') }}"
+#         icon_template: mdi:water-percent
+        
+#       purifier_pm25:
+#         friendly_name: ' Оценка загрязения воздуха - '
+#         unit_of_measurement: 'pm 2.5'
+#         value_template: "{{ state_attr('fan.mi_purifier', 'aqi') }}"
+#         icon_template: mdi:image-filter-center-focus-weak        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        
+        
+        

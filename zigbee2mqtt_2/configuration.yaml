@@ -1,0 +1,49 @@
+homeassistant: true
+mqtt:
+  base_topic: zigbee2mqtt_2
+  server: mqtt://core-mosquitto:1883
+  user: addons
+  password: leush4engiodoHeiDuBohf6vaevo9sheiQu6rahngaez2oDe8upheiwe5ee4sich
+advanced:
+  log_level: info
+  pan_id: 6677
+  channel: 11
+  network_key:
+    - 4
+    - 6
+    - 5
+    - 7
+    - 12
+    - 11
+    - 12
+    - 14
+    - 0
+    - 2
+    - 5
+    - 6
+    - 8
+    - 10
+    - 12
+    - 13
+  availability_blocklist: []
+  availability_passlist: []
+  last_seen: ISO_8601
+  homeassistant_legacy_entity_attributes: false
+  legacy_api: false
+  legacy_availability_payload: false
+device_options:
+  legacy: false
+serial:
+  port: tcp://core-silabs-multiprotocol:9999
+  adapter: ezsp
+frontend:
+  port: 8099
+devices:
+  '0x60a423fffe7ff8c8':
+    friendly_name: '0x60a423fffe7ff8c8'
+  '0x00158d000154a353':
+    friendly_name: '0x00158d000154a353'
+  '0x00124b002265ba65':
+    friendly_name: '0x00124b002265ba65'
+  '0x00158d0001718ca8':
+    friendly_name: '0x00158d0001718ca8'

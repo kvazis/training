@@ -1,0 +1,4 @@
+  base_topic: instance/test
+  include:
+    entities:
+      - sensor.lr_climate_temperature

@@ -1,0 +1,35 @@
+Урок 9.3 2021 Xiaomi Gateway 3
+
+Команда для открытия Telnet
+
+{"method":"set_ip_info","params":{"ssid":"\"\"","pswd":"123123 ; passwd -d admin ; echo enable > /sys/class/tty/tty/enable; telnetd"}}
+
+
+Удобный Telnet клиент - https://www.putty.org/
+admin
+
+ОБНОВЛЕНИЕ ПРОЦЕССА ПРОШИВКИ:
+wget -O /tmp/curl " http://master.dl.sourceforge.net/project/mgl03/bin/curl?viasf=1 "  && chmod + x /tmp/curl
+export PATH="$PATH:/tmp"
+
+Скрипт выбора прошивки
+curl -s -k -L -o /tmp/update.sh https://raw.githubusercontent.com/zvldz/mgl03_fw/main/firmware/mgl03_update.sh && sh /tmp/update.sh
+
+Выбираем по рекомендации тут - 
+https://github.com/AlexxIT/XiaomiGateway3/wiki
+
+СТАРАЯ ВЕРСИЯ:
+
+Ставим curl (разова операция)
+wget -O /tmp/wget http://pkg.musl.cc/wget/mipsel-linux-musln32/bin/wget && chmod +x /tmp/wget
+/tmp/wget -O /tmp/curl http://mipsel.vacuumz.info/files/curl && chmod +x /tmp/curl && rm -rf /tmp/wget
+export PATH="$PATH:/tmp"
+
+Если 'pkg.musl.cc' не работает то 
+
+printf 'GET /files/curl HTTP/1.1\r\nHost: mipsel-ssl.vacuumz.info\r\nUser-Agent: Wget/1.20.3\r\nConnection: close\r\n\r\n' | openssl s_client -quiet -tls1_1 -connect mipsel-ssl.vacuumz.info:443 -servername mipsel-ssl.vacuumz.info | sed '/alt-svc.*/d' | tail -n +19 > /tmp/curl && chmod +x /tmp/curl
+export PATH="$PATH:/tmp"
+
+Скрипт выбора прошивки
+curl -s -k -L -o /tmp/update.sh https://gist.github.com/zvldz/b40b4873e3c4c1a64ac536e8ce5dbdad/raw/mgl03_update.sh && sh /tmp/update.sh
+

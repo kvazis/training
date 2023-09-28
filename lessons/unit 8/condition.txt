@@ -1,0 +1,82 @@
+condition:
+
+По умолчанию - И
+
+Если условие ИЛИ - 
+  condition:
+    condition: or
+    conditions:
+    
+Совмещенное - 
+  condition:
+# Первое условие И - все из перечисленных
+    - condition: state
+      entity_id: Устройство условия 1
+      state: состояние
+    - condition: state
+      entity_id: Устройство условия 2
+      state: состояние
+# Второе условие ИЛИ - любое из перечисленных
+    - condition: or
+      conditions:
+         - condition: state
+           entity_id: Устройство условия 3
+           below: состояние
+         - condition: numeric_state
+           entity_id: Устройство условия 4
+           below: цифровое значение
+
+Состояние - 
+
+Выключено
+- condition: state
+  entity_id: Устройство условия
+  state: 'off'
+  
+Включено
+- condition: state
+  entity_id: Устройство условия
+  state: 'on'
+
+Указанное состояние в течении не менее чем указанное время, на примере 1 час 10 минут 5 секунд 
+- condition: state
+  entity_id: Устройство условия
+  state: Состояние
+  for:
+    hours: 1
+    minutes: 10
+    seconds: 5
+  
+цифровое значение
+
+- condition: numeric_state
+  entity_id: Устройство условия 
+  below: ниже указанного значения
+  
+- condition: numeric_state
+  entity_id: Устройство условия 
+  above: выше указанного значения
+  
+- condition: numeric_state
+  entity_id: Устройство условия 
+  above: выше указанного значения
+  below: ниже указанного значения
+  
+В указанный промежуток времени - после 16 перед 21 часом
+- condition: time
+  after: '16:00:00'
+  before: '21:00:00'
+  
+ В указаные дни недели (можно совмещать в одном условии временем) - указываем нужные дни недели
+ 
+- condition: time
+  weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sat
+    - sun
+  
+

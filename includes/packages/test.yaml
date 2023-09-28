@@ -1,0 +1,11 @@
+test:
+
+    template:
+    
+      - binary_sensor:
+      
+    # Сенсор определения отключения электрики
+          - name: electricity
+            state: >
+             {{ is_state('switch.0xa4c138716822e6a7', 'off') }}
+            device_class: problem

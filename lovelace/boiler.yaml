@@ -1,0 +1,288 @@
+##################   Энергомониторинг   ##################
+
+title: Power
+icon: mdi:home-lightning-bolt
+cards:
+
+############################ Колонка 1 ############################
+
+    - type: vertical-stack
+      cards:
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+
+            - type: entities
+              show_header_toggle: false
+              entities:
+                - entity: sensor.custom_time
+                  name: Текущее время
+                - entity: switch.0x60a423fffe7ff8c8_mode
+
+                - entity: switch.0x60a423fffe7ff8c8
+                  type: custom:multiple-entity-row
+                  toggle: true
+                  state_color: true
+                  name: Бойлер
+                  secondary_info: last-changed
+                  state_header: Питание
+                  entities:
+                  - entity: sensor.0x60a423fffe7ff8c8_timer_manual
+                    name: Таймер M
+                  - entity: sensor.0x60a423fffe7ff8c8_power
+                    name: Мощность
+                    unit: 'Ватт'
+
+
+            - type: conditional
+              conditions:
+                - entity: switch.0x60a423fffe7ff8c8
+                  state: "on"
+              card:
+                  type: custom:timer-bar-card
+                  entities:
+                  - entity: timer.0x60a423fffe7ff8c8
+                    name: Осталось - 
+                  modifications:
+                  - elapsed: 30%
+                    bar_foreground: yellow
+                  - elapsed: 60%
+                    bar_foreground: orange
+                  - elapsed: 90%
+                    bar_foreground: red
+                  bar_height: 20px
+                  sync_issues: ignore
+                  invert: true
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+
+            - type: entities
+              show_header_toggle: false
+              entities:
+                - entity: input_datetime.0x60a423fffe7ff8c8_period
+
+            - type: horizontal-stack
+        
+              cards:
+
+                - type: custom:mushroom-template-card
+                  layout: horizontal
+                  entity: input_button.0x60a423fffe7ff8c8_period_1
+                  icon: mdi:numeric-1-circle
+                  multiline_secondary: true
+                  icon_color: grey
+                  tap_action:
+                    action: call-service
+                    service: input_button.press
+                    target:
+                      entity_id: input_button.0x60a423fffe7ff8c8_period_1
+
+                - type: custom:mushroom-template-card
+                  layout: horizontal
+                  entity: input_button.0x60a423fffe7ff8c8_period_2
+                  icon: mdi:numeric-2-circle
+                  multiline_secondary: true
+                  icon_color: grey
+                  tap_action:
+                    action: call-service
+                    service: input_button.press
+                    target:
+                      entity_id: input_button.0x60a423fffe7ff8c8_period_2
+
+                - type: custom:mushroom-template-card
+                  layout: horizontal
+                  entity: input_button.0x60a423fffe7ff8c8_period_3
+                  icon: mdi:numeric-3-circle
+                  multiline_secondary: true
+                  icon_color: grey
+                  tap_action:
+                    action: call-service
+                    service: input_button.press
+                    target:
+                      entity_id: input_button.0x60a423fffe7ff8c8_period_3
+                      
+                - type: custom:mushroom-template-card
+                  layout: horizontal
+                  entity: input_button.0x60a423fffe7ff8c8_period_4
+                  icon: mdi:numeric-4-circle
+                  multiline_secondary: true
+                  icon_color: grey
+                  tap_action:
+                    action: call-service
+                    service: input_button.press
+                    target:
+                      entity_id: input_button.0x60a423fffe7ff8c8_period_4
+
+                - type: custom:mushroom-template-card
+                  layout: horizontal
+                  entity: input_button.0x60a423fffe7ff8c8_period_5
+                  icon: mdi:numeric-5-circle
+                  multiline_secondary: true
+                  icon_color: grey
+                  tap_action:
+                    action: call-service
+                    service: input_button.press
+                    target:
+                      entity_id: input_button.0x60a423fffe7ff8c8_period_5
+
+            - type: entities
+              show_header_toggle: false
+              entities:
+                - entity: input_datetime.0x60a423fffe7ff8c8_timer
+
+            - type: horizontal-stack
+        
+              cards:
+
+                - type: custom:mushroom-template-card
+                  layout: horizontal
+                  entity: input_button.0x60a423fffe7ff8c8_timer_1
+                  icon: mdi:numeric-1-circle
+                  multiline_secondary: true
+                  icon_color: grey
+                  tap_action:
+                    action: call-service
+                    service: input_button.press
+                    target:
+                      entity_id: input_button.0x60a423fffe7ff8c8_timer_1
+
+                - type: custom:mushroom-template-card
+                  layout: horizontal
+                  entity: input_button.0x60a423fffe7ff8c8_timer_2
+                  icon: mdi:numeric-2-circle
+                  multiline_secondary: true
+                  icon_color: grey
+                  tap_action:
+                    action: call-service
+                    service: input_button.press
+                    target:
+                      entity_id: input_button.0x60a423fffe7ff8c8_timer_2
+
+                - type: custom:mushroom-template-card
+                  layout: horizontal
+                  entity: input_button.0x60a423fffe7ff8c8_timer_3
+                  icon: mdi:numeric-3-circle
+                  multiline_secondary: true
+                  icon_color: grey
+                  tap_action:
+                    action: call-service
+                    service: input_button.press
+                    target:
+                      entity_id: input_button.0x60a423fffe7ff8c8_timer_3
+                      
+                - type: custom:mushroom-template-card
+                  layout: horizontal
+                  entity: input_button.0x60a423fffe7ff8c8_timer_4
+                  icon: mdi:numeric-4-circle
+                  multiline_secondary: true
+                  icon_color: grey
+                  tap_action:
+                    action: call-service
+                    service: input_button.press
+                    target:
+                      entity_id: input_button.0x60a423fffe7ff8c8_timer_4
+
+                - type: custom:mushroom-template-card
+                  layout: horizontal
+                  entity: input_button.0x60a423fffe7ff8c8_timer_5
+                  icon: mdi:numeric-5-circle
+                  multiline_secondary: true
+                  icon_color: grey
+                  tap_action:
+                    action: call-service
+                    service: input_button.press
+                    target:
+                      entity_id: input_button.0x60a423fffe7ff8c8_timer_5
+                      
+                - type: custom:mushroom-template-card
+                  layout: horizontal
+                  entity: input_button.0x60a423fffe7ff8c8_timer_manual
+                  icon: mdi:alpha-m-circle-outline
+                  multiline_secondary: true
+                  icon_color: grey
+                  tap_action:
+                    action: call-service
+                    service: input_button.press
+                    target:
+                      entity_id: input_button.0x60a423fffe7ff8c8_timer_manual
+
+    - type: vertical-stack
+      cards:
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+
+
+
+            - type: entities
+              show_header_toggle: false
+              entities:
+
+                - entity: switch.0x60a423fffe7ff8c8_period_1_mode
+                  type: custom:multiple-entity-row
+                  toggle: true
+                  state_color: true
+                  name: Период 1
+                  secondary_info: last-changed
+                  state_header: Активность
+                  entities:
+                  - entity: sensor.0x60a423fffe7ff8c8_timer_1
+                    name: Таймер
+                  - entity: sensor.0x60a423fffe7ff8c8_period_1
+                    name: Старт
+                    
+                - entity: switch.0x60a423fffe7ff8c8_period_2_mode
+                  type: custom:multiple-entity-row
+                  toggle: true
+                  state_color: true
+                  name: Период 2
+                  secondary_info: last-changed
+                  state_header: Активность
+                  entities:
+                  - entity: sensor.0x60a423fffe7ff8c8_timer_2
+                    name: Таймер
+                  - entity: sensor.0x60a423fffe7ff8c8_period_2
+                    name: Старт
+                    
+                - entity: switch.0x60a423fffe7ff8c8_period_3_mode
+                  type: custom:multiple-entity-row
+                  toggle: true
+                  state_color: true
+                  name: Период 3
+                  secondary_info: last-changed
+                  state_header: Активность
+                  entities:
+                  - entity: sensor.0x60a423fffe7ff8c8_timer_3
+                    name: Таймер
+                  - entity: sensor.0x60a423fffe7ff8c8_period_3
+                    name: Старт
+                    
+                - entity: switch.0x60a423fffe7ff8c8_period_4_mode
+                  type: custom:multiple-entity-row
+                  toggle: true
+                  state_color: true
+                  name: Период 4
+                  secondary_info: last-changed
+                  state_header: Активность
+                  entities:
+                  - entity: sensor.0x60a423fffe7ff8c8_timer_4
+                    name: Таймер
+                  - entity: sensor.0x60a423fffe7ff8c8_period_4
+                    name: Старт
+                    
+                - entity: switch.0x60a423fffe7ff8c8_period_5_mode
+                  type: custom:multiple-entity-row
+                  toggle: true
+                  state_color: true
+                  name: Период 5
+                  secondary_info: last-changed
+                  state_header: Активность
+                  entities:
+                  - entity: sensor.0x60a423fffe7ff8c8_timer_5
+                    name: Таймер
+                  - entity: sensor.0x60a423fffe7ff8c8_period_5
+                    name: Старт

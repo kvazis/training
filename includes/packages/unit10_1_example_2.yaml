@@ -1,0 +1,130 @@
+example_2:
+
+    binary_sensor:
+
+    # Сенсор автоотключения света 
+      - platform: template
+        sensors:
+          unit_10_1_ex2:
+            friendly_name: "Автоотключение"
+            value_template: >-
+              {{ is_state('light.yeelight_450', 'on')  
+                 and is_state('binary_sensor.ln_moving_occupancy', 'off')  
+                 and (state_attr('light.yeelight_450', 'brightness') | float) < 250
+              }}
+            icon_template: >-
+              {% if is_state("binary_sensor.unit_10_1_ex2", "on") %}
+              mdi:timer
+              {% else %}
+              mdi:timer-off
+              {% endif %}    
+    
+    
+    
+    # yeelight:
+    
+    #     devices:
+    #       192.168.0.112:
+    #         name: yeelight_450
+    #         transition: 1000
+    #         nightlight_switch_type: light
+    #         model: ceiling3
+            
+            
+    automation:
+
+        # Включение освещения 
+        - alias: unit_10_1_ex2_light_on
+          initial_state: false
+          trigger:
+        # Выключатель Aqara
+          - platform: state
+            entity_id: sensor.lr_ws_2ch_table_click
+            to: 'left'
+          condition:
+          - condition: state
+            entity_id: light.yeelight_450
+            state: 'off'
+          action:
+          - service: light.turn_on
+            entity_id:
+              - light.yeelight_450
+            data_template:
+              brightness_pct: 100
+              kelvin: 4000
+              
+        # Выключение освещения 
+        - alias: unit_10_1_ex2_light_off
+          initial_state: false
+          trigger:
+        # Выключатель Aqara
+          - platform: state
+            entity_id: sensor.lr_ws_2ch_table_click
+            to: 'left'
+          condition:
+          - condition: state
+            entity_id: light.yeelight_450
+            state: 'on'
+          action:
+          - service: light.turn_off
+            entity_id:
+              - light.yeelight_450
+              
+        # Автоподсветка
+        - alias: unit_10_1_ex2_light_autoon
+          initial_state: false
+          trigger:
+        # Датчик движения
+          - platform: state
+            entity_id: binary_sensor.ln_moving_occupancy
+            to: 'on'
+          condition:
+          - condition: state
+            entity_id: light.yeelight_450
+            state: 'off'
+          - condition: numeric_state
+            entity_id: sensor.kn_light_sensor_illuminance
+            below: 15000
+          action:
+          - service: light.turn_on
+            entity_id:
+              - light.yeelight_450
+            data_template:
+               brightness_pct: >
+                  {% set illum = states('sensor.kn_light_sensor_illuminance') | float %}
+                  {% if illum >= 10000 %}
+                    40
+                  {% elif illum >= 5000 %}
+                    50
+                  {% elif illum < 5000 %}
+                    60
+                  {% endif %}
+               kelvin: 4000 
+              
+
+              
+        # Автоподсветка выкл
+        - alias: unit_10_1_ex2_light_autooff
+          initial_state: false
+          trigger:
+        # Шаблонный сенсор
+          - platform: state
+            entity_id: binary_sensor.unit_10_1_ex2
+            to: 'on'
+          action:
+          - service: light.turn_off
+            entity_id:
+              - light.yeelight_450
+
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+

@@ -1,0 +1,74 @@
+{
+  "config": {
+    "error": {
+      "no_servers": "Пожалуйста, выберите хотя бы один сервер",
+      "cant_login": "Ошибка, проверьте имя пользователя и пароль",
+      "cant_connect": "Не получается подключиться к шлюзу",
+      "wrong_model": "Модель шлюза не поддерживается",
+      "wrong_token": "Неверный Mi Home токен",
+      "wrong_telnet": "Неверная команда для открытия Telnet",
+      "verify": "Перейдите по verify url"
+    },
+    "step": {
+      "user": {
+        "title": "Выберите действие",
+        "data": {
+          "action": "Действие"
+        }
+      },
+      "cloud": {
+        "title": "Добавить Mi Cloud аккаунт",
+        "description": "Выбирайте только те серверы, на которых у вас есть устройства{verify}",
+        "data": {
+          "username": "Email / Mi Account ID",
+          "password": "Пароль",
+          "servers": "Серверы"
+        }
+      },
+      "token": {
+        "description": "Вы можете получить Mi Home токен автоматически с помощью [облачной интеграции](https://github.com/AlexxIT/XiaomiGateway3#obtain-mi-home-device-token) или [вручную](https://github.com/Maxmudjon/com.xiaomi-miio/blob/master/docs/obtain_token.md).",
+        "data": {
+          "host": "IP-адрес",
+          "token": "Токен"
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "cloud": {
+        "title": "Информация о устройствах MiCloud",
+        "data": {
+          "did": "Устройство"
+        },
+        "description": "{device_info}"
+      },
+      "user": {
+        "title": "Настройка шлюза",
+        "data": {
+          "host": "IP-адрес",
+          "token": "Токен",
+          "telnet_cmd": "Команда для открытия Telnet",
+          "ble": "Поддержка Bluetooth устройств",
+          "stats": "Добавить сенсоры статистики",
+          "debug": "Логи отладки (debug)"
+        }
+      }
+    }
+  },
+  "device_automation": {
+    "trigger_type": {
+      "button": "Нажатие кнопки",
+      "button_1": "Нажатие первой кнопки",
+      "button_2": "Нажатие второй кнопки",
+      "button_3": "Нажатие третьей кнопки",
+      "button_4": "Нажатие четвёртой кнопки",
+      "button_5": "Нажатие пятой кнопки",
+      "button_6": "Нажатие шестой кнопки",
+      "button_both": "Нажатие двух кнопок",
+      "button_both_12": "Нажатие первой и второй кнопок",
+      "button_both_13": "Нажатие первой и третей кнопок",
+      "button_both_23": "Нажатие второй и третьей кнопок"
+    }
+  }
+}

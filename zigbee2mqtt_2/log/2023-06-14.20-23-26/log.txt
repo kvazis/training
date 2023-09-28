@@ -1,0 +1,16 @@
+info  2023-06-14 20:23:26: Logging to console and directory: '/config/zigbee2mqtt_2/log/2023-06-14.20-23-26' filename: log.txt
+info  2023-06-14 20:23:26: Starting Zigbee2MQTT version 1.31.2 (commit #unknown)
+info  2023-06-14 20:23:26: Starting zigbee-herdsman (0.14.117)
+error 2023-06-14 20:23:46: Error while starting zigbee-herdsman
+error 2023-06-14 20:23:46: Failed to start zigbee
+error 2023-06-14 20:23:46: Check https://www.zigbee2mqtt.io/guide/installation/20_zigbee2mqtt-fails-to-start.html for possible solutions
+error 2023-06-14 20:23:46: Exiting...
+error 2023-06-14 20:23:47: Error: Connection not initialized
+    at Ezsp.execCommand (/app/node_modules/zigbee-herdsman/src/adapter/ezsp/driver/ezsp.ts:551:19)
+    at Ezsp.version (/app/node_modules/zigbee-herdsman/src/adapter/ezsp/driver/ezsp.ts:349:35)
+    at Driver.startup (/app/node_modules/zigbee-herdsman/src/adapter/ezsp/driver/driver.ts:141:25)
+    at EZSPAdapter.start (/app/node_modules/zigbee-herdsman/src/adapter/ezsp/adapter/ezspAdapter.ts:165:16)
+    at Controller.start (/app/node_modules/zigbee-herdsman/src/controller/controller.ts:132:29)
+    at Zigbee.start (/app/lib/zigbee.ts:58:27)
+    at Controller.start (/app/lib/controller.ts:101:27)
+    at start (/app/index.js:107:5)

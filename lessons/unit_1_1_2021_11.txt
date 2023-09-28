@@ -1,0 +1,146 @@
+Raspberry Pi OS Lite
+Загрузка программы для записи образа - https://www.raspberrypi.org/software/
+
+Обновляем bootloader для загрузки с USB
+
+Удобный SSH клиент - https://www.putty.org/
+
+Разворачиваем образ на носитель и создаем в корневом каталоге пустой файл ssh
+
+Логин и пароль по умолчанию - pi / raspberry
+
+Обновление списка пакетов и пакетов
+sudo apt update
+sudo apt upgrade -y
+
+Обновление прошивки
+sudo rpi-update
+
+Перезагрузка
+sudo reboot
+
+Добавление пользователя - 
+sudo adduser имя
+
+Добавление в группу sudo - 
+sudo usermod -aG sudo имя
+
+Переключение на нового пользователя - su имя
+
+sudo apt-get install -y network-manager
+
+Отключаем dhcpcd
+sudo nano /etc/dhcpcd.conf
+denyinterfaces wlan0
+denyinterfaces eth0
+
+Выход - Ctrl-X 
+Сохранить изменения - Y
+
+
+sudo nano /etc/NetworkManager/NetworkManager.conf
+[main]
+plugins=ifupdown,keyfile
+dhcp=internal
+
+[ifupdown]
+managed=true
+
+Выход - Ctrl-X 
+Сохранить изменения - Y
+
+sudo reboot
+
+sudo systemctl daemon-reload
+sudo systemctl stop dhcpcd
+sudo systemctl disable dhcpcd
+
+sudo nmtui
+
+Activate connection - подключаем wi-fi
+Edit connection - настройки IP
+
+Отключение случайного МАС
+sudo nano /etc/NetworkManager/conf.d/100-disable-wifi-mac-randomization.conf
+
+[connection]
+wifi.mac-address-randomization=1
+
+[device]
+wifi.scan-rand-mac-address=no
+
+sudo reboot
+
+Проверка сетевых интерфейсов
+ifconfig
+
+Таблица маршрутизации
+route
+
+Установка Midnight Commander
+sudo apt-get install -y mc
+
+Запуск Midnight Commander
+sudo mc
+
+Путь к настройкам интерфейсов
+/etc/NetworkManager/system-connections/ 
+
+F4 - редактировать, при выборе редактора - выбираем nano
+
+Прописываем метрику в [ipv4]
+route-metric=105
+
+Выход - Ctrl X
+Подтверждение - Y
+
+F10 - выход из Midnight Commander
+
+Рестарт Network Manager
+sudo systemctl restart NetworkManager
+
+Таблица маршрутизации
+route
+
+Приложение для настройки - sudo raspi-config
+5 Localisation Options / I1 Change Locale - ищем и выбираем пробелом ru_RU.UTF-8 UTF-8
+5 Localisation Options / I2 Change Timezone - выбираем часовой пояс
+
+Установка пакетов нужных для работы и установки Hass.io
+
+
+sudo apt-get install -y bash curl git jq wget udisks2 libglib2.0-bin dbus apparmor-utils ca-certificates socat software-properties-common ftpd
+
+Установка docker - 
+sudo curl -fsSL get.docker.com | sh
+
+Добавляем в группу docker пользователя
+sudo gpasswd -a $USER docker
+newgrp docker
+
+Установка OS-Agent
+
+Последний релиз - https://github.com/home-assistant/os-agent/releases/latest
+
+wget https://github.com/home-assistant/os-agent/releases/download/1.2.2/os-agent_1.2.2_linux_armv7.deb  (меняем на актуальную)
+
+sudo dpkg -i os-agent_1.2.2_linux_armv7.deb  
+
+Установка Home Assisistant Supervised
+
+wget https://github.com/home-assistant/supervised-installer/releases/latest/download/homeassistant-supervised.deb
+
+sudo dpkg -i homeassistant-supervised.deb
+
+
+ставим Portainer - 
+docker pull portainer/portainer-ce
+docker volume create portainer_data
+docker run -d -p 9000:9000 --name portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
+
+Веб интерфейс Portainer - IP adress:9000
+Веб интерфейс Home Assistant - IP adress:8123
+
+Исправление ошибки Apparmor
+sudo nano /boot/cmdline.txt
+lsm=apparmor

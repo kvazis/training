@@ -1,0 +1,47 @@
+unit10_3:
+
+    binary_sensor:
+
+    # Сенсор автоотключения света 
+      - platform: template
+        sensors:
+        
+          motion_no_light:
+            friendly_name: "Сенсор движения без света"
+            value_template: >-
+              {{ is_state('light.0x00158d000420dbab_light', 'off')  
+                 and is_state('binary_sensor.0x00158d00013f7894_occupancy', 'on')  }}
+            device_class: light
+            
+          no_motion_light:
+            friendly_name: "Сенсор света без движения"
+            value_template: >-
+              {{ is_state('light.0x00158d000420dbab_light', 'on')  
+                 and is_state('binary_sensor.0x00158d00013f7894_occupancy', 'off')  }}
+            device_class: light
+
+    timer:
+        
+          unit_10_3:
+            name: Отключение света в прихожей через -
+            duration: '00:01:00'  
+            
+    automation:              
+            
+        - id: Автоматическое управление светом в прихожей
+          alias: light_motion_entrance
+          initial_state: false
+          use_blueprint:
+            path: homeassistant/light_auto_off.yaml
+            input:
+              motion_entity: binary_sensor.0x00158d00013f7894_occupancy
+              light_off_entity: binary_sensor.motion_no_light
+              light_on_entity: binary_sensor.no_motion_light
+              timer_entity: timer.unit_10_3
+              light_target:
+                entity_id: light.0x00158d000420dbab_light
+                
+                
+                
+                
+                

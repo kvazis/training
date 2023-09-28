@@ -1,0 +1,83 @@
+Карта в Lovelace
+
+        - type: picture-entity
+          entity: camera.reolink_e1_zoom_profile000_mainstream
+          camera_view: live 
+          show_state: false
+          show_name: false
+          
+Скрипт для съемки фото
+
+  photo_reolink:
+    alias: Фотография Reolink E1 zoom
+    sequence:
+       - service: camera.snapshot
+         data:
+              entity_id: camera.reolink_e1_zoom_profile000_mainstream
+              filename: "/config/www/cam_captures/reolink.jpg"
+              
+Скрипт для съемки видео
+
+  video_reolink:
+    alias: Запись с камеры Reolink E1 zoom
+    sequence:
+    - service: camera.record
+      data_template:
+        entity_id: camera.reolink_e1_zoom_profile000_mainstream
+        filename: "/config/www/cam_captures/reolink.mp4"
+        duration: 10
+        
+Скрипт для съемки фото и отправка в телеграмм
+
+  photo_reolink_telegram:
+    alias: Фотография Reolink E1 zoom и отправка в телеграм
+    sequence:
+       - service: camera.snapshot
+         data:
+              entity_id: camera.reolink_e1_zoom_profile000_mainstream
+              filename: "/config/www/cam_captures/reolink.jpg"
+       - delay: 00:00:15
+       - service: telegram_bot.send_photo
+         data_template:
+           target:
+            - !secret telegram_id_1
+           file: "/config/www/cam_captures/reolink.jpg" 
+           
+Скрипт для съемки видео и отправка в телеграмм
+
+  video_reolink_telegram:
+    alias: Запись с камеры Reolink E1 zoom и отправка в телеграм
+    sequence:
+    - service: camera.record
+      data_template:
+        entity_id: camera.reolink_e1_zoom_profile000_mainstream
+        filename: "/config/www/cam_captures/reolink.mp4"
+        duration: 10
+    - delay: 00:00:45
+    - service: telegram_bot.send_video
+      data_template:
+        target:
+            - !secret telegram_id_1
+        file: "/config/www/cam_captures/reolink.mp4"
+
+Автоматизация - запрос на отправку фото по команде /photo
+В данной автоматизации использован шаблон target: '{{ trigger.event.data.user_id }}' - отправляющий фото тому пользователю, который прислал запрос.
+           
+    - id: Запрос на отчет             
+      alias: send_report
+      initial_state: true
+      trigger:
+      - platform: event
+        event_type: telegram_command
+        event_data:
+          command: '/photo'
+      action:
+      - service: camera.snapshot
+        data:
+             entity_id: camera.reolink_e1_zoom_profile000_mainstream
+             filename: "/config/www/cam_captures/reolink.jpg"
+      - delay: 00:00:15
+      - service: telegram_bot.send_photo
+        data_template:
+          target: '{{ trigger.event.data.user_id }}'
+          file: "/config/www/cam_captures/reolink.jpg" 

@@ -1,0 +1,65 @@
+### Проект Linux Armbian
+https://www.armbian.com/ 
+
+### Логин и пароль для первого входа
+root 1234
+
+### Программа для записи образа
+https://www.balena.io/etcher/
+
+### Удобный SSH клиент - 
+https://www.putty.org/ 
+
+Копировать из консоли - просто выделить нужный фрагмент кода
+Вставить в консоль - правым кликом мышки
+
+### Подключение репозитория universe и обновление списка пакетов
+sudo add-apt-repository universe && sudo apt-get update
+
+### Обновление пакетов
+sudo apt-get -y upgrade
+sudo apt-get -y dist-upgrade
+
+### FTP сервер Midnight Commander  APP armor git watchdog ntpdate
+sudo apt-get -y install ftpd mc apparmor git watchdog bluez ntpdate
+
+### Часовой пояс
+sudo dpkg-reconfigure tzdata
+
+### Установка WatchDog (при зависании компа - перегружает его)
+sudo ln -s  /lib/systemd/system/watchdog.service /etc/systemd/system/multi-user.target.wants/watchdog.service
+sudo systemctl enable watchdog.service
+sudo systemctl start watchdog.service
+
+### Зависимости и докер
+sudo apt-get -y install avahi-daemon jq docker.io
+
+### Добавление пользователя
+sudo usermod -aG docker ##имя пользователя
+
+### Настройка сети
+sudo nmtui
+
+### Перезагрузка
+sudo reboot
+
+### Входим под root
+
+### Установка Hass.io для 64 разрядных ARM
+curl -Lo installer.sh https://raw.githubusercontent.com/home-assistant/supervised-installer/master/installer.sh
+bash installer.sh --machine raspberrypi3-64
+
+### Веб интерфейс Home Assistant
+http://YOUR IP:8123/
+
+### Установка Portainer
+docker pull portainer/portainer-ce
+docker volume create portainer_data
+docker run -d -p 9000:9000 --name portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
+
+### Выход из консоли
+exit - возможно несколько раз
+
+### Веб интерфейс Portainer
+http://YOUR IP:9000/
+

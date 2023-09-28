@@ -1,0 +1,7 @@
+  zigbee_permit_join:
+    name: Time remaining
+    duration: 600
+    
+  vent:
+    name: Вентиляция выкл через -
+    duration: 600

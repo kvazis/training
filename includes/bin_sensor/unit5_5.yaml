@@ -1,0 +1,21 @@
+#   - platform: ping
+#     name: router_ping
+#     unique_id: router_ping
+#     host: 192.168.0.1
+
+
+#   - platform: "mqtt"
+#     name: relay_interlock
+#     state_topic: "zigbee2mqtt/DA 2ch relay"
+#     availability_topic: "zigbee2mqtt/bridge/state"
+#     payload_on: true
+#     payload_off: false
+#     value_template: "{{ value_json.interlock }}"
+    
+#   - platform: "mqtt"
+#     name: switch_outage
+#     state_topic: "zigbee2mqtt/LR thermostat 2"
+#     availability_topic: "zigbee2mqtt/bridge/state"
+#     payload_on: true
+#     payload_off: false
+#     value_template: "{{ value_json.power_outage_memory }}"

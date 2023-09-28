@@ -1,0 +1,22 @@
+Автоматизация обновления состояния zigbee розетки
+
+zigbee2mqtt
+
+  - alias: lellki_update
+    id: Обновления состояния розетки
+    initial_state: true
+    trigger:
+      - platform: time_pattern
+        seconds: '/30'
+    action:
+      - service: mqtt.publish
+        data_template:                
+          topic: "zigbee2mqtt/0x540f57fffe78ba20/get"
+          payload: '{"state": ""}'
+
+SLS Gateway
+
+onemintimer.lua
+
+zigbee.get("0x540F57FFFE78BA20", "power")
+zigbee.get("0x540F57FFFE78BA20", "state")

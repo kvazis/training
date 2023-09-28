@@ -1,0 +1,88 @@
+blueprint:
+  name: Light Auto off
+  description: Turn off a light when no motion
+  domain: automation
+  input:
+    motion_entity:
+      name: Template motion Sensor
+      description: Template sensor - motion and light off
+      selector:
+        entity:
+          domain: binary_sensor
+          device_class: motion
+    light_off_entity:
+      name: Template motion Sensor
+      description: Template sensor - motion and light off
+      selector:
+        entity:
+          domain: binary_sensor
+          device_class: light
+    light_on_entity:
+      name: Template light sensor
+      description: Template sensor - no motion and light on
+      selector:
+        entity:
+          domain: binary_sensor
+          device_class: light
+    timer_entity:
+      name: Timer
+      description: Wait for motion
+      selector:
+        entity:
+          domain: timer
+    light_target:
+      name: Light
+      selector:
+        target:
+          entity:
+            domain: light
+            
+mode: restart
+max_exceeded: silent
+
+trigger:
+  - platform: state
+    entity_id: !input motion_entity
+    from: "off"
+    to: "on"
+  - platform: state
+    entity_id: !input light_on_entity
+
+action:
+  choose:
+    # 1. Motion detected - lihgt on
+    - conditions:
+        - condition: state
+          entity_id: !input light_off_entity
+          state: 'on'
+      sequence:
+        - service: light.turn_on
+          target: !input light_target
+    # 2. No Motion and light turn on
+    - conditions:
+        - condition: state
+          entity_id: !input light_on_entity
+          state: 'on'
+      sequence:
+        - service: timer.start
+          entity_id: !input timer_entity
+        - wait_for_trigger:
+              platform: event
+              event_type: timer.finished
+              event_data:
+                entity_id: !input timer_entity
+        - service: light.turn_off
+          target: !input light_target
+    # 3. No Motion and light turn off
+    - conditions:
+        - condition: state
+          entity_id: !input light_on_entity
+          state: 'off'
+      sequence:
+        - service: timer.cancel
+          entity_id: !input timer_entity
+          
+          
+          
+            
+            

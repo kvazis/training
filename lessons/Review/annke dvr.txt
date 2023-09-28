@@ -1,0 +1,60 @@
+camera:
+
+## 1 канал основной поток
+  - platform: ffmpeg
+    name: ANNKE
+    input: rtsp://admin:пароль@192.168.0.213:554/Streaming/Channels/101
+    extra_arguments: "-rtsp_transport tcp"
+## 1 канал дополнительный поток
+  - platform: ffmpeg
+    name: ANNKE
+    input: rtsp://admin:пароль@192.168.0.213:554/Streaming/Channels/102
+    extra_arguments: "-rtsp_transport tcp"
+    
+## 2 канал основной поток
+  - platform: ffmpeg
+    name: ANNKE
+    input: rtsp://admin:пароль@192.168.0.213:554/Streaming/Channels/201
+    extra_arguments: "-rtsp_transport tcp"
+## 2 канал дополнительный поток
+  - platform: ffmpeg
+    name: ANNKE
+    input: rtsp://admin:пароль@192.168.0.213:554/Streaming/Channels/202
+    extra_arguments: "-rtsp_transport tcp"
+    
+## 3 канал основной поток
+  - platform: ffmpeg
+    name: ANNKE
+    input: rtsp://admin:пароль@192.168.0.213:554/Streaming/Channels/301
+    extra_arguments: "-rtsp_transport tcp"
+## 3 канал дополнительный поток
+  - platform: ffmpeg
+    name: ANNKE
+    input: rtsp://admin:пароль@192.168.0.213:554/Streaming/Channels/302
+    extra_arguments: "-rtsp_transport tcp"
+    
+## 4 канал основной поток
+  - platform: ffmpeg
+    name: ANNKE
+    input: rtsp://admin:пароль@192.168.0.213:554/Streaming/Channels/401
+    extra_arguments: "-rtsp_transport tcp"
+## 4 канал дополнительный поток
+  - platform: ffmpeg
+    name: ANNKE
+    input: rtsp://admin:пароль@192.168.0.213:554/Streaming/Channels/402
+    extra_arguments: "-rtsp_transport tcp"
+    
+## IP камера основной поток
+  - platform: ffmpeg
+    name: ANNKE
+    input: rtsp://admin:пароль@192.168.0.213:554/Streaming/Channels/501
+    extra_arguments: "-rtsp_transport tcp"
+## IP камера дополнительный поток
+  - platform: ffmpeg
+    name: ANNKE
+    input: rtsp://admin:пароль@192.168.0.213:554/Streaming/Channels/502
+    extra_arguments: "-rtsp_transport tcp"
+    
+    
+    
+    

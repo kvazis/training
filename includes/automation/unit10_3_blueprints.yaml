@@ -1,0 +1,38 @@
+- id: Автоматическое включение света в прихожей
+  alias: Motion-activated Light
+  description: Автоматизация шаблона включения света
+## Для работы поставить initial_state: true
+  initial_state: false
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      no_motion_wait: '45'
+      motion_entity: binary_sensor.0x00158d00013f7894_occupancy
+      light_target:
+        entity_id: light.0x00158d000420dbab_light
+        
+- id: Автоматическое включение света в коридоре
+  alias: Motion-activated Light 2
+  description: Автоматизация шаблона включения света
+## Для работы поставить initial_state: true
+  initial_state: false
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      no_motion_wait: '60'
+      motion_entity: binary_sensor.0x00158d00013f7500_occupancy
+      light_target:
+        entity_id: light.0x00158d000420d500_light
+        
+- id: Автоматическое включение света в кухне
+  alias: Motion-activated Light 3
+  description: Автоматизация шаблона включения света
+## Для работы поставить initial_state: true
+  initial_state: false
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      no_motion_wait: '60'
+      motion_entity: binary_sensor.0x00158d00013f7800_occupancy
+      light_target:
+        entity_id: light.0x00158d000420d7880_light

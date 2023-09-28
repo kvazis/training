@@ -1,0 +1,76 @@
+virtual:
+
+
+    recorder:
+      include:
+        entities:
+          - binary_sensor.0xa4c138efbcfd0a22_occupancy
+
+    template:
+     
+      - binary_sensor:
+
+          - name: electricity
+            state: >
+              {{  is_state('switch.0x086bd7fffe3f4a24', 'off')  }}
+
+    binary_sensor:
+    
+      - platform: tod
+        name: test_tod_day
+        after: '10:00'
+        before: '22:00'
+
+
+    automation:
+              
+      - alias: test_auto_light
+        id: test_auto_light
+        description: Тестирование автономного светильника
+        initial_state: false
+        trigger:
+    # Перезагрузка раз в 6 часов
+        - platform: time_pattern
+          hours: '/6'            
+        action:            
+        - service: switch.toggle
+          entity_id: switch.0x086bd7fffe3f4a24
+          
+      - alias: test_backup_light
+        id: test_backup_light
+        description: Тестирование USB светильника
+        initial_state: false
+        trigger:
+    # Переключение раз в 15 минут
+        - platform: time_pattern
+          minutes: '/15'            
+        condition:
+    # Сенсор электричества - электропитания нет
+        - condition: state
+          entity_id: binary_sensor.electricity
+          state: 'on'
+    # Сенсор дня
+        - condition: state
+          entity_id: binary_sensor.test_tod_day
+          state: 'on'
+        action:            
+        - service: switch.toggle
+          entity_id: switch.0x00124b0023ae464d_left
+          
+          
+      - alias: test_backup_light_off
+        id: test_backup_light_off
+        description: Безусловное отключение вечером
+        initial_state: false
+        trigger:
+        - platform: state
+          entity_id: binary_sensor.test_tod_day
+          from: 'on'
+          to: 'off'
+        action:
+        - delay: 00:00:02
+        - service: switch.turn_off
+          entity_id: switch.0x00124b0023ae464d_left
+
+          
+          

@@ -1,0 +1,415 @@
+utility_total:
+
+    homeassistant:
+      customize:
+        binary_sensor.night:
+          friendly_name: Ночной тариф
+        sensor.month:
+          friendly_name: Текущий месяц
+          icon: mdi:calendar-month
+        select.counter_energy:
+          friendly_name: Текущий тариф
+
+        sensor.total_energy:
+          friendly_name: Общее потребление
+          device_class: energy
+          unit_of_measurement: кВт/ч
+        sensor.total_power:
+          friendly_name: Общая мощность
+          device_class: power
+          unit_of_measurement: Вт
+
+        sensor.counter_energy_clear:
+          friendly_name: Всего cчетчик
+          icon: mdi:counter
+          unit_of_measurement: кВт/ч
+        sensor.counter_energy_day:
+          friendly_name: День cчетчик
+          icon: mdi:white-balance-sunny
+          unit_of_measurement: кВт/ч
+        sensor.counter_energy_night:
+          friendly_name: Ночь cчетчик
+          icon: mdi:moon-waning-crescent
+          unit_of_measurement: кВт/ч
+
+        sensor.meter_total_energy_clear:
+          friendly_name: Всего
+          icon: mdi:transmission-tower
+          unit_of_measurement: кВт/ч
+        sensor.meter_total_energy_day:
+          friendly_name: День
+          icon: mdi:white-balance-sunny
+          unit_of_measurement: кВт/ч
+        sensor.meter_total_energy_night:
+          friendly_name: Ночь
+          icon: mdi:moon-waning-crescent
+          unit_of_measurement: кВт/ч
+
+        sensor.total_energy_clear_cost:
+          friendly_name: Всего
+          icon: mdi:cash-multiple
+          unit_of_measurement: грн
+        sensor.total_energy_day_cost:
+          friendly_name: День
+          icon: mdi:cash-clock
+          unit_of_measurement: грн
+        sensor.total_energy_night_cost:
+          friendly_name: Ночь
+          icon: mdi:cash-fast
+          unit_of_measurement: грн
+
+    recorder:
+      include:
+        entities:
+           - sensor.total_power
+
+    input_datetime:
+    
+      night_start:
+        name: Начало ночного тарифа
+        has_date: false
+        has_time: true
+
+      night_stop:
+        name: Завершение ночного тарифа
+        has_date: false
+        has_time: true
+
+    utility_meter:
+
+      counter_energy:
+        source: sensor.total_energy
+        tariffs:
+          - night
+          - day
+
+      meter_total_energy:
+        source: sensor.total_energy
+        cycle: monthly
+        offset:
+          days: 0
+          hours: 12
+          minutes: 0
+        tariffs:
+          - night
+          - day
+
+    input_text:
+      consumption_limit:
+        name: Лимит потребления КВт/ч
+      in_limit:
+        name: В лимите грн * КВт/ч
+      off_limit:
+        name: Сверх лимита грн * КВт/ч
+      night_coefficient:
+        name: Ночной коэффициент
+
+      counter_energy_day:
+        name: Счетчик день
+      counter_energy_night:
+        name: Счетчик ночь
+
+      total_day:
+        name: Общее потребление день
+      total_night:
+        name: Общее потребление ночь
+
+    input_button:
+      counter_energy_day:
+        name: Счетчик день
+        icon: mdi:white-balance-sunny
+      counter_energy_night:
+        name: Счетчик ночь
+        icon: mdi:moon-waning-crescent
+        
+      total_day:
+        name: Общее потребление день
+        icon: mdi:white-balance-sunny
+      total_night:
+        name: Общее потребление ночь
+        icon: mdi:moon-waning-crescent
+      send_stat:
+        name: Отправка в телеграмм
+
+    input_boolean:
+    
+      calibrate_switch:
+        name: Калибровка
+
+      tariff_switch:
+        name: Тарифы
+        
+      time_switch:
+        name: Время
+        
+      cost_switch:
+        name: Стоимость
+
+    template:
+    
+      - binary_sensor:
+      
+          - name: night
+            state: >
+                {% if states('input_datetime.night_start') < states('input_datetime.night_stop') %}
+                {{ states('input_datetime.night_start') <= now().strftime('%H:%M:%S') <= states('input_datetime.night_stop') }}
+                {% elif states('input_datetime.night_start') > states('input_datetime.night_stop') %}
+                {{states('input_datetime.night_start') <= now().strftime('%H:%M:%S') <= '23:59:59'
+                or '00:00:00' <= now().strftime('%H:%M:%S') <= states('input_datetime.night_stop')}}
+                {% endif %}
+            device_class: running
+            
+      - sensor:
+
+          - name: month
+            state: >
+                {% set month_num = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"] %}
+                {% set month_of_year = month_num[now().month-1]  %}
+                {{ month_of_year }}
+
+          - name: total_energy
+            state: >
+                {{(
+                   states('sensor.0xa4c138716822e6a7_energy')|float(0) +
+                   states('sensor.0x60a423fffe7ff8c8_energy')|float(0) +
+                   states('sensor.0x086bd7fffe3f4a24_energy')|float(0)
+                  )|round(2)}}
+                  
+          - name: total_power
+            state: >
+                {{(
+                   states('sensor.0xa4c138716822e6a7_power')|float(0) +
+                   states('sensor.0x60a423fffe7ff8c8_power')|float(0) +
+                   states('sensor.0x086bd7fffe3f4a24_power')|float(0)
+                  )|round(2)}}
+
+          - name: counter_energy_clear
+            state: >
+                {{(
+                   states('sensor.counter_energy_day')|float(0) +
+                   states('sensor.counter_energy_night')|float(0)
+                  )|round(2)}}
+                  
+          - name: meter_total_energy_clear
+            state: >
+                {{(
+                   states('sensor.meter_total_energy_day')|float(0) +
+                   states('sensor.meter_total_energy_night')|float(0)
+                  )|round(2)}}
+      
+          - name: total_energy_clear_cost
+            state: >
+                {{(
+                   states('sensor.total_energy_day_cost')|float(0) +
+                   states('sensor.total_energy_night_cost')|float(0)
+                  )|round(2)}}
+
+          - name: total_energy_day_cost
+            state: >
+                {% if states('sensor.meter_total_energy_clear')|float <= states('input_text.consumption_limit')|float %}
+                {{ states('sensor.meter_total_energy_day')|float * states('input_text.in_limit')|float }}
+                {% else  %}
+                {{ states('sensor.meter_total_energy_day')|float * states('input_text.off_limit')|float }}
+                {% endif %}
+                
+          - name: total_energy_night_cost
+            state: >
+                {% if states('sensor.meter_total_energy_clear')|float <= states('input_text.consumption_limit')|float %}
+                {{ states('sensor.meter_total_energy_night')|float * states('input_text.in_limit')|float * states('input_text.night_coefficient')|float }}
+                {% else  %}
+                {{ states('sensor.meter_total_energy_night')|float * states('input_text.off_limit')|float * states('input_text.night_coefficient')|float }}
+                {% endif %}
+                
+                
+    automation:
+    
+      - alias: counter_energy_calibrate
+        id: counter_energy_calibrate
+        description: Калибровка показаний счетчика
+        initial_state: true
+        trigger:
+    ## Дневное потребление
+        - platform: state
+          entity_id: input_button.counter_energy_day
+          id: counter_day
+    ## Ночное потребление
+        - platform: state
+          entity_id: input_button.counter_energy_night
+          id: counter_night
+        action:
+            - choose:
+              - conditions:
+                  - condition: trigger
+                    id: counter_day
+                sequence:
+                  - service: utility_meter.calibrate
+                    data_template:
+                      value: >
+                         {{states('input_text.counter_energy_day')|float}}
+                    target:
+                      entity_id:
+                        - sensor.counter_energy_day
+              - conditions:
+                  - condition: trigger
+                    id: counter_night
+                sequence:
+                  - service: utility_meter.calibrate
+                    data_template:
+                      value: >
+                         {{states('input_text.counter_energy_night')|float}}
+                    target:
+                      entity_id:
+                        - sensor.counter_energy_night
+    
+      - alias: total_energy_calibrate
+        id: total_energy_calibrate
+        description: Калибровка общего потребления
+        initial_state: true
+        trigger:
+    ## Дневное потребление
+        - platform: state
+          entity_id: input_button.total_day
+          id: total_day
+    ## Ночное потребление
+        - platform: state
+          entity_id: input_button.total_night
+          id: total_night
+        action:
+            - choose:
+              - conditions:
+                  - condition: trigger
+                    id: total_day
+                sequence:
+                  - service: utility_meter.calibrate
+                    data_template:
+                      value: >
+                         {{states('input_text.total_day')|float}}
+                    target:
+                      entity_id:
+                        - sensor.meter_total_energy_day
+              - conditions:
+                  - condition: trigger
+                    id: total_night
+                sequence:
+                  - service: utility_meter.calibrate
+                    data_template:
+                      value: >
+                         {{states('input_text.total_night')|float}}
+                    target:
+                      entity_id:
+                        - sensor.meter_total_energy_night
+                        
+      - alias: tariff_switching
+        id: tariff_switching
+        description: Переключение тарифов
+        initial_state: true
+        trigger:
+    ## Сенсор ночного тарифа
+        - platform: state
+          entity_id: binary_sensor.night
+    # Проверка раз в 5 минут
+        - platform: time_pattern
+          minutes: '/5'
+        action:
+            - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: binary_sensor.night
+                    state: 'off'
+                  - condition: state
+                    entity_id: select.counter_energy
+                    state: 'night'
+                sequence:
+                  - service: select.select_option
+                    target:
+                      entity_id: 
+                          - select.counter_energy
+                          - select.meter_total_energy
+                          - select.fridge
+                          - select.workplace
+                          - select.light_kn
+                    data:
+                      option: day
+              - conditions:
+                  - condition: state
+                    entity_id: binary_sensor.night
+                    state: 'on'
+                  - condition: state
+                    entity_id: select.counter_energy
+                    state: 'day'
+                sequence:
+                  - service: select.select_option
+                    target:
+                      entity_id: 
+                          - select.counter_energy
+                          - select.meter_total_energy
+                          - select.fridge
+                          - select.workplace
+                          - select.light_kn
+                    data:
+                      option: night
+
+      - alias: send_to_telegramm
+        id: send_to_telegramm
+        description: Отправка в телеграмм
+        initial_state: true
+        trigger:
+    # Отправка утром
+        - platform: time
+          at: '09:00:00'
+          id: monthly
+    # Принудительная отправка
+        - platform: state
+          entity_id: input_button.send_stat
+          id: forcibly      
+        action:
+            - choose:
+              - conditions:
+                  - condition: trigger
+                    id: monthly     
+                  - condition: template
+                    value_template: '{{ now().day == 1 }}'        
+                sequence:        
+                  - service: notify.telegram_id_1
+                    data:
+                      message: | 
+                         {{"\U0001F4C5"}} Начался новый месяц - {{ states('sensor.month') }}
+                         {{"\U0000303D"}} Электросчетчик всего {{ states('sensor.counter_energy_clear') }} КВт ч
+                         {{"\U00002600"}} День - {{ states('sensor.counter_energy_day') }} КВт ч, Ночь - {{ states('sensor.counter_energy_night') }} КВт ч
+                         {{"\U0001F4E8"}} Потребление за месяц:
+                         {{"\U000026A1"}} Всего - {{ states('sensor.meter_total_energy_clear') }} КВт ч
+                         {{"\U0001F4B5"}} Cтоимость {{ states('sensor.total_energy_clear_cost') }} грн
+                         {{"\U00002600"}} День - {{ states('sensor.meter_total_energy_day') }} КВт ч, Ночь - {{ states('sensor.meter_total_energy_night') }} КВт ч
+                         {{"\U0001F4B5"}} Cтоимость, день - {{ states('sensor.total_energy_day_cost') }} грн, ночь - {{ states('sensor.total_energy_night_cost') }} грн   
+            - choose:
+              - conditions:
+                  - condition: trigger
+                    id: forcibly  
+                sequence:        
+                  - service: notify.telegram_id_1
+                    data:
+                      message: | 
+                         {{"\U0001F4C5"}} {{as_timestamp(now()) | int | timestamp_custom("%H:%M:%S %d.%m.%Y") }}
+                         {{"\U0000303D"}} Электросчетчик всего {{ states('sensor.counter_energy_clear') }} КВт ч
+                         {{"\U00002600"}} День - {{ states('sensor.counter_energy_day') }} КВт ч, Ночь - {{ states('sensor.counter_energy_night') }} КВт ч
+                         {{"\U0001F4E8"}} Потребление за месяц:
+                         {{"\U000026A1"}} Всего - {{ states('sensor.meter_total_energy_clear') }} КВт ч
+                         {{"\U0001F4B5"}} Cтоимость {{ states('sensor.total_energy_clear_cost') }} грн
+                         {{"\U00002600"}} День - {{ states('sensor.meter_total_energy_day') }} КВт ч, Ночь - {{ states('sensor.meter_total_energy_night') }} КВт ч
+                         {{"\U0001F4B5"}} Cтоимость, день - {{ states('sensor.total_energy_day_cost') }} грн, ночь - {{ states('sensor.total_energy_night_cost') }} грн  
+
+                         
+                         
+                         
+                         
+                         
+                         
+                         
+                         
+                         
+                         
+                         
+                         
+                         
+                         
+                         

@@ -1,0 +1,17 @@
+aqarae1_therm:
+
+    automation:
+    
+      - alias: set_e1_temp
+        id: set_e1_temp
+        description: Установка температуры внешнего сенсора
+        initial_state: true
+        trigger:
+         - platform: state
+           entity_id: sensor.0x54ef44100001b68d_temperature
+        action:
+        - service: mqtt.publish
+          data_template:
+            topic: "zigbee2mqtt/0x54ef44100051cc38/set/sensor_temp"
+            payload_template: "{{states('sensor.0x54ef44100001b68d_temperature')|float(0)}}"
+            retain: true 

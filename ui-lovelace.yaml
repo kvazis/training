@@ -1,0 +1,143 @@
+title: Home Assistant - сервер
+views:
+
+  - title: Главная
+    icon: mdi:home-assistant
+    
+    cards:
+
+      - type: vertical-stack
+        cards:
+        
+        - type: markdown
+          content: >
+             **Текущее состояние**
+             
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - entity: sensor.last_boot_custom
+            - entity: sensor.online_custom
+            - entity: sensor.time
+              name: Текущее время
+              icon: mdi:clock-outline
+            - entity: sensor.date
+              name: Дата
+              icon: mdi:calendar-check-outline
+            - entity: binary_sensor.rpi_power_status
+              
+        - type: markdown
+          content: >
+             **Резервное копирование**
+             
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - entity: sensor.last_google_backup_main
+            - entity: sensor.backups_in_google_drive
+            - entity: sensor.backups_in_home_assistant
+              
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - entity: sensor.maria_db_size
+              name: Объем БД
+              icon: mdi:database
+
+      - type: vertical-stack
+        cards:
+        - type: markdown
+          content: >
+             **Графики** 
+
+        - type: horizontal-stack
+          cards:
+
+           - type: gauge
+             name: Загрузка CPU
+             unit: '%'
+             entity: sensor.processor_use_percent
+             severity:
+                green: 0
+                yellow: 60
+                red: 85
+             
+           - type: gauge
+             name: Загрузка ОЗУ
+             unit: '%'
+             entity: sensor.memory_use_percent
+             severity:
+                green: 0
+                yellow: 60
+                red: 85
+                
+        - type: horizontal-stack
+          cards:
+
+           - type: gauge
+             name: Диск заполнен
+             unit: '%'
+             entity: sensor.disk_use_percent
+             severity:
+                green: 0
+                yellow: 60
+                red: 85    
+                
+           - type: gauge
+             name: Свободное место
+             unit: 'Гб'
+             entity: sensor.disk_free
+             severity:
+                red: 2
+                yellow: 6
+                green: 8
+                
+        - type: history-graph
+          entities:
+           - entity: sensor.maria_db_size
+             name: Maria DB
+                
+  - !include lovelace/boiler.yaml
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+             
+              
+
+
+
+              
+              

@@ -1,0 +1,24 @@
+Координатор Zigbee V3, описание - https://modkam.ru/?p=1112
+
+Телеграмм, поддержка - https://t.me/zigbeer
+Телеграмм, барахолка (покупка в РФ) - https://t.me/zigberu
+
+Купить стик 3.0 и другие разработки zigbee в Украине - https://izi.ua/m-106842-id106842
+
+configuration.yaml
+mqtt:
+  broker: core-mosquitto
+  discovery: true
+  discovery_prefix: homeassistant
+  username: mqtt
+  password: mqtt
+
+Репозиторий Zigbee2mqtt https://github.com/danielwelch/hassio-zigbee2mqtt
+
+Проверяем номер serial порта - ls -l /dev/serial/by-id
+
+Репозиторий Zigbee2mqtt Assistant  https://github.com/yllibed/hassio
+
+
+
+

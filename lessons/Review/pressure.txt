@@ -1,0 +1,8 @@
+- platform: template
+  sensors:
+      0x04cf8cdf3c805f61_mmhg_pressure:
+        friendly_name: "Улица давление мм рт. ст. факт"
+        unit_of_measurement: 'mmHg'
+        value_template: "{{ (states('sensor.0x04cf8cdf3c805f61_pressure')|float * 0.7500637)|round(2) }}"
+        availability_template: "{{ (states('sensor.0x04cf8cdf3c805f61_pressure')|float > 850 ) }}"
+        icon_template: mdi:gauge

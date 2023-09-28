@@ -1,0 +1,232 @@
+power_switch:
+
+
+    input_button:
+
+      kettle:
+        name: Включение чайника
+        icon: mdi:kettle
+        
+      microwave:
+        name: Включение микролновки
+        icon: mdi:microwave
+        
+      stove:
+        name: Включение мультипечи
+        icon: mdi:stove
+
+    input_boolean:
+    
+      kettle:
+        name: Чайник
+        icon: mdi:kettle
+
+      kettle_power:
+        name: Кипение
+        icon: mdi:kettle-steam
+        
+      microwave:
+        name: Микроволновка
+        icon: mdi:microwave
+
+      microwave_power:
+        name: Приготовление
+        icon: mdi:microwave
+        
+      stove:
+        name: Мультипечь
+        icon: mdi:stove
+
+      stove_power:
+        name: Приготовление
+        icon: mdi:stove
+
+    template:
+     
+      - sensor:
+
+          - name: kitchen_power
+            state: >
+                {{states('sensor.kettle_power')|float(0) + states('sensor.microwave_power')|float(0) + states('sensor.stove_power')|float(0)}}
+      
+          - name: kettle_power
+            state: >
+              {% if is_state('input_boolean.kettle_power', 'on') %}
+              2000
+              {% else %}
+              0
+              {% endif %}
+              
+          - name: microwave_power
+            state: >
+              {% if is_state('input_boolean.microwave_power', 'on') %}
+              1200
+              {% else %}
+              0
+              {% endif %}
+              
+          - name: stove_power
+            state: >
+              {% if is_state('input_boolean.stove_power', 'on') %}
+              1500
+              {% else %}
+              0
+              {% endif %}
+              
+    automation:
+
+      - alias: kettle
+        id: kettle
+        description: Кипение чайника
+        initial_state: true
+        trigger:
+        - platform: state
+          entity_id: input_button.kettle
+          id: button_tap
+        - platform: state
+          entity_id: input_boolean.kettle
+          from: 'on'
+          to: 'off'
+          id: socket_off
+        action:
+            - choose:
+              - conditions:
+                  - condition: trigger
+                    id: button_tap
+                  - condition: state
+                    entity_id: input_boolean.kettle
+                    state: 'on'
+                sequence:          
+                  - service: input_boolean.toggle
+                    entity_id: input_boolean.kettle_power          
+              - conditions:
+                  - condition: trigger
+                    id: socket_off
+                  - condition: state
+                    entity_id: input_boolean.kettle_power
+                    state: 'on'
+                sequence:          
+                  - service: input_boolean.turn_off
+                    entity_id: input_boolean.kettle_power         
+          
+          
+      - alias: microwave
+        id: microwave
+        description: Работа микроволновки
+        initial_state: true
+        trigger:
+        - platform: state
+          entity_id: input_button.microwave
+          id: button_tap
+        - platform: state
+          entity_id: input_boolean.microwave
+          from: 'on'
+          to: 'off'
+          id: socket_off
+        action:
+            - choose:
+              - conditions:
+                  - condition: trigger
+                    id: button_tap
+                  - condition: state
+                    entity_id: input_boolean.microwave
+                    state: 'on'
+                sequence:          
+                  - service: input_boolean.toggle
+                    entity_id: input_boolean.microwave_power   
+              - conditions:
+                  - condition: trigger
+                    id: socket_off
+                  - condition: state
+                    entity_id: input_boolean.microwave_power
+                    state: 'on'
+                sequence:          
+                  - service: input_boolean.turn_off
+                    entity_id: input_boolean.microwave_power
+
+      - alias: stove
+        id: stove
+        description: Работа мультипечи
+        initial_state: true
+        trigger:
+        - platform: state
+          entity_id: input_button.stove
+          id: button_tap
+        - platform: state
+          entity_id: input_boolean.stove
+          from: 'on'
+          to: 'off'
+          id: socket_off
+        action:
+            - choose:
+              - conditions:
+                  - condition: trigger
+                    id: button_tap
+                  - condition: state
+                    entity_id: input_boolean.stove
+                    state: 'on'
+                sequence:          
+                  - service: input_boolean.toggle
+                    entity_id: input_boolean.stove_power
+              - conditions:
+                  - condition: trigger
+                    id: socket_off
+                  - condition: state
+                    entity_id: input_boolean.stove_power
+                    state: 'on'
+                sequence:          
+                  - service: input_boolean.turn_off
+                    entity_id: input_boolean.stove_power
+
+      - alias: power_control
+        id: power_control
+        description: Контроль питания
+        initial_state: true
+        trigger:
+         - platform: numeric_state
+           entity_id: sensor.kitchen_power
+           above: 2100
+           id: overpower
+         - platform: numeric_state
+           entity_id: sensor.kitchen_power
+           below: 2100
+           id: underpower
+        action:
+            - choose:
+              - conditions:
+                  - condition: trigger
+                    id: overpower
+                  - condition: numeric_state
+                    entity_id: sensor.kettle_power
+                    below: 50
+                sequence:          
+                  - service: input_boolean.turn_off
+                    entity_id: input_boolean.kettle
+              - conditions:
+                  - condition: trigger
+                    id: overpower
+                  - condition: numeric_state
+                    entity_id: sensor.microwave_power
+                    below: 50
+                sequence:          
+                  - service: input_boolean.turn_off
+                    entity_id: input_boolean.microwave
+              - conditions:
+                  - condition: trigger
+                    id: overpower
+                  - condition: numeric_state
+                    entity_id: sensor.stove_power
+                    below: 50
+                sequence:          
+                  - service: input_boolean.turn_off
+                    entity_id: input_boolean.stove
+              - conditions:
+                  - condition: trigger
+                    id: underpower
+                sequence: 
+                  - service: input_boolean.turn_on
+                    entity_id:
+                      - input_boolean.kettle
+                      - input_boolean.microwave
+                      - input_boolean.stove
+                    

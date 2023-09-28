@@ -1,0 +1,48 @@
+energy:
+
+    recorder:
+      include:
+        entities:
+           - sensor.0xa4c138940f10d76d_power
+           - sensor.0xa4c138940f10d76d_meter
+           - sensor.0xa4c138940f10d76d_meter_cost
+           - sensor.0x60a423fffe7ff8c8_power
+           - sensor.0x60a423fffe7ff8c8_meter
+           
+
+    homeassistant:
+      customize:
+      
+        sensor.0xa4c138940f10d76d_meter:
+          friendly_name: DIN rail
+          unit_of_measurement: kWh
+          device_class: energy
+          state_class: total
+
+
+        sensor.0x60a423fffe7ff8c8_meter:
+          friendly_name: EU Socket
+          unit_of_measurement: kWh
+          device_class: energy
+          state_class: total
+
+    utility_meter:
+
+      0xa4c138940f10d76d_meter:
+        source: sensor.0xa4c138940f10d76d_energy
+        unique_id: 0xa4c138940f10d76d
+        cycle: monthly
+        offset:
+          days: 0
+          hours: 9
+          minutes: 0
+    
+      0x60a423fffe7ff8c8_meter:
+        source: sensor.0x60a423fffe7ff8c8_energy
+        unique_id: 0x60a423fffe7ff8c8
+        cycle: monthly
+        offset:
+          days: 0
+          hours: 9
+          minutes: 0
+ 
