@@ -1,4 +1,4 @@
-### [Raspberry PI 4B - Установка и обновление Debian до версии 12, ставим Supervised Home Assistant - сентябрь 2023]( )
+### [Raspberry PI 4B - Установка Debian 12 Bookworm, и Supervised Home Assistant - сентябрь 2023](https://youtu.be/1gcUETTqWRU)
 
 <a href="https://www.youtube.com/channel/UCcq9onYHbs6go3kDpfBoqhg?sub_confirmation=1" target="_blank"><img src="https://raw.githubusercontent.com/kvazis/training/master/lessons/img/subscribe.png" alt="Subscribe" style="height: 71px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
 
@@ -26,7 +26,7 @@ sudo -s
 apt update
 apt upgrade -y
 ```
-:ballot_box_with_check: Обновление прошивки при необходимости    
+:ballot_box_with_check: Обновление прошивки - только при необходимости! (новый одноплатник или не обновляли не менее двух лет)    
 ```yaml
 rpi-update
 ```
