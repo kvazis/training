@@ -76,6 +76,14 @@ Unit of Measure:
 MB
 ```
 
+:ballot_box_with_check: Рекордер в `system_sensors.yaml`    
+```yaml
+    recorder:
+      db_url: !secret db_link
+      purge_keep_days: 7
+      auto_purge: true
+```
+
 :ballot_box_with_check: HACS    
 режим root:    
 ```yaml
