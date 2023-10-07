@@ -36,6 +36,8 @@ lovelace:
      type: module 
    - url: /hacsfiles/timer-bar-card/timer-bar-card.js
      type: module     
+   - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
+     type: module
      
 # Text to speech
 tts:

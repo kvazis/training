@@ -1,3 +1,4 @@
+
 #   - id: Включить добавление Zigbee
 #     alias: enable_zigbee_join
 #     initial_state: true

@@ -96,6 +96,25 @@ views:
           entities:
            - entity: sensor.maria_db_size
              name: Maria DB
+
+
+      - type: vertical-stack
+        cards:
+
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - state: 'unavailable'
+                   options:
+                      secondary_info: last-changed
+
+
+
+
                 
   - !include lovelace/boiler.yaml
   
