@@ -1,11 +1,66 @@
 test:
 
-    template:
+    automation:
     
-      - binary_sensor:
-      
-    # Сенсор определения отключения электрики
-          - name: electricity
-            state: >
-             {{ is_state('switch.0xa4c138716822e6a7', 'off') }}
-            device_class: problem
+    - id: 'aqara_h1_light_toggle'
+      alias: Aqara H1 light toggle
+      trigger:
+      - platform: state
+        entity_id:
+        - sensor.0x54ef4410007bb24e_action
+        to: single
+      condition: []
+      action:
+        - choose:
+          - conditions:
+              - condition: state
+                entity_id: light.0x00158d0004282c21
+                state: 'off'
+            sequence:
+              - service: light.turn_on
+                entity_id:
+                  - light.0x00158d0004282c21
+                data_template:
+                  brightness_pct: 60
+                  kelvin: 4000
+          - conditions:
+              - condition: state
+                entity_id: light.0x00158d0004282c21
+                state: 'on'
+            sequence:
+              - service: light.turn_off
+                entity_id:
+                  - light.0x00158d0004282c21
+
+    - id: 'aqara_h1_brightness_change'
+      alias: Aqara H1 brightness change
+      trigger:
+      - platform: state
+        entity_id:
+          - sensor.0x54ef4410007bb24e_action_rotation_percent
+        from: unknown
+      condition: 
+      - condition: state
+        entity_id: light.0x00158d0004282c21
+        state: 'on'
+      action:
+        - service: light.turn_on
+          data_template:
+            brightness: >-
+              {{((state_attr('light.0x00158d0004282c21','brightness')|int(1))+(trigger.to_state.state|float(1))*2.55)|int(1)}}
+          target:
+            entity_id: light.0x00158d0004282c21
+          enabled: true
+
+
+
+
+
+
+
+
+
+
+
+
+
