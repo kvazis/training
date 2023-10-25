@@ -1,0 +1,49 @@
+// Название: Tuya Zigbee Smart Curtain
+// Модель: TS0601_cover
+// modelID: TS0601
+// manufacturerName: _TZE200_guvc7pdy
+
+const fz = require('zigbee-herdsman-converters/converters/fromZigbee');
+const tz = require('zigbee-herdsman-converters/converters/toZigbee');
+const exposes = require('zigbee-herdsman-converters/lib/exposes');
+const legacy = require('zigbee-herdsman-converters/lib/legacy');
+const reporting = require('zigbee-herdsman-converters/lib/reporting');
+const extend = require('zigbee-herdsman-converters/lib/extend');
+const e = exposes.presets;
+const ea = exposes.access;
+const tuya = require('zigbee-herdsman-converters/lib/tuya');
+
+const definition = {
+    // Since a lot of TuYa devices use the same modelID, but use different datapoints
+    // it's necessary to provide a fingerprint instead of a zigbeeModel
+    fingerprint: [
+        {
+            // The model ID from: Device with modelID 'TS0601' is not supported
+            // You may need to add \u0000 at the end of the name in some cases
+            modelID: 'TS0601',
+            // The manufacturer name from: Device with modelID 'TS0601' is not supported.
+            manufacturerName: '_TZE200_guvc7pdy',
+        },
+    ],
+    model: 'TS0601_cover',
+    vendor: 'TuYa',
+    description: 'Curtain motor/roller blind motor/window pusher/tubular motor',
+    fromZigbee: [legacy.fromZigbee.tuya_cover, fz.ignore_basic_report],
+    toZigbee: [legacy.toZigbee.tuya_cover_control, legacy.toZigbee.tuya_cover_options],
+    onEvent: tuya.onEventSetTime, // Add this if you are getting no converter for 'commandMcuSyncTime'
+    configure: tuya.configureMagicPacket,
+    exposes: [
+            e.cover_position().setAccess('position', ea.STATE_SET),
+            e.composite('options', 'options', ea.STATE_SET)
+                .withFeature(e.numeric('motor_speed', ea.STATE_SET)
+                    .withValueMin(0).withValueMax(255).withDescription('Motor speed'))
+                .withFeature(e.binary('reverse_direction', ea.STATE_SET, true, false)
+                    .withDescription('Reverse the motor direction'))],
+    meta: {
+        // All datapoints go in here
+        tuyaDatapoints: [
+        ],
+    },
+};
+
+module.exports = definition;
