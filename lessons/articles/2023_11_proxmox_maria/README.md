@@ -132,21 +132,6 @@ Unit of Measure:
 ```yaml
 MB
 ```
-
-
-
-:ballot_box_with_check: HACS    
-режим root:    
-```yaml
-sudo -s
-```
-:white_check_mark: [Команда с сайта HACS](https://hacs.xyz/docs/setup/download)    
-Загрузка и установка HACS - `wget -O - https://get.hacs.xyz | bash -`    
-Выход:    
-```yaml
-exit
-```
-
 ____
 #### Поддержать развитие проекта *Умный дом с Alex Kvazis*    
 <a href="https://www.youtube.com/channel/UCcq9onYHbs6go3kDpfBoqhg/join" target="_blank"><img src="https://raw.githubusercontent.com/kvazis/training/master/lessons/img/youtube.png" alt="Youtube Sponsorship" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
