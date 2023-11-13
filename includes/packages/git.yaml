@@ -2,4 +2,4 @@ git:
 
 
     shell_command:
-      git_config: 'bash /homeassistant/ha_backup.sh'
+      git_config: 'bash ./ha_backup.sh'
