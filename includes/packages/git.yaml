@@ -1,0 +1,5 @@
+git:
+
+
+    shell_command:
+      git_config: /path/to/ha_backup.sh
