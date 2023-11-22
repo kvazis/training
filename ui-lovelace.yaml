@@ -25,7 +25,9 @@ views:
               name: Дата
               icon: mdi:calendar-check-outline
             - entity: binary_sensor.rpi_power_status
-              
+            - entity: input_button.git_update
+              icon: mdi:git
+             
         - type: markdown
           content: >
              **Резервное копирование**

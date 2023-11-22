@@ -3,3 +3,23 @@ git:
 
     shell_command:
       git_config: 'bash ./ha_backup.sh'
+      
+    input_button:
+
+      git_update:
+        name: Обновление конфигурации на github
+
+      
+
+    automation:
+
+      - alias: git_update
+        id: git_update
+        description: Обновление конфигурации на github
+        initial_state: true
+        trigger:
+        - platform: state
+          entity_id: input_button.git_update
+        action:
+        - service: shell_command.git_config
+          data: {}
