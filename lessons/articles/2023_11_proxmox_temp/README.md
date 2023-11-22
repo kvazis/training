@@ -7,7 +7,7 @@
 
 :white_check_mark: **Оригинальный скрипт съема данных** - [github](https://gist.github.com/dmslabsbr/08970d068e2e021312055e7560bcac9a)    
 
-:white_check_mark: **Скрипт показанный в уроке** - [github]( )    
+:white_check_mark: **Скрипт показанный в уроке** - [github](https://raw.githubusercontent.com/kvazis/training/master/lessons/articles/2023_11_proxmox_temp/ha_post_temp.sh)    
 
 #### Команды и ссылки из урока:  
 
