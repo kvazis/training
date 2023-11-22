@@ -25,7 +25,7 @@ sensors
 ```yaml
 nano ha_post_temp.sh
 ```
-Вставляем код скрипта    
+Вставляем код [скрипта]((https://raw.githubusercontent.com/kvazis/training/master/lessons/articles/2023_11_proxmox_temp/ha_post_temp.sh))    
 `Ctrl X` - для выхода    
 `Y` для сохранения    
 
