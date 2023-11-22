@@ -58,7 +58,7 @@ systemctl restart cron.service
 
 :ballot_box_with_check: Проверка    
 ```yaml
-systemctl restart cron.service
+systemctl status cron.service
 ```
 ____
 #### Поддержать развитие проекта *Умный дом с Alex Kvazis*    
