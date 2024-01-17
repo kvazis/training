@@ -1,6 +1,9 @@
 ### [Светодиодная лампочка RGB+CCT под E27, с управлением по zigbee - обзор, интеграция в Home Assistant](https://youtu.be/4XQbGesJ-mQ)
 
-####  Пакадж для управления лампочкой, с переводом режима свечения в щадящий режим перед выключением
+<a href="https://www.youtube.com/channel/UCcq9onYHbs6go3kDpfBoqhg?sub_confirmation=1" target="_blank"><img src="https://raw.githubusercontent.com/kvazis/training/master/lessons/img/subscribe.png" alt="Subscribe" style="height: 71px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+
+
+#### Пакадж из урока:  
 
 
 ```yaml
@@ -61,7 +64,6 @@ ____
 
 #### Или перевод любой суммы на -     
 * Webmoney - Z243592584952
-* BTC - 1Gzr7WQugfnPuWVawu47EiCMTDUBqCAshj
-* ETH - 0xa0ce3E29Cf537013649Ae9cdbc08C4853fF91FAc
-* LTC - ltc1qs493yk2wk9ywx5h6aruk4p9zm75hx42ekv4ym2
-* TRX - TFTCLqvS1tMBwokRHBwz1TCDJ4oD1Z5zPk
+* BTC - 1PAjXcNbLtUKLY8d5HDnfxRqc5Zchj1fU3    
+* TON - UQBEShkfKCFhvqlTs_oIpa6kFIQJguJR30hDXany1cCAbCfe    
+* USDT (TRON (TRC20)) - TEpnJcLDRbkwq5oQpjVET9NbPpHKB7QMrD    

@@ -115,11 +115,6 @@ views:
                       secondary_info: last-changed
 
 
-
-
-                
-  - !include lovelace/boiler.yaml
-  
   
   
   
