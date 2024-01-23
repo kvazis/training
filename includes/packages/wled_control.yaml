@@ -1,0 +1,144 @@
+wled_control:
+
+    automation:
+    
+      - alias: wled_toggle
+        id: wled_toggle
+        description: Gledopto WLED Bar toggle
+        initial_state: true          
+        trigger:
+    # Aqara Opple button 1, single click
+        - platform: state
+          entity_id: sensor.0x54ef4410004c1706_action
+          to: 'button_1_single'
+        action:
+        - service: light.toggle
+          entity_id: light.wled_soundreactive
+
+      - alias: wled_control
+        id: wled_control
+        description: Gledopto WLED Bar
+        initial_state: true          
+        trigger:
+    # Aqara Opple button 1, double click
+        - platform: state
+          entity_id: sensor.0x54ef4410004c1706_action
+          to: 'button_1_double'
+          id: opple_button_1_2
+    # Aqara Opple button 1, triple click
+        - platform: state
+          entity_id: sensor.0x54ef4410004c1706_action
+          to: 'button_1_triple'
+          id: opple_button_1_3
+    # Aqara Opple button 2, single click
+        - platform: state
+          entity_id: sensor.0x54ef4410004c1706_action
+          to: 'button_2_single'
+          id: opple_button_2_1
+    # Aqara Opple button 2, double click
+        - platform: state
+          entity_id: sensor.0x54ef4410004c1706_action
+          to: 'button_2_double'
+          id: opple_button_2_2
+        condition:
+        - condition: state
+          entity_id: light.wled_soundreactive
+          state: 'on'
+        action:
+            - choose:
+              - conditions:
+                  - condition: trigger
+                    id: opple_button_1_2
+                sequence:
+                  - service: light.turn_on
+                    entity_id: light.wled_soundreactive
+                    data:
+                      effect: Saw
+                      brightness_pct: 50
+                  - service: select.select_option
+                    data:
+                      option: Orangery
+                    target:
+                      entity_id: select.wled_soundreactive_color_palette
+                  - service: number.set_value
+                    target:
+                      entity_id: number.wled_soundreactive_speed
+                    data:
+                      value: 114
+                  - service: number.set_value
+                    target:
+                      entity_id: number.wled_soundreactive_intensity
+                    data:
+                      value: 76
+              - conditions:
+                  - condition: trigger
+                    id: opple_button_1_3
+                sequence:
+                  - service: light.turn_on
+                    entity_id: light.wled_soundreactive
+                    data:
+                      effect: Popcorn
+                      brightness_pct: 70
+                  - service: select.select_option
+                    data:
+                      option: Atlantica
+                    target:
+                      entity_id: select.wled_soundreactive_color_palette
+                  - service: number.set_value
+                    target:
+                      entity_id: number.wled_soundreactive_speed
+                    data:
+                      value: 157
+                  - service: number.set_value
+                    target:
+                      entity_id: number.wled_soundreactive_intensity
+                    data:
+                      value: 221
+              - conditions:
+                  - condition: trigger
+                    id: opple_button_2_1
+                sequence:
+                  - service: light.turn_on
+                    entity_id: light.wled_soundreactive
+                    data:
+                      effect: Scanner
+                      brightness_pct: 75
+                  - service: select.select_option
+                    data:
+                      option: Rainbow
+                    target:
+                      entity_id: select.wled_soundreactive_color_palette
+                  - service: number.set_value
+                    target:
+                      entity_id: number.wled_soundreactive_speed
+                    data:
+                      value: 180
+                  - service: number.set_value
+                    target:
+                      entity_id: number.wled_soundreactive_intensity
+                    data:
+                      value: 200
+              - conditions:
+                  - condition: trigger
+                    id: opple_button_2_2
+                sequence:
+                  - service: light.turn_on
+                    entity_id: light.wled_soundreactive
+                    data:
+                      effect: Scanner Dual
+                      brightness_pct: 100
+                  - service: select.select_option
+                    data:
+                      option: Drywet
+                    target:
+                      entity_id: select.wled_soundreactive_color_palette
+                  - service: number.set_value
+                    target:
+                      entity_id: number.wled_soundreactive_speed
+                    data:
+                      value: 100
+                  - service: number.set_value
+                    target:
+                      entity_id: number.wled_soundreactive_intensity
+                    data:
+                      value: 40
