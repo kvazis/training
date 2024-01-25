@@ -23,7 +23,7 @@ http://192.168.0.98:8080/json.htm?type=command¶m=switchlight&idx=94&switchcmd=S
 
 :ballot_box_with_check: Сценарий показанный в обзоре:    
 ```yaml
-  return {
+return {
 active = true,
 on = {
 devices = {
