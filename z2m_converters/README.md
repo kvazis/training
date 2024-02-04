@@ -41,3 +41,6 @@
 :point_right: **TS0601 TZE204_mhxn2jso** - [Gleco Zigbee Human Presence Sensor](https://raw.githubusercontent.com/kvazis/training/master/z2m_converters/converters/_TZE204_mhxn2jso.js) - микроволновый датчик присутствия Tuya, прямоугольный [Купить на Али](https://lres.bz/6s3vby)     
 :point_right: **TS0207 _TZ3000_nlsszmzl** - [USB Zigbee Repeater](https://raw.githubusercontent.com/kvazis/training/master/z2m_converters/converters/TS0207_repeater.js) - USB Zigbee роутер, сделано для версии которая определяется как датчик протечки, можно использовать как шаблон     
 :point_right: **lumi.switch.acn049 ZNQBKG39LM** - [Aqara Z1 Canon 2 gang smart wall switch](https://raw.githubusercontent.com/kvazis/training/master/z2m_converters/converters/lumi_switch_acn049.js) - Рабочий конвертер с штатным функционалом — управление реле, мощность, режим отвязки клавиш (decoupled mode).    
+:point_right: **lumi.switch.acn059 ZNQBKG45LM** - [Aqara Z1 Pro 4 gang smart wall switch](https://raw.githubusercontent.com/kvazis/training/master/z2m_converters/converters/lumi_switch_acn059.js) - Работает с z2m  1.35.2 (обновлен синтаксис) функционал — управление реле, мощность, режим отвязки клавиш (decoupled mode).    
+
+
