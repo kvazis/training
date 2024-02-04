@@ -69,7 +69,7 @@ const definition = {
                     'multi: supports more events like double and hold'),
 
         e.action([
-        			'button_4_single', 'button_4_double','button_4_hold', 'button_4_release',
+        			'button_1_single', 'button_2_single', 'button_3_single', 'button_4_single', 'button_4_double','button_4_hold', 'button_4_release',
                     ]),
     ],
     meta: {"multiEndpoint":true},
