@@ -44,7 +44,7 @@ systemctl enable NetworkManager
 sudo raspi-config
 ```
 `
-5 Localisation Options / I1 Change Locale - ищем и выбираем пробелом ru_UA.UTF-8 UTF-8
+5 Localisation Options / I1 Change Locale - ищем и выбираем пробелом ru_UA.UTF-8 UTF-8    
 5 Localisation Options / I2 Change Timezone - выбираем часовой пояс
 `
 
