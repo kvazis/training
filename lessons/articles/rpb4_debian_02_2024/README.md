@@ -87,14 +87,25 @@ newgrp docker
 
 :ballot_box_with_check: Установка OS-Agent    
 :white_check_mark: [Последний релиз](https://github.com/home-assistant/os-agent/releases/latest) (при необходимости, в команде ниже номер меняем на актуальный)    
-Загружаем - `wget https://github.com/home-assistant/os-agent/releases/download/1.6.0/os-agent_1.6.0_linux_aarch64.deb`    
-Установка - `sudo dpkg -i os-agent_1.6.0_linux_aarch64.deb`    
+Загружаем - 
+```yaml
+wget https://github.com/home-assistant/os-agent/releases/download/1.6.0/os-agent_1.6.0_linux_aarch64.deb
+```
+Установка - 
+```yaml
+sudo dpkg -i os-agent_1.6.0_linux_aarch64.deb
+```
 
 :ballot_box_with_check: Установка Home Assisistant Supervised    
 :white_check_mark: [Последний релиз](https://github.com/home-assistant/supervised-installer/releases) (при необходимости, в команде ниже номер меняем на актуальный)    
-Загружаем - `wget https://github.com/home-assistant/supervised-installer/releases/download/1.6.0/homeassistant-supervised.deb`    
-
-Установка - `sudo dpkg -i homeassistant-supervised.deb`    
+Загружаем - 
+```yaml
+wget https://github.com/home-assistant/supervised-installer/releases/download/1.6.0/homeassistant-supervised.deb
+```
+Установка - 
+```yaml
+sudo dpkg -i homeassistant-supervised.deb
+```
 
 :arrow_right: Веб интерфейс Home Assistant - `http://IP adress:8123`    
 
