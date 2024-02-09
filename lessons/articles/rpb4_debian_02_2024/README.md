@@ -83,11 +83,6 @@ newgrp docker
 :white_check_mark: [Последний релиз](https://github.com/home-assistant/supervised-installer/releases) (при необходимости, в команде ниже номер меняем на актуальный)    
 Загружаем - `wget https://github.com/home-assistant/supervised-installer/releases/download/1.6.0/homeassistant-supervised.deb`    
 
-:ballot_box_with_check: Просмотр списка файлов    
-```yaml
-ls
-```
-
 Установка - `sudo dpkg -i homeassistant-supervised.deb`    
 
 :arrow_right: Веб интерфейс Home Assistant - `http://IP adress:8123`    
