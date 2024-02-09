@@ -43,10 +43,9 @@ systemctl enable NetworkManager
 ```yaml
 sudo raspi-config
 ```
-`
-5 Localisation Options / I1 Change Locale - ищем и выбираем пробелом ru_UA.UTF-8 UTF-8    
-5 Localisation Options / I2 Change Timezone - выбираем часовой пояс
-`
+
+`5 Localisation Options / I1 Change Locale - ищем и выбираем пробелом ru_UA.UTF-8 UTF-8`    
+`5 Localisation Options / I2 Change Timezone - выбираем часовой пояс`    
 
 :ballot_box_with_check: Дополнительные настройки для устранения ошибок в НА    
 ```yaml
