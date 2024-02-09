@@ -32,13 +32,16 @@ apt-get install -y jq wget curl udisks2 apparmor-utils libglib2.0-bin network-ma
 :ballot_box_with_check: Запуск Network Manager    
 ```yaml
 systemctl start NetworkManager
- 
+```
+```yaml
 systemctl enable NetworkManager
 ```
    
 :ballot_box_with_check: Приложение для настройки - 
 ```yaml
 sudo raspi-config
+```
+```yaml
 5 Localisation Options / I1 Change Locale - ищем и выбираем пробелом ru_UA.UTF-8 UTF-8
 5 Localisation Options / I2 Change Timezone - выбираем часовой пояс
 ```
@@ -54,9 +57,14 @@ nano /boot/firmware/cmdline.txt
 :ballot_box_with_check: Перезагрузка - `reboot` 
 
 :ballot_box_with_check: Скрипт управления вентилятором для корпусов Argon M2    
-Установка скрипта - `curl https://download.argon40.com/argon1.sh | bash`    
-Настройка включения - `argonone-config`      
-
+Установка скрипта - 
+```yaml
+curl https://download.argon40.com/argon1.sh | bash
+```    
+Настройка включения -    
+```yaml
+argonone-config
+```
 
 :ballot_box_with_check: Установка docker - 
 ```yaml
@@ -71,6 +79,8 @@ exit
 :ballot_box_with_check: Добавляем в группу docker пользователя
 ```yaml
 sudo gpasswd -a $USER docker
+```
+```yaml
 newgrp docker
 ```
 
