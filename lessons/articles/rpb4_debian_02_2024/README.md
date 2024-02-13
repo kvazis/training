@@ -51,11 +51,21 @@ sudo raspi-config
 ```yaml
 nano /boot/firmware/cmdline.txt
 ```
-В конец первой строки файла вставляем `systemd.unified_cgroup_hierarchy=false lsm=apparmor`    
+В конец первой строки файла вставляем    
+```yaml
+systemd.unified_cgroup_hierarchy=false lsm=apparmor
+```
 `Ctrl X` - для выхода    
 `Y` для сохранения    
 
-:ballot_box_with_check: Перезагрузка - `reboot` 
+:ballot_box_with_check: Перезагрузка -    
+```yaml
+reboot
+```
+:ballot_box_with_check: Переход в режим root    
+```yaml
+sudo -s
+```
 
 :ballot_box_with_check: Скрипт управления вентилятором для корпусов Argon M2    
 Установка скрипта - 
