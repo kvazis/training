@@ -113,7 +113,13 @@ newgrp docker
 Загружаем - `wget https://github.com/home-assistant/supervised-installer/releases/download/1.5.0/homeassistant-supervised.deb`    
 Установка - `sudo dpkg -i homeassistant-supervised.deb`    
 
-:arrow_right: Веб интерфейс Home Assistant - `http://IP adress:8123`    
+:arrow_right: Веб интерфейс Home Assistant - `http://IP adress:8123`
+
+:ballot_box_with_check: Если восстанавливаемся из бекапа, надо предварительно перезагрузиться - 
+```yaml
+reboot
+```
+Проверять процесс восстановления из бекапа можно командой `ha supervisor logs`   
 
 :arrow_right: Информация о системе - `http://IP adress:8123/hassio/system`    
 
