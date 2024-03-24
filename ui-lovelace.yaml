@@ -100,19 +100,19 @@ views:
              name: Maria DB
 
 
-      - type: vertical-stack
-        cards:
+    #   - type: vertical-stack
+    #     cards:
 
-            - type: custom:auto-entities
-              show_empty: false
-              card:
-                type: entities
-                show_header_toggle: false
-              filter:
-                include:
-                 - state: 'unavailable'
-                   options:
-                      secondary_info: last-changed
+    #         - type: custom:auto-entities
+    #           show_empty: false
+    #           card:
+    #             type: entities
+    #             show_header_toggle: false
+    #           filter:
+    #             include:
+    #              - state: 'unavailable'
+    #               options:
+    #                   secondary_info: last-changed
 
 
   
