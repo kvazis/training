@@ -6,10 +6,10 @@
 #### Resources:    
 
 :white_check_mark: **Awtrix Light:**    
-:ballot_box_with_check: [Documentation](https://blueforcer.github.io/awtrix-light/#/?id=awtrix-light)     
-:ballot_box_with_check: [Web Flasher](https://blueforcer.github.io/awtrix-light/#/flasher)     
-:ballot_box_with_check: [Interaction](https://blueforcer.github.io/awtrix-light/#/api?id=interaction)     
-:ballot_box_with_check: [Effects](https://blueforcer.github.io/awtrix-light/#/effects)     
+:ballot_box_with_check: [Documentation](https://blueforcer.github.io/awtrix3/#/?id=awtrix-light)     
+:ballot_box_with_check: [Web Flasher](https://blueforcer.github.io/awtrix3/#/flasher)     
+:ballot_box_with_check: [Interaction](https://blueforcer.github.io/awtrix3/#/api?id=interaction)     
+:ballot_box_with_check: [Effects](https://blueforcer.github.io/awtrix3/#/effects)     
 :ballot_box_with_check: [Color Table](https://www.rapidtables.com/web/color/RGB_Color.html)     
 :ballot_box_with_check: [MQTT Explorer](https://mqtt-explorer.com/)     
 
