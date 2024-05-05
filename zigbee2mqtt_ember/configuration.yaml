@@ -1,0 +1,52 @@
+mqtt:
+  server: mqtt://core-mosquitto:1883
+  base_topic: zigbee2mqtt_ember
+  version: 5
+  user: addons
+  password: leush4engiodoHeiDuBohf6vaevo9sheiQu6rahngaez2oDe8upheiwe5ee4sich
+serial:
+  port: /dev/ttyUSB0
+  adapter: ember
+advanced:
+  transmit_power: 20
+  channel: 20
+  pan_id: 2291
+  network_key:
+    - 121
+    - 96
+    - 1
+    - 213
+    - 119
+    - 110
+    - 81
+    - 128
+    - 22
+    - 24
+    - 162
+    - 48
+    - 137
+    - 245
+    - 163
+    - 7
+  availability_blocklist: []
+  availability_passlist: []
+  last_seen: ISO_8601
+  log_level: info
+  homeassistant_legacy_entity_attributes: false
+  legacy_api: false
+  legacy_availability_payload: false
+homeassistant: true
+permit_join: false
+frontend:
+  port: 8099
+device_options:
+  legacy: false
+devices:
+  '0x00124b002447c3d1':
+    friendly_name: '0x00124b002447c3d1'
+  '0xa4c138235d1e6877':
+    friendly_name: '0xa4c138235d1e6877'
+  '0x54ef4410004c1706':
+    friendly_name: '0x54ef4410004c1706'
+  '0xa4c138ed64d46641':
+    friendly_name: '0xa4c138ed64d46641'

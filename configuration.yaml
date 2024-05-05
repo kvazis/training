@@ -7,7 +7,7 @@ homeassistant:
   longitude: !secret longitude_coord
   elevation: 179
   unit_system: metric
-  time_zone: Europe/Kiev
+  time_zone: Europe/Kyiv
   customize: !include customize.yaml
   packages: !include_dir_merge_named includes/packages
 

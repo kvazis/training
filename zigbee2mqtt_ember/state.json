@@ -1,0 +1,37 @@
+{
+    "0x00124b002447c3d1": {
+        "state": "OFF",
+        "last_seen": "2024-05-03T17:04:49.875Z",
+        "linkquality": 232
+    },
+    "0xa4c138235d1e6877": {
+        "state": "ON",
+        "power_outage_memory": "restore",
+        "indicator_mode": "off/on",
+        "child_lock": "UNLOCK",
+        "voltage": 227,
+        "power": 0,
+        "current": 0,
+        "update": {
+            "state": "idle",
+            "installed_version": 192,
+            "latest_version": 192
+        },
+        "update_available": false,
+        "energy": 0.04,
+        "last_seen": "2024-05-03T17:03:47.407Z",
+        "linkquality": 212
+    },
+    "0x54ef4410004c1706": {
+        "voltage": 2704,
+        "battery": 0,
+        "last_seen": "2024-05-03T16:29:14.142Z",
+        "linkquality": 216,
+        "power_outage_count": 50
+    },
+    "0xa4c138ed64d46641": {
+        "battery": 100,
+        "last_seen": "2024-05-03T15:34:07.075Z",
+        "linkquality": 200
+    }
+}
