@@ -9,7 +9,7 @@
         "power_outage_memory": "restore",
         "indicator_mode": "off/on",
         "child_lock": "UNLOCK",
-        "voltage": 227,
+        "voltage": 226,
         "power": 0,
         "current": 0,
         "update": {
@@ -23,8 +23,8 @@
         "linkquality": 212
     },
     "0x54ef4410004c1706": {
-        "voltage": 2704,
-        "battery": 0,
+        "voltage": 3043,
+        "battery": 100,
         "last_seen": "2024-05-03T16:29:14.142Z",
         "linkquality": 216,
         "power_outage_count": 50
